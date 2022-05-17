@@ -7,14 +7,16 @@ export default function htmlToMarkdown(html: string) {
     turndownService.use(gfm)
     turndownService.addRule('align', {
         filter: (node, options) => {
-            console.log([node])
-            const alignment = node.getAttribute('align')?.toLocaleLowerCase() || 'left'
-            return ['right', 'center', 'justify'].includes(alignment)
+            const classNames: string[] = Array.from(node.classList)
+            return classNames.some(className => className.includes('ql-align-'))
         },
         replacement: (content, node, options) => {
             const tag = node.nodeName.toLowerCase()
             //@ts-expect-error
-            const alignment = node.getAttribute('align')
+            const classNames: string[] = Array.from(node.classList)
+            const alignment = classNames
+                .find(className => className.includes('ql-align-'))
+                ?.replace('ql-align-', '')
             return `<${tag} align="${alignment}">${content}</${tag}>`
         }
     })

@@ -7,8 +7,6 @@ export default function App() {
             <hr />
             <pre id='raw-html' />
             <hr />
-            <pre id='cleaned-html' />
-            <hr />
             <pre id='markdown' />
         </div>
     )

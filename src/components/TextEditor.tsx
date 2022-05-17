@@ -1,7 +1,7 @@
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 import { useCallback, useState } from 'react'
-import { htmlToMarkdown, parseQuillHtml } from '../helperFunctions'
+import { htmlToMarkdown } from '../helperFunctions'
 
 const TOOLBAR_OPTIONS = [
     ['bold', 'italic', 'underline', 'strike'],
@@ -46,13 +46,8 @@ export default function TextEditor() {
             const rawHtml = quill.root.innerHTML
             // @ts-ignore
             document.getElementById('raw-html').innerText = rawHtml
-
-            const html = parseQuillHtml(rawHtml)
-
             // @ts-ignore
-            document.getElementById('cleaned-html').innerText = html
-            // @ts-ignore
-            document.getElementById('markdown').innerText = htmlToMarkdown(html)
+            document.getElementById('markdown').innerText = htmlToMarkdown(rawHtml)
         })
     }, [])
 
