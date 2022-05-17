@@ -43,10 +43,11 @@ export default function TextEditor() {
         //@ts-ignore
         window.quill = quill
         quill.on('text-change', () => {
+            const rawHtml = quill.root.innerHTML
             // @ts-ignore
-            document.getElementById('raw-html').innerText = quill.container.firstChild.innerHTML
+            document.getElementById('raw-html').innerText = rawHtml
 
-            const html = parseQuillHtml(quill.root.innerHTML)
+            const html = parseQuillHtml(rawHtml)
 
             // @ts-ignore
             document.getElementById('cleaned-html').innerText = html
