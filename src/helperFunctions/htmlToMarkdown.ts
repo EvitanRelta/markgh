@@ -4,6 +4,8 @@ import { gfm } from 'turndown-plugin-gfm'
 
 export default function htmlToMarkdown(html: string) {
     const spaceToNbsp = html.replaceAll(/(?<=\s)\s/g, '&nbsp;')
+    const escapedAmp = spaceToNbsp.replaceAll('&', '&amp;')
+        
     const turndownService = new TurndownService({ headingStyle: 'atx' })
     turndownService.use(gfm)
     turndownService.addRule('align', {
@@ -21,5 +23,5 @@ export default function htmlToMarkdown(html: string) {
             return `<${tag} align="${alignment}">${content}</${tag}>`
         }
     })
-    return turndownService.turndown(spaceToNbsp)
+    return turndownService.turndown(escapedAmp)
 }
