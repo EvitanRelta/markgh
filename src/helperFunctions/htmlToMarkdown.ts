@@ -3,7 +3,10 @@ import TurndownService from 'turndown'
 import { gfm } from 'turndown-plugin-gfm'
 
 export default function htmlToMarkdown(html: string) {
-    const spaceToNbsp = html.replaceAll(/(?<=\s)\s/g, '&nbsp;')
+    const spaceToNbsp = html
+        .replaceAll(/(?<=\s)\s/g, '&nbsp;')
+        .replaceAll(/(?<=>)\s/g, '&nbsp;')
+        .replaceAll(/\s(?=<)/g, '&nbsp;')
     const escapedAmp = spaceToNbsp.replaceAll('&', '&amp;')
         
     const turndownService = new TurndownService({ headingStyle: 'atx' })
