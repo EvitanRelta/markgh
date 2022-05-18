@@ -51,5 +51,11 @@ export default function htmlToMarkdown(html: string) {
             return "```\n" + content + "\n```\n"
         }
     })
+    turndownService.addRule('strikethrough', {
+        filter: ['del', 's'],
+        replacement: (content, node, options) => {
+            return `~~${content}~~`
+        }
+    })
     return turndownService.turndown(escapedAmp)
 }
