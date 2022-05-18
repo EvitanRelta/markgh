@@ -9,7 +9,10 @@ export default function htmlToMarkdown(html: string) {
         .replaceAll(/\s(?=<)/g, '&nbsp;')
     const escapedAmp = spaceToNbsp.replaceAll('&', '&amp;')
         
-    const turndownService = new TurndownService({ headingStyle: 'atx' })
+    const turndownService = new TurndownService({
+        headingStyle: 'atx',
+        codeBlockStyle: 'fenced'
+    })
     turndownService.use(gfm)
     turndownService.addRule('align', {
         filter: (node, options) => {
