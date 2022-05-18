@@ -14,19 +14,15 @@ body {
 .title {
     line-height: 12px;
     margin-bottom: 15px;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid steelblue;
     padding-bottom: 10px;
   }
 
 .title input {
     border: 0;
-    font-size: 25px;
-    width: 90%;
 }
 
-.title span {
-    
-}
+.title span
 
 
 .btn {
