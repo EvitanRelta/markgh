@@ -24,11 +24,6 @@ export default function App() {
     },
     });
 
-
-    const elementRef = useRef(null);
-    console.log(elementRef.current?.clientHeight);
-    
-
     const [mode, setMode] = useState('light');
     const [title, setTitle] = useState('')
     const selectedTheme = mode === "dark" ? darkTheme : lightTheme;

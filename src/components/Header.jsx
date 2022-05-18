@@ -12,9 +12,9 @@ const Header = ({ title, theme, toggleTheme}) => {
 
 
     const [text, setText] = useState(title)
-    const label = 'Dark mode'
     const themeColor = theme === 'dark' ? '#181414' : 'white';
     const textColor = theme === 'dark' ? 'white' : '#181414'
+
     return <header style = {{
                 borderBottom: '1px solid gray',
                 marginBottom: '15px',
