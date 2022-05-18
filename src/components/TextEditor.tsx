@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react'
 import { htmlToMarkdown, markdownToHtml } from '../helperFunctions'
 
 const TOOLBAR_OPTIONS = [
-    ['bold', 'italic', 'underline', 'strike'],
+    ['bold', 'italic', 'strike'],
     ['blockquote', 'code-block'],
     ['link', 'image'],
 
@@ -46,7 +46,7 @@ export default function TextEditor() {
             const rawHtml = quill.root.innerHTML
             const markdown = htmlToMarkdown(rawHtml)
             const renderedMarkdown = markdownToHtml(markdown)
-            
+
             // @ts-ignore
             document.getElementById('raw-html').innerText = rawHtml
             // @ts-ignore
