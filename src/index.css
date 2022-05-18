@@ -6,12 +6,39 @@ body {
   }
 
 .container {
-    padding: 20px;
-    padding-top: 0px;
+    margin: 20px;
+
 }
 
 
-.header {
+.title {
     line-height: 12px;
     margin-bottom: 15px;
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
   }
+
+.title input {
+    border: 0;
+    font-size: 25px;
+    width: 90%;
+}
+
+.title span {
+    
+}
+
+
+.btn {
+display: inline-block;
+background: #000;
+color: #fff;
+border: none;
+padding: 10px 20px;
+margin: 5px;
+border-radius: 5px;
+cursor: pointer;
+text-decoration: none;
+font-size: 12px;
+font-family: inherit;
+}
