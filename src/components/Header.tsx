@@ -1,16 +1,21 @@
-import ContentEditable from 'react-contenteditable'
+
 import { useState } from "react"
+import { Switch } from '@mui/material'
 
 
 const Header: React.FC<{ title: string }> = ({title}) => {
 
 
     const [text, setText] = useState(title)
+    const label = 'Dark mode'
 
     return <header className = 'title'>
-            <input type = 'text' placeholder = 'File Name'
-            value = {text} onChange = {(e) => setText(e.target.value)}>
-            </input>
+            <div>
+                <input type = 'text' placeholder = 'File Name'
+                value = {text} onChange = {(e) => setText(e.target.value)}>
+                </input>
+                <Switch {...label} disabled defaultChecked />
+            </div>
 
             <p>Last edited on </p>
 
