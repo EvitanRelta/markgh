@@ -40,5 +40,11 @@ export default function htmlToMarkdown(html: string) {
             return `~~${content}~~`
         }
     })
+    turndownService.addRule('underline', {
+        filter: 'u',
+        replacement: (content, node, options) => {
+            return `<ins>${content}</ins>`
+        }
+    })
     return turndownService.turndown(escapedAmp)
 }
