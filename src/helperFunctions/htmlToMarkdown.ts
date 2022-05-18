@@ -26,5 +26,11 @@ export default function htmlToMarkdown(html: string) {
             return `<${tag} align="${alignment}">${content}</${tag}>`
         }
     })
+    turndownService.addRule('codeblock', {
+        filter: 'pre',
+        replacement: (content, node, options) => {
+            return "```\n" + content + "\n```\n"
+        }
+    })
     return turndownService.turndown(escapedAmp)
 }
