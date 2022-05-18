@@ -8,7 +8,7 @@ export default function htmlToMarkdown(html: string) {
         .replaceAll(/(?<!<pre[^<]*>[^<]*)(?<=\s)\s/g, '&nbsp;')
         .replaceAll(/(?<!<pre[^<]*>[^<]*)(?<=>)\s/g, '&nbsp;')
         .replaceAll(/(?<!<pre[^<]*>[^<]*)\s(?=<)/g, '&nbsp;')
-    const escapedAmp = spaceToNbsp.replaceAll('&', '&amp;')
+    const escapedAmp = spaceToNbsp.replaceAll(/(?<!<pre[^<]*>[^<]*)&/g, '&amp;')
         
     const turndownService = new TurndownService({
         headingStyle: 'atx',
