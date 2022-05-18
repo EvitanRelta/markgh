@@ -1,6 +1,4 @@
 import TurndownService from 'turndown'
-//@ts-expect-error
-import { gfm } from 'turndown-plugin-gfm'
 
 export default function htmlToMarkdown(html: string) {
     const spaceToNbsp = html
@@ -14,7 +12,6 @@ export default function htmlToMarkdown(html: string) {
         headingStyle: 'atx',
         codeBlockStyle: 'fenced'
     })
-    turndownService.use(gfm)
     turndownService.addRule('htmlLinks', {
         filter: (node, options) => {
             let parentElement = node.parentElement
