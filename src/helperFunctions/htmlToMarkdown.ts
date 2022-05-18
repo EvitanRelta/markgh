@@ -5,9 +5,9 @@ import { gfm } from 'turndown-plugin-gfm'
 export default function htmlToMarkdown(html: string) {
     const spaceToNbsp = html
         .replaceAll(/\n(?=<\/pre>)/g, '')
-        .replaceAll(/(?<=\s)\s/g, '&nbsp;')
-        .replaceAll(/(?<=>)\s/g, '&nbsp;')
-        .replaceAll(/\s(?=<)/g, '&nbsp;')
+        .replaceAll(/(?<!<pre[^<]*>[^<]*)(?<=\s)\s/g, '&nbsp;')
+        .replaceAll(/(?<!<pre[^<]*>[^<]*)(?<=>)\s/g, '&nbsp;')
+        .replaceAll(/(?<!<pre[^<]*>[^<]*)\s(?=<)/g, '&nbsp;')
     const escapedAmp = spaceToNbsp.replaceAll('&', '&amp;')
         
     const turndownService = new TurndownService({
