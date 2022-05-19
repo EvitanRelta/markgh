@@ -4,7 +4,8 @@ import Footer from './components/Footer'
 import { useState, useRef } from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-import MarkdownText from './components/MarkdownText'
+import Input from '@mui/material/Input';
+
 
 
 export default function App() {
@@ -25,10 +26,12 @@ export default function App() {
     });
 
     const [mode, setMode] = useState('light');
-    const [title, setTitle] = useState('')
+    const [title, setTitle] = useState('') 
+
     const selectedTheme = mode === "dark" ? darkTheme : lightTheme;
 
-    const editorWidth = showMarkdown ? '50%' : '100%'
+  
+    
 
     
 
