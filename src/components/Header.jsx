@@ -1,12 +1,10 @@
 
 import { useState } from "react"
-import { FormControlLabel, Switch } from '@mui/material'
+import IconButton from '@mui/material/IconButton';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import IconButton from '@mui/material/IconButton';
-import * as React from 'react';
 
-const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+import * as React from 'react';
 
 const Header = ({ title, theme, toggleTheme}) => {
 
@@ -54,7 +52,10 @@ const Header = ({ title, theme, toggleTheme}) => {
             <p style = {{
                 color: 'gray',
                 paddingLeft: '5px',
-            }}>Last edited on </p>
+            }}> Last edited on
+            </p>
+
+           
 
         </header>
 }

@@ -1,4 +1,4 @@
-import TextEditor from './components/TextEditor'
+import Body from './components/Body'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import { useState, useRef } from 'react'
@@ -41,7 +41,7 @@ export default function App() {
                 title = {title} 
                 onChangeTitle = { (newTitle) => setTitle(newTitle) } 
                 toggleTheme = { () => setMode(mode === 'light' ? 'dark' : 'light')}/>
-                <div style = {{
+                {/* <div style = {{
                     justifyContent: 'center',
                     alignItems: 'stretch',
                     display: 'flex'
@@ -50,12 +50,11 @@ export default function App() {
                 margin: '10px',
                 width: editorWidth,
                 height: 'stretch'
-                }}>
-                <TextEditor />
-                </div>
-                {showMarkdown &&
-                <MarkdownText  markdown = 'test'/>}
-                </div >
+                }}> */}
+                <Body showMarkdown={ showMarkdown }/>
+           
+             
+                
                 <div style = {{
                     margin: '20px'
                 }}>
