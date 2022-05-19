@@ -1,6 +1,7 @@
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 import { useCallback } from 'react'
+import '../github-markdown-css/github-markdown-light.css'
 
 const TOOLBAR_OPTIONS = [
     ['bold', 'italic', 'underline', 'strike'],
@@ -16,6 +17,7 @@ export default function TextEditor() {
         if (!wrapper) return
         wrapper.innerHTML = ''
         const editor = document.createElement('div')
+        editor.className = 'markdown-body'
         wrapper.append(editor)
 
         new Quill(editor, {
