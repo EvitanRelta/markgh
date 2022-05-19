@@ -18,6 +18,11 @@ export default function TextEditor() {
         wrapper.innerHTML = ''
         const editor = document.createElement('div')
         editor.className = 'markdown-body'
+        editor.style.boxSizing = 'border-box'
+		editor.style.minWidth = '200px'
+		editor.style.maxWidth = '980px'
+		editor.style.margin = '0 auto'
+		editor.style.padding = '45px'
         wrapper.append(editor)
 
         new Quill(editor, {
