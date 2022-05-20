@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/testing-grounds/static/css/main.d71bf4a1.css",
+    "main.js": "/testing-grounds/static/js/main.b2800098.js",
+    "index.html": "/testing-grounds/index.html",
+    "main.d71bf4a1.css.map": "/testing-grounds/static/css/main.d71bf4a1.css.map",
+    "main.b2800098.js.map": "/testing-grounds/static/js/main.b2800098.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d71bf4a1.css",
+    "static/js/main.b2800098.js"
+  ]
+}
