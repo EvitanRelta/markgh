@@ -2,6 +2,7 @@ import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 import { useCallback } from 'react'
 import '../github-markdown-css/github-markdown-light.css'
+import testHtml from '../testHtml'
 
 const TOOLBAR_OPTIONS = [
     ['bold', 'italic', 'underline', 'strike'],
@@ -29,6 +30,8 @@ export default function TextEditor() {
             theme: 'snow',
             modules: { toolbar: TOOLBAR_OPTIONS }
         })
+
+        editor.getElementsByClassName('ql-editor')[0].innerHTML = testHtml
     }, [])
 
     return (
