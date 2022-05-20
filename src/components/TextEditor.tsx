@@ -2,6 +2,7 @@ import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 import { useCallback } from 'react'
 import '../github-markdown-css/github-markdown-light.css'
+import hljs from 'highlight.js'
 
 const TOOLBAR_OPTIONS = [
     ['bold', 'italic', 'underline', 'strike'],
@@ -26,8 +27,13 @@ export default function TextEditor() {
         wrapper.append(editor)
 
         new Quill(editor, {
-            theme: 'snow',
-            modules: { toolbar: TOOLBAR_OPTIONS }
+            // theme: 'snow',
+            modules: {
+                syntax: {
+                    highlight: (text: string) => hljs.highlightAuto(text).value,
+                },
+                toolbar: TOOLBAR_OPTIONS
+            }
         })
     }, [])
 
