@@ -25,7 +25,7 @@ export default function htmlToMarkdown(html: string) {
                 .find(className => className.includes('ql-align-'))
                 ?.replace('ql-align-', '')
             console.log(content)
-            return `<${tag} align="${alignment}">\n\n${content}\n\n</${tag}>`
+            return `<${tag} align="${alignment}">\n\n${content}\n\n</${tag}>\n`
         }
     })
     turndownService.addRule('codeblock', {
