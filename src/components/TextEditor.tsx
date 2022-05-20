@@ -1,7 +1,7 @@
 import Quill from 'quill'
-import 'quill/dist/quill.snow.css'
 import { useCallback } from 'react'
 import '../github-markdown-css/github-markdown-light.css'
+import '../quill-snow-base.css'
 import testHtml from '../testHtml'
 
 const TOOLBAR_OPTIONS = [
