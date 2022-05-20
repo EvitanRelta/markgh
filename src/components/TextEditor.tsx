@@ -3,8 +3,8 @@ import 'quill/dist/quill.snow.css'
 import { useCallback } from 'react'
 
 const TOOLBAR_OPTIONS = [
-    ['bold', 'italic', 'underline', 'strike'],
-    ['blockquote', 'code-block'],
+    ['bold', 'italic', 'underline', 'strike', 'code'],
+    ['blockquote', 'code-block', 'link'],
 
     [{ header: [1, 2, 3, 4, 5, 6, false] }],
     [{ list: 'ordered' }, { list: 'bullet' }],
