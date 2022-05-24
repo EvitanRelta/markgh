@@ -1,4 +1,5 @@
 import TurndownService from 'turndown'
+import sanitiseElement from './sanitiseElement'
 
 function escapeAmpersand(html: HTMLElement) {
     html.innerHTML = html.innerHTML.replaceAll('&', '&amp;')
@@ -56,6 +57,13 @@ export default function htmlToMarkdown(html: HTMLElement) {
         replacement: (content, node, options) => {
             return `<ins>${content}</ins>`
         }
+    })
+    turndownService.addRule('sizedImage', {
+        filter: (node, options) =>
+            node.nodeName === 'IMG'
+            && (node.hasAttribute('width') || node.hasAttribute('height')),
+        replacement: (content, node, options) =>
+            sanitiseElement(node as HTMLElement, ['src', 'alt', 'width', 'height']).outerHTML
     })
     return turndownService.turndown(htmlCopy)
 }
