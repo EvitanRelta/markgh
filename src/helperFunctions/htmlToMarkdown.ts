@@ -1,12 +1,23 @@
 import TurndownService from 'turndown'
 
-export default function htmlToMarkdown(html: string) {
-    const spaceToNbsp = html
-        .replaceAll(/\n(?=<\/pre>)/g, '')
-        .replaceAll(/(?<!<pre[^<]*>[^<]*)(?<=\s)\s/g, '&nbsp;')
-        .replaceAll(/(?<!<pre[^<]*>[^<]*)(?<!<\/[^>]+>)(?<=>)\s/g, '&nbsp;')
-        .replaceAll(/(?<!<pre[^<]*>[^<]*)\s(?=<)/g, '&nbsp;')
-    const escapedAmp = spaceToNbsp.replaceAll(/(?<!<pre[^<]*>[^<]*)&/g, '&amp;')
+function escapeAmpersand(html: HTMLElement) {
+    html.innerHTML = html.innerHTML.replaceAll('&', '&amp;')
+}
+
+function removeExtraNewlineInCodeblock(element: HTMLElement) {
+    if (element.nodeName === 'PRE') {
+        //@ts-ignore
+        element.lastChild.data = element.lastChild.data.replace(/\n$/, '')
+        return
+    }
+    const children = Array.from(element.children) as HTMLElement[]
+    children.forEach(removeExtraNewlineInCodeblock)
+}
+
+export default function htmlToMarkdown(html: HTMLElement) {
+    const htmlCopy = html.cloneNode(true) as HTMLElement
+    removeExtraNewlineInCodeblock(htmlCopy)
+    escapeAmpersand(htmlCopy)
 
     const turndownService = new TurndownService({
         headingStyle: 'atx',
@@ -46,5 +57,5 @@ export default function htmlToMarkdown(html: string) {
             return `<ins>${content}</ins>`
         }
     })
-    return turndownService.turndown(escapedAmp)
+    return turndownService.turndown(htmlCopy)
 }
