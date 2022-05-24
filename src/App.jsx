@@ -4,13 +4,15 @@ import Footer from './components/Footer'
 import { useState, useRef } from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-import Input from '@mui/material/Input';
 
 
 
 export default function App() {
 
     const [showMarkdown, setShowMarkdown] = useState(false)
+    const [mode, setMode] = useState('light');
+    const [title, setTitle] = useState('') 
+
  
 
     const darkTheme = createTheme({
@@ -25,9 +27,7 @@ export default function App() {
     },
     });
 
-    const [mode, setMode] = useState('light');
-    const [title, setTitle] = useState('') 
-
+  
     const selectedTheme = mode === "dark" ? darkTheme : lightTheme;
 
   
@@ -42,19 +42,9 @@ export default function App() {
                 <Header 
                 theme = {mode}
                 title = {title} 
-                onChangeTitle = { (newTitle) => setTitle(newTitle) } 
+                setTitle = { setTitle } 
                 toggleTheme = { () => setMode(mode === 'light' ? 'dark' : 'light')}/>
-                {/* <div style = {{
-                    justifyContent: 'center',
-                    alignItems: 'stretch',
-                    display: 'flex'
-                }}>
-                <div style = {{
-                margin: '10px',
-                width: editorWidth,
-                height: 'stretch'
-                }}> */}
-                <Body showMarkdown={ showMarkdown }/>
+                <Body showMarkdown={ showMarkdown } title = { title } />
            
              
                 

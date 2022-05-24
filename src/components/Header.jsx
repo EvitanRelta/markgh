@@ -4,9 +4,8 @@ import IconButton from '@mui/material/IconButton';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
-import * as React from 'react';
 
-const Header = ({ title, theme, toggleTheme}) => {
+const Header = ({ title, theme, toggleTheme, setTitle}) => {
 
 
     const [text, setText] = useState(title)
@@ -29,7 +28,10 @@ const Header = ({ title, theme, toggleTheme}) => {
                     type = 'text'
                     placeholder = 'File Name'
                     value = {text}
-                    onChange = {(e) => setText(e.target.value)}
+                    onChange = {(e) => {
+                        setText(e.target.value)
+                        setTitle(e.target.value)  
+                    }}
                     style = {{ 
                         border: '0px',
                         fontSize: '25px',
