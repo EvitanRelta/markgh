@@ -43,7 +43,7 @@ export default function App() {
         }
 
         if (!allowedFileTypes.includes(getFileType(file.name)) ) {
-            alert('Invalid file type!')
+            alert('Invalid file type! (.txt or .md only)')
             return
         }
 
