@@ -43,7 +43,7 @@ export default function App() {
         }
 
         if (!allowedFileTypes.includes(getFileType(file.name)) ) {
-            setMdText('Invalid file type!')
+            alert('Invalid file type!')
             return
         }
 
@@ -52,8 +52,7 @@ export default function App() {
             setMdText(reader.result)
     
         }
-        
-        console.log(mdText)
+    
         
     }
 

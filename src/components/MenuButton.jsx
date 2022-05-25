@@ -37,8 +37,8 @@ const MenuButton = ({theme, toggleTheme, title, onUpload}) => {
 
   return (
     <div>
-        <IconButton>
-            <MoreHorizIcon onClick = { openMenu }/>
+        <IconButton onClick = { openMenu }>
+            <MoreHorizIcon />
         </IconButton>
         <Menu open = { Boolean(anchor) } keepMounted
          anchorEl = {anchor} onClose = { closeMenu }>

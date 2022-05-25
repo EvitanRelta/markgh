@@ -7,7 +7,7 @@ const ThemeOption = ({toggleTheme, theme}) => {
     <div>  <IconButton onClick={toggleTheme} color="inherit">
         {theme === 'dark' ? <Brightness7Icon /> : <Brightness4Icon/>}
         </IconButton>
-        {theme === "light"? "dark" : "light"} mode
+        {theme === "light"? "Dark" : "Light"} mode
         </div>
   )
 }
