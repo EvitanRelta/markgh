@@ -1,6 +1,8 @@
 
 
-const MarkdownText = ({ markdown, height }) => {
+const MarkdownText = ({ mdText }) => {
+
+  console.log(mdText)
 
     
   return (
@@ -10,7 +12,7 @@ const MarkdownText = ({ markdown, height }) => {
         padding: '20px',
         margin: '10px',
 
-    }}>{ markdown }</span>
+    }}>{ mdText }</span>
   )
 }
 

@@ -12,6 +12,7 @@ export default function App() {
     const [showMarkdown, setShowMarkdown] = useState(false)
     const [mode, setMode] = useState('light');
     const [title, setTitle] = useState('') 
+    const [mdText, setMdText] = useState('')
 
  
 
@@ -30,6 +31,32 @@ export default function App() {
   
     const selectedTheme = mode === "dark" ? darkTheme : lightTheme;
 
+    const onUpload = (e) => {
+        const allowedFileTypes = ['txt', 'md']
+        const file = e.target.files[0]
+        console.log(file.name)
+
+        const reader = new FileReader();
+
+        const getFileType = (fileName) => {
+            return fileName.split('.').pop().toLowerCase()
+        }
+
+        if (!allowedFileTypes.includes(getFileType(file.name)) ) {
+            setMdText('Invalid file type!')
+            return
+        }
+
+        reader.readAsText(file);
+        reader.onload = () => {
+            setMdText(reader.result)
+    
+        }
+        
+        console.log(mdText)
+        
+    }
+
   
     
 
@@ -43,8 +70,9 @@ export default function App() {
                 theme = {mode}
                 title = {title} 
                 setTitle = { setTitle } 
-                toggleTheme = { () => setMode(mode === 'light' ? 'dark' : 'light')}/>
-                <Body showMarkdown={ showMarkdown } title = { title } />
+                toggleTheme = { () => setMode(mode === 'light' ? 'dark' : 'light')}
+                onUpload = { onUpload }/>
+                <Body showMarkdown={ showMarkdown } mdText = {mdText} />
            
              
                 
