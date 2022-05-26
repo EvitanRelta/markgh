@@ -12,7 +12,7 @@ const TOOLBAR_OPTIONS = [
 ]
 
 export default function TextEditor() {
-    const wrapperRef = useCallback((wrapper: HTMLDivElement) => {
+    const wrapperRef = useCallback((wrapper) => {
         if (!wrapper) return
         wrapper.innerHTML = ''
         const editor = document.createElement('div')
@@ -24,7 +24,8 @@ export default function TextEditor() {
         })
     }, [])
 
+    
     return (
-        <div id='container' ref={wrapperRef}></div>
+        <div id='container' ref={wrapperRef} ></div>
     )
 }
