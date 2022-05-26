@@ -4,9 +4,8 @@ import { useCallback, useState } from 'react'
 import { htmlToMarkdown, markdownToHtml } from '../helperFunctions'
 
 const TOOLBAR_OPTIONS = [
-    ['bold', 'italic', 'underline', 'strike'],
-    ['blockquote', 'code-block'],
-    ['link', 'image'],
+    ['bold', 'italic', 'underline', 'strike', 'code'],
+    ['blockquote', 'code-block', 'link', 'image'],
 
     [{ header: [1, 2, 3, 4, 5, 6, false] }],
     [{ list: 'ordered' }, { list: 'bullet' }],
