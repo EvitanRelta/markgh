@@ -1,7 +1,7 @@
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 import { useCallback, useState } from 'react'
-import { markdownToHtml, toMarkdown } from '../helperFunctions'
+import { markdownToHtml, toMarkdown } from '../converterFunctions'
 
 const TOOLBAR_OPTIONS = [
     ['bold', 'italic', 'underline', 'strike', 'code'],
