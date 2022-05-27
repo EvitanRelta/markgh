@@ -1,6 +1,8 @@
 import TurndownService from 'turndown'
+import indent from './indent'
 import TurndownAugmentedNode from './sharedTypes/TurndownAugmentedNode'
 import toSanitizedHtmlHOC from './toSanitizedHtmlHOC'
+import turndownHtmlOnly from './turndownHtmlOnly'
 
 function escapeAmpersand(html: HTMLElement) {
     html.innerHTML = html.innerHTML.replaceAll('&', '&amp;')
@@ -27,18 +29,20 @@ export default function htmlToMarkdown(html: HTMLElement) {
     })
     turndownService.addRule('align', {
         filter: (node, options) => {
-            const classNames: string[] = Array.from(node.classList)
+            const classNames = Array.from(node.classList)
             return classNames.some(className => className.includes('ql-align-'))
         },
         replacement: (content, node, options) => {
-            const tag = node.nodeName.toLowerCase()
-            //@ts-expect-error
-            const classNames: string[] = Array.from(node.classList)
+            const element = node as HTMLElement
+            const tag = element.nodeName.toLowerCase()
+            const classNames = Array.from(element.classList)
             const alignment = classNames
                 .find(className => className.includes('ql-align-'))
                 ?.replace('ql-align-', '')
-            console.log(content)
-            return `<${tag} align="${alignment}">\n\n${content}\n\n</${tag}>\n`
+            const innerMarkdown = turndownHtmlOnly.turndown(element)
+            return `<${tag} align="${alignment}">\n`
+                + indent(innerMarkdown)
+                + `\n</${tag}>\n\n`
         }
     })
     turndownService.addRule('codeblock', {
