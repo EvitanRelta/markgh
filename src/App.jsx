@@ -1,9 +1,10 @@
 import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Body from './components/Body'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import toMarkdown from './converterFunctions/toMarkdown'
 
 
 export default function App() {
@@ -11,6 +12,7 @@ export default function App() {
     const [mode, setMode] = useState('light')
     const [title, setTitle] = useState('')
     const [mdText, setMdText] = useState('')
+    const [quill, setQuill] = useState(null)
 
     const darkTheme = createTheme({
         palette: {
@@ -48,6 +50,23 @@ export default function App() {
         }
     }
 
+    const getMarkdownText = () => toMarkdown(document.getElementsByClassName('ql-editor')[0])
+
+    useEffect(() => {
+        if (!showMarkdown) return
+        if (document.getElementsByClassName('ql-editor')[0] === undefined) return
+
+        setMdText(getMarkdownText())
+    }, [showMarkdown])
+
+    useEffect(() => {
+        if (quill === null) return
+
+        quill.on('text-change', () => {
+            setMdText(getMarkdownText())
+        })
+    }, [quill])
+
 
     return (
         <ThemeProvider theme={selectedTheme}>
@@ -58,9 +77,9 @@ export default function App() {
                     title={title}
                     setTitle={setTitle}
                     toggleTheme={() => setMode(mode === 'light' ? 'dark' : 'light')}
-                    onUpload={onUpload} 
+                    onUpload={onUpload}
                 />
-                <Body showMarkdown={showMarkdown} mdText={mdText} />
+                <Body showMarkdown={showMarkdown} mdText={mdText} setQuill={setQuill} />
                 <div style={{
                     margin: '20px'
                 }}>

@@ -2,7 +2,7 @@ import MarkdownText from "./MarkdownText"
 import TextEditor from "./TextEditor"
 
 
-const Body = ({ showMarkdown, mdText }) => {
+const Body = ({ showMarkdown, mdText, setQuill }) => {
     const editorWidth = showMarkdown ? '50%' : '100%'
 
 
@@ -18,7 +18,7 @@ const Body = ({ showMarkdown, mdText }) => {
                     width: editorWidth,
                     height: 'stretch'
                 }}>
-                    <TextEditor />
+                    <TextEditor setQuill={setQuill} />
                 </div>
                 {showMarkdown && <MarkdownText mdText={mdText} />}
             </div>

@@ -1,6 +1,7 @@
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
-import { useCallback } from 'react'
+import { Dispatch, SetStateAction, useCallback } from 'react'
+
 
 const TOOLBAR_OPTIONS = [
     ['bold', 'italic', 'underline', 'strike', 'code'],
@@ -11,17 +12,23 @@ const TOOLBAR_OPTIONS = [
     [{ align: [] }]
 ]
 
-export default function TextEditor() {
+interface TextEditorProps {
+    setQuill: Dispatch<SetStateAction<Quill | null>>
+}
+
+export default function TextEditor({ setQuill }: TextEditorProps) {
     const wrapperRef = useCallback((wrapper: HTMLDivElement) => {
         if (!wrapper) return
         wrapper.innerHTML = ''
         const editor = document.createElement('div')
         wrapper.append(editor)
 
-        new Quill(editor, {
+        const quill = new Quill(editor, {
             theme: 'snow',
             modules: { toolbar: TOOLBAR_OPTIONS }
         })
+
+        setQuill(quill)
     }, [])
 
 
