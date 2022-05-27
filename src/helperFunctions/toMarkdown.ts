@@ -1,5 +1,6 @@
 import TurndownService from 'turndown'
-import sanitiseElement from './sanitiseElement'
+import TurndownAugmentedNode from './sharedTypes/TurndownAugmentedNode'
+import toSanitizedHtmlHOC from './toSanitizedHtmlHOC'
 
 function escapeAmpersand(html: HTMLElement) {
     html.innerHTML = html.innerHTML.replaceAll('&', '&amp;')
@@ -63,7 +64,7 @@ export default function htmlToMarkdown(html: HTMLElement) {
             node.nodeName === 'IMG'
             && (node.hasAttribute('width') || node.hasAttribute('height')),
         replacement: (content, node, options) =>
-            sanitiseElement(node as HTMLElement, ['src', 'alt', 'width', 'height']).outerHTML
+            toSanitizedHtmlHOC(node as TurndownAugmentedNode, ['src', 'alt', 'width', 'height'])()
     })
     return turndownService.turndown(htmlCopy)
 }
