@@ -47,7 +47,7 @@ export default function TextEditor() {
             const renderedMarkdown = markdownToHtml(markdown)
 
             // @ts-ignore
-            document.getElementById('raw-html').innerText = rawHtml
+            document.getElementById('raw-html').innerText = rawHtml.innerHTML
             // @ts-ignore
             document.getElementById('markdown').innerText = markdown
             // @ts-ignore
