@@ -5,7 +5,7 @@ function escapeAmpersand(html: HTMLElement) {
     html.innerHTML = html.innerHTML.replaceAll('&', '&amp;')
 }
 
-export default function htmlToMarkdown(html: HTMLElement) {
+export default (html: HTMLElement) => {
     const htmlCopy = html.cloneNode(true) as HTMLElement
     escapeAmpersand(htmlCopy)
 
