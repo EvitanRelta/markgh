@@ -24,8 +24,10 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload }) => {
         const file = new Blob(['test export'], { type: "text/plain;charset=utf-8" })
         element.href = URL.createObjectURL(file)
         element.download = (title === '' ? "NewFile" : title) + ".md"
+        element.hidden = true
         document.body.appendChild(element)
         element.click()
+        document.body.removeChild(element)
     }
 
 
