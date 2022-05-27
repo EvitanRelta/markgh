@@ -1,6 +1,7 @@
 import TurndownService from 'turndown'
 import TurndownAugmentedNode from './sharedTypes/TurndownAugmentedNode'
 import toSanitizedHtmlHOC from './toSanitizedHtmlHOC'
+import underline from './turndownPlugins/underline'
 
 interface AllowedAttr {
     filter: TurndownService.Filter
@@ -47,5 +48,7 @@ turndownHtmlOnly.addRule('htmlCodeblock', {
     replacement: (content, node, options) =>
         toSanitizedHtmlHOC(node as TurndownAugmentedNode, [], false)(content)
 })
+
+turndownHtmlOnly.use([underline])
 
 export default turndownHtmlOnly
