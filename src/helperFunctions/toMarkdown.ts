@@ -1,9 +1,5 @@
 import TurndownService from 'turndown'
-import codeBlocks from './turndownPlugins/codeBlocks'
-import quillAlign from './turndownPlugins/quillAlign'
-import resizedImage from './turndownPlugins/resizedImage'
-import strikethrough from './turndownPlugins/strikethrough'
-import underline from './turndownPlugins/underline'
+import { codeBlocks, quillAlign, resizedImage, strikethrough, underline } from './turndownPlugins'
 
 function escapeAmpersand(html: HTMLElement) {
     html.innerHTML = html.innerHTML.replaceAll('&', '&amp;')
