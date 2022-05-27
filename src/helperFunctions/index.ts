@@ -1,7 +1,7 @@
 import MarkdownIt from 'markdown-it'
 import TurndownService from 'turndown'
-import htmlToMarkdown from './htmlToMarkdown'
 import markdownToHtml from './markdownToHtml'
+import toMarkdown from './toMarkdown'
 
 // @ts-ignore
 window.MarkdownIt = MarkdownIt
@@ -9,4 +9,4 @@ window.MarkdownIt = MarkdownIt
 // @ts-ignore
 window.TurndownService = TurndownService
 
-export { htmlToMarkdown, markdownToHtml }
+export { toMarkdown, markdownToHtml }
