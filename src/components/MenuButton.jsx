@@ -2,6 +2,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import { Menu, MenuItem } from "@mui/material"
 import IconButton from '@mui/material/IconButton'
 import { useState } from 'react'
+import { toMarkdown } from '../converterFunctions'
 import ExportMarkdownOption from './ExportMarkdownOption'
 import ThemeOption from './ThemeOption'
 import UploadFileOption from './UploadFileOption'
@@ -20,10 +21,16 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload }) => {
     }
 
     const onDownload = () => {
+        const fileName = `${title || "NewFile"}.md`
+        const markdownText = toMarkdown(document.getElementsByClassName('ql-editor')[0])
+        downloadText(markdownText, fileName)
+    }
+
+    const downloadText = (text, fileName) => {
         const element = document.createElement("a")
-        const file = new Blob(['test export'], { type: "text/plain;charset=utf-8" })
+        const file = new Blob([text], { type: "text/plain;charset=utf-8" })
         element.href = URL.createObjectURL(file)
-        element.download = (title === '' ? "NewFile" : title) + ".md"
+        element.download = fileName
         element.hidden = true
         document.body.appendChild(element)
         element.click()
