@@ -5,7 +5,7 @@ import { markdownToHtml, toMarkdown } from '../converterFunctions'
 
 const TOOLBAR_OPTIONS = [
     ['bold', 'italic', 'underline', 'strike', 'code'],
-    ['blockquote', 'code-block', 'link', 'image'],
+    ['blockquote', 'code-block', 'link'],
 
     [{ header: [1, 2, 3, 4, 5, 6, false] }],
     [{ list: 'ordered' }, { list: 'bullet' }],
@@ -21,21 +21,7 @@ export default function TextEditor() {
         wrapper.append(editor)
         const quill = new Quill(editor, {
             theme: 'snow',
-            modules: {
-                toolbar: {
-                    container: TOOLBAR_OPTIONS,
-                    handlers: {
-                        image: () => {
-                            const range = quill.getSelection()
-                            if (!range) return
-                            var value = prompt('please copy paste the image url here.')
-                            if (value) {
-                                quill.insertEmbed(range.index, 'image', value, Quill.sources.USER)
-                            }
-                        }
-                    }
-                },
-            }
+            modules: { toolbar: TOOLBAR_OPTIONS }
         })
 
         setQuill(quill)
