@@ -1,9 +1,8 @@
 import TurndownService from 'turndown'
-import indent from './indent'
 import TurndownAugmentedNode from './sharedTypes/TurndownAugmentedNode'
 import toSanitizedHtmlHOC from './toSanitizedHtmlHOC'
-import turndownHtmlOnly from './turndownHtmlOnly'
 import codeBlocks from './turndownPlugins/codeBlocks'
+import quillAlign from './turndownPlugins/quillAlign'
 import underline from './turndownPlugins/underline'
 
 function escapeAmpersand(html: HTMLElement) {
@@ -17,23 +16,8 @@ export default function htmlToMarkdown(html: HTMLElement) {
     const turndownService = new TurndownService({
         headingStyle: 'atx',
         codeBlockStyle: 'fenced'
-    }).use([codeBlocks, underline])
+    }).use([codeBlocks, underline, quillAlign])
 
-    turndownService.addRule('align', {
-        filter: (node, options) => {
-            const classNames = Array.from(node.classList)
-            return classNames.some(className => className.includes('ql-align-'))
-        },
-        replacement: (content, node, options) => {
-            const element = node as HTMLElement
-            const tag = element.nodeName.toLowerCase()
-            const alignment = element.className.match(/(?<=(?<!\S)ql-align-)\S+/)?.[0]
-            const innerMarkdown = turndownHtmlOnly.turndown(element)
-            return `<${tag} align="${alignment}">\n`
-                + indent(innerMarkdown)
-                + `\n</${tag}>\n\n`
-        }
-    })
     turndownService.addRule('strikethrough', {
         filter: ['del', 's'],
         replacement: (content, node, options) => {
