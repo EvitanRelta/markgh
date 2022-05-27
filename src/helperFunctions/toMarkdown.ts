@@ -3,6 +3,7 @@ import TurndownAugmentedNode from './sharedTypes/TurndownAugmentedNode'
 import toSanitizedHtmlHOC from './toSanitizedHtmlHOC'
 import codeBlocks from './turndownPlugins/codeBlocks'
 import quillAlign from './turndownPlugins/quillAlign'
+import strikethrough from './turndownPlugins/strikethrough'
 import underline from './turndownPlugins/underline'
 
 function escapeAmpersand(html: HTMLElement) {
@@ -16,14 +17,8 @@ export default function htmlToMarkdown(html: HTMLElement) {
     const turndownService = new TurndownService({
         headingStyle: 'atx',
         codeBlockStyle: 'fenced'
-    }).use([codeBlocks, underline, quillAlign])
+    }).use([codeBlocks, underline, quillAlign, strikethrough])
 
-    turndownService.addRule('strikethrough', {
-        filter: ['del', 's'],
-        replacement: (content, node, options) => {
-            return `~~${content}~~`
-        }
-    })
     turndownService.addRule('sizedImage', {
         filter: (node, options) =>
             node.nodeName === 'IMG'
