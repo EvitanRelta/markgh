@@ -27,10 +27,7 @@ export default function htmlToMarkdown(html: HTMLElement) {
         replacement: (content, node, options) => {
             const element = node as HTMLElement
             const tag = element.nodeName.toLowerCase()
-            const classNames = Array.from(element.classList)
-            const alignment = classNames
-                .find(className => className.includes('ql-align-'))
-                ?.replace('ql-align-', '')
+            const alignment = element.className.match(/(?<=(?<!\S)ql-align-)\S+/)?.[0]
             const innerMarkdown = turndownHtmlOnly.turndown(element)
             return `<${tag} align="${alignment}">\n`
                 + indent(innerMarkdown)
