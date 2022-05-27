@@ -4,6 +4,7 @@ import TurndownAugmentedNode from './sharedTypes/TurndownAugmentedNode'
 import toSanitizedHtmlHOC from './toSanitizedHtmlHOC'
 import turndownHtmlOnly from './turndownHtmlOnly'
 import codeBlocks from './turndownPlugins/codeBlocks'
+import underline from './turndownPlugins/underline'
 
 function escapeAmpersand(html: HTMLElement) {
     html.innerHTML = html.innerHTML.replaceAll('&', '&amp;')
@@ -16,7 +17,8 @@ export default function htmlToMarkdown(html: HTMLElement) {
     const turndownService = new TurndownService({
         headingStyle: 'atx',
         codeBlockStyle: 'fenced'
-    }).use(codeBlocks)
+    }).use([codeBlocks, underline])
+
     turndownService.addRule('align', {
         filter: (node, options) => {
             const classNames = Array.from(node.classList)
@@ -39,12 +41,6 @@ export default function htmlToMarkdown(html: HTMLElement) {
         filter: ['del', 's'],
         replacement: (content, node, options) => {
             return `~~${content}~~`
-        }
-    })
-    turndownService.addRule('underline', {
-        filter: 'u',
-        replacement: (content, node, options) => {
-            return `<ins>${content}</ins>`
         }
     })
     turndownService.addRule('sizedImage', {
