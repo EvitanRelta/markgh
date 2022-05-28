@@ -3,6 +3,7 @@ import 'quill/dist/quill.snow.css'
 import { useCallback } from 'react'
 import '../githubMarkdownCss/light.css'
 import hljs from 'highlight.js'
+import '../githubMarkdownCss/syntaxHighlighting/light.highlight.css'
 
 const TOOLBAR_OPTIONS = [
     ['bold', 'italic', 'underline', 'strike'],
