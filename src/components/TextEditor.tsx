@@ -1,9 +1,11 @@
-import Quill from 'quill'
-import 'quill/dist/quill.snow.css'
-import { useCallback } from 'react'
-import '../githubMarkdownCss/light.css'
 import hljs from 'highlight.js'
+import Quill from 'quill'
+import { useCallback } from 'react'
+import '../customCss/custom-quill.css'
+import '../githubMarkdownCss/light.css'
 import '../githubMarkdownCss/syntaxHighlighting/light.highlight.css'
+import '../quill-snow-base.css'
+import testHtml from '../testHtml'
 
 const TOOLBAR_OPTIONS = [
     ['bold', 'italic', 'underline', 'strike'],
@@ -21,10 +23,10 @@ export default function TextEditor() {
         const editor = document.createElement('div')
         editor.className = 'markdown-body'
         editor.style.boxSizing = 'border-box'
-		editor.style.minWidth = '200px'
-		editor.style.maxWidth = '980px'
-		editor.style.margin = '0 auto'
-		editor.style.padding = '45px'
+        editor.style.minWidth = '200px'
+        editor.style.maxWidth = '980px'
+        editor.style.margin = '0 auto'
+        editor.style.padding = '45px'
         wrapper.append(editor)
 
         new Quill(editor, {
@@ -36,6 +38,8 @@ export default function TextEditor() {
                 toolbar: TOOLBAR_OPTIONS
             }
         })
+
+        editor.getElementsByClassName('ql-editor')[0].innerHTML = testHtml
     }, [])
 
     return (
