@@ -31,7 +31,6 @@ export default function App() {
     const onUpload = (e) => {
         const allowedFileTypes = ['txt', 'md']
         const file = e.target.files[0]
-        console.log(file.name)
 
         const reader = new FileReader()
 
