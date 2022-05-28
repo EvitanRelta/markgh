@@ -567,10 +567,6 @@
   margin-bottom: 16px;
 }
 
-.markdown-body pre {
-  padding-bottom: 16px;
-}
-
 .markdown-body blockquote>:first-child {
   margin-top: 0;
 }
