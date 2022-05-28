@@ -1,0 +1,128 @@
+.markdown-body .hljs-comment {
+  color: #66707B;
+}
+
+.markdown-body .hljs-attr,
+.markdown-body .hljs-number,
+.markdown-body .hljs-attribute,
+.markdown-body .hljs-literal,
+.markdown-body .hljs-string .hljs-title.class_ {
+  color: #023b95;
+}
+
+.markdown-body .pl-e,
+.markdown-body .hljs-built_in,
+.markdown-body .hljs-title.function_,
+.markdown-body .hljs-title {
+  color: #622cbc;
+}
+
+.markdown-body .hljs-tag,
+.markdown-body .hljs-params,
+.markdown-body .hljs-string .pl-s1 {
+  color: #0E1116;
+}
+
+.markdown-body .hljs-name {
+  color: #024c1a;
+}
+
+.markdown-body .hljs-keyword,
+.markdown-body .hljs-type {
+  color: #a0111f;
+}
+
+.markdown-body .hljs-string,
+.markdown-body .pl-pds,
+.markdown-body .hljs-string .pl-pse .pl-s1,
+.markdown-body .pl-sr,
+.markdown-body .pl-sr .pl-cce,
+.markdown-body .pl-sr .pl-sre,
+.markdown-body .pl-sr .pl-sra {
+  color: #032563;
+}
+
+.markdown-body .hljs-title.class_,
+.markdown-body .pl-smw {
+  color: #702c00;
+}
+
+.markdown-body .pl-bu {
+  color: #6e011a;
+}
+
+.markdown-body .pl-ii {
+  color: #FFFFFF;
+  background-color: #6e011a;
+}
+
+.markdown-body .pl-c2 {
+  color: #FFFFFF;
+  background-color: #a0111f;
+}
+
+.markdown-body .pl-sr .pl-cce {
+  font-weight: bold;
+  color: #024c1a;
+}
+
+.markdown-body .pl-ml {
+  color: #2e1800;
+}
+
+.markdown-body .pl-mh,
+.markdown-body .pl-mh .hljs-built_in,
+.markdown-body .pl-mh .hljs-title.function_,
+.markdown-body .pl-mh .hljs-title,
+.markdown-body .pl-ms {
+  font-weight: bold;
+  color: #023b95;
+}
+
+.markdown-body .pl-mi {
+  font-style: italic;
+  color: #0E1116;
+}
+
+.markdown-body .pl-mb {
+  font-weight: bold;
+  color: #0E1116;
+}
+
+.markdown-body .pl-md {
+  color: #6e011a;
+  background-color: #fff0ee;
+}
+
+.markdown-body .pl-mi1 {
+  color: #024c1a;
+  background-color: #d2fedb;
+}
+
+.markdown-body .pl-mc {
+  color: #702c00;
+  background-color: #ffc67b;
+}
+
+.markdown-body .pl-mi2 {
+  color: #E7ECF0;
+  background-color: #023b95;
+}
+
+.markdown-body .pl-mdr {
+  font-weight: bold;
+  color: #622cbc;
+}
+
+.markdown-body .pl-ba {
+  color: #4B535D;
+}
+
+.markdown-body .pl-sg {
+  color: #88929D;
+}
+
+.markdown-body .pl-corl {
+  text-decoration: underline;
+  color: #032563;
+}

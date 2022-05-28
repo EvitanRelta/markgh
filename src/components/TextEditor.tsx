@@ -1,6 +1,11 @@
+import hljs from 'highlight.js'
 import Quill from 'quill'
-import 'quill/dist/quill.snow.css'
 import { Dispatch, SetStateAction, useCallback } from 'react'
+import '../customCss/custom-quill.css'
+import '../githubMarkdownCss/light.css'
+import '../githubMarkdownCss/syntaxHighlighting/light.highlight.css'
+import '../quill-snow-base.css'
+import testHtml from '../testHtml'
 
 
 const TOOLBAR_OPTIONS = [
@@ -21,14 +26,26 @@ export default function TextEditor({ setQuill }: TextEditorProps) {
         if (!wrapper) return
         wrapper.innerHTML = ''
         const editor = document.createElement('div')
+        editor.className = 'markdown-body'
+        editor.style.boxSizing = 'border-box'
+        editor.style.minWidth = '200px'
+        editor.style.maxWidth = '980px'
+        editor.style.margin = '0 auto'
+        editor.style.padding = '45px'
         wrapper.append(editor)
 
         const quill = new Quill(editor, {
             theme: 'snow',
-            modules: { toolbar: TOOLBAR_OPTIONS }
+            modules: {
+                syntax: {
+                    highlight: (text: string) => hljs.highlightAuto(text).value,
+                },
+                toolbar: TOOLBAR_OPTIONS
+            }
         })
 
         setQuill(quill)
+        editor.getElementsByClassName('ql-editor')[0].innerHTML = testHtml
     }, [])
 
 
