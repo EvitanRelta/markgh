@@ -1,6 +1,6 @@
 import Quill from 'quill'
 import { useCallback } from 'react'
-import '../custom-quill.css'
+import '../customCss/custom-quill.css'
 import '../github-markdown-css/github-markdown-light.css'
 import '../quill-snow-base.css'
 import testHtml from '../testHtml'
