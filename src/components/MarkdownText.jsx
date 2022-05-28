@@ -3,14 +3,15 @@ const MarkdownText = ({ mdText }) => {
 
 
     return (
-        <span style={{
+        <pre style={{
             border: '1px solid #d0cccc',
-            minWidth: '50%',
+            width: '50%',
             padding: '20px',
-            margin: '10px'
+            margin: '10px',
+            overflowX: 'auto'
         }}>
             {mdText}
-        </span>
+        </pre >
     )
 }
 
