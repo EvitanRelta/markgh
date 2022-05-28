@@ -1,33 +1,40 @@
-.markdown-body .pl-c {
+.markdown-body .hljs-comment {
   color: #8b949e;
 }
 
-.markdown-body .pl-c1,
-.markdown-body .pl-s .pl-v {
+.markdown-body .hljs-attr,
+.markdown-body .hljs-number,
+.markdown-body .hljs-attribute,
+.markdown-body .hljs-literal,
+.markdown-body .hljs-string .hljs-title.class_ {
   color: #79c0ff;
 }
 
 .markdown-body .pl-e,
-.markdown-body .pl-en {
+.markdown-body .hljs-built_in,
+.markdown-body .hljs-title.function_,
+.markdown-body .hljs-title {
   color: #d2a8ff;
 }
 
-.markdown-body .pl-smi,
-.markdown-body .pl-s .pl-s1 {
+.markdown-body .hljs-tag,
+.markdown-body .hljs-params,
+.markdown-body .hljs-string .pl-s1 {
   color: #c9d1d9;
 }
 
-.markdown-body .pl-ent {
+.markdown-body .hljs-name {
   color: #a5d6ff;
 }
 
-.markdown-body .pl-k {
+.markdown-body .hljs-keyword,
+.markdown-body .hljs-type {
   color: #ff7b72;
 }
 
-.markdown-body .pl-s,
+.markdown-body .hljs-string,
 .markdown-body .pl-pds,
-.markdown-body .pl-s .pl-pse .pl-s1,
+.markdown-body .hljs-string .pl-pse .pl-s1,
 .markdown-body .pl-sr,
 .markdown-body .pl-sr .pl-cce,
 .markdown-body .pl-sr .pl-sre,
@@ -35,7 +42,7 @@
   color: #a5d6ff;
 }
 
-.markdown-body .pl-v,
+.markdown-body .hljs-title.class_,
 .markdown-body .pl-smw {
   color: #ffa198;
 }
@@ -64,7 +71,9 @@
 }
 
 .markdown-body .pl-mh,
-.markdown-body .pl-mh .pl-en,
+.markdown-body .pl-mh .hljs-built_in,
+.markdown-body .pl-mh .hljs-title.function_,
+.markdown-body .pl-mh .hljs-title,
 .markdown-body .pl-ms {
   font-weight: bold;
   color: #1f6feb;
