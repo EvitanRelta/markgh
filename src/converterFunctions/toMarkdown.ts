@@ -23,6 +23,13 @@ function preProcessHtml(element: Element) {
         .forEach(preProcessHtml)
 }
 
+function postProcessHtml(markdown: string) {
+    return markdown
+        .replaceAll('&lt;', '\\<')
+        .replaceAll('&amp;', '\\&')
+        .replace(/(?<!\s|\\)&nbsp;(?!\s)/g, ' ')
+}
+
 export default (html: HTMLElement) => {
     const htmlCopy = html.cloneNode(true) as HTMLElement
     preProcessHtml(htmlCopy)
@@ -32,5 +39,6 @@ export default (html: HTMLElement) => {
         codeBlockStyle: 'fenced'
     }).use([codeBlocks, underline, quillAlign, strikethrough, resizedImage])
 
-    return turndownService.turndown(htmlCopy)
+    const markdown = turndownService.turndown(htmlCopy)
+    return postProcessHtml(markdown)
 }
