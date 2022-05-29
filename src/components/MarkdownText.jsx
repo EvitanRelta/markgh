@@ -1,7 +1,4 @@
 const MarkdownText = ({ mdText }) => {
-    console.log(mdText)
-
-
     return (
         <pre style={{
             border: '1px solid #d0cccc',
