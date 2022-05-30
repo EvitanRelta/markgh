@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button'
 
 
-const Footer = ({ onClick, showMarkdown }) => (
+const Footer = ({ onClick, showMarkdown, theme }) => (
     <footer className='footer'>
         <div 
         // style={{
@@ -21,7 +21,7 @@ const Footer = ({ onClick, showMarkdown }) => (
             {
                 showMarkdown
                     ? <Button onClick={onClick} variant="outlined" 
-                    style = {{backgroundColor: 'white'}}>Hide Markdown</Button>
+                    style = {{backgroundColor: theme === 'light' ? 'white' : 'black' }}>Hide Markdown</Button>
                     : <Button color='primary' onClick={onClick} variant="contained">Show Markdown</Button>
             }
         </div>

@@ -80,7 +80,7 @@ export default function App() {
                 />
                 <Body showMarkdown={showMarkdown} mdText={mdText} setQuill={setQuill} />
                 <div>
-                    <Footer onClick={() => setShowMarkdown(!showMarkdown)} showMarkdown={showMarkdown} />
+                    <Footer onClick={() => setShowMarkdown(!showMarkdown)} showMarkdown={showMarkdown} theme={mode}/>
                 </div>
             </div>
         </ThemeProvider>
