@@ -38,6 +38,7 @@ function postProcessHtml(markdown: string) {
         .replaceAll('&amp;', '\\&')
         .replace(/(?<=&nbsp;)&nbsp;/g, ' ')
         .replace(/(?<!\s|\\)&nbsp;(?!\s)/g, ' ')
+        .replace(/(?<!\s|\\)((&nbsp; )+)&nbsp;(?!\s)/g, ' $1')
 }
 
 export default (html: HTMLElement) => {
