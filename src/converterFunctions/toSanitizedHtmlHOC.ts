@@ -5,7 +5,7 @@ export default (node: TurndownAugmentedNode, allowedAttributes: string[], addInd
     const attributesStr = Array.from(node.attributes)
         .filter(attribute => allowedAttributes.includes(attribute.name))
         .map(attribute => ` ${attribute.name}="${attribute.value}"`)
-        .join()
+        .join('')
     const tag = node.tagName.toLowerCase()
     const hasChildNodes = node.hasChildNodes()
     const isBlock = node.isBlock
