@@ -27,6 +27,7 @@ function postProcessHtml(markdown: string) {
     return markdown
         .replaceAll('&lt;', '\\<')
         .replaceAll('&amp;', '\\&')
+        .replace(/(?<=&nbsp;)&nbsp;/g, ' ')
         .replace(/(?<!\s|\\)&nbsp;(?!\s)/g, ' ')
 }
 
