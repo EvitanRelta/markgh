@@ -26,16 +26,15 @@ export default function TextEditor({ setQuill, theme }: TextEditorProps) {
     const wrapperRef = useCallback((wrapper: HTMLDivElement) => {
         if (!wrapper) return
         wrapper.innerHTML = ''
-        const editor = document.createElement('div')
-        editor.className = 'markdown-body gh-light'
-        editor.style.boxSizing = 'border-box'
-        editor.style.minWidth = '200px'
-        editor.style.maxWidth = '980px'
-        editor.style.margin = '0 auto'
-        editor.style.padding = '45px'
-        wrapper.append(editor)
+        const container = document.createElement('div')
+        container.style.boxSizing = 'border-box'
+        container.style.minWidth = '200px'
+        container.style.maxWidth = '980px'
+        container.style.margin = '0 auto'
+        container.style.padding = '45px'
+        wrapper.append(container)
 
-        const quill = new Quill(editor, {
+        const quill = new Quill(container, {
             theme: 'snow',
             modules: {
                 syntax: {
@@ -45,9 +44,13 @@ export default function TextEditor({ setQuill, theme }: TextEditorProps) {
             }
         })
 
+        //@ts-expect-error
+        const quillEditor = quill.scrollingContainer as HTMLDivElement
+        quillEditor.classList.add('markdown-body', 'gh-light')
+        quillEditor.innerHTML = placeholderEditorHtml
+
         setQuill(quill)
-        setEditor(editor)
-        editor.getElementsByClassName('ql-editor')[0].innerHTML = placeholderEditorHtml
+        setEditor(quillEditor)
     }, [])
 
     useEffect(() => {
