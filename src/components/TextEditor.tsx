@@ -1,6 +1,6 @@
 import hljs from 'highlight.js'
 import Quill from 'quill'
-import { Dispatch, SetStateAction, useCallback } from 'react'
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 import '../customCss/custom-quill.css'
 import '../customCss/quill-snow-no-editor-css.css'
 import '../githubMarkdownCss/importAllGithubCss'
@@ -18,9 +18,11 @@ const TOOLBAR_OPTIONS = [
 
 interface TextEditorProps {
     setQuill: Dispatch<SetStateAction<Quill | null>>
+    theme: 'light' | 'dark'
 }
 
-export default function TextEditor({ setQuill }: TextEditorProps) {
+export default function TextEditor({ setQuill, theme }: TextEditorProps) {
+    const [editor, setEditor] = useState<HTMLDivElement | null>(null)
     const wrapperRef = useCallback((wrapper: HTMLDivElement) => {
         if (!wrapper) return
         wrapper.innerHTML = ''
@@ -44,8 +46,24 @@ export default function TextEditor({ setQuill }: TextEditorProps) {
         })
 
         setQuill(quill)
+        setEditor(editor)
         editor.getElementsByClassName('ql-editor')[0].innerHTML = placeholderEditorHtml
     }, [])
+
+    useEffect(() => {
+        if (!editor) return
+        const isGithubCssClassName = (className: string) => /^gh-/.test(className)
+        const replaceClassName = (classList: DOMTokenList, oldClassName: string, newClassName: string) => {
+            classList.remove(oldClassName)
+            classList.add(newClassName)
+        }
+
+
+        const githubCssClassName = Array.from(editor.classList)
+            .find(isGithubCssClassName) as string
+
+        replaceClassName(editor.classList, githubCssClassName, `gh-${theme}`)
+    }, [editor, theme])
 
 
     return (

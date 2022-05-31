@@ -78,7 +78,7 @@ export default function App() {
                     toggleTheme={() => setMode(mode === 'light' ? 'dark' : 'light')}
                     onUpload={onUpload}
                 />
-                <Body showMarkdown={showMarkdown} mdText={mdText} setQuill={setQuill} />
+                <Body showMarkdown={showMarkdown} mdText={mdText} setQuill={setQuill} theme={mode} />
                 <div style={{
                     margin: '20px'
                 }}>
