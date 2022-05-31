@@ -44,12 +44,12 @@ function replaceOnlyNonCodeOrCodeBlock(markdown: string, replacementFn: (markdow
 
 function postProcessHtml(markdown: string) {
     const postProcess = (markdown: string) => markdown
+        .replace(/(?<=&nbsp;)&nbsp;/g, ' ')
+        .replace(/(?<!\s)&nbsp;(?!\s)/g, ' ')
+        .replace(/(?<!\s)((&nbsp; )+)&nbsp;(?!\s)/g, ' $1')
+        .replace(/(?<!\s)&nbsp; &nbsp; ((&nbsp; )*)/g, ' &nbsp;&nbsp; $1')
         .replaceAll('&lt;', '\\<')
         .replaceAll('&amp;', '\\&')
-        .replace(/(?<=&nbsp;)&nbsp;/g, ' ')
-        .replace(/(?<!\s|\\)&nbsp;(?!\s)/g, ' ')
-        .replace(/(?<!\s|\\)((&nbsp; )+)&nbsp;(?!\s)/g, ' $1')
-        .replace(/(?<!\s|\\)&nbsp; &nbsp; ((&nbsp; )*)/g, ' &nbsp;&nbsp; $1')
 
     return replaceOnlyNonCodeOrCodeBlock(markdown, postProcess)
 }
