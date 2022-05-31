@@ -3,8 +3,7 @@ import Quill from 'quill'
 import { Dispatch, SetStateAction, useCallback } from 'react'
 import '../customCss/custom-quill.css'
 import '../customCss/quill-snow-no-editor-css.css'
-import '../githubMarkdownCss/light.css'
-import '../githubMarkdownCss/syntaxHighlighting/light.highlight.css'
+import '../githubMarkdownCss/importAllGithubCss'
 import placeholderEditorHtml from '../placeholderEditorHtml'
 
 
