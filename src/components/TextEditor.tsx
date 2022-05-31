@@ -5,7 +5,7 @@ import '../customCss/custom-quill.css'
 import '../customCss/quill-snow-no-editor-css.css'
 import '../githubMarkdownCss/light.css'
 import '../githubMarkdownCss/syntaxHighlighting/light.highlight.css'
-import testHtml from '../testHtml'
+import placeholderEditorHtml from '../placeholderEditorHtml'
 
 
 const TOOLBAR_OPTIONS = [
@@ -45,7 +45,7 @@ export default function TextEditor({ setQuill }: TextEditorProps) {
         })
 
         setQuill(quill)
-        editor.getElementsByClassName('ql-editor')[0].innerHTML = testHtml
+        editor.getElementsByClassName('ql-editor')[0].innerHTML = placeholderEditorHtml
     }, [])
 
 
