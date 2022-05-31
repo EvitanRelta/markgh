@@ -1,128 +1,128 @@
-.markdown-body .hljs-comment {
+.markdown-body.gh-dark-colorblind .hljs-comment {
   color: #8b949e;
 }
 
-.markdown-body .hljs-attr,
-.markdown-body .hljs-number,
-.markdown-body .hljs-attribute,
-.markdown-body .hljs-literal,
-.markdown-body .hljs-string .hljs-title.class_ {
+.markdown-body.gh-dark-colorblind .hljs-attr,
+.markdown-body.gh-dark-colorblind .hljs-number,
+.markdown-body.gh-dark-colorblind .hljs-attribute,
+.markdown-body.gh-dark-colorblind .hljs-literal,
+.markdown-body.gh-dark-colorblind .hljs-string .hljs-title.class_ {
   color: #79c0ff;
 }
 
-.markdown-body .pl-e,
-.markdown-body .hljs-built_in,
-.markdown-body .hljs-title.function_,
-.markdown-body .hljs-title {
+.markdown-body.gh-dark-colorblind .pl-e,
+.markdown-body.gh-dark-colorblind .hljs-built_in,
+.markdown-body.gh-dark-colorblind .hljs-title.function_,
+.markdown-body.gh-dark-colorblind .hljs-title {
   color: #d2a8ff;
 }
 
-.markdown-body .hljs-tag,
-.markdown-body .hljs-params,
-.markdown-body .hljs-string .pl-s1 {
+.markdown-body.gh-dark-colorblind .hljs-tag,
+.markdown-body.gh-dark-colorblind .hljs-params,
+.markdown-body.gh-dark-colorblind .hljs-string .pl-s1 {
   color: #c9d1d9;
 }
 
-.markdown-body .hljs-name {
+.markdown-body.gh-dark-colorblind .hljs-name {
   color: #a5d6ff;
 }
 
-.markdown-body .hljs-keyword,
-.markdown-body .hljs-type {
+.markdown-body.gh-dark-colorblind .hljs-keyword,
+.markdown-body.gh-dark-colorblind .hljs-type {
   color: #ec8e2c;
 }
 
-.markdown-body .hljs-string,
-.markdown-body .pl-pds,
-.markdown-body .hljs-string .pl-pse .pl-s1,
-.markdown-body .pl-sr,
-.markdown-body .pl-sr .pl-cce,
-.markdown-body .pl-sr .pl-sre,
-.markdown-body .pl-sr .pl-sra {
+.markdown-body.gh-dark-colorblind .hljs-string,
+.markdown-body.gh-dark-colorblind .pl-pds,
+.markdown-body.gh-dark-colorblind .hljs-string .pl-pse .pl-s1,
+.markdown-body.gh-dark-colorblind .pl-sr,
+.markdown-body.gh-dark-colorblind .pl-sr .pl-cce,
+.markdown-body.gh-dark-colorblind .pl-sr .pl-sre,
+.markdown-body.gh-dark-colorblind .pl-sr .pl-sra {
   color: #a5d6ff;
 }
 
-.markdown-body .hljs-title.class_,
-.markdown-body .pl-smw {
+.markdown-body.gh-dark-colorblind .hljs-title.class_,
+.markdown-body.gh-dark-colorblind .pl-smw {
   color: #fdac54;
 }
 
-.markdown-body .pl-bu {
+.markdown-body.gh-dark-colorblind .pl-bu {
   color: #d47616;
 }
 
-.markdown-body .pl-ii {
+.markdown-body.gh-dark-colorblind .pl-ii {
   color: #f0f6fc;
   background-color: #6c3906;
 }
 
-.markdown-body .pl-c2 {
+.markdown-body.gh-dark-colorblind .pl-c2 {
   color: #f0f6fc;
   background-color: #914d04;
 }
 
-.markdown-body .pl-sr .pl-cce {
+.markdown-body.gh-dark-colorblind .pl-sr .pl-cce {
   font-weight: bold;
   color: #a5d6ff;
 }
 
-.markdown-body .pl-ml {
+.markdown-body.gh-dark-colorblind .pl-ml {
   color: #f2cc60;
 }
 
-.markdown-body .pl-mh,
-.markdown-body .pl-mh .hljs-built_in,
-.markdown-body .pl-mh .hljs-title.function_,
-.markdown-body .pl-mh .hljs-title,
-.markdown-body .pl-ms {
+.markdown-body.gh-dark-colorblind .pl-mh,
+.markdown-body.gh-dark-colorblind .pl-mh .hljs-built_in,
+.markdown-body.gh-dark-colorblind .pl-mh .hljs-title.function_,
+.markdown-body.gh-dark-colorblind .pl-mh .hljs-title,
+.markdown-body.gh-dark-colorblind .pl-ms {
   font-weight: bold;
   color: #1f6feb;
 }
 
-.markdown-body .pl-mi {
+.markdown-body.gh-dark-colorblind .pl-mi {
   font-style: italic;
   color: #c9d1d9;
 }
 
-.markdown-body .pl-mb {
+.markdown-body.gh-dark-colorblind .pl-mb {
   font-weight: bold;
   color: #c9d1d9;
 }
 
-.markdown-body .pl-md {
+.markdown-body.gh-dark-colorblind .pl-md {
   color: #ffe2bb;
   background-color: #4e2906;
 }
 
-.markdown-body .pl-mi1 {
+.markdown-body.gh-dark-colorblind .pl-mi1 {
   color: #cae8ff;
   background-color: #0c2d6b;
 }
 
-.markdown-body .pl-mc {
+.markdown-body.gh-dark-colorblind .pl-mc {
   color: #ffe2bb;
   background-color: #4e2906;
 }
 
-.markdown-body .pl-mi2 {
+.markdown-body.gh-dark-colorblind .pl-mi2 {
   color: #c9d1d9;
   background-color: #1158c7;
 }
 
-.markdown-body .pl-mdr {
+.markdown-body.gh-dark-colorblind .pl-mdr {
   font-weight: bold;
   color: #d2a8ff;
 }
 
-.markdown-body .pl-ba {
+.markdown-body.gh-dark-colorblind .pl-ba {
   color: #8b949e;
 }
 
-.markdown-body .pl-sg {
+.markdown-body.gh-dark-colorblind .pl-sg {
   color: #484f58;
 }
 
-.markdown-body .pl-corl {
+.markdown-body.gh-dark-colorblind .pl-corl {
   text-decoration: underline;
   color: #a5d6ff;
 }

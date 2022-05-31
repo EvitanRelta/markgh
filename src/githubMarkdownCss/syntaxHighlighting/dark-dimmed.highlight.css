@@ -1,128 +1,128 @@
-.markdown-body .hljs-comment {
+.markdown-body.gh-dark-dimmed .hljs-comment {
   color: #768390;
 }
 
-.markdown-body .hljs-attr,
-.markdown-body .hljs-number,
-.markdown-body .hljs-attribute,
-.markdown-body .hljs-literal,
-.markdown-body .hljs-string .hljs-title.class_ {
+.markdown-body.gh-dark-dimmed .hljs-attr,
+.markdown-body.gh-dark-dimmed .hljs-number,
+.markdown-body.gh-dark-dimmed .hljs-attribute,
+.markdown-body.gh-dark-dimmed .hljs-literal,
+.markdown-body.gh-dark-dimmed .hljs-string .hljs-title.class_ {
   color: #6cb6ff;
 }
 
-.markdown-body .pl-e,
-.markdown-body .hljs-built_in,
-.markdown-body .hljs-title.function_,
-.markdown-body .hljs-title {
+.markdown-body.gh-dark-dimmed .pl-e,
+.markdown-body.gh-dark-dimmed .hljs-built_in,
+.markdown-body.gh-dark-dimmed .hljs-title.function_,
+.markdown-body.gh-dark-dimmed .hljs-title {
   color: #dcbdfb;
 }
 
-.markdown-body .hljs-tag,
-.markdown-body .hljs-params,
-.markdown-body .hljs-string .pl-s1 {
+.markdown-body.gh-dark-dimmed .hljs-tag,
+.markdown-body.gh-dark-dimmed .hljs-params,
+.markdown-body.gh-dark-dimmed .hljs-string .pl-s1 {
   color: #adbac7;
 }
 
-.markdown-body .hljs-name {
+.markdown-body.gh-dark-dimmed .hljs-name {
   color: #8ddb8c;
 }
 
-.markdown-body .hljs-keyword,
-.markdown-body .hljs-type {
+.markdown-body.gh-dark-dimmed .hljs-keyword,
+.markdown-body.gh-dark-dimmed .hljs-type {
   color: #f47067;
 }
 
-.markdown-body .hljs-string,
-.markdown-body .pl-pds,
-.markdown-body .hljs-string .pl-pse .pl-s1,
-.markdown-body .pl-sr,
-.markdown-body .pl-sr .pl-cce,
-.markdown-body .pl-sr .pl-sre,
-.markdown-body .pl-sr .pl-sra {
+.markdown-body.gh-dark-dimmed .hljs-string,
+.markdown-body.gh-dark-dimmed .pl-pds,
+.markdown-body.gh-dark-dimmed .hljs-string .pl-pse .pl-s1,
+.markdown-body.gh-dark-dimmed .pl-sr,
+.markdown-body.gh-dark-dimmed .pl-sr .pl-cce,
+.markdown-body.gh-dark-dimmed .pl-sr .pl-sre,
+.markdown-body.gh-dark-dimmed .pl-sr .pl-sra {
   color: #96d0ff;
 }
 
-.markdown-body .hljs-title.class_,
-.markdown-body .pl-smw {
+.markdown-body.gh-dark-dimmed .hljs-title.class_,
+.markdown-body.gh-dark-dimmed .pl-smw {
   color: #f69d50;
 }
 
-.markdown-body .pl-bu {
+.markdown-body.gh-dark-dimmed .pl-bu {
   color: #e5534b;
 }
 
-.markdown-body .pl-ii {
+.markdown-body.gh-dark-dimmed .pl-ii {
   color: #cdd9e5;
   background-color: #922323;
 }
 
-.markdown-body .pl-c2 {
+.markdown-body.gh-dark-dimmed .pl-c2 {
   color: #cdd9e5;
   background-color: #ad2e2c;
 }
 
-.markdown-body .pl-sr .pl-cce {
+.markdown-body.gh-dark-dimmed .pl-sr .pl-cce {
   font-weight: bold;
   color: #8ddb8c;
 }
 
-.markdown-body .pl-ml {
+.markdown-body.gh-dark-dimmed .pl-ml {
   color: #eac55f;
 }
 
-.markdown-body .pl-mh,
-.markdown-body .pl-mh .hljs-built_in,
-.markdown-body .pl-mh .hljs-title.function_,
-.markdown-body .pl-mh .hljs-title,
-.markdown-body .pl-ms {
+.markdown-body.gh-dark-dimmed .pl-mh,
+.markdown-body.gh-dark-dimmed .pl-mh .hljs-built_in,
+.markdown-body.gh-dark-dimmed .pl-mh .hljs-title.function_,
+.markdown-body.gh-dark-dimmed .pl-mh .hljs-title,
+.markdown-body.gh-dark-dimmed .pl-ms {
   font-weight: bold;
   color: #316dca;
 }
 
-.markdown-body .pl-mi {
+.markdown-body.gh-dark-dimmed .pl-mi {
   font-style: italic;
   color: #adbac7;
 }
 
-.markdown-body .pl-mb {
+.markdown-body.gh-dark-dimmed .pl-mb {
   font-weight: bold;
   color: #adbac7;
 }
 
-.markdown-body .pl-md {
+.markdown-body.gh-dark-dimmed .pl-md {
   color: #ffd8d3;
   background-color: #78191b;
 }
 
-.markdown-body .pl-mi1 {
+.markdown-body.gh-dark-dimmed .pl-mi1 {
   color: #b4f1b4;
   background-color: #1b4721;
 }
 
-.markdown-body .pl-mc {
+.markdown-body.gh-dark-dimmed .pl-mc {
   color: #ffddb0;
   background-color: #682d0f;
 }
 
-.markdown-body .pl-mi2 {
+.markdown-body.gh-dark-dimmed .pl-mi2 {
   color: #adbac7;
   background-color: #255ab2;
 }
 
-.markdown-body .pl-mdr {
+.markdown-body.gh-dark-dimmed .pl-mdr {
   font-weight: bold;
   color: #dcbdfb;
 }
 
-.markdown-body .pl-ba {
+.markdown-body.gh-dark-dimmed .pl-ba {
   color: #768390;
 }
 
-.markdown-body .pl-sg {
+.markdown-body.gh-dark-dimmed .pl-sg {
   color: #545d68;
 }
 
-.markdown-body .pl-corl {
+.markdown-body.gh-dark-dimmed .pl-corl {
   text-decoration: underline;
   color: #96d0ff;
 }

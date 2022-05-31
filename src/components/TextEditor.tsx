@@ -26,7 +26,7 @@ export default function TextEditor({ setQuill }: TextEditorProps) {
         if (!wrapper) return
         wrapper.innerHTML = ''
         const editor = document.createElement('div')
-        editor.className = 'markdown-body'
+        editor.className = 'markdown-body gh-light'
         editor.style.boxSizing = 'border-box'
         editor.style.minWidth = '200px'
         editor.style.maxWidth = '980px'
