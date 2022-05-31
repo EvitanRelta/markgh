@@ -2,9 +2,9 @@ import hljs from 'highlight.js'
 import Quill from 'quill'
 import { Dispatch, SetStateAction, useCallback } from 'react'
 import '../customCss/custom-quill.css'
+import '../customCss/quill-snow-no-editor-css.css'
 import '../githubMarkdownCss/light.css'
 import '../githubMarkdownCss/syntaxHighlighting/light.highlight.css'
-import '../quill-snow-base.css'
 import testHtml from '../testHtml'
 
 
