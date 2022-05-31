@@ -32,14 +32,26 @@ function preProcessHtml(element: Element) {
         .forEach(preProcessHtml)
 }
 
+function replaceOnlyNonCodeOrCodeBlock(markdown: string, replacementFn: (markdown: string) => string) {
+    const separateCodeRegex = /(.*?)(`[^`]+`|$)/gs
+    const separateCodeBlocksRegex = /(.*?)((`{3,}).+?\3|(?<!\\)<pre(?!\w)[^>]*>.*?<\/pre>|$)/gs
+    const processOnlyNonCode = (wholeMatch: string, nonCode = '', code = '') => replacementFn(nonCode) + code
+    const processOnlyNonCodeOrCodeBlock = (wholeMatch: string, nonCodeBlock = '', codeBlock = '') => {
+        return nonCodeBlock.replace(separateCodeRegex, processOnlyNonCode) + codeBlock
+    }
+    return markdown.replace(separateCodeBlocksRegex, processOnlyNonCodeOrCodeBlock)
+}
+
 function postProcessHtml(markdown: string) {
-    return markdown
+    const postProcess = (markdown: string) => markdown
         .replaceAll('&lt;', '\\<')
         .replaceAll('&amp;', '\\&')
         .replace(/(?<=&nbsp;)&nbsp;/g, ' ')
         .replace(/(?<!\s|\\)&nbsp;(?!\s)/g, ' ')
         .replace(/(?<!\s|\\)((&nbsp; )+)&nbsp;(?!\s)/g, ' $1')
         .replace(/(?<!\s|\\)&nbsp; &nbsp; ((&nbsp; )*)/g, ' &nbsp;&nbsp; $1')
+
+    return replaceOnlyNonCodeOrCodeBlock(markdown, postProcess)
 }
 
 export default (html: HTMLElement) => {
