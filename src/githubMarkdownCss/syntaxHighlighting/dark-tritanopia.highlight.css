@@ -1,128 +1,128 @@
-.markdown-body .hljs-comment {
+.markdown-body.gh-dark-tritanopia .hljs-comment {
   color: #8b949e;
 }
 
-.markdown-body .hljs-attr,
-.markdown-body .hljs-number,
-.markdown-body .hljs-attribute,
-.markdown-body .hljs-literal,
-.markdown-body .hljs-string .hljs-title.class_ {
+.markdown-body.gh-dark-tritanopia .hljs-attr,
+.markdown-body.gh-dark-tritanopia .hljs-number,
+.markdown-body.gh-dark-tritanopia .hljs-attribute,
+.markdown-body.gh-dark-tritanopia .hljs-literal,
+.markdown-body.gh-dark-tritanopia .hljs-string .hljs-title.class_ {
   color: #79c0ff;
 }
 
-.markdown-body .pl-e,
-.markdown-body .hljs-built_in,
-.markdown-body .hljs-title.function_,
-.markdown-body .hljs-title {
+.markdown-body.gh-dark-tritanopia .pl-e,
+.markdown-body.gh-dark-tritanopia .hljs-built_in,
+.markdown-body.gh-dark-tritanopia .hljs-title.function_,
+.markdown-body.gh-dark-tritanopia .hljs-title {
   color: #d2a8ff;
 }
 
-.markdown-body .hljs-tag,
-.markdown-body .hljs-params,
-.markdown-body .hljs-string .pl-s1 {
+.markdown-body.gh-dark-tritanopia .hljs-tag,
+.markdown-body.gh-dark-tritanopia .hljs-params,
+.markdown-body.gh-dark-tritanopia .hljs-string .pl-s1 {
   color: #c9d1d9;
 }
 
-.markdown-body .hljs-name {
+.markdown-body.gh-dark-tritanopia .hljs-name {
   color: #a5d6ff;
 }
 
-.markdown-body .hljs-keyword,
-.markdown-body .hljs-type {
+.markdown-body.gh-dark-tritanopia .hljs-keyword,
+.markdown-body.gh-dark-tritanopia .hljs-type {
   color: #ff7b72;
 }
 
-.markdown-body .hljs-string,
-.markdown-body .pl-pds,
-.markdown-body .hljs-string .pl-pse .pl-s1,
-.markdown-body .pl-sr,
-.markdown-body .pl-sr .pl-cce,
-.markdown-body .pl-sr .pl-sre,
-.markdown-body .pl-sr .pl-sra {
+.markdown-body.gh-dark-tritanopia .hljs-string,
+.markdown-body.gh-dark-tritanopia .pl-pds,
+.markdown-body.gh-dark-tritanopia .hljs-string .pl-pse .pl-s1,
+.markdown-body.gh-dark-tritanopia .pl-sr,
+.markdown-body.gh-dark-tritanopia .pl-sr .pl-cce,
+.markdown-body.gh-dark-tritanopia .pl-sr .pl-sre,
+.markdown-body.gh-dark-tritanopia .pl-sr .pl-sra {
   color: #a5d6ff;
 }
 
-.markdown-body .hljs-title.class_,
-.markdown-body .pl-smw {
+.markdown-body.gh-dark-tritanopia .hljs-title.class_,
+.markdown-body.gh-dark-tritanopia .pl-smw {
   color: #ffa198;
 }
 
-.markdown-body .pl-bu {
+.markdown-body.gh-dark-tritanopia .pl-bu {
   color: #f85149;
 }
 
-.markdown-body .pl-ii {
+.markdown-body.gh-dark-tritanopia .pl-ii {
   color: #f0f6fc;
   background-color: #8e1519;
 }
 
-.markdown-body .pl-c2 {
+.markdown-body.gh-dark-tritanopia .pl-c2 {
   color: #f0f6fc;
   background-color: #b62324;
 }
 
-.markdown-body .pl-sr .pl-cce {
+.markdown-body.gh-dark-tritanopia .pl-sr .pl-cce {
   font-weight: bold;
   color: #a5d6ff;
 }
 
-.markdown-body .pl-ml {
+.markdown-body.gh-dark-tritanopia .pl-ml {
   color: #f2cc60;
 }
 
-.markdown-body .pl-mh,
-.markdown-body .pl-mh .hljs-built_in,
-.markdown-body .pl-mh .hljs-title.function_,
-.markdown-body .pl-mh .hljs-title,
-.markdown-body .pl-ms {
+.markdown-body.gh-dark-tritanopia .pl-mh,
+.markdown-body.gh-dark-tritanopia .pl-mh .hljs-built_in,
+.markdown-body.gh-dark-tritanopia .pl-mh .hljs-title.function_,
+.markdown-body.gh-dark-tritanopia .pl-mh .hljs-title,
+.markdown-body.gh-dark-tritanopia .pl-ms {
   font-weight: bold;
   color: #1f6feb;
 }
 
-.markdown-body .pl-mi {
+.markdown-body.gh-dark-tritanopia .pl-mi {
   font-style: italic;
   color: #c9d1d9;
 }
 
-.markdown-body .pl-mb {
+.markdown-body.gh-dark-tritanopia .pl-mb {
   font-weight: bold;
   color: #c9d1d9;
 }
 
-.markdown-body .pl-md {
+.markdown-body.gh-dark-tritanopia .pl-md {
   color: #ffdcd7;
   background-color: #67060c;
 }
 
-.markdown-body .pl-mi1 {
+.markdown-body.gh-dark-tritanopia .pl-mi1 {
   color: #cae8ff;
   background-color: #0c2d6b;
 }
 
-.markdown-body .pl-mc {
+.markdown-body.gh-dark-tritanopia .pl-mc {
   color: #ffdcd7;
   background-color: #67060c;
 }
 
-.markdown-body .pl-mi2 {
+.markdown-body.gh-dark-tritanopia .pl-mi2 {
   color: #c9d1d9;
   background-color: #1158c7;
 }
 
-.markdown-body .pl-mdr {
+.markdown-body.gh-dark-tritanopia .pl-mdr {
   font-weight: bold;
   color: #d2a8ff;
 }
 
-.markdown-body .pl-ba {
+.markdown-body.gh-dark-tritanopia .pl-ba {
   color: #8b949e;
 }
 
-.markdown-body .pl-sg {
+.markdown-body.gh-dark-tritanopia .pl-sg {
   color: #484f58;
 }
 
-.markdown-body .pl-corl {
+.markdown-body.gh-dark-tritanopia .pl-corl {
   text-decoration: underline;
   color: #a5d6ff;
 }

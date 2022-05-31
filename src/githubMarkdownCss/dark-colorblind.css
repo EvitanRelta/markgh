@@ -1,4 +1,4 @@
-.markdown-body {
+.markdown-body.gh-dark-colorblind {
   color-scheme: dark;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -11,18 +11,18 @@
   word-wrap: break-word;
 }
 
-.markdown-body .octicon {
+.markdown-body.gh-dark-colorblind .octicon {
   display: inline-block;
   fill: currentColor;
   vertical-align: text-bottom;
 }
 
-.markdown-body h1:hover .anchor .octicon-link:before,
-.markdown-body h2:hover .anchor .octicon-link:before,
-.markdown-body h3:hover .anchor .octicon-link:before,
-.markdown-body h4:hover .anchor .octicon-link:before,
-.markdown-body h5:hover .anchor .octicon-link:before,
-.markdown-body h6:hover .anchor .octicon-link:before {
+.markdown-body.gh-dark-colorblind h1:hover .anchor .octicon-link:before,
+.markdown-body.gh-dark-colorblind h2:hover .anchor .octicon-link:before,
+.markdown-body.gh-dark-colorblind h3:hover .anchor .octicon-link:before,
+.markdown-body.gh-dark-colorblind h4:hover .anchor .octicon-link:before,
+.markdown-body.gh-dark-colorblind h5:hover .anchor .octicon-link:before,
+.markdown-body.gh-dark-colorblind h6:hover .anchor .octicon-link:before {
   width: 16px;
   height: 16px;
   content: ' ';
@@ -32,41 +32,41 @@
   mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
 }
 
-.markdown-body details,
-.markdown-body figcaption,
-.markdown-body figure {
+.markdown-body.gh-dark-colorblind details,
+.markdown-body.gh-dark-colorblind figcaption,
+.markdown-body.gh-dark-colorblind figure {
   display: block;
 }
 
-.markdown-body summary {
+.markdown-body.gh-dark-colorblind summary {
   display: list-item;
 }
 
-.markdown-body [hidden] {
+.markdown-body.gh-dark-colorblind [hidden] {
   display: none !important;
 }
 
-.markdown-body a {
+.markdown-body.gh-dark-colorblind a {
   background-color: transparent;
   color: #58a6ff;
   text-decoration: none;
 }
 
-.markdown-body abbr[title] {
+.markdown-body.gh-dark-colorblind abbr[title] {
   border-bottom: none;
   text-decoration: underline dotted;
 }
 
-.markdown-body b,
-.markdown-body strong {
+.markdown-body.gh-dark-colorblind b,
+.markdown-body.gh-dark-colorblind strong {
   font-weight: 600;
 }
 
-.markdown-body dfn {
+.markdown-body.gh-dark-colorblind dfn {
   font-style: italic;
 }
 
-.markdown-body h1 {
+.markdown-body.gh-dark-colorblind h1 {
   margin: .67em 0;
   font-weight: 600;
   padding-bottom: .3em;
@@ -74,51 +74,51 @@
   border-bottom: 1px solid #21262d;
 }
 
-.markdown-body mark {
+.markdown-body.gh-dark-colorblind mark {
   background-color: rgba(187,128,9,0.15);
   color: #c9d1d9;
 }
 
-.markdown-body small {
+.markdown-body.gh-dark-colorblind small {
   font-size: 90%;
 }
 
-.markdown-body sub,
-.markdown-body sup {
+.markdown-body.gh-dark-colorblind sub,
+.markdown-body.gh-dark-colorblind sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
   vertical-align: baseline;
 }
 
-.markdown-body sub {
+.markdown-body.gh-dark-colorblind sub {
   bottom: -0.25em;
 }
 
-.markdown-body sup {
+.markdown-body.gh-dark-colorblind sup {
   top: -0.5em;
 }
 
-.markdown-body img {
+.markdown-body.gh-dark-colorblind img {
   border-style: none;
   max-width: 100%;
   box-sizing: content-box;
   background-color: #0d1117;
 }
 
-.markdown-body code,
-.markdown-body kbd,
-.markdown-body pre,
-.markdown-body samp {
+.markdown-body.gh-dark-colorblind code,
+.markdown-body.gh-dark-colorblind kbd,
+.markdown-body.gh-dark-colorblind pre,
+.markdown-body.gh-dark-colorblind samp {
   font-family: monospace;
   font-size: 1em;
 }
 
-.markdown-body figure {
+.markdown-body.gh-dark-colorblind figure {
   margin: 1em 40px;
 }
 
-.markdown-body hr {
+.markdown-body.gh-dark-colorblind hr {
   box-sizing: content-box;
   overflow: hidden;
   background: transparent;
@@ -130,7 +130,7 @@
   border: 0;
 }
 
-.markdown-body input {
+.markdown-body.gh-dark-colorblind input {
   font: inherit;
   margin: 0;
   overflow: visible;
@@ -139,54 +139,54 @@
   line-height: inherit;
 }
 
-.markdown-body [type=button],
-.markdown-body [type=reset],
-.markdown-body [type=submit] {
+.markdown-body.gh-dark-colorblind [type=button],
+.markdown-body.gh-dark-colorblind [type=reset],
+.markdown-body.gh-dark-colorblind [type=submit] {
   -webkit-appearance: button;
 }
 
-.markdown-body [type=checkbox],
-.markdown-body [type=radio] {
+.markdown-body.gh-dark-colorblind [type=checkbox],
+.markdown-body.gh-dark-colorblind [type=radio] {
   box-sizing: border-box;
   padding: 0;
 }
 
-.markdown-body [type=number]::-webkit-inner-spin-button,
-.markdown-body [type=number]::-webkit-outer-spin-button {
+.markdown-body.gh-dark-colorblind [type=number]::-webkit-inner-spin-button,
+.markdown-body.gh-dark-colorblind [type=number]::-webkit-outer-spin-button {
   height: auto;
 }
 
-.markdown-body [type=search]::-webkit-search-cancel-button,
-.markdown-body [type=search]::-webkit-search-decoration {
+.markdown-body.gh-dark-colorblind [type=search]::-webkit-search-cancel-button,
+.markdown-body.gh-dark-colorblind [type=search]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
-.markdown-body ::-webkit-input-placeholder {
+.markdown-body.gh-dark-colorblind ::-webkit-input-placeholder {
   color: inherit;
   opacity: .54;
 }
 
-.markdown-body ::-webkit-file-upload-button {
+.markdown-body.gh-dark-colorblind ::-webkit-file-upload-button {
   -webkit-appearance: button;
   font: inherit;
 }
 
-.markdown-body a:hover {
+.markdown-body.gh-dark-colorblind a:hover {
   text-decoration: underline;
 }
 
-.markdown-body hr::before {
+.markdown-body.gh-dark-colorblind hr::before {
   display: table;
   content: "";
 }
 
-.markdown-body hr::after {
+.markdown-body.gh-dark-colorblind hr::after {
   display: table;
   clear: both;
   content: "";
 }
 
-.markdown-body table {
+.markdown-body.gh-dark-colorblind table {
   border-spacing: 0;
   border-collapse: collapse;
   display: block;
@@ -195,62 +195,62 @@
   overflow: auto;
 }
 
-.markdown-body td,
-.markdown-body th {
+.markdown-body.gh-dark-colorblind td,
+.markdown-body.gh-dark-colorblind th {
   padding: 0;
 }
 
-.markdown-body details summary {
+.markdown-body.gh-dark-colorblind details summary {
   cursor: pointer;
 }
 
-.markdown-body details:not([open])>*:not(summary) {
+.markdown-body.gh-dark-colorblind details:not([open])>*:not(summary) {
   display: none !important;
 }
 
-.markdown-body a,
-.markdown-body [role=button],
-.markdown-body input[type=radio],
-.markdown-body input[type=checkbox] {
+.markdown-body.gh-dark-colorblind a,
+.markdown-body.gh-dark-colorblind [role=button],
+.markdown-body.gh-dark-colorblind input[type=radio],
+.markdown-body.gh-dark-colorblind input[type=checkbox] {
   transition: 80ms cubic-bezier(0.33, 1, 0.68, 1);
   transition-property: color,background-color,box-shadow,border-color;
 }
 
-.markdown-body a:focus,
-.markdown-body [role=button]:focus,
-.markdown-body input[type=radio]:focus,
-.markdown-body input[type=checkbox]:focus {
+.markdown-body.gh-dark-colorblind a:focus,
+.markdown-body.gh-dark-colorblind [role=button]:focus,
+.markdown-body.gh-dark-colorblind input[type=radio]:focus,
+.markdown-body.gh-dark-colorblind input[type=checkbox]:focus {
   outline: 2px solid #58a6ff;
   outline-offset: -2px;
   box-shadow: none;
 }
 
-.markdown-body a:focus:not(:focus-visible),
-.markdown-body [role=button]:focus:not(:focus-visible),
-.markdown-body input[type=radio]:focus:not(:focus-visible),
-.markdown-body input[type=checkbox]:focus:not(:focus-visible) {
+.markdown-body.gh-dark-colorblind a:focus:not(:focus-visible),
+.markdown-body.gh-dark-colorblind [role=button]:focus:not(:focus-visible),
+.markdown-body.gh-dark-colorblind input[type=radio]:focus:not(:focus-visible),
+.markdown-body.gh-dark-colorblind input[type=checkbox]:focus:not(:focus-visible) {
   outline: solid 1px transparent;
 }
 
-.markdown-body a:focus-visible,
-.markdown-body [role=button]:focus-visible,
-.markdown-body input[type=radio]:focus-visible,
-.markdown-body input[type=checkbox]:focus-visible {
+.markdown-body.gh-dark-colorblind a:focus-visible,
+.markdown-body.gh-dark-colorblind [role=button]:focus-visible,
+.markdown-body.gh-dark-colorblind input[type=radio]:focus-visible,
+.markdown-body.gh-dark-colorblind input[type=checkbox]:focus-visible {
   outline: 2px solid #58a6ff;
   outline-offset: -2px;
   box-shadow: none;
 }
 
-.markdown-body a:not([class]):focus,
-.markdown-body a:not([class]):focus-visible,
-.markdown-body input[type=radio]:focus,
-.markdown-body input[type=radio]:focus-visible,
-.markdown-body input[type=checkbox]:focus,
-.markdown-body input[type=checkbox]:focus-visible {
+.markdown-body.gh-dark-colorblind a:not([class]):focus,
+.markdown-body.gh-dark-colorblind a:not([class]):focus-visible,
+.markdown-body.gh-dark-colorblind input[type=radio]:focus,
+.markdown-body.gh-dark-colorblind input[type=radio]:focus-visible,
+.markdown-body.gh-dark-colorblind input[type=checkbox]:focus,
+.markdown-body.gh-dark-colorblind input[type=checkbox]:focus-visible {
   outline-offset: 0;
 }
 
-.markdown-body kbd {
+.markdown-body.gh-dark-colorblind kbd {
   display: inline-block;
   padding: 3px 5px;
   font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
@@ -264,89 +264,89 @@
   box-shadow: inset 0 -1px 0 rgba(110,118,129,0.4);
 }
 
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
+.markdown-body.gh-dark-colorblind h1,
+.markdown-body.gh-dark-colorblind h2,
+.markdown-body.gh-dark-colorblind h3,
+.markdown-body.gh-dark-colorblind h4,
+.markdown-body.gh-dark-colorblind h5,
+.markdown-body.gh-dark-colorblind h6 {
   margin-top: 24px;
   margin-bottom: 16px;
   font-weight: 600;
   line-height: 1.25;
 }
 
-.markdown-body h2 {
+.markdown-body.gh-dark-colorblind h2 {
   font-weight: 600;
   padding-bottom: .3em;
   font-size: 1.5em;
   border-bottom: 1px solid #21262d;
 }
 
-.markdown-body h3 {
+.markdown-body.gh-dark-colorblind h3 {
   font-weight: 600;
   font-size: 1.25em;
 }
 
-.markdown-body h4 {
+.markdown-body.gh-dark-colorblind h4 {
   font-weight: 600;
   font-size: 1em;
 }
 
-.markdown-body h5 {
+.markdown-body.gh-dark-colorblind h5 {
   font-weight: 600;
   font-size: .875em;
 }
 
-.markdown-body h6 {
+.markdown-body.gh-dark-colorblind h6 {
   font-weight: 600;
   font-size: .85em;
   color: #8b949e;
 }
 
-.markdown-body p {
+.markdown-body.gh-dark-colorblind p {
   margin-top: 0;
   margin-bottom: 10px;
 }
 
-.markdown-body blockquote {
+.markdown-body.gh-dark-colorblind blockquote {
   margin: 0;
   padding: 0 1em;
   color: #8b949e;
   border-left: .25em solid #30363d;
 }
 
-.markdown-body ul,
-.markdown-body ol {
+.markdown-body.gh-dark-colorblind ul,
+.markdown-body.gh-dark-colorblind ol {
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 2em;
 }
 
-.markdown-body ol ol,
-.markdown-body ul ol {
+.markdown-body.gh-dark-colorblind ol ol,
+.markdown-body.gh-dark-colorblind ul ol {
   list-style-type: lower-roman;
 }
 
-.markdown-body ul ul ol,
-.markdown-body ul ol ol,
-.markdown-body ol ul ol,
-.markdown-body ol ol ol {
+.markdown-body.gh-dark-colorblind ul ul ol,
+.markdown-body.gh-dark-colorblind ul ol ol,
+.markdown-body.gh-dark-colorblind ol ul ol,
+.markdown-body.gh-dark-colorblind ol ol ol {
   list-style-type: lower-alpha;
 }
 
-.markdown-body dd {
+.markdown-body.gh-dark-colorblind dd {
   margin-left: 0;
 }
 
-.markdown-body tt,
-.markdown-body code,
-.markdown-body samp {
+.markdown-body.gh-dark-colorblind tt,
+.markdown-body.gh-dark-colorblind code,
+.markdown-body.gh-dark-colorblind samp {
   font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
   font-size: 12px;
 }
 
-.markdown-body pre {
+.markdown-body.gh-dark-colorblind pre {
   margin-top: 0;
   margin-bottom: 0;
   font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
@@ -354,34 +354,34 @@
   word-wrap: normal;
 }
 
-.markdown-body .octicon {
+.markdown-body.gh-dark-colorblind .octicon {
   display: inline-block;
   overflow: visible !important;
   vertical-align: text-bottom;
   fill: currentColor;
 }
 
-.markdown-body ::placeholder {
+.markdown-body.gh-dark-colorblind ::placeholder {
   color: #6e7681;
   opacity: 1;
 }
 
-.markdown-body input::-webkit-outer-spin-button,
-.markdown-body input::-webkit-inner-spin-button {
+.markdown-body.gh-dark-colorblind input::-webkit-outer-spin-button,
+.markdown-body.gh-dark-colorblind input::-webkit-inner-spin-button {
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
 }
 
-.markdown-body [data-catalyst] {
+.markdown-body.gh-dark-colorblind [data-catalyst] {
   display: block;
 }
 
-.markdown-body [data-catalyst-inline] {
+.markdown-body.gh-dark-colorblind [data-catalyst-inline] {
   display: inline;
 }
 
-.markdown-body g-emoji {
+.markdown-body.gh-dark-colorblind g-emoji {
   display: inline-block;
   min-width: 1ch;
   font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
@@ -392,182 +392,182 @@
   vertical-align: -0.075em;
 }
 
-.markdown-body g-emoji img {
+.markdown-body.gh-dark-colorblind g-emoji img {
   width: 1em;
   height: 1em;
 }
 
-.markdown-body::before {
+.markdown-body.gh-dark-colorblind::before {
   display: table;
   content: "";
 }
 
-.markdown-body::after {
+.markdown-body.gh-dark-colorblind::after {
   display: table;
   clear: both;
   content: "";
 }
 
-.markdown-body>*:first-child {
+.markdown-body.gh-dark-colorblind>*:first-child {
   margin-top: 0 !important;
 }
 
-.markdown-body>*:last-child {
+.markdown-body.gh-dark-colorblind>*:last-child {
   margin-bottom: 0 !important;
 }
 
-.markdown-body a:not([href]) {
+.markdown-body.gh-dark-colorblind a:not([href]) {
   color: inherit;
   text-decoration: none;
 }
 
-.markdown-body .absent {
+.markdown-body.gh-dark-colorblind .absent {
   color: #d47616;
 }
 
-.markdown-body .anchor {
+.markdown-body.gh-dark-colorblind .anchor {
   float: left;
   padding-right: 4px;
   margin-left: -20px;
   line-height: 1;
 }
 
-.markdown-body .anchor:focus {
+.markdown-body.gh-dark-colorblind .anchor:focus {
   outline: none;
 }
 
-.markdown-body p,
-.markdown-body blockquote,
-.markdown-body ul,
-.markdown-body ol,
-.markdown-body dl,
-.markdown-body table,
-.markdown-body pre,
-.markdown-body details {
+.markdown-body.gh-dark-colorblind p,
+.markdown-body.gh-dark-colorblind blockquote,
+.markdown-body.gh-dark-colorblind ul,
+.markdown-body.gh-dark-colorblind ol,
+.markdown-body.gh-dark-colorblind dl,
+.markdown-body.gh-dark-colorblind table,
+.markdown-body.gh-dark-colorblind pre,
+.markdown-body.gh-dark-colorblind details {
   margin-top: 0;
   margin-bottom: 16px;
 }
 
-.markdown-body blockquote>:first-child {
+.markdown-body.gh-dark-colorblind blockquote>:first-child {
   margin-top: 0;
 }
 
-.markdown-body blockquote>:last-child {
+.markdown-body.gh-dark-colorblind blockquote>:last-child {
   margin-bottom: 0;
 }
 
-.markdown-body h1 .octicon-link,
-.markdown-body h2 .octicon-link,
-.markdown-body h3 .octicon-link,
-.markdown-body h4 .octicon-link,
-.markdown-body h5 .octicon-link,
-.markdown-body h6 .octicon-link {
+.markdown-body.gh-dark-colorblind h1 .octicon-link,
+.markdown-body.gh-dark-colorblind h2 .octicon-link,
+.markdown-body.gh-dark-colorblind h3 .octicon-link,
+.markdown-body.gh-dark-colorblind h4 .octicon-link,
+.markdown-body.gh-dark-colorblind h5 .octicon-link,
+.markdown-body.gh-dark-colorblind h6 .octicon-link {
   color: #c9d1d9;
   vertical-align: middle;
   visibility: hidden;
 }
 
-.markdown-body h1:hover .anchor,
-.markdown-body h2:hover .anchor,
-.markdown-body h3:hover .anchor,
-.markdown-body h4:hover .anchor,
-.markdown-body h5:hover .anchor,
-.markdown-body h6:hover .anchor {
+.markdown-body.gh-dark-colorblind h1:hover .anchor,
+.markdown-body.gh-dark-colorblind h2:hover .anchor,
+.markdown-body.gh-dark-colorblind h3:hover .anchor,
+.markdown-body.gh-dark-colorblind h4:hover .anchor,
+.markdown-body.gh-dark-colorblind h5:hover .anchor,
+.markdown-body.gh-dark-colorblind h6:hover .anchor {
   text-decoration: none;
 }
 
-.markdown-body h1:hover .anchor .octicon-link,
-.markdown-body h2:hover .anchor .octicon-link,
-.markdown-body h3:hover .anchor .octicon-link,
-.markdown-body h4:hover .anchor .octicon-link,
-.markdown-body h5:hover .anchor .octicon-link,
-.markdown-body h6:hover .anchor .octicon-link {
+.markdown-body.gh-dark-colorblind h1:hover .anchor .octicon-link,
+.markdown-body.gh-dark-colorblind h2:hover .anchor .octicon-link,
+.markdown-body.gh-dark-colorblind h3:hover .anchor .octicon-link,
+.markdown-body.gh-dark-colorblind h4:hover .anchor .octicon-link,
+.markdown-body.gh-dark-colorblind h5:hover .anchor .octicon-link,
+.markdown-body.gh-dark-colorblind h6:hover .anchor .octicon-link {
   visibility: visible;
 }
 
-.markdown-body h1 tt,
-.markdown-body h1 code,
-.markdown-body h2 tt,
-.markdown-body h2 code,
-.markdown-body h3 tt,
-.markdown-body h3 code,
-.markdown-body h4 tt,
-.markdown-body h4 code,
-.markdown-body h5 tt,
-.markdown-body h5 code,
-.markdown-body h6 tt,
-.markdown-body h6 code {
+.markdown-body.gh-dark-colorblind h1 tt,
+.markdown-body.gh-dark-colorblind h1 code,
+.markdown-body.gh-dark-colorblind h2 tt,
+.markdown-body.gh-dark-colorblind h2 code,
+.markdown-body.gh-dark-colorblind h3 tt,
+.markdown-body.gh-dark-colorblind h3 code,
+.markdown-body.gh-dark-colorblind h4 tt,
+.markdown-body.gh-dark-colorblind h4 code,
+.markdown-body.gh-dark-colorblind h5 tt,
+.markdown-body.gh-dark-colorblind h5 code,
+.markdown-body.gh-dark-colorblind h6 tt,
+.markdown-body.gh-dark-colorblind h6 code {
   padding: 0 .2em;
   font-size: inherit;
 }
 
-.markdown-body summary h1,
-.markdown-body summary h2,
-.markdown-body summary h3,
-.markdown-body summary h4,
-.markdown-body summary h5,
-.markdown-body summary h6 {
+.markdown-body.gh-dark-colorblind summary h1,
+.markdown-body.gh-dark-colorblind summary h2,
+.markdown-body.gh-dark-colorblind summary h3,
+.markdown-body.gh-dark-colorblind summary h4,
+.markdown-body.gh-dark-colorblind summary h5,
+.markdown-body.gh-dark-colorblind summary h6 {
   display: inline-block;
 }
 
-.markdown-body summary h1 .anchor,
-.markdown-body summary h2 .anchor,
-.markdown-body summary h3 .anchor,
-.markdown-body summary h4 .anchor,
-.markdown-body summary h5 .anchor,
-.markdown-body summary h6 .anchor {
+.markdown-body.gh-dark-colorblind summary h1 .anchor,
+.markdown-body.gh-dark-colorblind summary h2 .anchor,
+.markdown-body.gh-dark-colorblind summary h3 .anchor,
+.markdown-body.gh-dark-colorblind summary h4 .anchor,
+.markdown-body.gh-dark-colorblind summary h5 .anchor,
+.markdown-body.gh-dark-colorblind summary h6 .anchor {
   margin-left: -40px;
 }
 
-.markdown-body summary h1,
-.markdown-body summary h2 {
+.markdown-body.gh-dark-colorblind summary h1,
+.markdown-body.gh-dark-colorblind summary h2 {
   padding-bottom: 0;
   border-bottom: 0;
 }
 
-.markdown-body ul.no-list,
-.markdown-body ol.no-list {
+.markdown-body.gh-dark-colorblind ul.no-list,
+.markdown-body.gh-dark-colorblind ol.no-list {
   padding: 0;
   list-style-type: none;
 }
 
-.markdown-body ol[type="1"] {
+.markdown-body.gh-dark-colorblind ol[type="1"] {
   list-style-type: decimal;
 }
 
-.markdown-body ol[type=a] {
+.markdown-body.gh-dark-colorblind ol[type=a] {
   list-style-type: lower-alpha;
 }
 
-.markdown-body ol[type=i] {
+.markdown-body.gh-dark-colorblind ol[type=i] {
   list-style-type: lower-roman;
 }
 
-.markdown-body div>ol:not([type]) {
+.markdown-body.gh-dark-colorblind div>ol:not([type]) {
   list-style-type: decimal;
 }
 
-.markdown-body ul ul,
-.markdown-body ul ol,
-.markdown-body ol ol,
-.markdown-body ol ul {
+.markdown-body.gh-dark-colorblind ul ul,
+.markdown-body.gh-dark-colorblind ul ol,
+.markdown-body.gh-dark-colorblind ol ol,
+.markdown-body.gh-dark-colorblind ol ul {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.markdown-body li>p {
+.markdown-body.gh-dark-colorblind li>p {
   margin-top: 16px;
 }
 
-.markdown-body li+li {
+.markdown-body.gh-dark-colorblind li+li {
   margin-top: .25em;
 }
 
-.markdown-body dl {
+.markdown-body.gh-dark-colorblind dl {
   padding: 0;
 }
 
-.markdown-body dl dt {
+.markdown-body.gh-dark-colorblind dl dt {
   padding: 0;
   margin-top: 16px;
   font-size: 1em;
@@ -575,54 +575,54 @@
   font-weight: 600;
 }
 
-.markdown-body dl dd {
+.markdown-body.gh-dark-colorblind dl dd {
   padding: 0 16px;
   margin-bottom: 16px;
 }
 
-.markdown-body table th {
+.markdown-body.gh-dark-colorblind table th {
   font-weight: 600;
 }
 
-.markdown-body table th,
-.markdown-body table td {
+.markdown-body.gh-dark-colorblind table th,
+.markdown-body.gh-dark-colorblind table td {
   padding: 6px 13px;
   border: 1px solid #30363d;
 }
 
-.markdown-body table tr {
+.markdown-body.gh-dark-colorblind table tr {
   background-color: #0d1117;
   border-top: 1px solid #21262d;
 }
 
-.markdown-body table tr:nth-child(2n) {
+.markdown-body.gh-dark-colorblind table tr:nth-child(2n) {
   background-color: #161b22;
 }
 
-.markdown-body table img {
+.markdown-body.gh-dark-colorblind table img {
   background-color: transparent;
 }
 
-.markdown-body img[align=right] {
+.markdown-body.gh-dark-colorblind img[align=right] {
   padding-left: 20px;
 }
 
-.markdown-body img[align=left] {
+.markdown-body.gh-dark-colorblind img[align=left] {
   padding-right: 20px;
 }
 
-.markdown-body .emoji {
+.markdown-body.gh-dark-colorblind .emoji {
   max-width: none;
   vertical-align: text-top;
   background-color: transparent;
 }
 
-.markdown-body span.frame {
+.markdown-body.gh-dark-colorblind span.frame {
   display: block;
   overflow: hidden;
 }
 
-.markdown-body span.frame>span {
+.markdown-body.gh-dark-colorblind span.frame>span {
   display: block;
   float: left;
   width: auto;
@@ -632,81 +632,81 @@
   border: 1px solid #30363d;
 }
 
-.markdown-body span.frame span img {
+.markdown-body.gh-dark-colorblind span.frame span img {
   display: block;
   float: left;
 }
 
-.markdown-body span.frame span span {
+.markdown-body.gh-dark-colorblind span.frame span span {
   display: block;
   padding: 5px 0 0;
   clear: both;
   color: #c9d1d9;
 }
 
-.markdown-body span.align-center {
+.markdown-body.gh-dark-colorblind span.align-center {
   display: block;
   overflow: hidden;
   clear: both;
 }
 
-.markdown-body span.align-center>span {
+.markdown-body.gh-dark-colorblind span.align-center>span {
   display: block;
   margin: 13px auto 0;
   overflow: hidden;
   text-align: center;
 }
 
-.markdown-body span.align-center span img {
+.markdown-body.gh-dark-colorblind span.align-center span img {
   margin: 0 auto;
   text-align: center;
 }
 
-.markdown-body span.align-right {
+.markdown-body.gh-dark-colorblind span.align-right {
   display: block;
   overflow: hidden;
   clear: both;
 }
 
-.markdown-body span.align-right>span {
+.markdown-body.gh-dark-colorblind span.align-right>span {
   display: block;
   margin: 13px 0 0;
   overflow: hidden;
   text-align: right;
 }
 
-.markdown-body span.align-right span img {
+.markdown-body.gh-dark-colorblind span.align-right span img {
   margin: 0;
   text-align: right;
 }
 
-.markdown-body span.float-left {
+.markdown-body.gh-dark-colorblind span.float-left {
   display: block;
   float: left;
   margin-right: 13px;
   overflow: hidden;
 }
 
-.markdown-body span.float-left span {
+.markdown-body.gh-dark-colorblind span.float-left span {
   margin: 13px 0 0;
 }
 
-.markdown-body span.float-right {
+.markdown-body.gh-dark-colorblind span.float-right {
   display: block;
   float: right;
   margin-left: 13px;
   overflow: hidden;
 }
 
-.markdown-body span.float-right>span {
+.markdown-body.gh-dark-colorblind span.float-right>span {
   display: block;
   margin: 13px auto 0;
   overflow: hidden;
   text-align: right;
 }
 
-.markdown-body code,
-.markdown-body tt {
+.markdown-body.gh-dark-colorblind code,
+.markdown-body.gh-dark-colorblind tt {
   padding: .2em .4em;
   margin: 0;
   font-size: 85%;
@@ -714,24 +714,24 @@
   border-radius: 6px;
 }
 
-.markdown-body code br,
-.markdown-body tt br {
+.markdown-body.gh-dark-colorblind code br,
+.markdown-body.gh-dark-colorblind tt br {
   display: none;
 }
 
-.markdown-body del code {
+.markdown-body.gh-dark-colorblind del code {
   text-decoration: inherit;
 }
 
-.markdown-body samp {
+.markdown-body.gh-dark-colorblind samp {
   font-size: 85%;
 }
 
-.markdown-body pre code {
+.markdown-body.gh-dark-colorblind pre code {
   font-size: 100%;
 }
 
-.markdown-body pre>code {
+.markdown-body.gh-dark-colorblind pre>code {
   padding: 0;
   margin: 0;
   word-break: normal;
@@ -740,17 +740,17 @@
   border: 0;
 }
 
-.markdown-body .highlight {
+.markdown-body.gh-dark-colorblind .highlight {
   margin-bottom: 16px;
 }
 
-.markdown-body .highlight pre {
+.markdown-body.gh-dark-colorblind .highlight pre {
   margin-bottom: 0;
   word-break: normal;
 }
 
-.markdown-body .highlight pre,
-.markdown-body pre {
+.markdown-body.gh-dark-colorblind .highlight pre,
+.markdown-body.gh-dark-colorblind pre {
   padding: 16px;
   overflow: auto;
   font-size: 85%;
@@ -759,8 +759,8 @@
   border-radius: 6px;
 }
 
-.markdown-body pre code,
-.markdown-body pre tt {
+.markdown-body.gh-dark-colorblind pre code,
+.markdown-body.gh-dark-colorblind pre tt {
   display: inline;
   max-width: auto;
   padding: 0;
@@ -772,8 +772,8 @@
   border: 0;
 }
 
-.markdown-body .csv-data td,
-.markdown-body .csv-data th {
+.markdown-body.gh-dark-colorblind .csv-data td,
+.markdown-body.gh-dark-colorblind .csv-data th {
   padding: 5px;
   overflow: hidden;
   font-size: 12px;
@@ -782,46 +782,46 @@
   white-space: nowrap;
 }
 
-.markdown-body .csv-data .blob-num {
+.markdown-body.gh-dark-colorblind .csv-data .blob-num {
   padding: 10px 8px 9px;
   text-align: right;
   background: #0d1117;
   border: 0;
 }
 
-.markdown-body .csv-data tr {
+.markdown-body.gh-dark-colorblind .csv-data tr {
   border-top: 0;
 }
 
-.markdown-body .csv-data th {
+.markdown-body.gh-dark-colorblind .csv-data th {
   font-weight: 600;
   background: #161b22;
   border-top: 0;
 }
 
-.markdown-body [data-footnote-ref]::before {
+.markdown-body.gh-dark-colorblind [data-footnote-ref]::before {
   content: "[";
 }
 
-.markdown-body [data-footnote-ref]::after {
+.markdown-body.gh-dark-colorblind [data-footnote-ref]::after {
   content: "]";
 }
 
-.markdown-body .footnotes {
+.markdown-body.gh-dark-colorblind .footnotes {
   font-size: 12px;
   color: #8b949e;
   border-top: 1px solid #30363d;
 }
 
-.markdown-body .footnotes ol {
+.markdown-body.gh-dark-colorblind .footnotes ol {
   padding-left: 16px;
 }
 
-.markdown-body .footnotes li {
+.markdown-body.gh-dark-colorblind .footnotes li {
   position: relative;
 }
 
-.markdown-body .footnotes li:target::before {
+.markdown-body.gh-dark-colorblind .footnotes li:target::before {
   position: absolute;
   top: -8px;
   right: -8px;
@@ -833,52 +833,52 @@
   border-radius: 6px;
 }
 
-.markdown-body .footnotes li:target {
+.markdown-body.gh-dark-colorblind .footnotes li:target {
   color: #c9d1d9;
 }
 
-.markdown-body .footnotes .data-footnote-backref g-emoji {
+.markdown-body.gh-dark-colorblind .footnotes .data-footnote-backref g-emoji {
   font-family: monospace;
 }
 
-.markdown-body [data-a11y-animated-images=system] [data-animated-image],
-.markdown-body [data-a11y-animated-images=disabled] [data-animated-image] {
+.markdown-body.gh-dark-colorblind [data-a11y-animated-images=system] [data-animated-image],
+.markdown-body.gh-dark-colorblind [data-a11y-animated-images=disabled] [data-animated-image] {
   display: none;
 }
 
-.markdown-body .task-list-item {
+.markdown-body.gh-dark-colorblind .task-list-item {
   list-style-type: none;
 }
 
-.markdown-body .task-list-item label {
+.markdown-body.gh-dark-colorblind .task-list-item label {
   font-weight: 400;
 }
 
-.markdown-body .task-list-item.enabled label {
+.markdown-body.gh-dark-colorblind .task-list-item.enabled label {
   cursor: pointer;
 }
 
-.markdown-body .task-list-item+.task-list-item {
+.markdown-body.gh-dark-colorblind .task-list-item+.task-list-item {
   margin-top: 4px;
 }
 
-.markdown-body .task-list-item .handle {
+.markdown-body.gh-dark-colorblind .task-list-item .handle {
   display: none;
 }
 
-.markdown-body .task-list-item-checkbox {
+.markdown-body.gh-dark-colorblind .task-list-item-checkbox {
   margin: 0 .2em .25em -1.6em;
   vertical-align: middle;
 }
 
-.markdown-body .contains-task-list:dir(rtl) .task-list-item-checkbox {
+.markdown-body.gh-dark-colorblind .contains-task-list:dir(rtl) .task-list-item-checkbox {
   margin: 0 -1.6em .25em .2em;
 }
 
-.markdown-body ::-webkit-calendar-picker-indicator {
+.markdown-body.gh-dark-colorblind ::-webkit-calendar-picker-indicator {
   filter: invert(50%);
 }
 
-.markdown-body details>summary::-webkit-details-marker {
+.markdown-body.gh-dark-colorblind details>summary::-webkit-details-marker {
   display: none;
 }
