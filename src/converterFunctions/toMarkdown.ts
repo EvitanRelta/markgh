@@ -18,7 +18,9 @@ function preProcessHtml(element: Element) {
         if (!node.nodeValue) return
         node.nodeValue = node.nodeValue
             .replace(/(?<!\\)&(?=\S+;)/gi, '&amp;')
-            .replaceAll('\xa0', '&nbsp;')
+            .replaceAll('\xa0', ' ')
+            .replaceAll('  ', '&nbsp; ')
+            .replace(/^ | $|(?<=\s) (?=\S)/g, '&nbsp;')
             .replace(/(?<!\\)<(?=\/?[a-z])/gi, '&lt;')
     }
 
@@ -45,8 +47,7 @@ function replaceOnlyNonCodeOrCodeBlock(markdown: string, replacementFn: (markdow
 function postProcessHtml(markdown: string) {
     type StrReplacement = (str: string) => string
 
-    // Assumes that there's no more than 2 '&nbsp;' in a row, as HTML naturally 
-    // (and probably) will not do that.
+    // Assumes that there's no more than 2 '&nbsp;' in a row.
     // eg. '[TEXT]&nbsp;&nbsp;[TEXT]' -> '[TEXT]&nbsp; [TEXT]'
     const unescapeDoubleNbsp: StrReplacement = x => x
         .replace(/(?<=&nbsp;)&nbsp;(?!$)/gm, ' ')
