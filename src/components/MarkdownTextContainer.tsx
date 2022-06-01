@@ -3,8 +3,6 @@ type Props = {
 }
 
 const MarkdownTextContainer = ({ mdText }: Props) => {
-    console.log(mdText)
-
 
     return (
         <span style={{
