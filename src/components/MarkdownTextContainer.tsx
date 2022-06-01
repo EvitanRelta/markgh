@@ -1,4 +1,8 @@
-const MarkdownText = ({ mdText }) => {
+type Props = {
+    mdText: string;
+}
+
+const MarkdownTextContainer = ({ mdText }: Props) => {
     console.log(mdText)
 
 
@@ -14,4 +18,4 @@ const MarkdownText = ({ mdText }) => {
     )
 }
 
-export default MarkdownText
+export default MarkdownTextContainer

@@ -1,5 +1,5 @@
 import Quill from 'quill'
-import MarkdownText from "./MarkdownText"
+import MarkdownTextContainer from "./MarkdownTextContainer"
 import TextEditor from "./TextEditor"
 
 type Props = {
@@ -27,7 +27,7 @@ const Body = ({ showMarkdown, mdText, setQuill }: Props) => {
                 }}>
                     <TextEditor setQuill={setQuill} />
                 </div>
-                {showMarkdown && <MarkdownText mdText={mdText} />}
+                {showMarkdown && <MarkdownTextContainer mdText={mdText} />}
             </div>
 
         </div>
