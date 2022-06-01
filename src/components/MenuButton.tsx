@@ -7,12 +7,18 @@ import ExportMarkdownOption from './MenuOptions/ExportMarkdownOption'
 import ThemeOption from './MenuOptions/ThemeOption'
 import UploadFileOption from './MenuOptions/UploadFileOption'
 
+type Props = {
+    theme: string;
+    toggleTheme: React.MouseEventHandler<HTMLButtonElement | HTMLElement>;
+    title: string;
+    onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-const MenuButton = ({ theme, toggleTheme, title, onUpload }) => {
-    const [anchor, setAnchor] = useState(null)
+const MenuButton = ({ theme, toggleTheme, title, onUpload }: Props) => {
+    const [anchor, setAnchor] = useState<EventTarget & Element | null>(null)
     //const [selected, setSelected] = useState(-1)
 
-    const openMenu = (e) => {
+    const openMenu = (e: React.MouseEvent) => {
         setAnchor(e.currentTarget)
     }
 
@@ -22,11 +28,11 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload }) => {
 
     const onDownload = () => {
         const fileName = `${title || "NewFile"}.md`
-        const markdownText = toMarkdown(document.getElementsByClassName('ql-editor')[0])
+        const markdownText = toMarkdown(document.getElementsByClassName('ql-editor')[0] as HTMLElement)
         downloadText(markdownText, fileName)
     }
 
-    const downloadText = (text, fileName) => {
+    const downloadText = (text: string, fileName: string) => {
         const element = document.createElement("a")
         const file = new Blob([text], { type: "text/plain;charset=utf-8" })
         element.href = URL.createObjectURL(file)
@@ -46,7 +52,7 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload }) => {
             <Menu open={Boolean(anchor)} keepMounted
                 anchorEl={anchor} onClose={closeMenu}>
                 <MenuItem style={{ padding: "0px" }}><UploadFileOption onUpload={onUpload} /></MenuItem>
-                <MenuItem onClick={onDownload} ><ExportMarkdownOption title={title} /></MenuItem>
+                <MenuItem onClick={onDownload} ><ExportMarkdownOption /></MenuItem>
                 <MenuItem onClick={toggleTheme}><ThemeOption theme={theme} /></MenuItem>
             </Menu>
         </div>

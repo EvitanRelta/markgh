@@ -2,8 +2,11 @@ import FileUploadIcon from '@mui/icons-material/FileUpload'
 import IconButton from '@mui/material/IconButton'
 import Input from '@mui/material/Input'
 
-
-const UploadFileOption = ({ onUpload }) => (
+type Props = {
+    onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+const UploadFileOption = ({ onUpload }: Props) => (
+    
     <label style={{
         paddingLeft: "16px",
         paddingTop: "5px",
@@ -11,7 +14,7 @@ const UploadFileOption = ({ onUpload }) => (
         minWidth: "208.75px"
     }}>
         <div style={{ display: 'none' }}>
-            <Input type="file" accept="file/*" onChange={onUpload} />
+            <Input type="file" onChange={onUpload} />
         </div>
         <IconButton component="span">
             <FileUploadIcon />
