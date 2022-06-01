@@ -20,7 +20,8 @@ const Footer = ({ onClick, showMarkdown }) => (
         }}>
             {
                 showMarkdown
-                    ? <Button onClick={onClick} variant="outlined">Hide Markdown</Button>
+                    ? <Button onClick={onClick} variant="outlined" 
+                    style = {{backgroundColor: 'white'}}>Hide Markdown</Button>
                     : <Button color='primary' onClick={onClick} variant="contained">Show Markdown</Button>
             }
         </div>
