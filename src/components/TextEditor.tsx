@@ -2,7 +2,7 @@ import hljs from 'highlight.js'
 import Quill from 'quill'
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 import '../customCss/custom-quill.css'
-import '../customCss/quill-snow-no-editor-css.css'
+import '../customCss/quill-snow-without-most-editor-css.css'
 import '../githubMarkdownCss/importAllGithubCss'
 import placeholderEditorHtml from '../placeholderEditorHtml'
 
