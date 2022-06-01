@@ -2,7 +2,16 @@
 import { useState } from "react"
 import MenuButton from './MenuButton'
 
-const Header = ({ title, theme, toggleTheme, setTitle, onUpload }) => {
+type Props = {
+    title: string;
+    theme: string;
+    toggleTheme: React.MouseEventHandler<HTMLButtonElement>;
+    setTitle: React.Dispatch<React.SetStateAction<string>>;
+    onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+}
+
+const Header = ({ title, theme, toggleTheme, setTitle, onUpload }: Props) => {
     //var for current file name
     const [text, setText] = useState(title)
 
