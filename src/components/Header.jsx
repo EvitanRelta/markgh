@@ -6,9 +6,6 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload }) => {
     //var for current file name
     const [text, setText] = useState(title)
 
-    //var for uploading file
-    const [fileName, setFileName] = useState('No File Chosen')
-
     //vars for theme control
     const themeColor = theme === 'dark' ? '#181414' : 'white'
     const textColor = theme === 'dark' ? 'white' : '#181414'
@@ -46,10 +43,7 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload }) => {
                 <div>
                     <MenuButton theme={theme} toggleTheme={toggleTheme} title={title} onUpload={onUpload} />
 
-                    {/* {theme} mode
-                <IconButton onClick={toggleTheme} color="inherit">
-                    {theme === 'dark' ? <Brightness7Icon /> : <Brightness4Icon/>}
-                </IconButton> */}
+
                 </div>
             </div>
             <p style={{
