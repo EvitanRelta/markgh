@@ -49,20 +49,20 @@ function postProcessHtml(markdown: string) {
     // (and probably) will not do that.
     // eg. '[TEXT]&nbsp;&nbsp;[TEXT]' -> '[TEXT]&nbsp; [TEXT]'
     const unescapeDoubleNbsp: StrReplacement = x => x
-        .replace(/(?<=&nbsp;)&nbsp;/g, ' ')
+        .replace(/(?<=&nbsp;)&nbsp;(?!$)/gm, ' ')
 
     // eg. '[TEXT]&nbsp;[TEXT]' -> '[TEXT] [TEXT]'
     const unescapeUnnecessaryNbsp: StrReplacement = x => x
-        .replace(/(?<!\s)&nbsp;(?!\s)/g, ' ')
+        .replace(/(?<!\s|^)&nbsp;(?!\s|$)/gm, ' ')
 
     // eg. '[TEXT]&nbsp; &nbsp; &nbsp;[TEXT]' -> '[TEXT] &nbsp; &nbsp; [TEXT]'
     const reduceOddNumOfNbsp: StrReplacement = x => x
-        .replace(/(?<!\s)((&nbsp; )+)&nbsp;(?!\s)/g, ' $1')
+        .replace(/(?<!\s|^)((&nbsp; )+)&nbsp;(?!\s|$)/gm, ' $1')
 
     // For better readability.
     // eg. '[TEXT]&nbsp; &nbsp; [TEXT]' -> '[TEXT] &nbsp;&nbsp; [TEXT]'
     const avoidNbspBesideWords: StrReplacement = x => x
-        .replace(/(?<!\s)&nbsp; &nbsp; ((&nbsp; )*)/g, ' &nbsp;&nbsp; $1')
+        .replace(/(?<!\s|^)&nbsp; &nbsp; ((&nbsp; )*)(?!$)/gm, ' &nbsp;&nbsp; $1')
 
     // '&lt;&amp;' -> '\<\&'
     const htmlEscapeToBackslashEscape: StrReplacement = x => x
