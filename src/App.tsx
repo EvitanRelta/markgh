@@ -28,7 +28,7 @@ export default function App(): ReactElement {
 
     const selectedTheme = mode === "dark" ? darkTheme : lightTheme
 
-    const onUpload = (e: React.ChangeEvent) => {
+    const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const allowedFileTypes = ['txt', 'md']
         const target = e.target as HTMLInputElement
 
