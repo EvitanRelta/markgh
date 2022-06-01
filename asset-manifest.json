@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/readme-editor/static/css/main.7326ccb9.css",
-    "main.js": "/readme-editor/static/js/main.9b0f9038.js",
+    "main.js": "/readme-editor/static/js/main.56785b74.js",
     "index.html": "/readme-editor/index.html",
     "main.7326ccb9.css.map": "/readme-editor/static/css/main.7326ccb9.css.map",
-    "main.9b0f9038.js.map": "/readme-editor/static/js/main.9b0f9038.js.map"
+    "main.56785b74.js.map": "/readme-editor/static/js/main.56785b74.js.map"
   },
   "entrypoints": [
     "static/css/main.7326ccb9.css",
-    "static/js/main.9b0f9038.js"
+    "static/js/main.56785b74.js"
   ]
 }
