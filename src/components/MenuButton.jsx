@@ -3,9 +3,9 @@ import { Menu, MenuItem } from "@mui/material"
 import IconButton from '@mui/material/IconButton'
 import { useState } from 'react'
 import { toMarkdown } from '../converterFunctions'
-import ExportMarkdownOption from './ExportMarkdownOption'
-import ThemeOption from './ThemeOption'
-import UploadFileOption from './UploadFileOption'
+import ExportMarkdownOption from './MenuOptions/ExportMarkdownOption'
+import ThemeOption from './MenuOptions/ThemeOption'
+import UploadFileOption from './MenuOptions/UploadFileOption'
 
 
 const MenuButton = ({ theme, toggleTheme, title, onUpload }) => {
