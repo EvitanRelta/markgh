@@ -10,10 +10,8 @@ const Footer = ({ onClick, showMarkdown, theme }: Props) => (
         <div 
         style = {{
             margin: 0,
-            top: 745,
             right: 40,
             bottom: 40,
-            left: '20',
             position: 'fixed',
         }}>
             {
