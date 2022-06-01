@@ -79,9 +79,7 @@ export default function App() {
                     onUpload={onUpload}
                 />
                 <Body showMarkdown={showMarkdown} mdText={mdText} setQuill={setQuill} />
-                <div style={{
-                    margin: '20px'
-                }}>
+                <div>
                     <Footer onClick={() => setShowMarkdown(!showMarkdown)} showMarkdown={showMarkdown} />
                 </div>
             </div>
