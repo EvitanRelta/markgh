@@ -50,8 +50,8 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload }: Props) => {
                 <MoreHorizIcon />
             </IconButton>
             <Menu open={Boolean(anchor)} keepMounted
-                anchorEl={anchor} onClose={closeMenu}>
-                <MenuItem style={{ padding: "0px" }}><UploadFileOption onUpload={onUpload} /></MenuItem>
+                anchorEl={anchor} onClose={closeMenu} >
+                <MenuItem style={{ padding: "0px"}}><UploadFileOption onUpload={onUpload} /></MenuItem>
                 <MenuItem onClick={onDownload} ><ExportMarkdownOption /></MenuItem>
                 <MenuItem onClick={toggleTheme}><ThemeOption theme={theme} /></MenuItem>
             </Menu>
