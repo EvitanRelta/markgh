@@ -1,4 +1,5 @@
 import Button from '@mui/material/Button'
+import UploadImage from './UploadImage'
 
 type Props = {
     onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -7,6 +8,7 @@ type Props = {
 }
 const Footer = ({ onClick, showMarkdown, theme }: Props) => (
     <footer className='footer'>
+        <UploadImage />
         <div 
         style = {{
             margin: 0,

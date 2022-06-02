@@ -1,6 +1,8 @@
 
-import { useState } from "react"
+import React, { useState } from 'react'
 import MenuButton from './MenuButton'
+
+
 
 type Props = {
     title: string;
@@ -29,6 +31,7 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload }: Props) => {
             lineHeight: '12px',
 
         }}>
+            
             <div style={{
                 justifyContent: 'space-between',
                 display: 'flex'
@@ -49,11 +52,12 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload }: Props) => {
                         color: textColor
                     }}
                 />
+        
                 <div>
                     <MenuButton theme={theme} toggleTheme={toggleTheme} title={title} onUpload={onUpload} />
-
-
                 </div>
+
+                
             </div>
             <p style={{
                 color: 'gray',
@@ -66,3 +70,7 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload }: Props) => {
 }
 
 export default Header
+
+function getBase64(file: File) {
+    throw new Error('Function not implemented.')
+}
