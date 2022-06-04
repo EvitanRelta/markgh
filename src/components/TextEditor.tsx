@@ -42,7 +42,7 @@ export default function TextEditor({ setQuill, theme }: TextEditorProps) {
 
         //@ts-expect-error
         const quillEditor = quill.scrollingContainer as HTMLDivElement
-        quillEditor.classList.add('markdown-body', 'gh-light')
+        quillEditor.classList.add('markdown-body')
         quillEditor.innerHTML = placeholderEditorHtml
 
         setQuill(quill)
