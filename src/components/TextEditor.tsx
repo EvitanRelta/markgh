@@ -51,17 +51,15 @@ export default function TextEditor({ setQuill, theme }: TextEditorProps) {
 
     useEffect(() => {
         if (!editor) return
+
+        const classList = editor.classList
         const isGithubCssClassName = (className: string) => /^gh-/.test(className)
-        const replaceClassName = (classList: DOMTokenList, oldClassName: string, newClassName: string) => {
-            classList.remove(oldClassName)
-            classList.add(newClassName)
-        }
 
+        Array.from(classList)
+            .filter(isGithubCssClassName)
+            .forEach(className => classList.remove(className))
 
-        const githubCssClassName = Array.from(editor.classList)
-            .find(isGithubCssClassName) as string
-
-        replaceClassName(editor.classList, githubCssClassName, `gh-${theme}`)
+        classList.add(`gh-${theme}`)
     }, [editor, theme])
 
 
