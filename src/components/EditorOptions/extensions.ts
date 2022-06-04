@@ -1,10 +1,10 @@
-import Image from '@tiptap/extension-image'
 import Link from '@tiptap/extension-link'
 import StarterKit from '@tiptap/starter-kit'
+import SizedImage from './SizedImage'
 
 export default [
     StarterKit.configure({}),
-    Image.configure({
+    SizedImage.configure({
         inline: true
     }),
     Link
