@@ -1,8 +1,8 @@
 import { Editor } from '@tiptap/react'
-import addUrlImage from './EditorOptions/toolbarFunctions/addUrlImage'
-import bold from './EditorOptions/toolbarFunctions/bold'
-import italic from './EditorOptions/toolbarFunctions/italic'
-import underline from './EditorOptions/toolbarFunctions/underline'
+import addUrlImage from './toolbarFunctions/addUrlImage'
+import bold from './toolbarFunctions/bold'
+import italic from './toolbarFunctions/italic'
+import underline from './toolbarFunctions/underline'
 
 
 interface Props {

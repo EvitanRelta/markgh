@@ -1,5 +1,5 @@
+import TextEditor from "./Editor/TextEditor"
 import MarkdownText from "./MarkdownText"
-import TextEditor from "./TextEditor"
 
 
 const Body = ({ showMarkdown, mdText, onTextChange, theme }) => {
