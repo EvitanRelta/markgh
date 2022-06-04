@@ -27,11 +27,7 @@ export default function TextEditor({ setQuill, theme }: TextEditorProps) {
         if (!wrapper) return
         wrapper.innerHTML = ''
         const container = document.createElement('div')
-        container.style.boxSizing = 'border-box'
-        container.style.minWidth = '200px'
-        container.style.maxWidth = '980px'
-        container.style.margin = '0 auto'
-        container.style.padding = '45px'
+        container.className = 'markdown-container'
         wrapper.append(container)
 
         const quill = new Quill(container, {
