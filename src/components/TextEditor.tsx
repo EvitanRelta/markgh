@@ -5,6 +5,7 @@ import '../githubMarkdownCss/importAllGithubCss'
 import placeholderEditorHtml from '../placeholderEditorHtml'
 import extensions from './EditorOptions/extensions'
 import addUrlImage from './EditorOptions/toolbarFunctions/addUrlImage'
+import bold from './EditorOptions/toolbarFunctions/bold'
 
 
 interface Props {
@@ -54,6 +55,7 @@ export default ({ theme, onTextChange }: Props) => {
 
     return (
         <div>
+            <button onClick={bold(editor)}>Bold</button>
             <button onClick={addUrlImage(editor)}>Add image via URL</button>
             <EditorContent editor={editor} />
         </div>
