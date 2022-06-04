@@ -8,9 +8,10 @@ import extensions from './EditorOptions/extensions'
 
 interface Props {
     theme: 'light' | 'dark'
+    onTextChange: (editorContainer: HTMLElement) => void | null
 }
 
-export default ({ theme }: Props) => {
+export default ({ theme, onTextChange }: Props) => {
     const [editorContainer, setEditorContainer] = useState<HTMLElement | null>(null)
     const editor = useEditor({
         extensions,
@@ -23,6 +24,14 @@ export default ({ theme }: Props) => {
         const editorContainer = editor.view.dom
         editorContainer.classList.add('markdown-body')
         setEditorContainer(editorContainer)
+
+        editor.on('create', ({ editor }) => {
+            onTextChange(editor.view.dom)
+        })
+
+        editor.on('update', ({ editor }) => {
+            onTextChange(editor.view.dom)
+        })
 
         const parentContainer = editorContainer.parentElement as HTMLDivElement
         parentContainer.classList.add('markdown-container')
