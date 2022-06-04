@@ -4,6 +4,7 @@ import '../customCss/fix-codeblock-bottom-spacing.css'
 import '../githubMarkdownCss/importAllGithubCss'
 import placeholderEditorHtml from '../placeholderEditorHtml'
 import extensions from './EditorOptions/extensions'
+import addUrlImage from './EditorOptions/toolbarFunctions/addUrlImage'
 
 
 interface Props {
@@ -53,6 +54,7 @@ export default ({ theme, onTextChange }: Props) => {
 
     return (
         <div>
+            <button onClick={addUrlImage(editor)}>Add image via URL</button>
             <EditorContent editor={editor} />
         </div>
     )
