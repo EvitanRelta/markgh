@@ -5,7 +5,9 @@ import CodeNoExcludes from './CodeNoExcludes'
 import SizedImage from './SizedImage'
 
 export default [
-    StarterKit.configure({}),
+    StarterKit.configure({
+        code: false,
+    }),
     SizedImage.configure({
         inline: true
     }),
