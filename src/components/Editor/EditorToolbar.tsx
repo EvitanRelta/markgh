@@ -2,6 +2,7 @@ import { Editor } from '@tiptap/react'
 import addUrlImage from './toolbarFunctions/addUrlImage'
 import bold from './toolbarFunctions/bold'
 import code from './toolbarFunctions/code'
+import codeBlock from './toolbarFunctions/codeBlock'
 import italic from './toolbarFunctions/italic'
 import strikethrough from './toolbarFunctions/strikethrough'
 import underline from './toolbarFunctions/underline'
@@ -18,6 +19,7 @@ export default ({ editor }: Props) => (
         <button onClick={underline(editor)}>Underline</button>
         <button onClick={strikethrough(editor)}>StrikeThrough</button>
         <button onClick={code(editor)}>Code</button>
+        <button onClick={codeBlock(editor)}>CodeBlock</button>
         <button onClick={addUrlImage(editor)}>Add image via URL</button>
     </div>
 )
