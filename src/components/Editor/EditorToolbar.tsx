@@ -5,6 +5,7 @@ import bold from './toolbarFunctions/bold'
 import code from './toolbarFunctions/code'
 import codeBlock from './toolbarFunctions/codeBlock'
 import italic from './toolbarFunctions/italic'
+import link from './toolbarFunctions/link'
 import strikethrough from './toolbarFunctions/strikethrough'
 import underline from './toolbarFunctions/underline'
 
@@ -22,6 +23,7 @@ export default ({ editor }: Props) => (
         <button onClick={code(editor)}>Code</button>
         <button onClick={blockQuote(editor)}>BlockQuote</button>
         <button onClick={codeBlock(editor)}>CodeBlock</button>
+        <button onClick={link(editor)}>Link</button>
         <button onClick={addUrlImage(editor)}>Add image via URL</button>
     </div>
 )
