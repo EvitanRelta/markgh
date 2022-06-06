@@ -52,7 +52,8 @@ const ImageConatiner = () => {
 
     //Clears db
     const deleteAllImages = async () => {
-        for (let i = 0; i < images.length; i++) {
+        for (let i = 0; i <= images[images.length -1].id; i++) {
+            console.log(i)
             db.images.delete(i);
         }
         updateImagesFromDb();
