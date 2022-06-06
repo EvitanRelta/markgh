@@ -1,57 +1,80 @@
+import Dexie from 'dexie'
 import { useEffect, useState } from 'react'
-import UploadImage from './UploadImage'
 
 const ImageConatiner = () => {
 
-    const getLocalStorageUsage = () => {
-        var _lsTotal = 0,
-        _xLen, _x;
-        
-        for (_x in localStorage) {
-            if (!localStorage.hasOwnProperty(_x)) {
-                continue;
-            }
-            _xLen = ((localStorage[_x].length + _x.length) * 2);
-            _lsTotal += _xLen;
-            //console.log(_x.substr(0, 50) + " = " + (_xLen / 1024).toFixed(2) + " KB")
-        };
-        return (_lsTotal / 1024).toFixed(2);
+    //Inititalises db, doesn't execute if db of the same name already exists
+    const db = new Dexie("Images");
+    db.version(1).stores({
+        images: "id, base64"
+    })
+    
+    db.open().catch((err) => {
+        console.log(err.stack || err)
+    })
+
+  
+    const [images, setImages] = useState([])
+
+    //Retrieves images from db, and updates them in state
+    const updateImagesFromDb = async () => {
+        let allImages = await db.images.toArray();
+        setImages(allImages);
     }
 
-    const makeImageArray = () => {
-        var tempArray = [];
-        for (let i = 0; i < localStorage.length; i++) {
-            tempArray[tempArray.length] = localStorage["image" + i]
-        }
-        return tempArray;
-    }
-   
-    const [imgArray, setImgArray] = useState(makeImageArray())
-    const [localStorageUse, setLocalStorageUse] = useState(getLocalStorageUsage())
-
-    const uploadImage = (e) => {
-        let file = e[0]
-        // setFiles([...files, file])
-        localStorage["image" + localStorage.length] = file.base64
-        setImgArray([...imgArray, file.base64])
-    }
-
+    //Retrieve images from db when page is loaded
     useEffect(() => {
-        setLocalStorageUse(getLocalStorageUsage())
-    }, [imgArray])
+        updateImagesFromDb();
+    }, [])
+
+
+    //Upload an image
+    const uploadImage = (e) => {
+        var input = e.target;
+        var reader = new FileReader();
+        reader.onload = function(){
+        };
+        reader.readAsDataURL(input.files[0]);
+        reader.onload = async () => {
+            let imageBase64 = reader.result
+            let image = {
+                id: !images.length ? 0 : (images[images.length - 1].id + 1),
+                base64: imageBase64
+            }
+            db.images.add(image).then(updateImagesFromDb())
+        }
+
+        //Refreshes element value to allow a same image to be uploaded again 
+        //(Otherwise onChange can't detect if the same image is uploaded again)
+        e.target.value = ''
+        
+    }
+
+    //Clears db
+    const deleteAllImages = async () => {
+        for (let i = 0; i < images.length; i++) {
+            db.images.delete(i);
+        }
+        updateImagesFromDb();
+    }
+
+    //Clears single image by id
+    const deleteImage = async (id) => {
+        db.images.delete(id);
+        updateImagesFromDb();
+    }
 
 
 
-
-    console.log(localStorageUse)
 
   return (
     <div>
-        <UploadImage uploadImage = {uploadImage} />
-        {imgArray.map((image) =>  <img key={Math.floor(Math.random()*(10000))}
-        style = {{maxWidth: 320, maxHeight: 180}} src={image} />)}
-        {localStorageUse + "/5000KB used" + "(" + (localStorageUse/5000 * 100).toFixed(2) + "%)"}
-        
+        <input accept= "image/" type= "file" onChange = {uploadImage}/>
+        {images.map((image) =>  <div key= {image.id}>id:{image.id}<img
+        style = {{maxWidth: 320, maxHeight: 180}} src={image.base64} alt= {image.id}/>
+        <button onClick= {() => deleteImage(image.id)}>Delete</button>
+        </div>)}
+        <button onClick= {() => deleteAllImages() }> Delete all images</button>
     </div>
   )
 }
