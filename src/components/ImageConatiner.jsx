@@ -70,11 +70,12 @@ const ImageConatiner = () => {
   return (
     <div>
         <input accept= "image/" type= "file" onChange = {uploadImage}/>
-        {images.map((image) =>  <div key= {image.id}>id:{image.id}<img
-        style = {{maxWidth: 320, maxHeight: 180}} src={image.base64} alt= {image.id}/>
-        <button onClick= {() => deleteImage(image.id)}>Delete</button>
+        {images.map((image) => 
+        <div key= {image.id}>id:{image.id}
+            <img style= {{maxWidth: 320, maxHeight: 180}} src= {image.base64} alt= {image.id}/>
+            <button onClick= {() => deleteImage(image.id)}>Delete</button>
         </div>)}
-        <button onClick= {() => deleteAllImages() }> Delete all images</button>
+        <button onClick= {() => deleteAllImages()}>Delete all images</button>
     </div>
   )
 }
