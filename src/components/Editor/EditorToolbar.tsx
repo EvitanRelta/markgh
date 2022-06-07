@@ -7,6 +7,7 @@ import codeBlock from './toolbarFunctions/codeBlock'
 import heading from './toolbarFunctions/heading'
 import italic from './toolbarFunctions/italic'
 import link from './toolbarFunctions/link'
+import orderedList from './toolbarFunctions/orderedList'
 import strikethrough from './toolbarFunctions/strikethrough'
 import underline from './toolbarFunctions/underline'
 
@@ -60,6 +61,7 @@ export default ({ editor }: Props) => {
                 <option value='0'>Normal</option>
             </select>
             <button onClick={addUrlImage(editor)}>Add image via URL</button>
+            <button onClick={orderedList(editor)}>OrderedList</button>
         </div>
     )
 }
