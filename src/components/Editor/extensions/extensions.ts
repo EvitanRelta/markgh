@@ -1,9 +1,9 @@
 import Link from '@tiptap/extension-link'
-import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
 import StarterKit from '@tiptap/starter-kit'
 import CodeNoExcludes from './CodeNoExcludes'
 import SizedImage from './SizedImage'
+import TextAlignAttr from './TextAlignAttr'
 
 export default [
     StarterKit.configure({
@@ -15,7 +15,7 @@ export default [
     Link,
     Underline,
     CodeNoExcludes,
-    TextAlign.configure({
+    TextAlignAttr.configure({
         types: ['heading', 'paragraph'],
     }),
 ]
