@@ -1,7 +1,6 @@
 import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import Quill from 'quill'
-import { ReactElement, useEffect, useState } from 'react'
+import { ReactElement, useState } from 'react'
 import Body from './components/Body'
 import Footer from './components/Footer'
 import Header from './components/Header'
@@ -12,7 +11,6 @@ export default function App(): ReactElement {
     const [mode, setMode] = useState('light')
     const [title, setTitle] = useState('')
     const [mdText, setMdText] = useState('')
-    const [quill, setQuill] = useState<Quill | null>(null)
 
     const darkTheme = createTheme({
         palette: {
@@ -51,22 +49,10 @@ export default function App(): ReactElement {
         }
     }
 
-    const getMarkdownText = () => toMarkdown(document.getElementsByClassName('ql-editor')[0] as HTMLElement)
-
-    useEffect(() => {
-        if (!showMarkdown) return
-        if (document.getElementsByClassName('ql-editor')[0] === undefined) return
-
-        setMdText(getMarkdownText())
-    }, [showMarkdown])
-
-    useEffect(() => {
-        if (quill === null) return
-
-        quill.on('text-change', () => {
-            setMdText(getMarkdownText())
-        })
-    }, [quill])
+    const onTextChange = (editorContainer: HTMLElement) => {
+        const markdown = toMarkdown(editorContainer)
+        setMdText(markdown)
+    }
 
 
     return (
@@ -80,7 +66,7 @@ export default function App(): ReactElement {
                     toggleTheme={() => setMode(mode === 'light' ? 'dark' : 'light')}
                     onUpload={onUpload}
                 />
-                <Body showMarkdown={showMarkdown} mdText={mdText} setQuill={setQuill} theme={mode} />
+                <Body showMarkdown={showMarkdown} mdText={mdText} theme={mode} onTextChange={onTextChange} />
                 <div>
                     <Footer onClick={() => setShowMarkdown(!showMarkdown)} showMarkdown={showMarkdown} theme={mode} />
                 </div>
