@@ -13,7 +13,7 @@ export default function App(): ReactElement {
     const [showMarkdown, setShowMarkdown] = useState(false)
 
     //var for theme control
-    const [mode, setMode] = useState('light')
+    const [mode, setMode] = useState(localStorage["selectedTheme"] || 'light')
     
     //var for setting file title
     const [title, setTitle] = useState('')
@@ -72,9 +72,20 @@ export default function App(): ReactElement {
         }
     }
 
-
+    //Toggle theme
+    const toggleTheme = () => {
+        setMode(mode === 'light' ? 'dark' : 'light')
+    }
+     
+    
     const getMarkdownText = () => toMarkdown(document.getElementsByClassName('ql-editor')[0] as HTMLElement)
 
+    //Updates preferred theme in localStorage
+    useEffect(() => {
+        localStorage["selectedTheme"] = mode
+    }, [mode])
+    
+    
     //Updates markdown text when prompted to show it
     useEffect(() => {
         if (!showMarkdown) return
@@ -121,7 +132,7 @@ export default function App(): ReactElement {
                     theme={mode}
                     title={title}
                     setTitle={setTitle}
-                    toggleTheme={() => setMode(mode === 'light' ? 'dark' : 'light')}
+                    toggleTheme={toggleTheme}
                     onUpload={onUpload}
                     lastEditedOn= {lastEditedOn}
                 />
