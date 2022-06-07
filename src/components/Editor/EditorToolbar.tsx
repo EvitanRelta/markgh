@@ -1,4 +1,5 @@
 import { Editor } from '@tiptap/react'
+import AlignDropDown from './AlignDropDown'
 import HeadingDropDown from './HeadingDropDown'
 import addUrlImage from './toolbarFunctions/addUrlImage'
 import blockQuote from './toolbarFunctions/blockQuote'
@@ -31,5 +32,6 @@ export default ({ editor }: Props) => (
         <button onClick={addUrlImage(editor)}>Add image via URL</button>
         <button onClick={orderedList(editor)}>OrderedList</button>
         <button onClick={unorderedList(editor)}>UnorderedList</button>
+        <AlignDropDown editor={editor} />
     </div>
 )

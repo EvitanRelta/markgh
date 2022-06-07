@@ -1,4 +1,5 @@
 import Link from '@tiptap/extension-link'
+import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
 import StarterKit from '@tiptap/starter-kit'
 import CodeNoExcludes from './CodeNoExcludes'
@@ -14,4 +15,7 @@ export default [
     Link,
     Underline,
     CodeNoExcludes,
+    TextAlign.configure({
+        types: ['heading', 'paragraph'],
+    }),
 ]
