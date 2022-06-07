@@ -14,6 +14,9 @@ export default function App(): ReactElement {
     const [mdText, setMdText] = useState('')
     const [quill, setQuill] = useState<Quill | null>(null)
 
+    //var for 'Last edited on'
+    const [lastEditedOn, setLastEditedOn] = useState(localStorage["lastEditedOn"])
+
     const darkTheme = createTheme({
         palette: {
             mode: 'dark',
@@ -68,7 +71,23 @@ export default function App(): ReactElement {
         })  
     }, [quill])
 
+    useEffect(() => {
+        const date = new Date()
+        const n = date.toDateString() 
+        var t = date.toLocaleTimeString()
+        var timeShort = (t.length == 11 ? t.substring(0, 5) : t.substring(0, 4)) + " " + t.substring(t.length-2, t.length)
+        var dateShort = n.substring(4, n.length - 5)
+        var dateTime = dateShort + " " + timeShort
 
+        if (quill == null) return
+        quill.on('text-change', () => {
+            setLastEditedOn(dateTime)
+            localStorage["lastEditedOn"] = dateTime
+        })
+
+    }, [quill])
+
+    
     return (
         <ThemeProvider theme={selectedTheme}>
             <CssBaseline />
@@ -79,6 +98,7 @@ export default function App(): ReactElement {
                     setTitle={setTitle}
                     toggleTheme={() => setMode(mode === 'light' ? 'dark' : 'light')}
                     onUpload={onUpload}
+                    lastEditedOn= {lastEditedOn}
                 />
                 <Body showMarkdown={showMarkdown} mdText={mdText} setQuill={setQuill} />
                 <div>
