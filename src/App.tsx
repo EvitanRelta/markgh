@@ -1,5 +1,6 @@
 import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import Dexie from 'dexie'
 import Quill from 'quill'
 import { ReactElement, useEffect, useState } from 'react'
 import Body from './components/Body'
@@ -8,6 +9,17 @@ import Header from './components/Header'
 import toMarkdown from './converterFunctions/toMarkdown'
 
 export default function App(): ReactElement {
+
+    //Inititalises db, doesn't execute if db of the same name already exists
+    const db = new Dexie("EditorData");
+    db.version(1).stores({
+        images: "id, base64",
+        text: "value"
+    })
+    
+    db.open().catch((err) => {
+        console.log(err.stack || err)
+    })
 
     //var for controlling whether to show markdown
     const [showMarkdown, setShowMarkdown] = useState(false)
@@ -138,7 +150,7 @@ export default function App(): ReactElement {
                 />
                 <Body showMarkdown={showMarkdown} mdText={mdText} setQuill={setQuill} />
                 <div>
-                    <Footer onClick={() => setShowMarkdown(!showMarkdown)} showMarkdown={showMarkdown} theme={mode}/>
+                    <Footer onClick={() => setShowMarkdown(!showMarkdown)} showMarkdown={showMarkdown} theme={mode} db = {db}/>
                 </div>
             </div>
         </ThemeProvider>

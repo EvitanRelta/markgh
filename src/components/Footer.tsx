@@ -1,14 +1,16 @@
 import Button from '@mui/material/Button'
+import Dexie from 'dexie'
 import ImageContainer from './ImageContainer'
 
 type Props = {
     onClick: React.MouseEventHandler<HTMLButtonElement>;
     showMarkdown: boolean;
     theme: string;
+    db: Dexie;
 }
-const Footer = ({ onClick, showMarkdown, theme }: Props) => (
+const Footer = ({ onClick, showMarkdown, theme, db }: Props) => (
     <footer className='footer'>
-        <ImageContainer />
+        <ImageContainer db= {db} />
         <div 
         style = {{
             margin: 0,

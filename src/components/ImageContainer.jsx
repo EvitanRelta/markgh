@@ -1,19 +1,7 @@
-import Dexie from 'dexie'
 import { useEffect, useState } from 'react'
 
-const ImageConatiner = () => {
+const ImageConatiner = ({db}) => {
 
-    //Inititalises db, doesn't execute if db of the same name already exists
-    const db = new Dexie("Images");
-    db.version(1).stores({
-        images: "id, base64"
-    })
-    
-    db.open().catch((err) => {
-        console.log(err.stack || err)
-    })
-
-  
     const [images, setImages] = useState([])
 
     //Retrieves images from db, and updates them in state
