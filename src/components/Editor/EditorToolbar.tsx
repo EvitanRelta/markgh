@@ -10,6 +10,7 @@ import link from './toolbarFunctions/link'
 import orderedList from './toolbarFunctions/orderedList'
 import strikethrough from './toolbarFunctions/strikethrough'
 import underline from './toolbarFunctions/underline'
+import unorderedList from './toolbarFunctions/unorderedList'
 
 
 interface Props {
@@ -62,6 +63,7 @@ export default ({ editor }: Props) => {
             </select>
             <button onClick={addUrlImage(editor)}>Add image via URL</button>
             <button onClick={orderedList(editor)}>OrderedList</button>
+            <button onClick={unorderedList(editor)}>UnorderedList</button>
         </div>
     )
 }
