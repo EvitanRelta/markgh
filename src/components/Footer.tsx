@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button'
-import ImageContainer from './ImageConatiner'
+import ImageContainer from './ImageContainer'
 
 type Props = {
     onClick: React.MouseEventHandler<HTMLButtonElement>;
