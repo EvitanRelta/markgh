@@ -3,9 +3,7 @@ import { Menu, MenuItem } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import { useState } from 'react'
 import { toMarkdown } from '../../converterFunctions'
-import ExportMarkdownOption from './MenuOptions/ExportMarkdownOption'
 import ThemeOption from './MenuOptions/ThemeOption'
-import UploadFileOption from './MenuOptions/UploadFileOption'
 
 type Props = {
     theme: string
@@ -56,12 +54,6 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload }: Props) => {
                 anchorEl={anchor}
                 onClose={closeMenu}
             >
-                <MenuItem style={{ padding: '0px' }}>
-                    <UploadFileOption onUpload={onUpload} />
-                </MenuItem>
-                <MenuItem onClick={onDownload}>
-                    <ExportMarkdownOption />
-                </MenuItem>
                 <MenuItem onClick={toggleTheme}>
                     <ThemeOption theme={theme} />
                 </MenuItem>

@@ -70,7 +70,7 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload, lastEditedOn }:
                 <div style={{
                     color: 'gray',
                     paddingLeft: '5px',
-                    marginTop: 7,
+                    marginTop: 5.5,
                     textDecoration: 'underline'
                 }}>
                     Last edited on {lastEditedOn}

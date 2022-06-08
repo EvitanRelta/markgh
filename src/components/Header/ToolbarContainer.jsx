@@ -1,4 +1,4 @@
-import FileOption from './ToolbarOptions/FileOption'
+import FileOption from './ToolbarOptions/FileMenu/FileOption'
 
 const ToolbarContainer = ({ onUpload }) => {
 
@@ -7,7 +7,7 @@ const ToolbarContainer = ({ onUpload }) => {
     
   return (
     <div>
-      <FileOption onUpload = {onUpload} sx = {{ padding: 0}}/>
+      <FileOption onUpload = {onUpload} />
     </div>
   )
 }

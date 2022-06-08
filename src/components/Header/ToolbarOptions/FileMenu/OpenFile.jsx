@@ -8,17 +8,19 @@ const OpenFile = ({ onUpload }) => {
     <MenuItem style= {{padding: 0}}>
         <label style={{
             cursor: 'pointer',
-            minWidth: 200,  
+            minWidth: 250,  
         }}>
             <div style={{ display: 'none' }}>
                 <Input type="file" onChange={onUpload} />
             </div>
-            <div style = {{display: 'inline-block', marginRight: 6, paddingLeft: 10}}>
+            <div style = {{display: 'inline-block', marginRight: 6, paddingLeft: 11}}>
                 <IconButton component="span" >
                 <FolderOpenIcon />
                 </IconButton>
             </div>
-            <div style = {{display: 'inline-block',}}>Open...</div>
+            <span>
+                Open...
+            </span>
         </label>
     </MenuItem>
   )
