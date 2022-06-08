@@ -2,8 +2,8 @@ import { Plugin } from 'turndown'
 import indent from '../indent'
 import turndownHtmlOnly from '../turndownHtmlOnly'
 
-const quillAlign: Plugin = (service) => {
-    service.addRule('quillAlign', {
+const align: Plugin = (service) => {
+    service.addRule('align', {
         filter: (node, options) => {
             const classNames = Array.from(node.classList)
             return classNames.some((className) =>
@@ -26,4 +26,4 @@ const quillAlign: Plugin = (service) => {
     })
 }
 
-export default quillAlign
+export default align

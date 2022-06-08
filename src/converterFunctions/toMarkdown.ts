@@ -1,7 +1,7 @@
 import TurndownService from 'turndown'
 import {
+    align,
     codeBlocks,
-    quillAlign,
     resizedImage,
     strikethrough,
     underline,
@@ -112,7 +112,7 @@ export default (html: HTMLElement) => {
     const turndownService = new TurndownService({
         headingStyle: 'atx',
         codeBlockStyle: 'fenced',
-    }).use([codeBlocks, underline, quillAlign, strikethrough, resizedImage])
+    }).use([codeBlocks, underline, align, strikethrough, resizedImage])
 
     const markdown = turndownService.turndown(htmlCopy)
     return postProcessHtml(markdown)
