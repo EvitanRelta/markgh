@@ -7,15 +7,17 @@ interface Props {
 }
 
 const getHeadingLevel = (editor: Editor) => {
-    // Can't find a better way to do this.
     if (editor.isActive('paragraph')) return 0
-    if (editor.isActive('heading', { level: 1 })) return 1
-    if (editor.isActive('heading', { level: 2 })) return 2
-    if (editor.isActive('heading', { level: 3 })) return 3
-    if (editor.isActive('heading', { level: 4 })) return 4
-    if (editor.isActive('heading', { level: 5 })) return 5
-    if (editor.isActive('heading', { level: 6 })) return 6
-    return null
+
+    // If multiple different headings types are selected, 'headingAttr.level' 
+    // will have a value, but 'editor.isActive('heading')' will be false.
+    if (!editor.isActive('heading')) return null
+
+    const headingAttr = editor.getAttributes('heading')
+
+    return headingAttr.level === undefined
+        ? null
+        : headingAttr.level
 }
 
 export default ({ editor }: Props) => {
