@@ -5,8 +5,8 @@
     margin: 0;
     color: #f0f3f6;
     background-color: #0a0c10;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
-        sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji';
     font-size: 16px;
     line-height: 1.5;
     word-wrap: break-word;
@@ -153,15 +153,12 @@
 }
 
 .markdown-body.gh-dark-high-contrast [type='number']::-webkit-inner-spin-button,
-.markdown-body.gh-dark-high-contrast
-    [type='number']::-webkit-outer-spin-button {
+.markdown-body.gh-dark-high-contrast [type='number']::-webkit-outer-spin-button {
     height: auto;
 }
 
-.markdown-body.gh-dark-high-contrast
-    [type='search']::-webkit-search-cancel-button,
-.markdown-body.gh-dark-high-contrast
-    [type='search']::-webkit-search-decoration {
+.markdown-body.gh-dark-high-contrast [type='search']::-webkit-search-cancel-button,
+.markdown-body.gh-dark-high-contrast [type='search']::-webkit-search-decoration {
     -webkit-appearance: none;
 }
 
@@ -231,10 +228,8 @@
 
 .markdown-body.gh-dark-high-contrast a:focus:not(:focus-visible),
 .markdown-body.gh-dark-high-contrast [role='button']:focus:not(:focus-visible),
-.markdown-body.gh-dark-high-contrast
-    input[type='radio']:focus:not(:focus-visible),
-.markdown-body.gh-dark-high-contrast
-    input[type='checkbox']:focus:not(:focus-visible) {
+.markdown-body.gh-dark-high-contrast input[type='radio']:focus:not(:focus-visible),
+.markdown-body.gh-dark-high-contrast input[type='checkbox']:focus:not(:focus-visible) {
     outline: solid 1px transparent;
 }
 
@@ -259,8 +254,7 @@
 .markdown-body.gh-dark-high-contrast kbd {
     display: inline-block;
     padding: 3px 5px;
-    font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-        Liberation Mono, monospace;
+    font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
     line-height: 10px;
     color: #f0f3f6;
     vertical-align: middle;
@@ -349,16 +343,14 @@
 .markdown-body.gh-dark-high-contrast tt,
 .markdown-body.gh-dark-high-contrast code,
 .markdown-body.gh-dark-high-contrast samp {
-    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-        Liberation Mono, monospace;
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
     font-size: 12px;
 }
 
 .markdown-body.gh-dark-high-contrast pre {
     margin-top: 0;
     margin-bottom: 0;
-    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-        Liberation Mono, monospace;
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
     font-size: 12px;
     word-wrap: normal;
 }
@@ -850,12 +842,8 @@
     font-family: monospace;
 }
 
-.markdown-body.gh-dark-high-contrast
-    [data-a11y-animated-images='system']
-    [data-animated-image],
-.markdown-body.gh-dark-high-contrast
-    [data-a11y-animated-images='disabled']
-    [data-animated-image] {
+.markdown-body.gh-dark-high-contrast [data-a11y-animated-images='system'] [data-animated-image],
+.markdown-body.gh-dark-high-contrast [data-a11y-animated-images='disabled'] [data-animated-image] {
     display: none;
 }
 
@@ -884,9 +872,7 @@
     vertical-align: middle;
 }
 
-.markdown-body.gh-dark-high-contrast
-    .contains-task-list:dir(rtl)
-    .task-list-item-checkbox {
+.markdown-body.gh-dark-high-contrast .contains-task-list:dir(rtl) .task-list-item-checkbox {
     margin: 0 -1.6em 0.25em 0.2em;
 }
 

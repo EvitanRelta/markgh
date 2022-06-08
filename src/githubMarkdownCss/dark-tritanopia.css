@@ -5,8 +5,8 @@
     margin: 0;
     color: #c9d1d9;
     background-color: #0d1117;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
-        sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji';
     font-size: 16px;
     line-height: 1.5;
     word-wrap: break-word;
@@ -229,8 +229,7 @@
 .markdown-body.gh-dark-tritanopia a:focus:not(:focus-visible),
 .markdown-body.gh-dark-tritanopia [role='button']:focus:not(:focus-visible),
 .markdown-body.gh-dark-tritanopia input[type='radio']:focus:not(:focus-visible),
-.markdown-body.gh-dark-tritanopia
-    input[type='checkbox']:focus:not(:focus-visible) {
+.markdown-body.gh-dark-tritanopia input[type='checkbox']:focus:not(:focus-visible) {
     outline: solid 1px transparent;
 }
 
@@ -255,8 +254,7 @@
 .markdown-body.gh-dark-tritanopia kbd {
     display: inline-block;
     padding: 3px 5px;
-    font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-        Liberation Mono, monospace;
+    font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
     line-height: 10px;
     color: #c9d1d9;
     vertical-align: middle;
@@ -345,16 +343,14 @@
 .markdown-body.gh-dark-tritanopia tt,
 .markdown-body.gh-dark-tritanopia code,
 .markdown-body.gh-dark-tritanopia samp {
-    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-        Liberation Mono, monospace;
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
     font-size: 12px;
 }
 
 .markdown-body.gh-dark-tritanopia pre {
     margin-top: 0;
     margin-bottom: 0;
-    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-        Liberation Mono, monospace;
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
     font-size: 12px;
     word-wrap: normal;
 }
@@ -846,12 +842,8 @@
     font-family: monospace;
 }
 
-.markdown-body.gh-dark-tritanopia
-    [data-a11y-animated-images='system']
-    [data-animated-image],
-.markdown-body.gh-dark-tritanopia
-    [data-a11y-animated-images='disabled']
-    [data-animated-image] {
+.markdown-body.gh-dark-tritanopia [data-a11y-animated-images='system'] [data-animated-image],
+.markdown-body.gh-dark-tritanopia [data-a11y-animated-images='disabled'] [data-animated-image] {
     display: none;
 }
 
@@ -880,9 +872,7 @@
     vertical-align: middle;
 }
 
-.markdown-body.gh-dark-tritanopia
-    .contains-task-list:dir(rtl)
-    .task-list-item-checkbox {
+.markdown-body.gh-dark-tritanopia .contains-task-list:dir(rtl) .task-list-item-checkbox {
     margin: 0 -1.6em 0.25em 0.2em;
 }
 

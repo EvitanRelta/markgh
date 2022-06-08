@@ -2,16 +2,12 @@ const fs = require('fs')
 
 const inputDir = './'
 const highlightCssDir = inputDir + 'syntaxHighlighting/'
-const fileNames = fs
-    .readdirSync(inputDir)
-    .filter((fileName) => /.css$/i.test(fileName))
+const fileNames = fs.readdirSync(inputDir).filter((fileName) => /.css$/i.test(fileName))
 
 const getFileContents = (filePath) => fs.promises.readFile(filePath, 'utf8')
 const highlightCssRegex = /^.+\.pl-\S([^\}]|\n)+\}/gm
-const writeFile = (filePath, textContent) =>
-    fs.promises.writeFile(filePath, textContent, 'utf8')
-const removeArtifactNewlines = (text) =>
-    text.replace(/(\n[^\S\n]*){3,}/g, '\n\n')
+const writeFile = (filePath, textContent) => fs.promises.writeFile(filePath, textContent, 'utf8')
+const removeArtifactNewlines = (text) => text.replace(/(\n[^\S\n]*){3,}/g, '\n\n')
 const getHighlightCssFilePath = (originalCssFilename) =>
     highlightCssDir + originalCssFilename.replace(/.css$/i, '.highlight.css')
 

@@ -15,9 +15,8 @@ const codeBlocks: Plugin = (service) => {
                 .map((className) => `:not(.${className})`)
                 .join('')
             const hasNonSpanElements =
-                innerCodeElement.querySelectorAll(
-                    ':not(span)' + notTipTapArtifactSelector
-                ).length !== 0
+                innerCodeElement.querySelectorAll(':not(span)' + notTipTapArtifactSelector)
+                    .length !== 0
 
             return hasNonSpanElements
                 ? turndownHtmlOnly.turndown(element.outerHTML)

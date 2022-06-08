@@ -25,12 +25,7 @@ const OpenFileOption = ({ onUpload, onDownload }: Props) => {
             <Button style={{ padding: 0 }} onClick={openMenu}>
                 File
             </Button>
-            <Menu
-                open={Boolean(anchor)}
-                keepMounted
-                anchorEl={anchor}
-                onClose={closeMenu}
-            >
+            <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 <OpenFile onUpload={onUpload} />
                 <ExportFile onDownload={onDownload} />
             </Menu>

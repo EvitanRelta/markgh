@@ -24,9 +24,7 @@ export default function App(): ReactElement {
     const [showMarkdown, setShowMarkdown] = useState(false)
 
     //var for theme control
-    const [mode, setMode] = useState<'light' | 'dark'>(
-        localStorage['selectedTheme'] || 'light'
-    )
+    const [mode, setMode] = useState<'light' | 'dark'>(localStorage['selectedTheme'] || 'light')
 
     //var for setting file title
     const [title, setTitle] = useState('')
@@ -35,9 +33,7 @@ export default function App(): ReactElement {
     const [mdText, setMdText] = useState('')
 
     //var for 'Last edited on'
-    const [lastEditedOn, setLastEditedOn] = useState(
-        localStorage['lastEditedOn']
-    )
+    const [lastEditedOn, setLastEditedOn] = useState(localStorage['lastEditedOn'])
 
     //Defining theme colors
     const darkTheme = createTheme({

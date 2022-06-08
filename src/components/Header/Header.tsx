@@ -12,15 +12,7 @@ type Props = {
     mdText: string
 }
 
-const Header = ({
-    title,
-    theme,
-    toggleTheme,
-    setTitle,
-    onUpload,
-    lastEditedOn,
-    mdText,
-}: Props) => {
+const Header = ({ title, theme, toggleTheme, setTitle, onUpload, lastEditedOn, mdText }: Props) => {
     //var for current file name
     const [text, setText] = useState(title)
 
@@ -78,11 +70,7 @@ const Header = ({
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer
-                    onUpload={onUpload}
-                    mdText={mdText}
-                    title={title}
-                />
+                <ToolbarContainer onUpload={onUpload} mdText={mdText} title={title} />
                 <div
                     style={{
                         color: 'gray',
