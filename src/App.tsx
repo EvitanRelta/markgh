@@ -10,7 +10,7 @@ import toMarkdown from './converterFunctions/toMarkdown'
 
 export default function App(): ReactElement {
     const [showMarkdown, setShowMarkdown] = useState(false)
-    const [mode, setMode] = useState('light')
+    const [mode, setMode] = useState<'light' | 'dark'>('light')
     const [title, setTitle] = useState('')
     const [mdText, setMdText] = useState('')
     const [quill, setQuill] = useState<Quill | null>(null)
@@ -29,7 +29,7 @@ export default function App(): ReactElement {
 
     const selectedTheme = mode === "dark" ? darkTheme : lightTheme
 
-    const onUpload = (e: React.ChangeEvent) => {
+    const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const allowedFileTypes = ['txt', 'md']
         const target = e.target as HTMLInputElement
 

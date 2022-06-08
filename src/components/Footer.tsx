@@ -1,7 +1,11 @@
 import Button from '@mui/material/Button'
 
-
-const Footer = ({ onClick, showMarkdown, theme }) => (
+type Props = {
+    onClick: React.MouseEventHandler<HTMLButtonElement>;
+    showMarkdown: boolean;
+    theme: string;
+}
+const Footer = ({ onClick, showMarkdown, theme }: Props) => (
     <footer className='footer'>
         <div
             style={{

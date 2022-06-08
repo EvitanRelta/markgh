@@ -1,4 +1,11 @@
-const MarkdownText = ({ mdText }) => {
+type Props = {
+    mdText: string;
+}
+
+const MarkdownTextContainer = ({ mdText }: Props) => {
+    console.log(mdText)
+
+
     return (
         <pre style={{
             border: '1px solid #d0cccc',
@@ -12,4 +19,4 @@ const MarkdownText = ({ mdText }) => {
     )
 }
 
-export default MarkdownText
+export default MarkdownTextContainer
