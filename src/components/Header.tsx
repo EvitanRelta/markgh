@@ -2,15 +2,19 @@ import { useState } from 'react'
 import MenuButton from './MenuButton'
 import ToolbarContainer from './ToolbarContainer'
 
+
+
 type Props = {
-    title: string
-    theme: string
-    toggleTheme: React.MouseEventHandler<HTMLButtonElement>
-    setTitle: React.Dispatch<React.SetStateAction<string>>
-    onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
+    title: string;
+    theme: string;
+    toggleTheme: React.MouseEventHandler<HTMLButtonElement>;
+    setTitle: React.Dispatch<React.SetStateAction<string>>;
+    onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    lastEditedOn: string;
+
 }
 
-const Header = ({ title, theme, toggleTheme, setTitle, onUpload }: Props) => {
+const Header = ({ title, theme, toggleTheme, setTitle, onUpload, lastEditedOn }: Props) => {
     //var for current file name
     const [text, setText] = useState(title)
 
@@ -51,9 +55,12 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload }: Props) => {
                         marginLeft: 12
                     }}
                 />
+        
                 <div>
                     <MenuButton theme={theme} toggleTheme={toggleTheme} title={title} onUpload={onUpload} />
                 </div>
+
+                
             </div>
             <div 
             style= {{ display: 'inline-flex',
@@ -66,7 +73,7 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload }: Props) => {
                     marginTop: 7,
                     textDecoration: 'underline'
                 }}>
-                    Last edited on
+                    Last edited on {lastEditedOn}
                 </div>
             </div>
         </header>
