@@ -2,6 +2,7 @@ import TurndownService from 'turndown'
 import {
     align,
     codeBlocks,
+    ignoreTipTapArtifacts,
     resizedImage,
     strikethrough,
     underline,
@@ -112,7 +113,14 @@ export default (html: HTMLElement) => {
     const turndownService = new TurndownService({
         headingStyle: 'atx',
         codeBlockStyle: 'fenced',
-    }).use([codeBlocks, underline, align, strikethrough, resizedImage])
+    }).use([
+        codeBlocks,
+        underline,
+        align,
+        strikethrough,
+        resizedImage,
+        ignoreTipTapArtifacts,
+    ])
 
     const markdown = turndownService.turndown(htmlCopy)
     return postProcessHtml(markdown)
