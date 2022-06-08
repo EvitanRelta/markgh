@@ -5,6 +5,7 @@ import { ReactElement, useEffect, useState } from 'react'
 import Body from './components/Body'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import Version from './components/Version'
 import toMarkdown from './converterFunctions/toMarkdown'
 
 export default function App(): ReactElement {
@@ -84,6 +85,7 @@ export default function App(): ReactElement {
                 <div>
                     <Footer onClick={() => setShowMarkdown(!showMarkdown)} showMarkdown={showMarkdown} theme={mode} />
                 </div>
+                <Version />
             </div>
         </ThemeProvider >
     )
