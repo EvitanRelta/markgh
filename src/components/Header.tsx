@@ -1,6 +1,7 @@
 
 import { useState } from "react"
 import MenuButton from './MenuButton'
+import ToolbarContainer from './ToolbarContainer'
 
 type Props = {
     title: string;
@@ -35,7 +36,7 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload }: Props) => {
             }}>
                 <input
                     type='text'
-                    placeholder='File Name'
+                    placeholder='Untitled Document'
                     value={text}
                     onChange={(e) => {
                         setText(e.target.value)
@@ -46,21 +47,28 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload }: Props) => {
                         fontSize: '25px',
                         width: '30%',
                         backgroundColor: themeColor,
-                        color: textColor
+                        color: textColor,
+                        marginLeft: 12
                     }}
                 />
                 <div>
                     <MenuButton theme={theme} toggleTheme={toggleTheme} title={title} onUpload={onUpload} />
-
-
                 </div>
             </div>
-            <p style={{
-                color: 'gray',
-                paddingLeft: '5px',
-            }}>
-                Last edited on
-            </p>
+            <div 
+            style= {{ display: 'inline-flex',
+            paddingTop: 5,
+            paddingBottom: 5 }}>
+                <ToolbarContainer onUpload = {onUpload} />
+                <div style={{
+                    color: 'gray',
+                    paddingLeft: '5px',
+                    marginTop: 7,
+                    textDecoration: 'underline'
+                }}>
+                    Last edited on
+                </div>
+            </div>
         </header>
     )
 }
