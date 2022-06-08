@@ -24,15 +24,11 @@ export default function App(): ReactElement {
 
     //var for controlling whether to show markdown
     const [showMarkdown, setShowMarkdown] = useState(false)
-<<<<<<< HEAD
-    const [mode, setMode] = useState<'light' | 'dark'>('light')
-=======
 
     //var for theme control
-    const [mode, setMode] = useState(localStorage["selectedTheme"] || 'light')
+    const [mode, setMode] = useState<'light' | 'dark'>(localStorage["selectedTheme"] || 'light')
     
     //var for setting file title
->>>>>>> feat-storage-features
     const [title, setTitle] = useState('')
 
     //var for to contain markdown text
@@ -58,12 +54,8 @@ export default function App(): ReactElement {
         },
     })
 
-<<<<<<< HEAD
-    const selectedTheme = mode === 'dark' ? darkTheme : lightTheme
-=======
     //Check selectedTheme
     const selectedTheme = mode === "dark" ? darkTheme : lightTheme
->>>>>>> feat-storage-features
 
     //Executes when user uploads a .md or .txt file
     const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,13 +64,7 @@ export default function App(): ReactElement {
 
         //Retrieving file from event
         const target = e.target as HTMLInputElement
-<<<<<<< HEAD
-
-        let file = target.files![0]
-
-=======
         let file = (target.files![0])
->>>>>>> feat-storage-features
         const reader = new FileReader()
 
         //Check file type
@@ -99,20 +85,12 @@ export default function App(): ReactElement {
         }
     }
 
-<<<<<<< HEAD
-    const getMarkdownText = () =>
-        toMarkdown(
-            document.getElementsByClassName('ql-editor')[0] as HTMLElement
-        )
-=======
     //Toggle theme
     const toggleTheme = () => {
         setMode(mode === 'light' ? 'dark' : 'light')
     }
      
-    
     const getMarkdownText = () => toMarkdown(document.getElementsByClassName('ql-editor')[0] as HTMLElement)
->>>>>>> feat-storage-features
 
     //Updates preferred theme in localStorage
     useEffect(() => {
@@ -138,8 +116,6 @@ export default function App(): ReactElement {
         })
     }, [quill])
 
-<<<<<<< HEAD
-=======
     //Updates 'Last Edited On' in local storage when text is changed in quill
     useEffect(() => {
 
@@ -161,7 +137,6 @@ export default function App(): ReactElement {
     }, [quill])
 
     
->>>>>>> feat-storage-features
     return (
         <ThemeProvider theme={selectedTheme}>
             <CssBaseline />
@@ -170,13 +145,7 @@ export default function App(): ReactElement {
                     theme={mode}
                     title={title}
                     setTitle={setTitle}
-<<<<<<< HEAD
-                    toggleTheme={() =>
-                        setMode(mode === 'light' ? 'dark' : 'light')
-                    }
-=======
                     toggleTheme={toggleTheme}
->>>>>>> feat-storage-features
                     onUpload={onUpload}
                     lastEditedOn= {lastEditedOn}
                 />
@@ -187,15 +156,7 @@ export default function App(): ReactElement {
                     theme={mode}
                 />
                 <div>
-<<<<<<< HEAD
-                    <Footer
-                        onClick={() => setShowMarkdown(!showMarkdown)}
-                        showMarkdown={showMarkdown}
-                        theme={mode}
-                    />
-=======
                     <Footer onClick={() => setShowMarkdown(!showMarkdown)} showMarkdown={showMarkdown} theme={mode} db = {db}/>
->>>>>>> feat-storage-features
                 </div>
                 <Version />
             </div>
