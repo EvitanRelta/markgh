@@ -1,12 +1,17 @@
 import hljs from 'highlight.js'
 import Quill from 'quill'
-import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
+import {
+    Dispatch,
+    SetStateAction,
+    useCallback,
+    useEffect,
+    useState,
+} from 'react'
 import '../customCss/custom-quill.css'
 import '../customCss/fix-codeblock-bottom-spacing.css'
 import '../customCss/quill-snow-without-most-editor-css.css'
 import '../githubMarkdownCss/importAllGithubCss'
 import placeholderEditorHtml from '../placeholderEditorHtml'
-
 
 const TOOLBAR_OPTIONS = [
     ['bold', 'italic', 'underline', 'strike', 'code'],
@@ -14,7 +19,7 @@ const TOOLBAR_OPTIONS = [
 
     [{ header: [1, 2, 3, 4, 5, 6, false] }],
     [{ list: 'ordered' }, { list: 'bullet' }],
-    [{ align: [] }]
+    [{ align: [] }],
 ]
 
 interface TextEditorProps {
@@ -37,8 +42,8 @@ export default function TextEditor({ setQuill, theme }: TextEditorProps) {
                 syntax: {
                     highlight: (text: string) => hljs.highlightAuto(text).value,
                 },
-                toolbar: TOOLBAR_OPTIONS
-            }
+                toolbar: TOOLBAR_OPTIONS,
+            },
         })
 
         //@ts-expect-error
@@ -54,17 +59,15 @@ export default function TextEditor({ setQuill, theme }: TextEditorProps) {
         if (!editor) return
 
         const classList = editor.classList
-        const isGithubCssClassName = (className: string) => /^gh-/.test(className)
+        const isGithubCssClassName = (className: string) =>
+            /^gh-/.test(className)
 
         Array.from(classList)
             .filter(isGithubCssClassName)
-            .forEach(className => classList.remove(className))
+            .forEach((className) => classList.remove(className))
 
         classList.add(`gh-${theme}`)
     }, [editor, theme])
 
-
-    return (
-        <div id='container' ref={wrapperRef}></div>
-    )
+    return <div id='container' ref={wrapperRef}></div>
 }

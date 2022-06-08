@@ -1,5 +1,5 @@
 .markdown-body.gh-dark-high-contrast .hljs-comment {
-  color: #bdc4cc;
+    color: #bdc4cc;
 }
 
 .markdown-body.gh-dark-high-contrast .hljs-attr,
@@ -7,29 +7,29 @@
 .markdown-body.gh-dark-high-contrast .hljs-attribute,
 .markdown-body.gh-dark-high-contrast .hljs-literal,
 .markdown-body.gh-dark-high-contrast .hljs-string .hljs-title.class_ {
-  color: #91cbff;
+    color: #91cbff;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-e,
 .markdown-body.gh-dark-high-contrast .hljs-built_in,
 .markdown-body.gh-dark-high-contrast .hljs-title.function_,
 .markdown-body.gh-dark-high-contrast .hljs-title {
-  color: #dbb7ff;
+    color: #dbb7ff;
 }
 
 .markdown-body.gh-dark-high-contrast .hljs-tag,
 .markdown-body.gh-dark-high-contrast .hljs-params,
 .markdown-body.gh-dark-high-contrast .hljs-string .pl-s1 {
-  color: #f0f3f6;
+    color: #f0f3f6;
 }
 
 .markdown-body.gh-dark-high-contrast .hljs-name {
-  color: #72f088;
+    color: #72f088;
 }
 
 .markdown-body.gh-dark-high-contrast .hljs-keyword,
 .markdown-body.gh-dark-high-contrast .hljs-type {
-  color: #ff9492;
+    color: #ff9492;
 }
 
 .markdown-body.gh-dark-high-contrast .hljs-string,
@@ -39,35 +39,35 @@
 .markdown-body.gh-dark-high-contrast .pl-sr .pl-cce,
 .markdown-body.gh-dark-high-contrast .pl-sr .pl-sre,
 .markdown-body.gh-dark-high-contrast .pl-sr .pl-sra {
-  color: #addcff;
+    color: #addcff;
 }
 
 .markdown-body.gh-dark-high-contrast .hljs-title.class_,
 .markdown-body.gh-dark-high-contrast .pl-smw {
-  color: #ffb757;
+    color: #ffb757;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-bu {
-  color: #ff6a69;
+    color: #ff6a69;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-ii {
-  color: #ffffff;
-  background-color: #e82a2f;
+    color: #ffffff;
+    background-color: #e82a2f;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-c2 {
-  color: #ffffff;
-  background-color: #ff4445;
+    color: #ffffff;
+    background-color: #ff4445;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-sr .pl-cce {
-  font-weight: bold;
-  color: #72f088;
+    font-weight: bold;
+    color: #72f088;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-ml {
-  color: #fbd669;
+    color: #fbd669;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-mh,
@@ -75,54 +75,54 @@
 .markdown-body.gh-dark-high-contrast .pl-mh .hljs-title.function_,
 .markdown-body.gh-dark-high-contrast .pl-mh .hljs-title,
 .markdown-body.gh-dark-high-contrast .pl-ms {
-  font-weight: bold;
-  color: #409eff;
+    font-weight: bold;
+    color: #409eff;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-mi {
-  font-style: italic;
-  color: #f0f3f6;
+    font-style: italic;
+    color: #f0f3f6;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-mb {
-  font-weight: bold;
-  color: #f0f3f6;
+    font-weight: bold;
+    color: #f0f3f6;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-md {
-  color: #ffdedb;
-  background-color: #cc1421;
+    color: #ffdedb;
+    background-color: #cc1421;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-mi1 {
-  color: #acf7b6;
-  background-color: #007728;
+    color: #acf7b6;
+    background-color: #007728;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-mc {
-  color: #ffe1b4;
-  background-color: #a74c00;
+    color: #ffe1b4;
+    background-color: #a74c00;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-mi2 {
-  color: #f0f3f6;
-  background-color: #318bf8;
+    color: #f0f3f6;
+    background-color: #318bf8;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-mdr {
-  font-weight: bold;
-  color: #dbb7ff;
+    font-weight: bold;
+    color: #dbb7ff;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-ba {
-  color: #bdc4cc;
+    color: #bdc4cc;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-sg {
-  color: #7a828e;
+    color: #7a828e;
 }
 
 .markdown-body.gh-dark-high-contrast .pl-corl {
-  text-decoration: underline;
-  color: #addcff;
+    text-decoration: underline;
+    color: #addcff;
 }

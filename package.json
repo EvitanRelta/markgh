@@ -57,6 +57,7 @@
   },
   "devDependencies": {
     "@types/quill": "^2.0.9",
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "prettier": "^2.6.2"
   }
 }

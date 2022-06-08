@@ -10,43 +10,43 @@ interface AllowedAttr {
 
 const turndownHtmlOnly = new TurndownService({
     headingStyle: 'atx',
-    codeBlockStyle: 'fenced'
+    codeBlockStyle: 'fenced',
 })
 
 const allowedAttr: AllowedAttr[] = [
     {
         filter: 'img',
-        allowedAttributes: ['src', 'alt', 'width', 'height']
+        allowedAttributes: ['src', 'alt', 'width', 'height'],
     },
     {
         filter: ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'blockquote'],
-        allowedAttributes: ['align']
+        allowedAttributes: ['align'],
     },
     {
         filter: 'a',
-        allowedAttributes: ['href']
+        allowedAttributes: ['href'],
     },
     {
         filter: ['br', 'hr', 'em', 'i', 'strong', 'b', 's', 'code'],
-        allowedAttributes: []
-    }
+        allowedAttributes: [],
+    },
 ]
 
-allowedAttr.forEach(
-    ({ filter, allowedAttributes }, i) => turndownHtmlOnly.addRule(
-        `sanitizedElement${i}`,
-        {
-            filter,
-            replacement: (content, node, options) =>
-                toSanitizedHtmlHOC(node as TurndownAugmentedNode, allowedAttributes)(content)
-        }
-    )
+allowedAttr.forEach(({ filter, allowedAttributes }, i) =>
+    turndownHtmlOnly.addRule(`sanitizedElement${i}`, {
+        filter,
+        replacement: (content, node, options) =>
+            toSanitizedHtmlHOC(
+                node as TurndownAugmentedNode,
+                allowedAttributes
+            )(content),
+    })
 )
 
 turndownHtmlOnly.addRule('htmlCodeblock', {
     filter: 'pre',
     replacement: (content, node, options) =>
-        toSanitizedHtmlHOC(node as TurndownAugmentedNode, [], false)(content)
+        toSanitizedHtmlHOC(node as TurndownAugmentedNode, [], false)(content),
 })
 
 turndownHtmlOnly.use([underline])

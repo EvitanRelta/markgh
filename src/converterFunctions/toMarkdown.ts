@@ -1,10 +1,17 @@
 import TurndownService from 'turndown'
-import { codeBlocks, quillAlign, resizedImage, strikethrough, underline } from './turndownPlugins'
-
+import {
+    codeBlocks,
+    quillAlign,
+    resizedImage,
+    strikethrough,
+    underline,
+} from './turndownPlugins'
 
 function preProcessHtml(element: Element) {
-    const isCodeOrCodeBlock = (element: Element) => ['CODE', 'PRE'].includes(element.tagName)
-    const isEditorContainer = (element: Element) => element.classList.contains('ql-editor')
+    const isCodeOrCodeBlock = (element: Element) =>
+        ['CODE', 'PRE'].includes(element.tagName)
+    const isEditorContainer = (element: Element) =>
+        element.classList.contains('ql-editor')
     const isInsideCodeOrCodeBlock = (element: Element): boolean => {
         if (isEditorContainer(element)) return false
         if (isCodeOrCodeBlock(element)) return true
@@ -30,18 +37,32 @@ function preProcessHtml(element: Element) {
             .forEach(escapeAmpersand)
     }
 
-    Array.from(element.children)
-        .forEach(preProcessHtml)
+    Array.from(element.children).forEach(preProcessHtml)
 }
 
-function replaceOnlyNonCodeOrCodeBlock(markdown: string, replacementFn: (markdown: string) => string) {
+function replaceOnlyNonCodeOrCodeBlock(
+    markdown: string,
+    replacementFn: (markdown: string) => string
+) {
     const separateCodeRegex = /(.*?)(`[^`]+`|$)/gs
-    const separateCodeBlocksRegex = /(.*?)((`{3,}).+?\3|(?<!\\)<pre(?!\w)[^>]*>.*?<\/pre>|$)/gs
-    const processOnlyNonCode = (wholeMatch: string, nonCode = '', code = '') => replacementFn(nonCode) + code
-    const processOnlyNonCodeOrCodeBlock = (wholeMatch: string, nonCodeBlock = '', codeBlock = '') => {
-        return nonCodeBlock.replace(separateCodeRegex, processOnlyNonCode) + codeBlock
+    const separateCodeBlocksRegex =
+        /(.*?)((`{3,}).+?\3|(?<!\\)<pre(?!\w)[^>]*>.*?<\/pre>|$)/gs
+    const processOnlyNonCode = (wholeMatch: string, nonCode = '', code = '') =>
+        replacementFn(nonCode) + code
+    const processOnlyNonCodeOrCodeBlock = (
+        wholeMatch: string,
+        nonCodeBlock = '',
+        codeBlock = ''
+    ) => {
+        return (
+            nonCodeBlock.replace(separateCodeRegex, processOnlyNonCode) +
+            codeBlock
+        )
     }
-    return markdown.replace(separateCodeBlocksRegex, processOnlyNonCodeOrCodeBlock)
+    return markdown.replace(
+        separateCodeBlocksRegex,
+        processOnlyNonCodeOrCodeBlock
+    )
 }
 
 function postProcessHtml(markdown: string) {
@@ -49,34 +70,37 @@ function postProcessHtml(markdown: string) {
 
     // Assumes that there's no more than 2 '&nbsp;' in a row.
     // eg. '[TEXT]&nbsp;&nbsp;[TEXT]' -> '[TEXT]&nbsp; [TEXT]'
-    const unescapeDoubleNbsp: StrReplacement = x => x
-        .replace(/(?<=&nbsp;)&nbsp;(?!$)/gm, ' ')
+    const unescapeDoubleNbsp: StrReplacement = (x) =>
+        x.replace(/(?<=&nbsp;)&nbsp;(?!$)/gm, ' ')
 
     // eg. '[TEXT]&nbsp;[TEXT]' -> '[TEXT] [TEXT]'
-    const unescapeUnnecessaryNbsp: StrReplacement = x => x
-        .replace(/(?<!\s|^)&nbsp;(?!\s|$)/gm, ' ')
+    const unescapeUnnecessaryNbsp: StrReplacement = (x) =>
+        x.replace(/(?<!\s|^)&nbsp;(?!\s|$)/gm, ' ')
 
     // eg. '[TEXT]&nbsp; &nbsp; &nbsp;[TEXT]' -> '[TEXT] &nbsp; &nbsp; [TEXT]'
-    const reduceOddNumOfNbsp: StrReplacement = x => x
-        .replace(/(?<!\s|^)((&nbsp; )+)&nbsp;(?!\s|$)/gm, ' $1')
+    const reduceOddNumOfNbsp: StrReplacement = (x) =>
+        x.replace(/(?<!\s|^)((&nbsp; )+)&nbsp;(?!\s|$)/gm, ' $1')
 
     // For better readability.
     // eg. '[TEXT]&nbsp; &nbsp; [TEXT]' -> '[TEXT] &nbsp;&nbsp; [TEXT]'
-    const avoidNbspBesideWords: StrReplacement = x => x
-        .replace(/(?<!\s|^)&nbsp; &nbsp; ((&nbsp; )*)(?!$)/gm, ' &nbsp;&nbsp; $1')
+    const avoidNbspBesideWords: StrReplacement = (x) =>
+        x.replace(
+            /(?<!\s|^)&nbsp; &nbsp; ((&nbsp; )*)(?!$)/gm,
+            ' &nbsp;&nbsp; $1'
+        )
 
     // '&lt;&amp;' -> '\<\&'
-    const htmlEscapeToBackslashEscape: StrReplacement = x => x
-        .replaceAll('&lt;', '\\<')
-        .replaceAll('&amp;', '\\&')
+    const htmlEscapeToBackslashEscape: StrReplacement = (x) =>
+        x.replaceAll('&lt;', '\\<').replaceAll('&amp;', '\\&')
 
-    const postProcess: StrReplacement = markdown => [
-        unescapeDoubleNbsp,
-        unescapeUnnecessaryNbsp,
-        reduceOddNumOfNbsp,
-        avoidNbspBesideWords,
-        htmlEscapeToBackslashEscape
-    ].reduce((str, fn) => fn(str), markdown)
+    const postProcess: StrReplacement = (markdown) =>
+        [
+            unescapeDoubleNbsp,
+            unescapeUnnecessaryNbsp,
+            reduceOddNumOfNbsp,
+            avoidNbspBesideWords,
+            htmlEscapeToBackslashEscape,
+        ].reduce((str, fn) => fn(str), markdown)
 
     return replaceOnlyNonCodeOrCodeBlock(markdown, postProcess)
 }
@@ -87,7 +111,7 @@ export default (html: HTMLElement) => {
 
     const turndownService = new TurndownService({
         headingStyle: 'atx',
-        codeBlockStyle: 'fenced'
+        codeBlockStyle: 'fenced',
     }).use([codeBlocks, underline, quillAlign, strikethrough, resizedImage])
 
     const markdown = turndownService.turndown(htmlCopy)

@@ -1,5 +1,5 @@
 .markdown-body.gh-light-colorblind .hljs-comment {
-  color: #6e7781;
+    color: #6e7781;
 }
 
 .markdown-body.gh-light-colorblind .hljs-attr,
@@ -7,29 +7,29 @@
 .markdown-body.gh-light-colorblind .hljs-attribute,
 .markdown-body.gh-light-colorblind .hljs-literal,
 .markdown-body.gh-light-colorblind .hljs-string .hljs-title.class_ {
-  color: #0550ae;
+    color: #0550ae;
 }
 
 .markdown-body.gh-light-colorblind .pl-e,
 .markdown-body.gh-light-colorblind .hljs-built_in,
 .markdown-body.gh-light-colorblind .hljs-title.function_,
 .markdown-body.gh-light-colorblind .hljs-title {
-  color: #8250df;
+    color: #8250df;
 }
 
 .markdown-body.gh-light-colorblind .hljs-tag,
 .markdown-body.gh-light-colorblind .hljs-params,
 .markdown-body.gh-light-colorblind .hljs-string .pl-s1 {
-  color: #24292f;
+    color: #24292f;
 }
 
 .markdown-body.gh-light-colorblind .hljs-name {
-  color: #0550ae;
+    color: #0550ae;
 }
 
 .markdown-body.gh-light-colorblind .hljs-keyword,
 .markdown-body.gh-light-colorblind .hljs-type {
-  color: #b35900;
+    color: #b35900;
 }
 
 .markdown-body.gh-light-colorblind .hljs-string,
@@ -39,35 +39,35 @@
 .markdown-body.gh-light-colorblind .pl-sr .pl-cce,
 .markdown-body.gh-light-colorblind .pl-sr .pl-sre,
 .markdown-body.gh-light-colorblind .pl-sr .pl-sra {
-  color: #0a3069;
+    color: #0a3069;
 }
 
 .markdown-body.gh-light-colorblind .hljs-title.class_,
 .markdown-body.gh-light-colorblind .pl-smw {
-  color: #8a4600;
+    color: #8a4600;
 }
 
 .markdown-body.gh-light-colorblind .pl-bu {
-  color: #6f3800;
+    color: #6f3800;
 }
 
 .markdown-body.gh-light-colorblind .pl-ii {
-  color: #f6f8fa;
-  background-color: #6f3800;
+    color: #f6f8fa;
+    background-color: #6f3800;
 }
 
 .markdown-body.gh-light-colorblind .pl-c2 {
-  color: #f6f8fa;
-  background-color: #b35900;
+    color: #f6f8fa;
+    background-color: #b35900;
 }
 
 .markdown-body.gh-light-colorblind .pl-sr .pl-cce {
-  font-weight: bold;
-  color: #0550ae;
+    font-weight: bold;
+    color: #0550ae;
 }
 
 .markdown-body.gh-light-colorblind .pl-ml {
-  color: #3b2300;
+    color: #3b2300;
 }
 
 .markdown-body.gh-light-colorblind .pl-mh,
@@ -75,54 +75,54 @@
 .markdown-body.gh-light-colorblind .pl-mh .hljs-title.function_,
 .markdown-body.gh-light-colorblind .pl-mh .hljs-title,
 .markdown-body.gh-light-colorblind .pl-ms {
-  font-weight: bold;
-  color: #0550ae;
+    font-weight: bold;
+    color: #0550ae;
 }
 
 .markdown-body.gh-light-colorblind .pl-mi {
-  font-style: italic;
-  color: #24292f;
+    font-style: italic;
+    color: #24292f;
 }
 
 .markdown-body.gh-light-colorblind .pl-mb {
-  font-weight: bold;
-  color: #24292f;
+    font-weight: bold;
+    color: #24292f;
 }
 
 .markdown-body.gh-light-colorblind .pl-md {
-  color: #6f3800;
-  background-color: #fff5e8;
+    color: #6f3800;
+    background-color: #fff5e8;
 }
 
 .markdown-body.gh-light-colorblind .pl-mi1 {
-  color: #0550ae;
-  background-color: #ddf4ff;
+    color: #0550ae;
+    background-color: #ddf4ff;
 }
 
 .markdown-body.gh-light-colorblind .pl-mc {
-  color: #8a4600;
-  background-color: #ffddb0;
+    color: #8a4600;
+    background-color: #ffddb0;
 }
 
 .markdown-body.gh-light-colorblind .pl-mi2 {
-  color: #eaeef2;
-  background-color: #0550ae;
+    color: #eaeef2;
+    background-color: #0550ae;
 }
 
 .markdown-body.gh-light-colorblind .pl-mdr {
-  font-weight: bold;
-  color: #8250df;
+    font-weight: bold;
+    color: #8250df;
 }
 
 .markdown-body.gh-light-colorblind .pl-ba {
-  color: #57606a;
+    color: #57606a;
 }
 
 .markdown-body.gh-light-colorblind .pl-sg {
-  color: #8c959f;
+    color: #8c959f;
 }
 
 .markdown-body.gh-light-colorblind .pl-corl {
-  text-decoration: underline;
-  color: #0a3069;
+    text-decoration: underline;
+    color: #0a3069;
 }
