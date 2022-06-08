@@ -1,0 +1,128 @@
+.markdown-body.gh-light .hljs-comment {
+    color: #6e7781;
+}
+
+.markdown-body.gh-light .hljs-attr,
+.markdown-body.gh-light .hljs-number,
+.markdown-body.gh-light .hljs-attribute,
+.markdown-body.gh-light .hljs-literal,
+.markdown-body.gh-light .hljs-string .hljs-title.class_ {
+    color: #0550ae;
+}
+
+.markdown-body.gh-light .pl-e,
+.markdown-body.gh-light .hljs-built_in,
+.markdown-body.gh-light .hljs-title.function_,
+.markdown-body.gh-light .hljs-title {
+    color: #8250df;
+}
+
+.markdown-body.gh-light .hljs-tag,
+.markdown-body.gh-light .hljs-params,
+.markdown-body.gh-light .hljs-string .pl-s1 {
+    color: #24292f;
+}
+
+.markdown-body.gh-light .hljs-name {
+    color: #116329;
+}
+
+.markdown-body.gh-light .hljs-keyword,
+.markdown-body.gh-light .hljs-type {
+    color: #cf222e;
+}
+
+.markdown-body.gh-light .hljs-string,
+.markdown-body.gh-light .pl-pds,
+.markdown-body.gh-light .hljs-string .pl-pse .pl-s1,
+.markdown-body.gh-light .pl-sr,
+.markdown-body.gh-light .pl-sr .pl-cce,
+.markdown-body.gh-light .pl-sr .pl-sre,
+.markdown-body.gh-light .pl-sr .pl-sra {
+    color: #0a3069;
+}
+
+.markdown-body.gh-light .hljs-title.class_,
+.markdown-body.gh-light .pl-smw {
+    color: #953800;
+}
+
+.markdown-body.gh-light .pl-bu {
+    color: #82071e;
+}
+
+.markdown-body.gh-light .pl-ii {
+    color: #f6f8fa;
+    background-color: #82071e;
+}
+
+.markdown-body.gh-light .pl-c2 {
+    color: #f6f8fa;
+    background-color: #cf222e;
+}
+
+.markdown-body.gh-light .pl-sr .pl-cce {
+    font-weight: bold;
+    color: #116329;
+}
+
+.markdown-body.gh-light .pl-ml {
+    color: #3b2300;
+}
+
+.markdown-body.gh-light .pl-mh,
+.markdown-body.gh-light .pl-mh .hljs-built_in,
+.markdown-body.gh-light .pl-mh .hljs-title.function_,
+.markdown-body.gh-light .pl-mh .hljs-title,
+.markdown-body.gh-light .pl-ms {
+    font-weight: bold;
+    color: #0550ae;
+}
+
+.markdown-body.gh-light .pl-mi {
+    font-style: italic;
+    color: #24292f;
+}
+
+.markdown-body.gh-light .pl-mb {
+    font-weight: bold;
+    color: #24292f;
+}
+
+.markdown-body.gh-light .pl-md {
+    color: #82071e;
+    background-color: #ffebe9;
+}
+
+.markdown-body.gh-light .pl-mi1 {
+    color: #116329;
+    background-color: #dafbe1;
+}
+
+.markdown-body.gh-light .pl-mc {
+    color: #953800;
+    background-color: #ffd8b5;
+}
+
+.markdown-body.gh-light .pl-mi2 {
+    color: #eaeef2;
+    background-color: #0550ae;
+}
+
+.markdown-body.gh-light .pl-mdr {
+    font-weight: bold;
+    color: #8250df;
+}
+
+.markdown-body.gh-light .pl-ba {
+    color: #57606a;
+}
+
+.markdown-body.gh-light .pl-sg {
+    color: #8c959f;
+}
+
+.markdown-body.gh-light .pl-corl {
+    text-decoration: underline;
+    color: #0a3069;
+}

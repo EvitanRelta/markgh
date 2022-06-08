@@ -1,0 +1,128 @@
+.markdown-body.gh-dark-dimmed .hljs-comment {
+    color: #768390;
+}
+
+.markdown-body.gh-dark-dimmed .hljs-attr,
+.markdown-body.gh-dark-dimmed .hljs-number,
+.markdown-body.gh-dark-dimmed .hljs-attribute,
+.markdown-body.gh-dark-dimmed .hljs-literal,
+.markdown-body.gh-dark-dimmed .hljs-string .hljs-title.class_ {
+    color: #6cb6ff;
+}
+
+.markdown-body.gh-dark-dimmed .pl-e,
+.markdown-body.gh-dark-dimmed .hljs-built_in,
+.markdown-body.gh-dark-dimmed .hljs-title.function_,
+.markdown-body.gh-dark-dimmed .hljs-title {
+    color: #dcbdfb;
+}
+
+.markdown-body.gh-dark-dimmed .hljs-tag,
+.markdown-body.gh-dark-dimmed .hljs-params,
+.markdown-body.gh-dark-dimmed .hljs-string .pl-s1 {
+    color: #adbac7;
+}
+
+.markdown-body.gh-dark-dimmed .hljs-name {
+    color: #8ddb8c;
+}
+
+.markdown-body.gh-dark-dimmed .hljs-keyword,
+.markdown-body.gh-dark-dimmed .hljs-type {
+    color: #f47067;
+}
+
+.markdown-body.gh-dark-dimmed .hljs-string,
+.markdown-body.gh-dark-dimmed .pl-pds,
+.markdown-body.gh-dark-dimmed .hljs-string .pl-pse .pl-s1,
+.markdown-body.gh-dark-dimmed .pl-sr,
+.markdown-body.gh-dark-dimmed .pl-sr .pl-cce,
+.markdown-body.gh-dark-dimmed .pl-sr .pl-sre,
+.markdown-body.gh-dark-dimmed .pl-sr .pl-sra {
+    color: #96d0ff;
+}
+
+.markdown-body.gh-dark-dimmed .hljs-title.class_,
+.markdown-body.gh-dark-dimmed .pl-smw {
+    color: #f69d50;
+}
+
+.markdown-body.gh-dark-dimmed .pl-bu {
+    color: #e5534b;
+}
+
+.markdown-body.gh-dark-dimmed .pl-ii {
+    color: #cdd9e5;
+    background-color: #922323;
+}
+
+.markdown-body.gh-dark-dimmed .pl-c2 {
+    color: #cdd9e5;
+    background-color: #ad2e2c;
+}
+
+.markdown-body.gh-dark-dimmed .pl-sr .pl-cce {
+    font-weight: bold;
+    color: #8ddb8c;
+}
+
+.markdown-body.gh-dark-dimmed .pl-ml {
+    color: #eac55f;
+}
+
+.markdown-body.gh-dark-dimmed .pl-mh,
+.markdown-body.gh-dark-dimmed .pl-mh .hljs-built_in,
+.markdown-body.gh-dark-dimmed .pl-mh .hljs-title.function_,
+.markdown-body.gh-dark-dimmed .pl-mh .hljs-title,
+.markdown-body.gh-dark-dimmed .pl-ms {
+    font-weight: bold;
+    color: #316dca;
+}
+
+.markdown-body.gh-dark-dimmed .pl-mi {
+    font-style: italic;
+    color: #adbac7;
+}
+
+.markdown-body.gh-dark-dimmed .pl-mb {
+    font-weight: bold;
+    color: #adbac7;
+}
+
+.markdown-body.gh-dark-dimmed .pl-md {
+    color: #ffd8d3;
+    background-color: #78191b;
+}
+
+.markdown-body.gh-dark-dimmed .pl-mi1 {
+    color: #b4f1b4;
+    background-color: #1b4721;
+}
+
+.markdown-body.gh-dark-dimmed .pl-mc {
+    color: #ffddb0;
+    background-color: #682d0f;
+}
+
+.markdown-body.gh-dark-dimmed .pl-mi2 {
+    color: #adbac7;
+    background-color: #255ab2;
+}
+
+.markdown-body.gh-dark-dimmed .pl-mdr {
+    font-weight: bold;
+    color: #dcbdfb;
+}
+
+.markdown-body.gh-dark-dimmed .pl-ba {
+    color: #768390;
+}
+
+.markdown-body.gh-dark-dimmed .pl-sg {
+    color: #545d68;
+}
+
+.markdown-body.gh-dark-dimmed .pl-corl {
+    text-decoration: underline;
+    color: #96d0ff;
+}

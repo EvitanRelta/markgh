@@ -5,11 +5,12 @@ import { ReactElement, useEffect, useState } from 'react'
 import Body from './components/Body'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import Version from './components/Version'
 import toMarkdown from './converterFunctions/toMarkdown'
 
 export default function App(): ReactElement {
     const [showMarkdown, setShowMarkdown] = useState(false)
-    const [mode, setMode] = useState('light')
+    const [mode, setMode] = useState<'light' | 'dark'>('light')
     const [title, setTitle] = useState('')
     const [mdText, setMdText] = useState('')
     const [quill, setQuill] = useState<Quill | null>(null)
@@ -26,18 +27,18 @@ export default function App(): ReactElement {
         },
     })
 
-    const selectedTheme = mode === "dark" ? darkTheme : lightTheme
+    const selectedTheme = mode === 'dark' ? darkTheme : lightTheme
 
     const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const allowedFileTypes = ['txt', 'md']
         const target = e.target as HTMLInputElement
 
-        let file = (target.files![0])
+        let file = target.files![0]
 
         const reader = new FileReader()
 
         const getFileType = (fileName: string) => {
-            return (fileName.split('.').pop()!.toLowerCase())
+            return fileName.split('.').pop()!.toLowerCase()
         }
 
         if (!allowedFileTypes.includes(getFileType(file.name))) {
@@ -51,11 +52,15 @@ export default function App(): ReactElement {
         }
     }
 
-    const getMarkdownText = () => toMarkdown(document.getElementsByClassName('ql-editor')[0] as HTMLElement)
+    const getMarkdownText = () =>
+        toMarkdown(
+            document.getElementsByClassName('ql-editor')[0] as HTMLElement
+        )
 
     useEffect(() => {
         if (!showMarkdown) return
-        if (document.getElementsByClassName('ql-editor')[0] === undefined) return
+        if (document.getElementsByClassName('ql-editor')[0] === undefined)
+            return
 
         setMdText(getMarkdownText())
     }, [showMarkdown])
@@ -65,9 +70,8 @@ export default function App(): ReactElement {
 
         quill.on('text-change', () => {
             setMdText(getMarkdownText())
-        })  
+        })
     }, [quill])
-
 
     return (
         <ThemeProvider theme={selectedTheme}>
@@ -77,13 +81,25 @@ export default function App(): ReactElement {
                     theme={mode}
                     title={title}
                     setTitle={setTitle}
-                    toggleTheme={() => setMode(mode === 'light' ? 'dark' : 'light')}
+                    toggleTheme={() =>
+                        setMode(mode === 'light' ? 'dark' : 'light')
+                    }
                     onUpload={onUpload}
                 />
-                <Body showMarkdown={showMarkdown} mdText={mdText} setQuill={setQuill} />
+                <Body
+                    showMarkdown={showMarkdown}
+                    mdText={mdText}
+                    setQuill={setQuill}
+                    theme={mode}
+                />
                 <div>
-                    <Footer onClick={() => setShowMarkdown(!showMarkdown)} showMarkdown={showMarkdown} theme={mode}/>
+                    <Footer
+                        onClick={() => setShowMarkdown(!showMarkdown)}
+                        showMarkdown={showMarkdown}
+                        theme={mode}
+                    />
                 </div>
+                <Version />
             </div>
         </ThemeProvider>
     )
