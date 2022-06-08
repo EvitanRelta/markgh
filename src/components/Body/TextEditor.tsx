@@ -5,7 +5,7 @@ import {
     SetStateAction,
     useCallback,
     useEffect,
-    useState
+    useState,
 } from 'react'
 import '../../customCss/custom-quill.css'
 import '../../customCss/fix-codeblock-bottom-spacing.css'
@@ -48,7 +48,7 @@ export default function TextEditor({ setQuill, theme }: TextEditorProps) {
         //@ts-expect-error
         const quillEditor = quill.scrollingContainer as HTMLDivElement
         quillEditor.classList.add('markdown-body')
-        quillEditor.innerHTML = ""
+        quillEditor.innerHTML = ''
 
         setQuill(quill)
         setEditor(quillEditor)

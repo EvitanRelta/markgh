@@ -2,19 +2,23 @@ import { useState } from 'react'
 import MenuButton from './MenuButton'
 import ToolbarContainer from './ToolbarContainer'
 
-
-
 type Props = {
-    title: string;
-    theme: string;
-    toggleTheme: React.MouseEventHandler<HTMLButtonElement>;
-    setTitle: React.Dispatch<React.SetStateAction<string>>;
-    onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    lastEditedOn: string;
-
+    title: string
+    theme: string
+    toggleTheme: React.MouseEventHandler<HTMLButtonElement>
+    setTitle: React.Dispatch<React.SetStateAction<string>>
+    onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
+    lastEditedOn: string
 }
 
-const Header = ({ title, theme, toggleTheme, setTitle, onUpload, lastEditedOn }: Props) => {
+const Header = ({
+    title,
+    theme,
+    toggleTheme,
+    setTitle,
+    onUpload,
+    lastEditedOn,
+}: Props) => {
     //var for current file name
     const [text, setText] = useState(title)
 
@@ -52,27 +56,35 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload, lastEditedOn }:
                         width: '30%',
                         backgroundColor: themeColor,
                         color: textColor,
-                        marginLeft: 12
+                        marginLeft: 12,
                     }}
                 />
-        
-                <div>
-                    <MenuButton theme={theme} toggleTheme={toggleTheme} title={title} onUpload={onUpload} />
-                </div>
 
-                
+                <div>
+                    <MenuButton
+                        theme={theme}
+                        toggleTheme={toggleTheme}
+                        title={title}
+                        onUpload={onUpload}
+                    />
+                </div>
             </div>
-            <div 
-            style= {{ display: 'inline-flex',
-            paddingTop: 5,
-            paddingBottom: 5 }}>
-                <ToolbarContainer onUpload = {onUpload} />
-                <div style={{
-                    color: 'gray',
-                    paddingLeft: '5px',
-                    marginTop: 5.5,
-                    textDecoration: 'underline'
-                }}>
+            <div
+                style={{
+                    display: 'inline-flex',
+                    paddingTop: 5,
+                    paddingBottom: 5,
+                }}
+            >
+                <ToolbarContainer onUpload={onUpload} />
+                <div
+                    style={{
+                        color: 'gray',
+                        paddingLeft: '5px',
+                        marginTop: 5.5,
+                        textDecoration: 'underline',
+                    }}
+                >
                     Last edited on {lastEditedOn}
                 </div>
             </div>

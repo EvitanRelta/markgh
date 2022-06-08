@@ -10,14 +10,13 @@ import Header from './components/Header/Header'
 import toMarkdown from './converterFunctions/toMarkdown'
 
 export default function App(): ReactElement {
-
     //Inititalises db, doesn't execute if db of the same name already exists
-    const db = new Dexie("EditorData");
+    const db = new Dexie('EditorData')
     db.version(1).stores({
-        images: "id, base64",
-        text: "value"
+        images: 'id, base64',
+        text: 'value',
     })
-    
+
     db.open().catch((err) => {
         console.log(err.stack || err)
     })
@@ -26,20 +25,22 @@ export default function App(): ReactElement {
     const [showMarkdown, setShowMarkdown] = useState(false)
 
     //var for theme control
-    const [mode, setMode] = useState<'light' | 'dark'>(localStorage["selectedTheme"] || 'light')
-    
+    const [mode, setMode] = useState<'light' | 'dark'>(
+        localStorage['selectedTheme'] || 'light'
+    )
+
     //var for setting file title
     const [title, setTitle] = useState('')
 
     //var for to contain markdown text
     const [mdText, setMdText] = useState('')
 
-
     const [quill, setQuill] = useState<Quill | null>(null)
 
     //var for 'Last edited on'
-    const [lastEditedOn, setLastEditedOn] = useState(localStorage["lastEditedOn"])
-
+    const [lastEditedOn, setLastEditedOn] = useState(
+        localStorage['lastEditedOn']
+    )
 
     //Defining theme colors
     const darkTheme = createTheme({
@@ -55,7 +56,7 @@ export default function App(): ReactElement {
     })
 
     //Check selectedTheme
-    const selectedTheme = mode === "dark" ? darkTheme : lightTheme
+    const selectedTheme = mode === 'dark' ? darkTheme : lightTheme
 
     //Executes when user uploads a .md or .txt file
     const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +65,7 @@ export default function App(): ReactElement {
 
         //Retrieving file from event
         const target = e.target as HTMLInputElement
-        let file = (target.files![0])
+        let file = target.files![0]
         const reader = new FileReader()
 
         //Check file type
@@ -89,15 +90,17 @@ export default function App(): ReactElement {
     const toggleTheme = () => {
         setMode(mode === 'light' ? 'dark' : 'light')
     }
-     
-    const getMarkdownText = () => toMarkdown(document.getElementsByClassName('ql-editor')[0] as HTMLElement)
+
+    const getMarkdownText = () =>
+        toMarkdown(
+            document.getElementsByClassName('ql-editor')[0] as HTMLElement
+        )
 
     //Updates preferred theme in localStorage
     useEffect(() => {
-        localStorage["selectedTheme"] = mode
+        localStorage['selectedTheme'] = mode
     }, [mode])
-    
-    
+
     //Updates markdown text when prompted to show it
     useEffect(() => {
         if (!showMarkdown) return
@@ -118,25 +121,25 @@ export default function App(): ReactElement {
 
     //Updates 'Last Edited On' in local storage when text is changed in quill
     useEffect(() => {
-
         //Formatting time as text
         const date = new Date()
-        const n = date.toDateString() 
+        const n = date.toDateString()
         var t = date.toLocaleTimeString()
-        var timeShort = (t.length == 11 ? t.substring(0, 5) : t.substring(0, 4)) + " " + t.substring(t.length-2, t.length)
+        var timeShort =
+            (t.length == 11 ? t.substring(0, 5) : t.substring(0, 4)) +
+            ' ' +
+            t.substring(t.length - 2, t.length)
         var dateShort = n.substring(4, n.length - 5)
-        var dateTime = dateShort + " " + timeShort
+        var dateTime = dateShort + ' ' + timeShort
 
         //Updates 'Last Edited On' in localStorage and state when text in quill is changed
         if (quill == null) return
         quill.on('text-change', () => {
             setLastEditedOn(dateTime)
-            localStorage["lastEditedOn"] = dateTime
+            localStorage['lastEditedOn'] = dateTime
         })
-
     }, [quill])
 
-    
     return (
         <ThemeProvider theme={selectedTheme}>
             <CssBaseline />
@@ -147,7 +150,7 @@ export default function App(): ReactElement {
                     setTitle={setTitle}
                     toggleTheme={toggleTheme}
                     onUpload={onUpload}
-                    lastEditedOn= {lastEditedOn}
+                    lastEditedOn={lastEditedOn}
                 />
                 <Body
                     showMarkdown={showMarkdown}
@@ -156,7 +159,12 @@ export default function App(): ReactElement {
                     theme={mode}
                 />
                 <div>
-                    <Footer onClick={() => setShowMarkdown(!showMarkdown)} showMarkdown={showMarkdown} theme={mode} db = {db}/>
+                    <Footer
+                        onClick={() => setShowMarkdown(!showMarkdown)}
+                        showMarkdown={showMarkdown}
+                        theme={mode}
+                        db={db}
+                    />
                 </div>
                 <Version />
             </div>

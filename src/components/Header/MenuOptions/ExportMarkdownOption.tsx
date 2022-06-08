@@ -2,8 +2,8 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import IconButton from '@mui/material/IconButton'
 
 const ExportMarkdownOption = () => (
-    <label style= {{ cursor: 'pointer'}}>
-        <IconButton component="span" >
+    <label style={{ cursor: 'pointer' }}>
+        <IconButton component='span'>
             <FileDownloadIcon />
         </IconButton>
         <span

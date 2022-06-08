@@ -3,7 +3,6 @@ type Props = {
 }
 
 const MarkdownTextContainer = ({ mdText }: Props) => {
-
     return (
         <pre
             style={{
