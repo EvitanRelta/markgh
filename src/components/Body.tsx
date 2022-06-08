@@ -1,8 +1,15 @@
-import MarkdownText from "./MarkdownText"
+import Quill from 'quill'
+import MarkdownTextContainer from "./MarkdownTextContainer"
 import TextEditor from "./TextEditor"
 
+type Props = {
+    showMarkdown: boolean;
+    mdText: string;
+    setQuill: React.Dispatch<React.SetStateAction<Quill | null>>;
+}
 
-const Body = ({ showMarkdown, mdText, setQuill }) => {
+
+const Body = ({ showMarkdown, mdText, setQuill }: Props) => {
     const editorWidth = showMarkdown ? '50%' : '100%'
 
 
@@ -20,7 +27,7 @@ const Body = ({ showMarkdown, mdText, setQuill }) => {
                 }}>
                     <TextEditor setQuill={setQuill} />
                 </div>
-                {showMarkdown && <MarkdownText mdText={mdText} />}
+                {showMarkdown && <MarkdownTextContainer mdText={mdText} />}
             </div>
 
         </div>

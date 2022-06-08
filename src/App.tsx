@@ -1,18 +1,18 @@
 import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { useEffect, useState } from 'react'
+import Quill from 'quill'
+import { ReactElement, useEffect, useState } from 'react'
 import Body from './components/Body'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import toMarkdown from './converterFunctions/toMarkdown'
 
-
-export default function App() {
+export default function App(): ReactElement {
     const [showMarkdown, setShowMarkdown] = useState(false)
     const [mode, setMode] = useState('light')
     const [title, setTitle] = useState('')
     const [mdText, setMdText] = useState('')
-    const [quill, setQuill] = useState(null)
+    const [quill, setQuill] = useState<Quill | null>(null)
 
     const darkTheme = createTheme({
         palette: {
@@ -28,14 +28,16 @@ export default function App() {
 
     const selectedTheme = mode === "dark" ? darkTheme : lightTheme
 
-    const onUpload = (e) => {
+    const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const allowedFileTypes = ['txt', 'md']
-        const file = e.target.files[0]
+        const target = e.target as HTMLInputElement
+
+        let file = (target.files![0])
 
         const reader = new FileReader()
 
-        const getFileType = (fileName) => {
-            return fileName.split('.').pop().toLowerCase()
+        const getFileType = (fileName: string) => {
+            return (fileName.split('.').pop()!.toLowerCase())
         }
 
         if (!allowedFileTypes.includes(getFileType(file.name))) {
@@ -45,11 +47,11 @@ export default function App() {
 
         reader.readAsText(file)
         reader.onload = () => {
-            setMdText(reader.result)
+            setMdText(reader.result as string)
         }
     }
 
-    const getMarkdownText = () => toMarkdown(document.getElementsByClassName('ql-editor')[0])
+    const getMarkdownText = () => toMarkdown(document.getElementsByClassName('ql-editor')[0] as HTMLElement)
 
     useEffect(() => {
         if (!showMarkdown) return
@@ -63,7 +65,7 @@ export default function App() {
 
         quill.on('text-change', () => {
             setMdText(getMarkdownText())
-        })
+        })  
     }, [quill])
 
 
