@@ -1,7 +1,6 @@
 import { Editor } from '@tiptap/react'
 import textAlign from './toolbarFunctions/textAlign'
 
-
 interface Props {
     editor: Editor | null
 }
@@ -12,9 +11,10 @@ export default ({ editor }: Props) => {
 
         if (selectElement.value === '') return
 
-        textAlign(editor)(selectElement.value as 'left' | 'center' | 'right' | 'justify')
+        textAlign(editor)(
+            selectElement.value as 'left' | 'center' | 'right' | 'justify'
+        )
     }
-
 
     return (
         <select value='' onChange={onChange}>

@@ -1,7 +1,6 @@
 import { Editor } from '@tiptap/react'
 import heading from './toolbarFunctions/heading'
 
-
 interface Props {
     editor: Editor | null
 }
@@ -9,15 +8,13 @@ interface Props {
 const getHeadingLevel = (editor: Editor) => {
     if (editor.isActive('paragraph')) return 0
 
-    // If multiple different headings types are selected, 'headingAttr.level' 
+    // If multiple different headings types are selected, 'headingAttr.level'
     // will have a value, but 'editor.isActive('heading')' will be false.
     if (!editor.isActive('heading')) return null
 
     const headingAttr = editor.getAttributes('heading')
 
-    return headingAttr.level === undefined
-        ? null
-        : headingAttr.level
+    return headingAttr.level === undefined ? null : headingAttr.level
 }
 
 export default ({ editor }: Props) => {

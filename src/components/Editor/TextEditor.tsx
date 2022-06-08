@@ -6,14 +6,15 @@ import placeholderEditorHtml from '../../placeholderEditorHtml'
 import EditorToolbar from './EditorToolbar'
 import extensions from './extensions/extensions'
 
-
 interface Props {
     theme: 'light' | 'dark'
     onTextChange: (editorContainer: HTMLElement) => void | null
 }
 
 export default ({ theme, onTextChange }: Props) => {
-    const [editorContainer, setEditorContainer] = useState<HTMLElement | null>(null)
+    const [editorContainer, setEditorContainer] = useState<HTMLElement | null>(
+        null
+    )
     const editor = useEditor({
         extensions,
         content: placeholderEditorHtml,
@@ -42,15 +43,15 @@ export default ({ theme, onTextChange }: Props) => {
         if (!editorContainer) return
 
         const classList = editorContainer.classList
-        const isGithubCssClassName = (className: string) => /^gh-/.test(className)
+        const isGithubCssClassName = (className: string) =>
+            /^gh-/.test(className)
 
         Array.from(classList)
             .filter(isGithubCssClassName)
-            .forEach(className => classList.remove(className))
+            .forEach((className) => classList.remove(className))
 
         classList.add(`gh-${theme}`)
     }, [editorContainer, theme])
-
 
     return (
         <div>

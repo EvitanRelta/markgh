@@ -9,9 +9,14 @@ export default TextAlign.extend({
                 attributes: {
                     textAlign: {
                         default: this.options.defaultAlignment,
-                        parseHTML: element => element.getAttribute('align') || this.options.defaultAlignment,
-                        renderHTML: attributes => {
-                            if (attributes.textAlign === this.options.defaultAlignment) {
+                        parseHTML: (element) =>
+                            element.getAttribute('align') ||
+                            this.options.defaultAlignment,
+                        renderHTML: (attributes) => {
+                            if (
+                                attributes.textAlign ===
+                                this.options.defaultAlignment
+                            ) {
                                 return {}
                             }
 

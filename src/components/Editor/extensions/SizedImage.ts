@@ -5,8 +5,8 @@ export default Image.extend({
     addAttributes() {
         return {
             ...this.parent?.(),
-            width: { default: null, },
-            height: { default: null, },
+            width: { default: null },
+            height: { default: null },
         }
     },
 })

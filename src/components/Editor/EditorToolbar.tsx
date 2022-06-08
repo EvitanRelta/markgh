@@ -13,7 +13,6 @@ import strikethrough from './toolbarFunctions/strikethrough'
 import underline from './toolbarFunctions/underline'
 import unorderedList from './toolbarFunctions/unorderedList'
 
-
 interface Props {
     editor: Editor | null
 }

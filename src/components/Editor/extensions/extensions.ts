@@ -10,7 +10,7 @@ export default [
         code: false,
     }),
     SizedImage.configure({
-        inline: true
+        inline: true,
     }),
     Link,
     Underline,
