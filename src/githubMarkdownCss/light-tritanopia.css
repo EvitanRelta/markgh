@@ -1,19 +1,20 @@
 .markdown-body.gh-light-tritanopia {
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  margin: 0;
-  color: #24292f;
-  background-color: #ffffff;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
-  font-size: 16px;
-  line-height: 1.5;
-  word-wrap: break-word;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    margin: 0;
+    color: #24292f;
+    background-color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+        sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
 }
 
 .markdown-body.gh-light-tritanopia .octicon {
-  display: inline-block;
-  fill: currentColor;
-  vertical-align: text-bottom;
+    display: inline-block;
+    fill: currentColor;
+    vertical-align: text-bottom;
 }
 
 .markdown-body.gh-light-tritanopia h1:hover .anchor .octicon-link:before,
@@ -22,245 +23,249 @@
 .markdown-body.gh-light-tritanopia h4:hover .anchor .octicon-link:before,
 .markdown-body.gh-light-tritanopia h5:hover .anchor .octicon-link:before,
 .markdown-body.gh-light-tritanopia h6:hover .anchor .octicon-link:before {
-  width: 16px;
-  height: 16px;
-  content: ' ';
-  display: inline-block;
-  background-color: currentColor;
-  -webkit-mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
-  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+    width: 16px;
+    height: 16px;
+    content: ' ';
+    display: inline-block;
+    background-color: currentColor;
+    -webkit-mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+    mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
 }
 
 .markdown-body.gh-light-tritanopia details,
 .markdown-body.gh-light-tritanopia figcaption,
 .markdown-body.gh-light-tritanopia figure {
-  display: block;
+    display: block;
 }
 
 .markdown-body.gh-light-tritanopia summary {
-  display: list-item;
+    display: list-item;
 }
 
 .markdown-body.gh-light-tritanopia [hidden] {
-  display: none !important;
+    display: none !important;
 }
 
 .markdown-body.gh-light-tritanopia a {
-  background-color: transparent;
-  color: #0969da;
-  text-decoration: none;
+    background-color: transparent;
+    color: #0969da;
+    text-decoration: none;
 }
 
 .markdown-body.gh-light-tritanopia abbr[title] {
-  border-bottom: none;
-  text-decoration: underline dotted;
+    border-bottom: none;
+    text-decoration: underline dotted;
 }
 
 .markdown-body.gh-light-tritanopia b,
 .markdown-body.gh-light-tritanopia strong {
-  font-weight: 600;
+    font-weight: 600;
 }
 
 .markdown-body.gh-light-tritanopia dfn {
-  font-style: italic;
+    font-style: italic;
 }
 
 .markdown-body.gh-light-tritanopia h1 {
-  margin: .67em 0;
-  font-weight: 600;
-  padding-bottom: .3em;
-  font-size: 2em;
-  border-bottom: 1px solid hsla(210,18%,87%,1);
+    margin: 0.67em 0;
+    font-weight: 600;
+    padding-bottom: 0.3em;
+    font-size: 2em;
+    border-bottom: 1px solid hsla(210, 18%, 87%, 1);
 }
 
 .markdown-body.gh-light-tritanopia mark {
-  background-color: #fff8c5;
-  color: #24292f;
+    background-color: #fff8c5;
+    color: #24292f;
 }
 
 .markdown-body.gh-light-tritanopia small {
-  font-size: 90%;
+    font-size: 90%;
 }
 
 .markdown-body.gh-light-tritanopia sub,
 .markdown-body.gh-light-tritanopia sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
 }
 
 .markdown-body.gh-light-tritanopia sub {
-  bottom: -0.25em;
+    bottom: -0.25em;
 }
 
 .markdown-body.gh-light-tritanopia sup {
-  top: -0.5em;
+    top: -0.5em;
 }
 
 .markdown-body.gh-light-tritanopia img {
-  border-style: none;
-  max-width: 100%;
-  box-sizing: content-box;
-  background-color: #ffffff;
+    border-style: none;
+    max-width: 100%;
+    box-sizing: content-box;
+    background-color: #ffffff;
 }
 
 .markdown-body.gh-light-tritanopia code,
 .markdown-body.gh-light-tritanopia kbd,
 .markdown-body.gh-light-tritanopia pre,
 .markdown-body.gh-light-tritanopia samp {
-  font-family: monospace;
-  font-size: 1em;
+    font-family: monospace;
+    font-size: 1em;
 }
 
 .markdown-body.gh-light-tritanopia figure {
-  margin: 1em 40px;
+    margin: 1em 40px;
 }
 
 .markdown-body.gh-light-tritanopia hr {
-  box-sizing: content-box;
-  overflow: hidden;
-  background: transparent;
-  border-bottom: 1px solid hsla(210,18%,87%,1);
-  height: .25em;
-  padding: 0;
-  margin: 24px 0;
-  background-color: #d0d7de;
-  border: 0;
+    box-sizing: content-box;
+    overflow: hidden;
+    background: transparent;
+    border-bottom: 1px solid hsla(210, 18%, 87%, 1);
+    height: 0.25em;
+    padding: 0;
+    margin: 24px 0;
+    background-color: #d0d7de;
+    border: 0;
 }
 
 .markdown-body.gh-light-tritanopia input {
-  font: inherit;
-  margin: 0;
-  overflow: visible;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
+    font: inherit;
+    margin: 0;
+    overflow: visible;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
 }
 
-.markdown-body.gh-light-tritanopia [type=button],
-.markdown-body.gh-light-tritanopia [type=reset],
-.markdown-body.gh-light-tritanopia [type=submit] {
-  -webkit-appearance: button;
+.markdown-body.gh-light-tritanopia [type='button'],
+.markdown-body.gh-light-tritanopia [type='reset'],
+.markdown-body.gh-light-tritanopia [type='submit'] {
+    -webkit-appearance: button;
 }
 
-.markdown-body.gh-light-tritanopia [type=checkbox],
-.markdown-body.gh-light-tritanopia [type=radio] {
-  box-sizing: border-box;
-  padding: 0;
+.markdown-body.gh-light-tritanopia [type='checkbox'],
+.markdown-body.gh-light-tritanopia [type='radio'] {
+    box-sizing: border-box;
+    padding: 0;
 }
 
-.markdown-body.gh-light-tritanopia [type=number]::-webkit-inner-spin-button,
-.markdown-body.gh-light-tritanopia [type=number]::-webkit-outer-spin-button {
-  height: auto;
+.markdown-body.gh-light-tritanopia [type='number']::-webkit-inner-spin-button,
+.markdown-body.gh-light-tritanopia [type='number']::-webkit-outer-spin-button {
+    height: auto;
 }
 
-.markdown-body.gh-light-tritanopia [type=search]::-webkit-search-cancel-button,
-.markdown-body.gh-light-tritanopia [type=search]::-webkit-search-decoration {
-  -webkit-appearance: none;
+.markdown-body.gh-light-tritanopia
+    [type='search']::-webkit-search-cancel-button,
+.markdown-body.gh-light-tritanopia [type='search']::-webkit-search-decoration {
+    -webkit-appearance: none;
 }
 
 .markdown-body.gh-light-tritanopia ::-webkit-input-placeholder {
-  color: inherit;
-  opacity: .54;
+    color: inherit;
+    opacity: 0.54;
 }
 
 .markdown-body.gh-light-tritanopia ::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit;
+    -webkit-appearance: button;
+    font: inherit;
 }
 
 .markdown-body.gh-light-tritanopia a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .markdown-body.gh-light-tritanopia hr::before {
-  display: table;
-  content: "";
+    display: table;
+    content: '';
 }
 
 .markdown-body.gh-light-tritanopia hr::after {
-  display: table;
-  clear: both;
-  content: "";
+    display: table;
+    clear: both;
+    content: '';
 }
 
 .markdown-body.gh-light-tritanopia table {
-  border-spacing: 0;
-  border-collapse: collapse;
-  display: block;
-  width: max-content;
-  max-width: 100%;
-  overflow: auto;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow: auto;
 }
 
 .markdown-body.gh-light-tritanopia td,
 .markdown-body.gh-light-tritanopia th {
-  padding: 0;
+    padding: 0;
 }
 
 .markdown-body.gh-light-tritanopia details summary {
-  cursor: pointer;
+    cursor: pointer;
 }
 
-.markdown-body.gh-light-tritanopia details:not([open])>*:not(summary) {
-  display: none !important;
+.markdown-body.gh-light-tritanopia details:not([open]) > *:not(summary) {
+    display: none !important;
 }
 
 .markdown-body.gh-light-tritanopia a,
-.markdown-body.gh-light-tritanopia [role=button],
-.markdown-body.gh-light-tritanopia input[type=radio],
-.markdown-body.gh-light-tritanopia input[type=checkbox] {
-  transition: 80ms cubic-bezier(0.33, 1, 0.68, 1);
-  transition-property: color,background-color,box-shadow,border-color;
+.markdown-body.gh-light-tritanopia [role='button'],
+.markdown-body.gh-light-tritanopia input[type='radio'],
+.markdown-body.gh-light-tritanopia input[type='checkbox'] {
+    transition: 80ms cubic-bezier(0.33, 1, 0.68, 1);
+    transition-property: color, background-color, box-shadow, border-color;
 }
 
 .markdown-body.gh-light-tritanopia a:focus,
-.markdown-body.gh-light-tritanopia [role=button]:focus,
-.markdown-body.gh-light-tritanopia input[type=radio]:focus,
-.markdown-body.gh-light-tritanopia input[type=checkbox]:focus {
-  outline: 2px solid #0969da;
-  outline-offset: -2px;
-  box-shadow: none;
+.markdown-body.gh-light-tritanopia [role='button']:focus,
+.markdown-body.gh-light-tritanopia input[type='radio']:focus,
+.markdown-body.gh-light-tritanopia input[type='checkbox']:focus {
+    outline: 2px solid #0969da;
+    outline-offset: -2px;
+    box-shadow: none;
 }
 
 .markdown-body.gh-light-tritanopia a:focus:not(:focus-visible),
-.markdown-body.gh-light-tritanopia [role=button]:focus:not(:focus-visible),
-.markdown-body.gh-light-tritanopia input[type=radio]:focus:not(:focus-visible),
-.markdown-body.gh-light-tritanopia input[type=checkbox]:focus:not(:focus-visible) {
-  outline: solid 1px transparent;
+.markdown-body.gh-light-tritanopia [role='button']:focus:not(:focus-visible),
+.markdown-body.gh-light-tritanopia
+    input[type='radio']:focus:not(:focus-visible),
+.markdown-body.gh-light-tritanopia
+    input[type='checkbox']:focus:not(:focus-visible) {
+    outline: solid 1px transparent;
 }
 
 .markdown-body.gh-light-tritanopia a:focus-visible,
-.markdown-body.gh-light-tritanopia [role=button]:focus-visible,
-.markdown-body.gh-light-tritanopia input[type=radio]:focus-visible,
-.markdown-body.gh-light-tritanopia input[type=checkbox]:focus-visible {
-  outline: 2px solid #0969da;
-  outline-offset: -2px;
-  box-shadow: none;
+.markdown-body.gh-light-tritanopia [role='button']:focus-visible,
+.markdown-body.gh-light-tritanopia input[type='radio']:focus-visible,
+.markdown-body.gh-light-tritanopia input[type='checkbox']:focus-visible {
+    outline: 2px solid #0969da;
+    outline-offset: -2px;
+    box-shadow: none;
 }
 
 .markdown-body.gh-light-tritanopia a:not([class]):focus,
 .markdown-body.gh-light-tritanopia a:not([class]):focus-visible,
-.markdown-body.gh-light-tritanopia input[type=radio]:focus,
-.markdown-body.gh-light-tritanopia input[type=radio]:focus-visible,
-.markdown-body.gh-light-tritanopia input[type=checkbox]:focus,
-.markdown-body.gh-light-tritanopia input[type=checkbox]:focus-visible {
-  outline-offset: 0;
+.markdown-body.gh-light-tritanopia input[type='radio']:focus,
+.markdown-body.gh-light-tritanopia input[type='radio']:focus-visible,
+.markdown-body.gh-light-tritanopia input[type='checkbox']:focus,
+.markdown-body.gh-light-tritanopia input[type='checkbox']:focus-visible {
+    outline-offset: 0;
 }
 
 .markdown-body.gh-light-tritanopia kbd {
-  display: inline-block;
-  padding: 3px 5px;
-  font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
-  line-height: 10px;
-  color: #24292f;
-  vertical-align: middle;
-  background-color: #f6f8fa;
-  border: solid 1px rgba(175,184,193,0.2);
-  border-bottom-color: rgba(175,184,193,0.2);
-  border-radius: 6px;
-  box-shadow: inset 0 -1px 0 rgba(175,184,193,0.2);
+    display: inline-block;
+    padding: 3px 5px;
+    font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
+        Liberation Mono, monospace;
+    line-height: 10px;
+    color: #24292f;
+    vertical-align: middle;
+    background-color: #f6f8fa;
+    border: solid 1px rgba(175, 184, 193, 0.2);
+    border-bottom-color: rgba(175, 184, 193, 0.2);
+    border-radius: 6px;
+    box-shadow: inset 0 -1px 0 rgba(175, 184, 193, 0.2);
 }
 
 .markdown-body.gh-light-tritanopia h1,
@@ -269,170 +274,172 @@
 .markdown-body.gh-light-tritanopia h4,
 .markdown-body.gh-light-tritanopia h5,
 .markdown-body.gh-light-tritanopia h6 {
-  margin-top: 24px;
-  margin-bottom: 16px;
-  font-weight: 600;
-  line-height: 1.25;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    line-height: 1.25;
 }
 
 .markdown-body.gh-light-tritanopia h2 {
-  font-weight: 600;
-  padding-bottom: .3em;
-  font-size: 1.5em;
-  border-bottom: 1px solid hsla(210,18%,87%,1);
+    font-weight: 600;
+    padding-bottom: 0.3em;
+    font-size: 1.5em;
+    border-bottom: 1px solid hsla(210, 18%, 87%, 1);
 }
 
 .markdown-body.gh-light-tritanopia h3 {
-  font-weight: 600;
-  font-size: 1.25em;
+    font-weight: 600;
+    font-size: 1.25em;
 }
 
 .markdown-body.gh-light-tritanopia h4 {
-  font-weight: 600;
-  font-size: 1em;
+    font-weight: 600;
+    font-size: 1em;
 }
 
 .markdown-body.gh-light-tritanopia h5 {
-  font-weight: 600;
-  font-size: .875em;
+    font-weight: 600;
+    font-size: 0.875em;
 }
 
 .markdown-body.gh-light-tritanopia h6 {
-  font-weight: 600;
-  font-size: .85em;
-  color: #57606a;
+    font-weight: 600;
+    font-size: 0.85em;
+    color: #57606a;
 }
 
 .markdown-body.gh-light-tritanopia p {
-  margin-top: 0;
-  margin-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .markdown-body.gh-light-tritanopia blockquote {
-  margin: 0;
-  padding: 0 1em;
-  color: #57606a;
-  border-left: .25em solid #d0d7de;
+    margin: 0;
+    padding: 0 1em;
+    color: #57606a;
+    border-left: 0.25em solid #d0d7de;
 }
 
 .markdown-body.gh-light-tritanopia ul,
 .markdown-body.gh-light-tritanopia ol {
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-left: 2em;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 2em;
 }
 
 .markdown-body.gh-light-tritanopia ol ol,
 .markdown-body.gh-light-tritanopia ul ol {
-  list-style-type: lower-roman;
+    list-style-type: lower-roman;
 }
 
 .markdown-body.gh-light-tritanopia ul ul ol,
 .markdown-body.gh-light-tritanopia ul ol ol,
 .markdown-body.gh-light-tritanopia ol ul ol,
 .markdown-body.gh-light-tritanopia ol ol ol {
-  list-style-type: lower-alpha;
+    list-style-type: lower-alpha;
 }
 
 .markdown-body.gh-light-tritanopia dd {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 .markdown-body.gh-light-tritanopia tt,
 .markdown-body.gh-light-tritanopia code,
 .markdown-body.gh-light-tritanopia samp {
-  font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
-  font-size: 12px;
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
+        Liberation Mono, monospace;
+    font-size: 12px;
 }
 
 .markdown-body.gh-light-tritanopia pre {
-  margin-top: 0;
-  margin-bottom: 0;
-  font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
-  font-size: 12px;
-  word-wrap: normal;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
+        Liberation Mono, monospace;
+    font-size: 12px;
+    word-wrap: normal;
 }
 
 .markdown-body.gh-light-tritanopia .octicon {
-  display: inline-block;
-  overflow: visible !important;
-  vertical-align: text-bottom;
-  fill: currentColor;
+    display: inline-block;
+    overflow: visible !important;
+    vertical-align: text-bottom;
+    fill: currentColor;
 }
 
 .markdown-body.gh-light-tritanopia ::placeholder {
-  color: #6e7781;
-  opacity: 1;
+    color: #6e7781;
+    opacity: 1;
 }
 
 .markdown-body.gh-light-tritanopia input::-webkit-outer-spin-button,
 .markdown-body.gh-light-tritanopia input::-webkit-inner-spin-button {
-  margin: 0;
-  -webkit-appearance: none;
-  appearance: none;
+    margin: 0;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .markdown-body.gh-light-tritanopia [data-catalyst] {
-  display: block;
+    display: block;
 }
 
 .markdown-body.gh-light-tritanopia [data-catalyst-inline] {
-  display: inline;
+    display: inline;
 }
 
 .markdown-body.gh-light-tritanopia g-emoji {
-  display: inline-block;
-  min-width: 1ch;
-  font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-  font-size: 1em;
-  font-style: normal !important;
-  font-weight: 400;
-  line-height: 1;
-  vertical-align: -0.075em;
+    display: inline-block;
+    min-width: 1ch;
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-size: 1em;
+    font-style: normal !important;
+    font-weight: 400;
+    line-height: 1;
+    vertical-align: -0.075em;
 }
 
 .markdown-body.gh-light-tritanopia g-emoji img {
-  width: 1em;
-  height: 1em;
+    width: 1em;
+    height: 1em;
 }
 
 .markdown-body.gh-light-tritanopia::before {
-  display: table;
-  content: "";
+    display: table;
+    content: '';
 }
 
 .markdown-body.gh-light-tritanopia::after {
-  display: table;
-  clear: both;
-  content: "";
+    display: table;
+    clear: both;
+    content: '';
 }
 
-.markdown-body.gh-light-tritanopia>*:first-child {
-  margin-top: 0 !important;
+.markdown-body.gh-light-tritanopia > *:first-child {
+    margin-top: 0 !important;
 }
 
-.markdown-body.gh-light-tritanopia>*:last-child {
-  margin-bottom: 0 !important;
+.markdown-body.gh-light-tritanopia > *:last-child {
+    margin-bottom: 0 !important;
 }
 
 .markdown-body.gh-light-tritanopia a:not([href]) {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 .markdown-body.gh-light-tritanopia .absent {
-  color: #cf222e;
+    color: #cf222e;
 }
 
 .markdown-body.gh-light-tritanopia .anchor {
-  float: left;
-  padding-right: 4px;
-  margin-left: -20px;
-  line-height: 1;
+    float: left;
+    padding-right: 4px;
+    margin-left: -20px;
+    line-height: 1;
 }
 
 .markdown-body.gh-light-tritanopia .anchor:focus {
-  outline: none;
+    outline: none;
 }
 
 .markdown-body.gh-light-tritanopia p,
@@ -443,16 +450,16 @@
 .markdown-body.gh-light-tritanopia table,
 .markdown-body.gh-light-tritanopia pre,
 .markdown-body.gh-light-tritanopia details {
-  margin-top: 0;
-  margin-bottom: 16px;
+    margin-top: 0;
+    margin-bottom: 16px;
 }
 
-.markdown-body.gh-light-tritanopia blockquote>:first-child {
-  margin-top: 0;
+.markdown-body.gh-light-tritanopia blockquote > :first-child {
+    margin-top: 0;
 }
 
-.markdown-body.gh-light-tritanopia blockquote>:last-child {
-  margin-bottom: 0;
+.markdown-body.gh-light-tritanopia blockquote > :last-child {
+    margin-bottom: 0;
 }
 
 .markdown-body.gh-light-tritanopia h1 .octicon-link,
@@ -461,9 +468,9 @@
 .markdown-body.gh-light-tritanopia h4 .octicon-link,
 .markdown-body.gh-light-tritanopia h5 .octicon-link,
 .markdown-body.gh-light-tritanopia h6 .octicon-link {
-  color: #24292f;
-  vertical-align: middle;
-  visibility: hidden;
+    color: #24292f;
+    vertical-align: middle;
+    visibility: hidden;
 }
 
 .markdown-body.gh-light-tritanopia h1:hover .anchor,
@@ -472,7 +479,7 @@
 .markdown-body.gh-light-tritanopia h4:hover .anchor,
 .markdown-body.gh-light-tritanopia h5:hover .anchor,
 .markdown-body.gh-light-tritanopia h6:hover .anchor {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .markdown-body.gh-light-tritanopia h1:hover .anchor .octicon-link,
@@ -481,7 +488,7 @@
 .markdown-body.gh-light-tritanopia h4:hover .anchor .octicon-link,
 .markdown-body.gh-light-tritanopia h5:hover .anchor .octicon-link,
 .markdown-body.gh-light-tritanopia h6:hover .anchor .octicon-link {
-  visibility: visible;
+    visibility: visible;
 }
 
 .markdown-body.gh-light-tritanopia h1 tt,
@@ -496,8 +503,8 @@
 .markdown-body.gh-light-tritanopia h5 code,
 .markdown-body.gh-light-tritanopia h6 tt,
 .markdown-body.gh-light-tritanopia h6 code {
-  padding: 0 .2em;
-  font-size: inherit;
+    padding: 0 0.2em;
+    font-size: inherit;
 }
 
 .markdown-body.gh-light-tritanopia summary h1,
@@ -506,7 +513,7 @@
 .markdown-body.gh-light-tritanopia summary h4,
 .markdown-body.gh-light-tritanopia summary h5,
 .markdown-body.gh-light-tritanopia summary h6 {
-  display: inline-block;
+    display: inline-block;
 }
 
 .markdown-body.gh-light-tritanopia summary h1 .anchor,
@@ -515,369 +522,375 @@
 .markdown-body.gh-light-tritanopia summary h4 .anchor,
 .markdown-body.gh-light-tritanopia summary h5 .anchor,
 .markdown-body.gh-light-tritanopia summary h6 .anchor {
-  margin-left: -40px;
+    margin-left: -40px;
 }
 
 .markdown-body.gh-light-tritanopia summary h1,
 .markdown-body.gh-light-tritanopia summary h2 {
-  padding-bottom: 0;
-  border-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
 }
 
 .markdown-body.gh-light-tritanopia ul.no-list,
 .markdown-body.gh-light-tritanopia ol.no-list {
-  padding: 0;
-  list-style-type: none;
+    padding: 0;
+    list-style-type: none;
 }
 
-.markdown-body.gh-light-tritanopia ol[type="1"] {
-  list-style-type: decimal;
+.markdown-body.gh-light-tritanopia ol[type='1'] {
+    list-style-type: decimal;
 }
 
-.markdown-body.gh-light-tritanopia ol[type=a] {
-  list-style-type: lower-alpha;
+.markdown-body.gh-light-tritanopia ol[type='a'] {
+    list-style-type: lower-alpha;
 }
 
-.markdown-body.gh-light-tritanopia ol[type=i] {
-  list-style-type: lower-roman;
+.markdown-body.gh-light-tritanopia ol[type='i'] {
+    list-style-type: lower-roman;
 }
 
-.markdown-body.gh-light-tritanopia div>ol:not([type]) {
-  list-style-type: decimal;
+.markdown-body.gh-light-tritanopia div > ol:not([type]) {
+    list-style-type: decimal;
 }
 
 .markdown-body.gh-light-tritanopia ul ul,
 .markdown-body.gh-light-tritanopia ul ol,
 .markdown-body.gh-light-tritanopia ol ol,
 .markdown-body.gh-light-tritanopia ol ul {
-  margin-top: 0;
-  margin-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
-.markdown-body.gh-light-tritanopia li>p {
-  margin-top: 16px;
+.markdown-body.gh-light-tritanopia li > p {
+    margin-top: 16px;
 }
 
-.markdown-body.gh-light-tritanopia li+li {
-  margin-top: .25em;
+.markdown-body.gh-light-tritanopia li + li {
+    margin-top: 0.25em;
 }
 
 .markdown-body.gh-light-tritanopia dl {
-  padding: 0;
+    padding: 0;
 }
 
 .markdown-body.gh-light-tritanopia dl dt {
-  padding: 0;
-  margin-top: 16px;
-  font-size: 1em;
-  font-style: italic;
-  font-weight: 600;
+    padding: 0;
+    margin-top: 16px;
+    font-size: 1em;
+    font-style: italic;
+    font-weight: 600;
 }
 
 .markdown-body.gh-light-tritanopia dl dd {
-  padding: 0 16px;
-  margin-bottom: 16px;
+    padding: 0 16px;
+    margin-bottom: 16px;
 }
 
 .markdown-body.gh-light-tritanopia table th {
-  font-weight: 600;
+    font-weight: 600;
 }
 
 .markdown-body.gh-light-tritanopia table th,
 .markdown-body.gh-light-tritanopia table td {
-  padding: 6px 13px;
-  border: 1px solid #d0d7de;
+    padding: 6px 13px;
+    border: 1px solid #d0d7de;
 }
 
 .markdown-body.gh-light-tritanopia table tr {
-  background-color: #ffffff;
-  border-top: 1px solid hsla(210,18%,87%,1);
+    background-color: #ffffff;
+    border-top: 1px solid hsla(210, 18%, 87%, 1);
 }
 
 .markdown-body.gh-light-tritanopia table tr:nth-child(2n) {
-  background-color: #f6f8fa;
+    background-color: #f6f8fa;
 }
 
 .markdown-body.gh-light-tritanopia table img {
-  background-color: transparent;
+    background-color: transparent;
 }
 
-.markdown-body.gh-light-tritanopia img[align=right] {
-  padding-left: 20px;
+.markdown-body.gh-light-tritanopia img[align='right'] {
+    padding-left: 20px;
 }
 
-.markdown-body.gh-light-tritanopia img[align=left] {
-  padding-right: 20px;
+.markdown-body.gh-light-tritanopia img[align='left'] {
+    padding-right: 20px;
 }
 
 .markdown-body.gh-light-tritanopia .emoji {
-  max-width: none;
-  vertical-align: text-top;
-  background-color: transparent;
+    max-width: none;
+    vertical-align: text-top;
+    background-color: transparent;
 }
 
 .markdown-body.gh-light-tritanopia span.frame {
-  display: block;
-  overflow: hidden;
+    display: block;
+    overflow: hidden;
 }
 
-.markdown-body.gh-light-tritanopia span.frame>span {
-  display: block;
-  float: left;
-  width: auto;
-  padding: 7px;
-  margin: 13px 0 0;
-  overflow: hidden;
-  border: 1px solid #d0d7de;
+.markdown-body.gh-light-tritanopia span.frame > span {
+    display: block;
+    float: left;
+    width: auto;
+    padding: 7px;
+    margin: 13px 0 0;
+    overflow: hidden;
+    border: 1px solid #d0d7de;
 }
 
 .markdown-body.gh-light-tritanopia span.frame span img {
-  display: block;
-  float: left;
+    display: block;
+    float: left;
 }
 
 .markdown-body.gh-light-tritanopia span.frame span span {
-  display: block;
-  padding: 5px 0 0;
-  clear: both;
-  color: #24292f;
+    display: block;
+    padding: 5px 0 0;
+    clear: both;
+    color: #24292f;
 }
 
 .markdown-body.gh-light-tritanopia span.align-center {
-  display: block;
-  overflow: hidden;
-  clear: both;
+    display: block;
+    overflow: hidden;
+    clear: both;
 }
 
-.markdown-body.gh-light-tritanopia span.align-center>span {
-  display: block;
-  margin: 13px auto 0;
-  overflow: hidden;
-  text-align: center;
+.markdown-body.gh-light-tritanopia span.align-center > span {
+    display: block;
+    margin: 13px auto 0;
+    overflow: hidden;
+    text-align: center;
 }
 
 .markdown-body.gh-light-tritanopia span.align-center span img {
-  margin: 0 auto;
-  text-align: center;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .markdown-body.gh-light-tritanopia span.align-right {
-  display: block;
-  overflow: hidden;
-  clear: both;
+    display: block;
+    overflow: hidden;
+    clear: both;
 }
 
-.markdown-body.gh-light-tritanopia span.align-right>span {
-  display: block;
-  margin: 13px 0 0;
-  overflow: hidden;
-  text-align: right;
+.markdown-body.gh-light-tritanopia span.align-right > span {
+    display: block;
+    margin: 13px 0 0;
+    overflow: hidden;
+    text-align: right;
 }
 
 .markdown-body.gh-light-tritanopia span.align-right span img {
-  margin: 0;
-  text-align: right;
+    margin: 0;
+    text-align: right;
 }
 
 .markdown-body.gh-light-tritanopia span.float-left {
-  display: block;
-  float: left;
-  margin-right: 13px;
-  overflow: hidden;
+    display: block;
+    float: left;
+    margin-right: 13px;
+    overflow: hidden;
 }
 
 .markdown-body.gh-light-tritanopia span.float-left span {
-  margin: 13px 0 0;
+    margin: 13px 0 0;
 }
 
 .markdown-body.gh-light-tritanopia span.float-right {
-  display: block;
-  float: right;
-  margin-left: 13px;
-  overflow: hidden;
+    display: block;
+    float: right;
+    margin-left: 13px;
+    overflow: hidden;
 }
 
-.markdown-body.gh-light-tritanopia span.float-right>span {
-  display: block;
-  margin: 13px auto 0;
-  overflow: hidden;
-  text-align: right;
+.markdown-body.gh-light-tritanopia span.float-right > span {
+    display: block;
+    margin: 13px auto 0;
+    overflow: hidden;
+    text-align: right;
 }
 
 .markdown-body.gh-light-tritanopia code,
 .markdown-body.gh-light-tritanopia tt {
-  padding: .2em .4em;
-  margin: 0;
-  font-size: 85%;
-  background-color: rgba(175,184,193,0.2);
-  border-radius: 6px;
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(175, 184, 193, 0.2);
+    border-radius: 6px;
 }
 
 .markdown-body.gh-light-tritanopia code br,
 .markdown-body.gh-light-tritanopia tt br {
-  display: none;
+    display: none;
 }
 
 .markdown-body.gh-light-tritanopia del code {
-  text-decoration: inherit;
+    text-decoration: inherit;
 }
 
 .markdown-body.gh-light-tritanopia samp {
-  font-size: 85%;
+    font-size: 85%;
 }
 
 .markdown-body.gh-light-tritanopia pre code {
-  font-size: 100%;
+    font-size: 100%;
 }
 
-.markdown-body.gh-light-tritanopia pre>code {
-  padding: 0;
-  margin: 0;
-  word-break: normal;
-  white-space: pre;
-  background: transparent;
-  border: 0;
+.markdown-body.gh-light-tritanopia pre > code {
+    padding: 0;
+    margin: 0;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
 }
 
 .markdown-body.gh-light-tritanopia .highlight {
-  margin-bottom: 16px;
+    margin-bottom: 16px;
 }
 
 .markdown-body.gh-light-tritanopia .highlight pre {
-  margin-bottom: 0;
-  word-break: normal;
+    margin-bottom: 0;
+    word-break: normal;
 }
 
 .markdown-body.gh-light-tritanopia .highlight pre,
 .markdown-body.gh-light-tritanopia pre {
-  padding: 16px;
-  overflow: auto;
-  font-size: 85%;
-  line-height: 1.45;
-  background-color: #f6f8fa;
-  border-radius: 6px;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 6px;
 }
 
 .markdown-body.gh-light-tritanopia pre code,
 .markdown-body.gh-light-tritanopia pre tt {
-  display: inline;
-  max-width: auto;
-  padding: 0;
-  margin: 0;
-  overflow: visible;
-  line-height: inherit;
-  word-wrap: normal;
-  background-color: transparent;
-  border: 0;
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
 }
 
 .markdown-body.gh-light-tritanopia .csv-data td,
 .markdown-body.gh-light-tritanopia .csv-data th {
-  padding: 5px;
-  overflow: hidden;
-  font-size: 12px;
-  line-height: 1;
-  text-align: left;
-  white-space: nowrap;
+    padding: 5px;
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 1;
+    text-align: left;
+    white-space: nowrap;
 }
 
 .markdown-body.gh-light-tritanopia .csv-data .blob-num {
-  padding: 10px 8px 9px;
-  text-align: right;
-  background: #ffffff;
-  border: 0;
+    padding: 10px 8px 9px;
+    text-align: right;
+    background: #ffffff;
+    border: 0;
 }
 
 .markdown-body.gh-light-tritanopia .csv-data tr {
-  border-top: 0;
+    border-top: 0;
 }
 
 .markdown-body.gh-light-tritanopia .csv-data th {
-  font-weight: 600;
-  background: #f6f8fa;
-  border-top: 0;
+    font-weight: 600;
+    background: #f6f8fa;
+    border-top: 0;
 }
 
 .markdown-body.gh-light-tritanopia [data-footnote-ref]::before {
-  content: "[";
+    content: '[';
 }
 
 .markdown-body.gh-light-tritanopia [data-footnote-ref]::after {
-  content: "]";
+    content: ']';
 }
 
 .markdown-body.gh-light-tritanopia .footnotes {
-  font-size: 12px;
-  color: #57606a;
-  border-top: 1px solid #d0d7de;
+    font-size: 12px;
+    color: #57606a;
+    border-top: 1px solid #d0d7de;
 }
 
 .markdown-body.gh-light-tritanopia .footnotes ol {
-  padding-left: 16px;
+    padding-left: 16px;
 }
 
 .markdown-body.gh-light-tritanopia .footnotes li {
-  position: relative;
+    position: relative;
 }
 
 .markdown-body.gh-light-tritanopia .footnotes li:target::before {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  bottom: -8px;
-  left: -24px;
-  pointer-events: none;
-  content: "";
-  border: 2px solid #0969da;
-  border-radius: 6px;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    bottom: -8px;
+    left: -24px;
+    pointer-events: none;
+    content: '';
+    border: 2px solid #0969da;
+    border-radius: 6px;
 }
 
 .markdown-body.gh-light-tritanopia .footnotes li:target {
-  color: #24292f;
+    color: #24292f;
 }
 
 .markdown-body.gh-light-tritanopia .footnotes .data-footnote-backref g-emoji {
-  font-family: monospace;
+    font-family: monospace;
 }
 
-.markdown-body.gh-light-tritanopia [data-a11y-animated-images=system] [data-animated-image],
-.markdown-body.gh-light-tritanopia [data-a11y-animated-images=disabled] [data-animated-image] {
-  display: none;
+.markdown-body.gh-light-tritanopia
+    [data-a11y-animated-images='system']
+    [data-animated-image],
+.markdown-body.gh-light-tritanopia
+    [data-a11y-animated-images='disabled']
+    [data-animated-image] {
+    display: none;
 }
 
 .markdown-body.gh-light-tritanopia .task-list-item {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 .markdown-body.gh-light-tritanopia .task-list-item label {
-  font-weight: 400;
+    font-weight: 400;
 }
 
 .markdown-body.gh-light-tritanopia .task-list-item.enabled label {
-  cursor: pointer;
+    cursor: pointer;
 }
 
-.markdown-body.gh-light-tritanopia .task-list-item+.task-list-item {
-  margin-top: 4px;
+.markdown-body.gh-light-tritanopia .task-list-item + .task-list-item {
+    margin-top: 4px;
 }
 
 .markdown-body.gh-light-tritanopia .task-list-item .handle {
-  display: none;
+    display: none;
 }
 
 .markdown-body.gh-light-tritanopia .task-list-item-checkbox {
-  margin: 0 .2em .25em -1.6em;
-  vertical-align: middle;
+    margin: 0 0.2em 0.25em -1.6em;
+    vertical-align: middle;
 }
 
-.markdown-body.gh-light-tritanopia .contains-task-list:dir(rtl) .task-list-item-checkbox {
-  margin: 0 -1.6em .25em .2em;
+.markdown-body.gh-light-tritanopia
+    .contains-task-list:dir(rtl)
+    .task-list-item-checkbox {
+    margin: 0 -1.6em 0.25em 0.2em;
 }
 
 .markdown-body.gh-light-tritanopia ::-webkit-calendar-picker-indicator {
-  filter: invert(50%);
+    filter: invert(50%);
 }
 
-.markdown-body.gh-light-tritanopia details>summary::-webkit-details-marker {
-  display: none;
+.markdown-body.gh-light-tritanopia details > summary::-webkit-details-marker {
+    display: none;
 }

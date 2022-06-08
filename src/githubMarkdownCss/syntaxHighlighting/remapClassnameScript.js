@@ -12,31 +12,44 @@ const githubToHljsClassMapping = {
     c: ['comment'],
     // s1: ['title.function_'],
     en: ['built_in', 'title.function_', 'title'],
-    smi: ['tag', 'params']
+    smi: ['tag', 'params'],
 }
 
-const fileNames = fs.readdirSync(inputDir)
-    .filter(fileName => (/.highlight.css$/i).test(fileName))
+const fileNames = fs
+    .readdirSync(inputDir)
+    .filter((fileName) => /.highlight.css$/i.test(fileName))
 
-const getFileContents = filePath => fs.promises.readFile(filePath, 'utf8')
-const writeFile = (filePath, textContent) => fs.promises.writeFile(filePath, textContent, 'utf8')
-const getCssSelectorRegex = githubClassName => new RegExp(`(?<=^|[},]\\s*)(\\S.+\\.)(${githubClassName})(?![a-zA-Z0-9_-])([^,{]*[^,{ ])?`, 'g')
+const getFileContents = (filePath) => fs.promises.readFile(filePath, 'utf8')
+const writeFile = (filePath, textContent) =>
+    fs.promises.writeFile(filePath, textContent, 'utf8')
+const getCssSelectorRegex = (githubClassName) =>
+    new RegExp(
+        `(?<=^|[},]\\s*)(\\S.+\\.)(${githubClassName})(?![a-zA-Z0-9_-])([^,{]*[^,{ ])?`,
+        'g'
+    )
 const replaceGithubClassName = (text, [githubClassName, arrHljsClassNames]) => {
-    const cssSelectorRegex = getCssSelectorRegex(githubClassPrefix + githubClassName)
+    const cssSelectorRegex = getCssSelectorRegex(
+        githubClassPrefix + githubClassName
+    )
     return text.replace(
         cssSelectorRegex,
         (_, strBefClassName, __, strAftClassName = '') =>
             arrHljsClassNames
-                .map(x => hljsClassPrefix + x)
-                .map(replacementClassName => strBefClassName + replacementClassName + strAftClassName)
+                .map((x) => hljsClassPrefix + x)
+                .map(
+                    (replacementClassName) =>
+                        strBefClassName + replacementClassName + strAftClassName
+                )
                 .join(',\n')
     )
 }
-const replaceAllGithubClassNames = text => Object.entries(githubToHljsClassMapping)
-    .reduce(replaceGithubClassName, text)
+const replaceAllGithubClassNames = (text) =>
+    Object.entries(githubToHljsClassMapping).reduce(
+        replaceGithubClassName,
+        text
+    )
 
-
-fileNames.forEach(async fileName => {
+fileNames.forEach(async (fileName) => {
     const fileText = await getFileContents(fileName)
     const outputText = replaceAllGithubClassNames(fileText)
 

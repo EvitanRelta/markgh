@@ -1,5 +1,5 @@
 .markdown-body.gh-light-high-contrast .hljs-comment {
-  color: #66707B;
+    color: #66707b;
 }
 
 .markdown-body.gh-light-high-contrast .hljs-attr,
@@ -7,29 +7,29 @@
 .markdown-body.gh-light-high-contrast .hljs-attribute,
 .markdown-body.gh-light-high-contrast .hljs-literal,
 .markdown-body.gh-light-high-contrast .hljs-string .hljs-title.class_ {
-  color: #023b95;
+    color: #023b95;
 }
 
 .markdown-body.gh-light-high-contrast .pl-e,
 .markdown-body.gh-light-high-contrast .hljs-built_in,
 .markdown-body.gh-light-high-contrast .hljs-title.function_,
 .markdown-body.gh-light-high-contrast .hljs-title {
-  color: #622cbc;
+    color: #622cbc;
 }
 
 .markdown-body.gh-light-high-contrast .hljs-tag,
 .markdown-body.gh-light-high-contrast .hljs-params,
 .markdown-body.gh-light-high-contrast .hljs-string .pl-s1 {
-  color: #0E1116;
+    color: #0e1116;
 }
 
 .markdown-body.gh-light-high-contrast .hljs-name {
-  color: #024c1a;
+    color: #024c1a;
 }
 
 .markdown-body.gh-light-high-contrast .hljs-keyword,
 .markdown-body.gh-light-high-contrast .hljs-type {
-  color: #a0111f;
+    color: #a0111f;
 }
 
 .markdown-body.gh-light-high-contrast .hljs-string,
@@ -39,35 +39,35 @@
 .markdown-body.gh-light-high-contrast .pl-sr .pl-cce,
 .markdown-body.gh-light-high-contrast .pl-sr .pl-sre,
 .markdown-body.gh-light-high-contrast .pl-sr .pl-sra {
-  color: #032563;
+    color: #032563;
 }
 
 .markdown-body.gh-light-high-contrast .hljs-title.class_,
 .markdown-body.gh-light-high-contrast .pl-smw {
-  color: #702c00;
+    color: #702c00;
 }
 
 .markdown-body.gh-light-high-contrast .pl-bu {
-  color: #6e011a;
+    color: #6e011a;
 }
 
 .markdown-body.gh-light-high-contrast .pl-ii {
-  color: #FFFFFF;
-  background-color: #6e011a;
+    color: #ffffff;
+    background-color: #6e011a;
 }
 
 .markdown-body.gh-light-high-contrast .pl-c2 {
-  color: #FFFFFF;
-  background-color: #a0111f;
+    color: #ffffff;
+    background-color: #a0111f;
 }
 
 .markdown-body.gh-light-high-contrast .pl-sr .pl-cce {
-  font-weight: bold;
-  color: #024c1a;
+    font-weight: bold;
+    color: #024c1a;
 }
 
 .markdown-body.gh-light-high-contrast .pl-ml {
-  color: #2e1800;
+    color: #2e1800;
 }
 
 .markdown-body.gh-light-high-contrast .pl-mh,
@@ -75,54 +75,54 @@
 .markdown-body.gh-light-high-contrast .pl-mh .hljs-title.function_,
 .markdown-body.gh-light-high-contrast .pl-mh .hljs-title,
 .markdown-body.gh-light-high-contrast .pl-ms {
-  font-weight: bold;
-  color: #023b95;
+    font-weight: bold;
+    color: #023b95;
 }
 
 .markdown-body.gh-light-high-contrast .pl-mi {
-  font-style: italic;
-  color: #0E1116;
+    font-style: italic;
+    color: #0e1116;
 }
 
 .markdown-body.gh-light-high-contrast .pl-mb {
-  font-weight: bold;
-  color: #0E1116;
+    font-weight: bold;
+    color: #0e1116;
 }
 
 .markdown-body.gh-light-high-contrast .pl-md {
-  color: #6e011a;
-  background-color: #fff0ee;
+    color: #6e011a;
+    background-color: #fff0ee;
 }
 
 .markdown-body.gh-light-high-contrast .pl-mi1 {
-  color: #024c1a;
-  background-color: #d2fedb;
+    color: #024c1a;
+    background-color: #d2fedb;
 }
 
 .markdown-body.gh-light-high-contrast .pl-mc {
-  color: #702c00;
-  background-color: #ffc67b;
+    color: #702c00;
+    background-color: #ffc67b;
 }
 
 .markdown-body.gh-light-high-contrast .pl-mi2 {
-  color: #E7ECF0;
-  background-color: #023b95;
+    color: #e7ecf0;
+    background-color: #023b95;
 }
 
 .markdown-body.gh-light-high-contrast .pl-mdr {
-  font-weight: bold;
-  color: #622cbc;
+    font-weight: bold;
+    color: #622cbc;
 }
 
 .markdown-body.gh-light-high-contrast .pl-ba {
-  color: #4B535D;
+    color: #4b535d;
 }
 
 .markdown-body.gh-light-high-contrast .pl-sg {
-  color: #88929D;
+    color: #88929d;
 }
 
 .markdown-body.gh-light-high-contrast .pl-corl {
-  text-decoration: underline;
-  color: #032563;
+    text-decoration: underline;
+    color: #032563;
 }

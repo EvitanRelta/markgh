@@ -1,5 +1,5 @@
 .markdown-body.gh-light-tritanopia .hljs-comment {
-  color: #6e7781;
+    color: #6e7781;
 }
 
 .markdown-body.gh-light-tritanopia .hljs-attr,
@@ -7,29 +7,29 @@
 .markdown-body.gh-light-tritanopia .hljs-attribute,
 .markdown-body.gh-light-tritanopia .hljs-literal,
 .markdown-body.gh-light-tritanopia .hljs-string .hljs-title.class_ {
-  color: #0550ae;
+    color: #0550ae;
 }
 
 .markdown-body.gh-light-tritanopia .pl-e,
 .markdown-body.gh-light-tritanopia .hljs-built_in,
 .markdown-body.gh-light-tritanopia .hljs-title.function_,
 .markdown-body.gh-light-tritanopia .hljs-title {
-  color: #8250df;
+    color: #8250df;
 }
 
 .markdown-body.gh-light-tritanopia .hljs-tag,
 .markdown-body.gh-light-tritanopia .hljs-params,
 .markdown-body.gh-light-tritanopia .hljs-string .pl-s1 {
-  color: #24292f;
+    color: #24292f;
 }
 
 .markdown-body.gh-light-tritanopia .hljs-name {
-  color: #0550ae;
+    color: #0550ae;
 }
 
 .markdown-body.gh-light-tritanopia .hljs-keyword,
 .markdown-body.gh-light-tritanopia .hljs-type {
-  color: #cf222e;
+    color: #cf222e;
 }
 
 .markdown-body.gh-light-tritanopia .hljs-string,
@@ -39,35 +39,35 @@
 .markdown-body.gh-light-tritanopia .pl-sr .pl-cce,
 .markdown-body.gh-light-tritanopia .pl-sr .pl-sre,
 .markdown-body.gh-light-tritanopia .pl-sr .pl-sra {
-  color: #0a3069;
+    color: #0a3069;
 }
 
 .markdown-body.gh-light-tritanopia .hljs-title.class_,
 .markdown-body.gh-light-tritanopia .pl-smw {
-  color: #a40e26;
+    color: #a40e26;
 }
 
 .markdown-body.gh-light-tritanopia .pl-bu {
-  color: #82071e;
+    color: #82071e;
 }
 
 .markdown-body.gh-light-tritanopia .pl-ii {
-  color: #f6f8fa;
-  background-color: #82071e;
+    color: #f6f8fa;
+    background-color: #82071e;
 }
 
 .markdown-body.gh-light-tritanopia .pl-c2 {
-  color: #f6f8fa;
-  background-color: #cf222e;
+    color: #f6f8fa;
+    background-color: #cf222e;
 }
 
 .markdown-body.gh-light-tritanopia .pl-sr .pl-cce {
-  font-weight: bold;
-  color: #0550ae;
+    font-weight: bold;
+    color: #0550ae;
 }
 
 .markdown-body.gh-light-tritanopia .pl-ml {
-  color: #3b2300;
+    color: #3b2300;
 }
 
 .markdown-body.gh-light-tritanopia .pl-mh,
@@ -75,54 +75,54 @@
 .markdown-body.gh-light-tritanopia .pl-mh .hljs-title.function_,
 .markdown-body.gh-light-tritanopia .pl-mh .hljs-title,
 .markdown-body.gh-light-tritanopia .pl-ms {
-  font-weight: bold;
-  color: #0550ae;
+    font-weight: bold;
+    color: #0550ae;
 }
 
 .markdown-body.gh-light-tritanopia .pl-mi {
-  font-style: italic;
-  color: #24292f;
+    font-style: italic;
+    color: #24292f;
 }
 
 .markdown-body.gh-light-tritanopia .pl-mb {
-  font-weight: bold;
-  color: #24292f;
+    font-weight: bold;
+    color: #24292f;
 }
 
 .markdown-body.gh-light-tritanopia .pl-md {
-  color: #82071e;
-  background-color: #FFEBE9;
+    color: #82071e;
+    background-color: #ffebe9;
 }
 
 .markdown-body.gh-light-tritanopia .pl-mi1 {
-  color: #0550ae;
-  background-color: #ddf4ff;
+    color: #0550ae;
+    background-color: #ddf4ff;
 }
 
 .markdown-body.gh-light-tritanopia .pl-mc {
-  color: #a40e26;
-  background-color: #ffcecb;
+    color: #a40e26;
+    background-color: #ffcecb;
 }
 
 .markdown-body.gh-light-tritanopia .pl-mi2 {
-  color: #eaeef2;
-  background-color: #0550ae;
+    color: #eaeef2;
+    background-color: #0550ae;
 }
 
 .markdown-body.gh-light-tritanopia .pl-mdr {
-  font-weight: bold;
-  color: #8250df;
+    font-weight: bold;
+    color: #8250df;
 }
 
 .markdown-body.gh-light-tritanopia .pl-ba {
-  color: #57606a;
+    color: #57606a;
 }
 
 .markdown-body.gh-light-tritanopia .pl-sg {
-  color: #8c959f;
+    color: #8c959f;
 }
 
 .markdown-body.gh-light-tritanopia .pl-corl {
-  text-decoration: underline;
-  color: #0a3069;
+    text-decoration: underline;
+    color: #0a3069;
 }

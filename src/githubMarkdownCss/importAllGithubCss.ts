@@ -17,4 +17,3 @@ import './syntaxHighlighting/light-colorblind.highlight.css'
 import './syntaxHighlighting/light-high-contrast.highlight.css'
 import './syntaxHighlighting/light-tritanopia.highlight.css'
 import './syntaxHighlighting/light.highlight.css'
-

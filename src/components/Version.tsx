@@ -10,6 +10,8 @@ export default () => (
             color: 'gray',
         }}
     >
-        <strong><em>version: {packageInfo.version}</em></strong>
+        <strong>
+            <em>version: {packageInfo.version}</em>
+        </strong>
     </div>
 )
