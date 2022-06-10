@@ -8,10 +8,7 @@ const noListItemSpacing: Plugin = (service) => {
             const parent = node.parentElement
             if (!parent || parent.nodeName !== 'LI') return false
 
-            const grandparent = parent.parentElement
-            if (!grandparent) return false
-
-            return grandparent.classList.contains('no-list-item-spacing')
+            return parent.classList.contains('no-list-item-spacing')
         },
         replacement: (content, node, options) => content,
     })
