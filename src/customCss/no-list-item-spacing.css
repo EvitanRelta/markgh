@@ -1,4 +1,3 @@
-.markdown-body ol.no-list-item-spacing > li > p,
-.markdown-body ul.no-list-item-spacing > li > p {
+.markdown-body li.no-list-item-spacing > p {
     margin: 0;
 }
