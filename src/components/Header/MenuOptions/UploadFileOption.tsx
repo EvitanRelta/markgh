@@ -6,14 +6,15 @@ type Props = {
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 const UploadFileOption = ({ onUpload }: Props) => (
-    
-    <label style={{
-        paddingLeft: "16px",
-        paddingTop: "5px",
-        paddingBottom: "5px",
-        minWidth: "208.75px",
-        cursor: 'pointer'
-    }}>
+    <label
+        style={{
+            paddingLeft: '16px',
+            paddingTop: '5px',
+            paddingBottom: '5px',
+            minWidth: '208.75px',
+            cursor: 'pointer',
+        }}
+    >
         <div style={{ display: 'none' }}>
             <Input type='file' onChange={onUpload} />
         </div>

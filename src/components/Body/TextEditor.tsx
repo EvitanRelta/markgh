@@ -7,11 +7,10 @@ import {
     useEffect,
     useState,
 } from 'react'
-import '../customCss/custom-quill.css'
-import '../customCss/fix-codeblock-bottom-spacing.css'
-import '../customCss/quill-snow-without-most-editor-css.css'
-import '../githubMarkdownCss/importAllGithubCss'
-import placeholderEditorHtml from '../placeholderEditorHtml'
+import '../../customCss/custom-quill.css'
+import '../../customCss/fix-codeblock-bottom-spacing.css'
+import '../../customCss/quill-snow-without-most-editor-css.css'
+import '../../githubMarkdownCss/importAllGithubCss'
 
 const TOOLBAR_OPTIONS = [
     ['bold', 'italic', 'underline', 'strike', 'code'],
@@ -49,7 +48,7 @@ export default function TextEditor({ setQuill, theme }: TextEditorProps) {
         //@ts-expect-error
         const quillEditor = quill.scrollingContainer as HTMLDivElement
         quillEditor.classList.add('markdown-body')
-        quillEditor.innerHTML = placeholderEditorHtml
+        quillEditor.innerHTML = ''
 
         setQuill(quill)
         setEditor(quillEditor)
