@@ -6,6 +6,7 @@ import EditorToolbar from './EditorToolbar'
 import extensions from './extensions/extensions'
 
 import '../../customCss/fix-codeblock-bottom-spacing.css'
+import '../../customCss/fix-codeblock-cannot-type.css'
 import '../../customCss/no-list-item-spacing.css'
 import '../../customCss/remove-editing-border.css'
 
