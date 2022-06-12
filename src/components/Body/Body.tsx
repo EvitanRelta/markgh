@@ -1,4 +1,4 @@
-import TextEditor from './Editor/TextEditor'
+import TextEditor from '../Editor/TextEditor'
 import MarkdownTextContainer from './MarkdownTextContainer'
 
 type Props = {

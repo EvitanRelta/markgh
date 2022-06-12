@@ -2,10 +2,10 @@ import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Dexie from 'dexie'
 import { ReactElement, useEffect, useState } from 'react'
-import Body from './components/Body'
-import Footer from './components/Footer'
-import Header from './components/Header'
-import Version from './components/Version'
+import Body from './components/Body/Body'
+import Footer from './components/Footer/Footer'
+import Version from './components/Footer/Version'
+import Header from './components/Header/Header'
 import toMarkdown from './converterFunctions/toMarkdown'
 
 export default function App(): ReactElement {
@@ -62,9 +62,7 @@ export default function App(): ReactElement {
 
         //Retrieving file from event
         const target = e.target as HTMLInputElement
-
         let file = target.files![0]
-
         const reader = new FileReader()
 
         //Check file type
@@ -114,7 +112,6 @@ export default function App(): ReactElement {
     useEffect(() => {
         localStorage['selectedTheme'] = mode
     }, [mode])
-
     return (
         <ThemeProvider theme={selectedTheme}>
             <CssBaseline />

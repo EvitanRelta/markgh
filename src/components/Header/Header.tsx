@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import MenuButton from './MenuButton'
 import ToolbarContainer from './ToolbarContainer'
 
@@ -68,7 +68,6 @@ const Header = ({
                         toggleTheme={toggleTheme}
                         title={title}
                         onUpload={onUpload}
-                        mdText={mdText}
                     />
                 </div>
             </div>
@@ -79,12 +78,16 @@ const Header = ({
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer onUpload={onUpload} />
+                <ToolbarContainer
+                    onUpload={onUpload}
+                    mdText={mdText}
+                    title={title}
+                />
                 <div
                     style={{
                         color: 'gray',
                         paddingLeft: '5px',
-                        marginTop: 7,
+                        marginTop: 5.5,
                         textDecoration: 'underline',
                     }}
                 >

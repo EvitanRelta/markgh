@@ -2,19 +2,16 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import { Menu, MenuItem } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import { useState } from 'react'
-import ExportMarkdownOption from './MenuOptions/ExportMarkdownOption'
 import ThemeOption from './MenuOptions/ThemeOption'
-import UploadFileOption from './MenuOptions/UploadFileOption'
 
 type Props = {
     theme: string
     toggleTheme: React.MouseEventHandler<HTMLButtonElement | HTMLElement>
     title: string
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
-    mdText: string
 }
 
-const MenuButton = ({ theme, toggleTheme, title, onUpload, mdText }: Props) => {
+const MenuButton = ({ theme, toggleTheme, title, onUpload }: Props) => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
     //const [selected, setSelected] = useState(-1)
 
@@ -24,22 +21,6 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload, mdText }: Props) => {
 
     const closeMenu = () => {
         setAnchor(null)
-    }
-
-    const onDownload = () => {
-        const fileName = `${title || 'NewFile'}.md`
-        downloadText(mdText, fileName)
-    }
-
-    const downloadText = (text: string, fileName: string) => {
-        const element = document.createElement('a')
-        const file = new Blob([text], { type: 'text/plain;charset=utf-8' })
-        element.href = URL.createObjectURL(file)
-        element.download = fileName
-        element.hidden = true
-        document.body.appendChild(element)
-        element.click()
-        document.body.removeChild(element)
     }
 
     return (
@@ -53,12 +34,6 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload, mdText }: Props) => {
                 anchorEl={anchor}
                 onClose={closeMenu}
             >
-                <MenuItem style={{ padding: '0px' }}>
-                    <UploadFileOption onUpload={onUpload} />
-                </MenuItem>
-                <MenuItem onClick={onDownload}>
-                    <ExportMarkdownOption />
-                </MenuItem>
                 <MenuItem onClick={toggleTheme}>
                     <ThemeOption theme={theme} />
                 </MenuItem>
