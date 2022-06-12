@@ -1,17 +1,19 @@
 import TurndownService from 'turndown'
 import {
+    align,
     codeBlocks,
-    quillAlign,
+    ignoreTipTapArtifacts,
     resizedImage,
     strikethrough,
     underline,
 } from './turndownPlugins'
+import noListItemSpacing from './turndownPlugins/noListItemSpacing'
 
 function preProcessHtml(element: Element) {
     const isCodeOrCodeBlock = (element: Element) =>
         ['CODE', 'PRE'].includes(element.tagName)
     const isEditorContainer = (element: Element) =>
-        element.classList.contains('ql-editor')
+        element.classList.contains('markdown-body')
     const isInsideCodeOrCodeBlock = (element: Element): boolean => {
         if (isEditorContainer(element)) return false
         if (isCodeOrCodeBlock(element)) return true
@@ -112,7 +114,15 @@ export default (html: HTMLElement) => {
     const turndownService = new TurndownService({
         headingStyle: 'atx',
         codeBlockStyle: 'fenced',
-    }).use([codeBlocks, underline, quillAlign, strikethrough, resizedImage])
+    }).use([
+        codeBlocks,
+        underline,
+        align,
+        strikethrough,
+        resizedImage,
+        ignoreTipTapArtifacts,
+        noListItemSpacing,
+    ])
 
     const markdown = turndownService.turndown(htmlCopy)
     return postProcessHtml(markdown)
