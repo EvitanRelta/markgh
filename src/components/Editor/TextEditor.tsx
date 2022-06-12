@@ -1,12 +1,13 @@
 import { EditorContent, useEditor } from '@tiptap/react'
 import { useEffect, useState } from 'react'
-import '../../customCss/fix-codeblock-bottom-spacing.css'
-import '../../customCss/no-list-item-spacing.css'
-import '../../customCss/remove-editing-border.css'
 import '../../githubMarkdownCss/importAllGithubCss'
 import placeholderEditorHtml from '../../placeholderEditorHtml'
 import EditorToolbar from './EditorToolbar'
 import extensions from './extensions/extensions'
+
+import '../../customCss/fix-codeblock-bottom-spacing.css'
+import '../../customCss/no-list-item-spacing.css'
+import '../../customCss/remove-editing-border.css'
 
 interface Props {
     theme: 'light' | 'dark'
