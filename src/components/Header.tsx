@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import MenuButton from './MenuButton'
+import ToolbarContainer from './ToolbarContainer'
 
 type Props = {
     title: string
@@ -45,7 +46,7 @@ const Header = ({
             >
                 <input
                     type='text'
-                    placeholder='File Name'
+                    placeholder='Untitled Document'
                     value={text}
                     onChange={(e) => {
                         setText(e.target.value)
@@ -57,6 +58,7 @@ const Header = ({
                         width: '30%',
                         backgroundColor: themeColor,
                         color: textColor,
+                        marginLeft: 12,
                     }}
                 />
 
@@ -70,14 +72,25 @@ const Header = ({
                     />
                 </div>
             </div>
-            <p
+            <div
                 style={{
-                    color: 'gray',
-                    paddingLeft: '5px',
+                    display: 'inline-flex',
+                    paddingTop: 5,
+                    paddingBottom: 5,
                 }}
             >
-                Last edited on {lastEditedOn}
-            </p>
+                <ToolbarContainer onUpload={onUpload} />
+                <div
+                    style={{
+                        color: 'gray',
+                        paddingLeft: '5px',
+                        marginTop: 7,
+                        textDecoration: 'underline',
+                    }}
+                >
+                    Last edited on {lastEditedOn}
+                </div>
+            </div>
         </header>
     )
 }
