@@ -30,7 +30,9 @@ const Body = ({ showMarkdown, mdText, setQuill, theme }: Props) => {
                 >
                     <TextEditor setQuill={setQuill} theme={theme} />
                 </div>
-                {showMarkdown && <MarkdownTextContainer mdText={mdText} />}
+                {showMarkdown && (
+                    <MarkdownTextContainer mdText={mdText} theme={theme} />
+                )}
             </div>
         </div>
     )
