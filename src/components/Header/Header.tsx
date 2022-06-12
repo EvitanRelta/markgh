@@ -9,6 +9,7 @@ type Props = {
     setTitle: React.Dispatch<React.SetStateAction<string>>
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     lastEditedOn: string
+    mdText: string
 }
 
 const Header = ({
@@ -18,6 +19,7 @@ const Header = ({
     setTitle,
     onUpload,
     lastEditedOn,
+    mdText,
 }: Props) => {
     //var for current file name
     const [text, setText] = useState(title)
@@ -76,7 +78,11 @@ const Header = ({
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer onUpload={onUpload} />
+                <ToolbarContainer
+                    onUpload={onUpload}
+                    mdText={mdText}
+                    title={title}
+                />
                 <div
                     style={{
                         color: 'gray',

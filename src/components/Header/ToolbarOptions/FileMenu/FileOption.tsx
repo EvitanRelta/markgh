@@ -6,9 +6,10 @@ import OpenFile from './OpenFile'
 
 type Props = {
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onDownload: () => void
 }
 
-const OpenFileOption = ({ onUpload }: Props) => {
+const OpenFileOption = ({ onUpload, onDownload }: Props) => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
 
     const openMenu = (e: React.MouseEvent) => {
@@ -31,7 +32,7 @@ const OpenFileOption = ({ onUpload }: Props) => {
                 onClose={closeMenu}
             >
                 <OpenFile onUpload={onUpload} />
-                <ExportFile />
+                <ExportFile onDownload={onDownload} />
             </Menu>
         </div>
     )

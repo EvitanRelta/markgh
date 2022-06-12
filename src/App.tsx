@@ -151,6 +151,7 @@ export default function App(): ReactElement {
                     toggleTheme={toggleTheme}
                     onUpload={onUpload}
                     lastEditedOn={lastEditedOn}
+                    mdText={mdText}
                 />
                 <Body
                     showMarkdown={showMarkdown}

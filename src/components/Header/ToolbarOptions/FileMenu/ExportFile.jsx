@@ -2,9 +2,9 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import { MenuItem } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 
-const ExportFile = () => {
+const ExportFile = ({ onDownload }) => {
     return (
-        <MenuItem style={{ padding: 0 }}>
+        <MenuItem style={{ padding: 0 }} onClick={onDownload}>
             <label style={{ cursor: 'pointer' }}>
                 <div
                     style={{
