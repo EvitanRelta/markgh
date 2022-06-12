@@ -2,7 +2,6 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import { Menu, MenuItem } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import { useState } from 'react'
-import { toMarkdown } from '../converterFunctions'
 import ExportMarkdownOption from './MenuOptions/ExportMarkdownOption'
 import ThemeOption from './MenuOptions/ThemeOption'
 import UploadFileOption from './MenuOptions/UploadFileOption'
@@ -12,9 +11,10 @@ type Props = {
     toggleTheme: React.MouseEventHandler<HTMLButtonElement | HTMLElement>
     title: string
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
+    mdText: string
 }
 
-const MenuButton = ({ theme, toggleTheme, title, onUpload }: Props) => {
+const MenuButton = ({ theme, toggleTheme, title, onUpload, mdText }: Props) => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
     //const [selected, setSelected] = useState(-1)
 
@@ -28,10 +28,7 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload }: Props) => {
 
     const onDownload = () => {
         const fileName = `${title || 'NewFile'}.md`
-        const markdownText = toMarkdown(
-            document.getElementsByClassName('ql-editor')[0] as HTMLElement
-        )
-        downloadText(markdownText, fileName)
+        downloadText(mdText, fileName)
     }
 
     const downloadText = (text: string, fileName: string) => {
