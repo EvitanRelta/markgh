@@ -1,6 +1,7 @@
 import { EditorContent, useEditor } from '@tiptap/react'
 import { useEffect, useState } from 'react'
 import '../../customCss/fix-codeblock-bottom-spacing.css'
+import '../../customCss/no-list-item-spacing.css'
 import '../../githubMarkdownCss/importAllGithubCss'
 import placeholderEditorHtml from '../../placeholderEditorHtml'
 import EditorToolbar from './EditorToolbar'

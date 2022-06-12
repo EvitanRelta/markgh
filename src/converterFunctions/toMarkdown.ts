@@ -7,6 +7,7 @@ import {
     strikethrough,
     underline,
 } from './turndownPlugins'
+import noListItemSpacing from './turndownPlugins/noListItemSpacing'
 
 function preProcessHtml(element: Element) {
     const isCodeOrCodeBlock = (element: Element) =>
@@ -120,6 +121,7 @@ export default (html: HTMLElement) => {
         strikethrough,
         resizedImage,
         ignoreTipTapArtifacts,
+        noListItemSpacing,
     ])
 
     const markdown = turndownService.turndown(htmlCopy)
