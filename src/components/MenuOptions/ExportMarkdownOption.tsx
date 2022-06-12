@@ -2,7 +2,7 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import IconButton from '@mui/material/IconButton'
 
 const ExportMarkdownOption = () => (
-    <label>
+    <label style={{ cursor: 'pointer' }}>
         <IconButton component='span'>
             <FileDownloadIcon />
         </IconButton>

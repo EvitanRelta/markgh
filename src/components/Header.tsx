@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import MenuButton from './MenuButton'
 
 type Props = {
@@ -7,9 +7,17 @@ type Props = {
     toggleTheme: React.MouseEventHandler<HTMLButtonElement>
     setTitle: React.Dispatch<React.SetStateAction<string>>
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
+    lastEditedOn: string
 }
 
-const Header = ({ title, theme, toggleTheme, setTitle, onUpload }: Props) => {
+const Header = ({
+    title,
+    theme,
+    toggleTheme,
+    setTitle,
+    onUpload,
+    lastEditedOn,
+}: Props) => {
     //var for current file name
     const [text, setText] = useState(title)
 
@@ -49,6 +57,7 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload }: Props) => {
                         color: textColor,
                     }}
                 />
+
                 <div>
                     <MenuButton
                         theme={theme}
@@ -64,7 +73,7 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload }: Props) => {
                     paddingLeft: '5px',
                 }}
             >
-                Last edited on
+                Last edited on {lastEditedOn}
             </p>
         </header>
     )

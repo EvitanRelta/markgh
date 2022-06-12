@@ -12,6 +12,7 @@ const UploadFileOption = ({ onUpload }: Props) => (
             paddingTop: '5px',
             paddingBottom: '5px',
             minWidth: '208.75px',
+            cursor: 'pointer',
         }}
     >
         <div style={{ display: 'none' }}>
