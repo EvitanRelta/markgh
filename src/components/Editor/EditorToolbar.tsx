@@ -8,6 +8,7 @@ import code from './toolbarFunctions/code'
 import codeBlock from './toolbarFunctions/codeBlock'
 import italic from './toolbarFunctions/italic'
 import link from './toolbarFunctions/link'
+import listItemSpacing from './toolbarFunctions/listItemSpacing'
 import orderedList from './toolbarFunctions/orderedList'
 import strikethrough from './toolbarFunctions/strikethrough'
 import underline from './toolbarFunctions/underline'
@@ -32,5 +33,8 @@ export default ({ editor }: Props) => (
         <button onClick={orderedList(editor)}>OrderedList</button>
         <button onClick={unorderedList(editor)}>UnorderedList</button>
         <AlignDropDown editor={editor} />
+        <button disabled={false} onClick={listItemSpacing(editor)}>
+            Toggle List Item Spacing
+        </button>
     </div>
 )
