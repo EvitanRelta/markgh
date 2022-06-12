@@ -6,10 +6,10 @@ const CopyClipboardButton = ({ onClick }) => {
         <div
             style={{
                 marginTop: 6,
-                border: '1px solid #d0cccc',
-                padding: 0,
+                padding: 2,
+                paddingTop: 6,
                 borderRadius: 5,
-                maxHeight: 37,
+                display: 'inline',
             }}
         >
             <IconButton

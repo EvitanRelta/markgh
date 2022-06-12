@@ -29,7 +29,9 @@ const Body = ({ showMarkdown, mdText, onTextChange, theme }: Props) => {
                 >
                     <TextEditor theme={theme} onTextChange={onTextChange} />
                 </div>
-                {showMarkdown && <MarkdownTextContainer mdText={mdText} />}
+                {showMarkdown && (
+                    <MarkdownTextContainer mdText={mdText} theme={theme} />
+                )}
             </div>
         </div>
     )
