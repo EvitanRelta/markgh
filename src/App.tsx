@@ -1,7 +1,6 @@
 import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Dexie from 'dexie'
-import Quill from 'quill'
 import { ReactElement, useEffect, useState } from 'react'
 import Body from './components/Body/Body'
 import Footer from './components/Footer/Footer'
@@ -34,8 +33,6 @@ export default function App(): ReactElement {
 
     //var for to contain markdown text
     const [mdText, setMdText] = useState('')
-
-    const [quill, setQuill] = useState<Quill | null>(null)
 
     //var for 'Last edited on'
     const [lastEditedOn, setLastEditedOn] = useState(
@@ -86,41 +83,11 @@ export default function App(): ReactElement {
         }
     }
 
-    //Toggle theme
-    const toggleTheme = () => {
-        setMode(mode === 'light' ? 'dark' : 'light')
-    }
+    const onTextChange = (editorContainer: HTMLElement) => {
+        const markdown = toMarkdown(editorContainer)
+        setMdText(markdown)
 
-    const getMarkdownText = () =>
-        toMarkdown(
-            document.getElementsByClassName('ql-editor')[0] as HTMLElement
-        )
-
-    //Updates preferred theme in localStorage
-    useEffect(() => {
-        localStorage['selectedTheme'] = mode
-    }, [mode])
-
-    //Updates markdown text when prompted to show it
-    useEffect(() => {
-        if (!showMarkdown) return
-        if (document.getElementsByClassName('ql-editor')[0] === undefined)
-            return
-
-        setMdText(getMarkdownText())
-    }, [showMarkdown])
-
-    //Updates markdown text when text is changed in quill
-    useEffect(() => {
-        if (quill === null) return
-
-        quill.on('text-change', () => {
-            setMdText(getMarkdownText())
-        })
-    }, [quill])
-
-    //Updates 'Last Edited On' in local storage when text is changed in quill
-    useEffect(() => {
+        //Updates 'Last Edited On' in local storage when text is changed in editor
         //Formatting time as text
         const date = new Date()
         const n = date.toDateString()
@@ -132,14 +99,19 @@ export default function App(): ReactElement {
         var dateShort = n.substring(4, n.length - 5)
         var dateTime = dateShort + ' ' + timeShort
 
-        //Updates 'Last Edited On' in localStorage and state when text in quill is changed
-        if (quill == null) return
-        quill.on('text-change', () => {
-            setLastEditedOn(dateTime)
-            localStorage['lastEditedOn'] = dateTime
-        })
-    }, [quill])
+        setLastEditedOn(dateTime)
+        localStorage['lastEditedOn'] = dateTime
+    }
 
+    //Toggle theme
+    const toggleTheme = () => {
+        setMode(mode === 'light' ? 'dark' : 'light')
+    }
+
+    //Updates preferred theme in localStorage
+    useEffect(() => {
+        localStorage['selectedTheme'] = mode
+    }, [mode])
     return (
         <ThemeProvider theme={selectedTheme}>
             <CssBaseline />
@@ -156,8 +128,8 @@ export default function App(): ReactElement {
                 <Body
                     showMarkdown={showMarkdown}
                     mdText={mdText}
-                    setQuill={setQuill}
                     theme={mode}
+                    onTextChange={onTextChange}
                 />
                 <div>
                     <Footer
