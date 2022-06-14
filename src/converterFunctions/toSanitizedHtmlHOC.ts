@@ -18,8 +18,6 @@ export default (
         !hasChildNodes
             ? `<${tag}${attributesStr} />`
             : isBlock
-            ? `<${tag}${attributesStr}>\n${`${
-                  addIndent ? indent(content) : content
-              }`}\n</${tag}>\n`
+            ? `<${tag}${attributesStr}>\n${`${addIndent ? indent(content) : content}`}\n</${tag}>\n`
             : `<${tag}${attributesStr}>${content}</${tag}>`
 }

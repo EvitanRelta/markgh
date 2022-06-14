@@ -28,12 +28,7 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload }: Props) => {
             <IconButton onClick={openMenu}>
                 <MoreHorizIcon />
             </IconButton>
-            <Menu
-                open={Boolean(anchor)}
-                keepMounted
-                anchorEl={anchor}
-                onClose={closeMenu}
-            >
+            <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 <MenuItem onClick={toggleTheme}>
                     <ThemeOption theme={theme} />
                 </MenuItem>

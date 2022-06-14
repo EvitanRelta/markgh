@@ -4,5 +4,6 @@
     "semi": false,
     "singleQuote": true,
     "jsxSingleQuote": true,
-    "endOfLine": "crlf"
+    "endOfLine": "crlf",
+    "printWidth": 100
 }

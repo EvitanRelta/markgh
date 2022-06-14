@@ -11,9 +11,7 @@ export default ({ editor }: Props) => {
 
         if (selectElement.value === '') return
 
-        textAlign(editor)(
-            selectElement.value as 'left' | 'center' | 'right' | 'justify'
-        )
+        textAlign(editor)(selectElement.value as 'left' | 'center' | 'right' | 'justify')
     }
 
     return (

@@ -40,10 +40,7 @@ allowedAttr.forEach(({ filter, allowedAttributes }, i) =>
     turndownHtmlOnly.addRule(`sanitizedElement${i}`, {
         filter,
         replacement: (content, node, options) =>
-            toSanitizedHtmlHOC(
-                node as TurndownAugmentedNode,
-                allowedAttributes
-            )(content),
+            toSanitizedHtmlHOC(node as TurndownAugmentedNode, allowedAttributes)(content),
     })
 )
 

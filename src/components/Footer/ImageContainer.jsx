@@ -59,9 +59,7 @@ const ImageConatiner = ({ db }) => {
                         src={image.base64}
                         alt={image.id}
                     />
-                    <button onClick={() => deleteImage(image.id)}>
-                        Delete
-                    </button>
+                    <button onClick={() => deleteImage(image.id)}>Delete</button>
                 </div>
             ))}
             <button onClick={() => deleteAllImages()}>Delete all images</button>

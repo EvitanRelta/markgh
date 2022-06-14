@@ -16,9 +16,7 @@ interface Props {
 }
 
 export default ({ theme, onTextChange }: Props) => {
-    const [editorContainer, setEditorContainer] = useState<HTMLElement | null>(
-        null
-    )
+    const [editorContainer, setEditorContainer] = useState<HTMLElement | null>(null)
     const editor = useEditor({
         extensions,
         content: placeholderEditorHtml,
@@ -47,8 +45,7 @@ export default ({ theme, onTextChange }: Props) => {
         if (!editorContainer) return
 
         const classList = editorContainer.classList
-        const isGithubCssClassName = (className: string) =>
-            /^gh-/.test(className)
+        const isGithubCssClassName = (className: string) => /^gh-/.test(className)
 
         Array.from(classList)
             .filter(isGithubCssClassName)
