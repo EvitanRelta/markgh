@@ -1,16 +1,16 @@
 import { FormatStrikethroughTwoTone } from '@mui/icons-material'
 import CodeIcon from '@mui/icons-material/Code'
+import DataObjectIcon from '@mui/icons-material/DataObject'
 import FormatBoldIcon from '@mui/icons-material/FormatBold'
 import FormatItalicIcon from '@mui/icons-material/FormatItalic'
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote'
 import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined'
+import ImageIcon from '@mui/icons-material/Image'
+import LinkIcon from '@mui/icons-material/Link'
 import IconButton from '@mui/material/IconButton'
 import { Editor } from '@tiptap/react'
 import AlignDropDown from './AlignDropDown'
 import HeadingDropDown from './HeadingDropDown'
-import addUrlImage from './toolbarFunctions/addUrlImage'
-import blockQuote from './toolbarFunctions/blockQuote'
-import codeBlock from './toolbarFunctions/codeBlock'
-import link from './toolbarFunctions/link'
 import orderedList from './toolbarFunctions/orderedList'
 import unorderedList from './toolbarFunctions/unorderedList'
 
@@ -25,11 +25,11 @@ const EditorToolbar = ({ editor }: Props) => {
         underline: FormatUnderlinedIcon,
         strikethrough: FormatStrikethroughTwoTone,
         code: CodeIcon,
-        blockQuote,
-        codeBlock,
-        link,
+        blockQuote: FormatQuoteIcon,
+        codeBlock: DataObjectIcon,
+        link: LinkIcon,
         HeadingDropDown,
-        addUrlImage,
+        addUrlImage: ImageIcon,
         orderedList,
         unorderedList,
         AlignDropDown,
