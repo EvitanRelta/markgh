@@ -12,6 +12,7 @@ import textAlign from './toolbarFunctions/textAlign'
 export default ({ editor }) => {
     const onChange = (alignment) => {
         textAlign(editor)(alignment)
+        closeMenu()
     }
     const [anchor, setAnchor] = useState(null)
 
