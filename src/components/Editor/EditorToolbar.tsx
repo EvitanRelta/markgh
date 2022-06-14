@@ -3,6 +3,8 @@ import CodeIcon from '@mui/icons-material/Code'
 import DataObjectIcon from '@mui/icons-material/DataObject'
 import FormatBoldIcon from '@mui/icons-material/FormatBold'
 import FormatItalicIcon from '@mui/icons-material/FormatItalic'
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote'
 import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined'
 import ImageIcon from '@mui/icons-material/Image'
@@ -11,8 +13,6 @@ import IconButton from '@mui/material/IconButton'
 import { Editor } from '@tiptap/react'
 import AlignDropDown from './AlignDropDown'
 import HeadingDropDown from './HeadingDropDown'
-import orderedList from './toolbarFunctions/orderedList'
-import unorderedList from './toolbarFunctions/unorderedList'
 
 interface Props {
     editor: Editor | null
@@ -30,8 +30,8 @@ const EditorToolbar = ({ editor }: Props) => {
         link: LinkIcon,
         HeadingDropDown,
         addUrlImage: ImageIcon,
-        orderedList,
-        unorderedList,
+        orderedList: FormatListNumberedIcon,
+        unorderedList: FormatListBulletedIcon,
         AlignDropDown,
     }
 
