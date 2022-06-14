@@ -1,5 +1,5 @@
+import TurndownAugmentedNode from '../sharedTypes/TurndownAugmentedNode'
 import indent from './indent'
-import TurndownAugmentedNode from './sharedTypes/TurndownAugmentedNode'
 
 export default (
     node: TurndownAugmentedNode,

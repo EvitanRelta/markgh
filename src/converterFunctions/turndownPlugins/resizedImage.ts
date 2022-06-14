@@ -1,6 +1,6 @@
 import { Plugin } from 'turndown'
+import toSanitizedHtmlHOC from '../helpers/toSanitizedHtmlHOC'
 import TurndownAugmentedNode from '../sharedTypes/TurndownAugmentedNode'
-import toSanitizedHtmlHOC from '../toSanitizedHtmlHOC'
 
 const resizedImage: Plugin = (service) => {
     service.addRule('resizedImage', {

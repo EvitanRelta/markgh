@@ -1,5 +1,5 @@
 import { Plugin } from 'turndown'
-import turndownHtmlOnly from '../turndownHtmlOnly'
+import turndownHtmlOnly from '../helpers/turndownHtmlOnly'
 
 const align: Plugin = (service) => {
     service.addRule('align', {
