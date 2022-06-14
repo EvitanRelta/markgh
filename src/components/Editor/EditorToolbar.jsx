@@ -46,13 +46,6 @@ const EditorToolbar = ({ editor }) => {
         <AlignDropDown editor={editor} />,
     ]
 
-    const getObjectIndexFromArray = (object, array) => {
-        for (let i = 0; i < array.length; i++) {
-            if (array[i] === object) return i
-        }
-        return -1
-    }
-
     const optionMapping = (option, index) => {
         return Array.isArray(option) ? (
             <IconButton
@@ -69,7 +62,7 @@ const EditorToolbar = ({ editor }) => {
             </IconButton>
         ) : (
             React.cloneElement(option, {
-                key: getObjectIndexFromArray(option, EditorOptions),
+                key: index,
             })
         )
     }
