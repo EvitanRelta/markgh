@@ -10,6 +10,7 @@ import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined'
 import ImageIcon from '@mui/icons-material/Image'
 import LinkIcon from '@mui/icons-material/Link'
 import IconButton from '@mui/material/IconButton'
+import { Editor } from '@tiptap/react'
 import React from 'react'
 import AlignDropDown from './AlignDropDown'
 import HeadingDropDown from './HeadingDropDown'
@@ -25,12 +26,15 @@ import strikethrough from './toolbarFunctions/strikethrough'
 import underline from './toolbarFunctions/underline'
 import unorderedList from './toolbarFunctions/unorderedList'
 
-// interface Props {
-//     editor: Editor | null;
-// }
+type ToolbarFunction = (editor: Editor | null) => () => void
+type FormatOption = [ToolbarFunction, JSX.Element] | JSX.Element
 
-const EditorToolbar = ({ editor }) => {
-    const editorOptions = [
+interface Props {
+    editor: Editor | null
+}
+
+const EditorToolbar = ({ editor }: Props) => {
+    const editorOptions: FormatOption[] = [
         [bold, <FormatBoldIcon />],
         [italic, <FormatItalicIcon />],
         [underline, <FormatUnderlinedIcon />],
@@ -46,8 +50,8 @@ const EditorToolbar = ({ editor }) => {
         <AlignDropDown editor={editor} />,
     ]
 
-    const optionMapping = (option, index) => {
-        return Array.isArray(option) ? (
+    const optionMapping = (option: FormatOption, index: number) =>
+        Array.isArray(option) ? (
             <IconButton
                 key={index}
                 onClick={option[0](editor)}
@@ -65,11 +69,8 @@ const EditorToolbar = ({ editor }) => {
                 key: index,
             })
         )
-    }
 
-    return (
-        <div style={{ marginLeft: 8 }}>{editorOptions.map(optionMapping)}</div>
-    )
+    return <div style={{ marginLeft: 8 }}>{editorOptions.map(optionMapping)}</div>
 }
 
 export default EditorToolbar
