@@ -1,3 +1,4 @@
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft'
 import { Menu, MenuItem } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
@@ -40,13 +41,9 @@ export default ({ editor }) => {
                 }}
             >
                 <FormatAlignLeftIcon />
+                <ExpandMoreIcon sx={{ fontSize: 'medium' }} />
             </IconButton>
-            <Menu
-                open={Boolean(anchor)}
-                keepMounted
-                anchorEl={anchor}
-                onClose={closeMenu}
-            >
+            <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 {alignOptions.map((option, index) => (
                     <MenuItem key={index} onClick={() => onChange(option)}>
                         {capitaliseFirstLetter(option)}
