@@ -55,7 +55,16 @@ const EditorToolbar = ({ editor }) => {
 
     const optionMapping = (option, index) => {
         return Array.isArray(option) ? (
-            <IconButton key={index} onClick={option[0](editor)}>
+            <IconButton
+                key={index}
+                onClick={option[0](editor)}
+                sx={{
+                    '&:hover': {
+                        borderRadius: 1,
+                    },
+                    marginTop: -1,
+                }}
+            >
                 {option[1]}
             </IconButton>
         ) : (
@@ -65,7 +74,9 @@ const EditorToolbar = ({ editor }) => {
         )
     }
 
-    return <>{EditorOptions.map(optionMapping)}</>
+    return (
+        <div style={{ marginLeft: 8 }}>{EditorOptions.map(optionMapping)}</div>
+    )
 }
 
 export default EditorToolbar

@@ -51,12 +51,13 @@ const HeadingDropDown = ({ editor }) => {
                     borderLeft: '1px solid #d0cccc',
                     borderRight: '1px solid #d0cccc',
                     minWidth: 117.43,
-                    minHeight: 36.5,
+                    maxHeight: 25,
                     paddingRight: 0.5,
                     paddingLeft: 1.5,
                     borderRadius: 0,
                     display: 'flex inline',
                     justifyContent: 'space-between',
+                    marginTop: -1,
                 }}
             >
                 <span style={{ display: 'inline' }}>

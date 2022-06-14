@@ -30,7 +30,15 @@ export default ({ editor }) => {
 
     return (
         <div style={{ display: 'inline' }}>
-            <IconButton onClick={openMenu}>
+            <IconButton
+                onClick={openMenu}
+                sx={{
+                    marginTop: -1,
+                    '&:hover': {
+                        borderRadius: 1,
+                    },
+                }}
+            >
                 <FormatAlignLeftIcon />
             </IconButton>
             <Menu
@@ -45,13 +53,6 @@ export default ({ editor }) => {
                     </MenuItem>
                 ))}
             </Menu>
-            {/* <select value='' onChange={onChange}>
-                <option hidden>Alignment</option>
-                <option value='left'>Left</option>
-                <option value='center'>Center</option>
-                <option value='right'>Right</option>
-                <option value='justify'>Justify</option>
-            </select> */}
         </div>
     )
 }
