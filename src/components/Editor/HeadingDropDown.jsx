@@ -34,8 +34,7 @@ const HeadingDropDown = ({ editor }) => {
     const headingLevel = editor ? getHeadingLevel(editor) : null
 
     const onChange = (value) => {
-        const level = parseInt(value)
-        heading(editor)(level)
+        heading(editor)(value)
         closeMenu()
     }
 
