@@ -30,7 +30,7 @@ import unorderedList from './toolbarFunctions/unorderedList'
 // }
 
 const EditorToolbar = ({ editor }) => {
-    const EditorOptions = [
+    const editorOptions = [
         [bold, <FormatBoldIcon />],
         [italic, <FormatItalicIcon />],
         [underline, <FormatUnderlinedIcon />],
@@ -75,7 +75,7 @@ const EditorToolbar = ({ editor }) => {
     }
 
     return (
-        <div style={{ marginLeft: 8 }}>{EditorOptions.map(optionMapping)}</div>
+        <div style={{ marginLeft: 8 }}>{editorOptions.map(optionMapping)}</div>
     )
 }
 
