@@ -34,6 +34,8 @@ const MarkdownTextContainer = ({ mdText, theme }: Props) => {
                 paddingRight: 8,
                 margin: '10px',
                 overflowX: 'auto',
+                marginTop: 41,
+                borderRadius: 6.5,
             }}
             onMouseLeave={() => setIsHovering(false)}
             onMouseEnter={() => setIsHovering(true)}
