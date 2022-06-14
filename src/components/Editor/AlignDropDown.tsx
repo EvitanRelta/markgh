@@ -2,21 +2,24 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft'
 import { Menu, MenuItem } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
+import { Editor } from '@tiptap/react'
 import { useState } from 'react'
 import textAlign from './toolbarFunctions/textAlign'
 
-// interface Props {
-//     editor: Editor | null;
-// }
+type Alignment = 'left' | 'center' | 'right' | 'justify'
 
-export default ({ editor }) => {
-    const onChange = (alignment) => {
+interface Props {
+    editor: Editor | null
+}
+
+export default ({ editor }: Props) => {
+    const onChange = (alignment: Alignment) => {
         textAlign(editor)(alignment)
         closeMenu()
     }
-    const [anchor, setAnchor] = useState(null)
+    const [anchor, setAnchor] = useState<Element | null>(null)
 
-    const openMenu = (e) => {
+    const openMenu: React.MouseEventHandler<HTMLButtonElement> = (e) => {
         setAnchor(e.currentTarget)
     }
 
@@ -24,9 +27,9 @@ export default ({ editor }) => {
         setAnchor(null)
     }
 
-    const alignOptions = ['left', 'center', 'right', 'justify']
+    const alignOptions: Alignment[] = ['left', 'center', 'right', 'justify']
 
-    const capitaliseFirstLetter = (string) => {
+    const capitaliseFirstLetter = (string: string) => {
         return string.charAt(0).toUpperCase() + string.substring(1)
     }
 

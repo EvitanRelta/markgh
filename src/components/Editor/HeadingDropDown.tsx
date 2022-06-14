@@ -1,17 +1,19 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Menu, MenuItem } from '@mui/material'
 import Button from '@mui/material/Button'
+import { Editor } from '@tiptap/react'
 import { useState } from 'react'
 import heading from './toolbarFunctions/heading'
 
-// interface Props {
-//     editor: Editor | null;
-// }
+type HeadingLevels = 0 | 1 | 2 | 3 | 4 | 5 | 6
+interface Props {
+    editor: Editor | null
+}
 
-const HeadingDropDown = ({ editor }) => {
-    const [anchor, setAnchor] = useState(null)
+const HeadingDropDown = ({ editor }: Props) => {
+    const [anchor, setAnchor] = useState<Element | null>(null)
 
-    const openMenu = (e) => {
+    const openMenu: React.MouseEventHandler<HTMLButtonElement> = (e) => {
         setAnchor(e.currentTarget)
     }
 
@@ -19,7 +21,7 @@ const HeadingDropDown = ({ editor }) => {
         setAnchor(null)
     }
 
-    const getHeadingLevel = (editor) => {
+    const getHeadingLevel = (editor: Editor) => {
         if (editor.isActive('paragraph')) return 0
 
         // If multiple different headings types are selected, 'headingAttr.level'
@@ -33,13 +35,12 @@ const HeadingDropDown = ({ editor }) => {
 
     const headingLevel = editor ? getHeadingLevel(editor) : null
 
-    const onChange = (value) => {
-        const level = parseInt(value)
-        heading(editor)(level)
+    const onChange = (value: HeadingLevels) => {
+        heading(editor)(value)
         closeMenu()
     }
 
-    const headingOptions = [1, 2, 3, 4, 5, 6, 0]
+    const headingOptions: HeadingLevels[] = [1, 2, 3, 4, 5, 6, 0]
 
     return (
         <div style={{ display: 'inline' }}>
@@ -77,12 +78,7 @@ const HeadingDropDown = ({ editor }) => {
                     }}
                 />
             </Button>
-            <Menu
-                open={Boolean(anchor)}
-                keepMounted
-                anchorEl={anchor}
-                onClose={closeMenu}
-            >
+            <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 {headingOptions.map((value, index) => (
                     <MenuItem key={index} onClick={() => onChange(value)}>
                         {value === 0 ? 'Normal' : 'Heading ' + value}
