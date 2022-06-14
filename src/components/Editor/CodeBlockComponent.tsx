@@ -1,3 +1,5 @@
+import { TextField } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { CodeBlockLowlightOptions } from '@tiptap/extension-code-block-lowlight'
 import { NodeViewContent, NodeViewWrapper } from '@tiptap/react'
 import { lowlight } from 'lowlight/lib/all'
@@ -14,6 +16,13 @@ interface Props {
     updateAttributes: (attributes: Record<string, any>) => any
     extension: { options: Options }
 }
+
+const TopRightTextField = styled(TextField)({
+    position: 'absolute',
+    right: '5px',
+    top: '5px',
+    width: '120px',
+})
 
 export default ({
     node: {
@@ -38,13 +47,6 @@ export default ({
         updateAttributes({ language: value })
         setIsValidLanguage(true)
     }
-    const inputStyle: React.CSSProperties = {
-        ...(inputValue !== '' && !isValidLanguage ? { color: 'red' } : {}),
-        position: 'absolute',
-        right: '0.5rem',
-        top: '0.5rem',
-        width: '120px',
-    }
 
     return (
         <NodeViewWrapper
@@ -52,9 +54,13 @@ export default ({
                 position: 'relative',
             }}
         >
-            <input
+            <TopRightTextField
+                error={inputValue !== '' && !isValidLanguage}
+                size='small'
+                variant='outlined'
+                label='Language'
+                margin='none'
                 contentEditable={false}
-                style={inputStyle}
                 type='text'
                 value={inputValue}
                 onChange={handleOnChange}
