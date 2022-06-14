@@ -24,7 +24,7 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload, lastEditedOn, m
         <header
             style={{
                 borderBottom: '1px solid gray',
-                marginBottom: '0px',
+                marginBottom: '15px',
                 padding: '10px',
                 paddingBottom: '0px',
                 lineHeight: '12px',
