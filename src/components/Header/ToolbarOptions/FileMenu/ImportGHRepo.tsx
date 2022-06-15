@@ -29,7 +29,7 @@ window.Buffer = window.Buffer || require('buffer').Buffer
 const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
     const [showPopover, setShowPopover] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
-    const [linkError, setLinkError] = useState(false)
+    const [linkError, setLinkError] = useState<boolean>(false)
 
     const openPopover = (e: React.MouseEvent) => {
         setShowPopover(true)
@@ -37,6 +37,8 @@ const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
 
     const closePopover = () => {
         setShowPopover(false)
+        setLinkError(false)
+        setAnchor(null)
     }
 
     const getRepo = () => {
@@ -69,7 +71,7 @@ const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
     }
 
     const linkInput = (
-        <Box sx={{ padding: 1 }}>
+        <Box sx={{ padding: 1, paddingTop: 1.5 }}>
             <TextField
                 error={linkError}
                 type='text'
@@ -87,7 +89,7 @@ const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
     )
 
     return (
-        <MenuItem divider sx={{ paddingBottom: 1.3 }} onMouseEnter={closePopover}>
+        <MenuItem divider sx={{ paddingBottom: 1.3 }}>
             <GitHubIcon sx={{ marginLeft: 0.5 }} />
             <ListItemText sx={{ marginLeft: 1.7 }}>Import from GitHub...</ListItemText>
             <ArrowForwardIosIcon
