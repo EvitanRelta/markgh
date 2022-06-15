@@ -27,6 +27,27 @@ const recursivelyEscape = (element: Element) => {
     Array.from(element.children).forEach(recursivelyEscape)
 }
 
+const removeCodeBlockWrapper = (htmlElement: Element) => {
+    const removeInnerWrapper = (preElement: Element) => {
+        const codeElement = preElement.firstElementChild
+        const innerDivElement = codeElement?.firstElementChild
+        if (!codeElement || !innerDivElement) throw new Error('Error parsing codeblock.')
+
+        codeElement.removeChild(innerDivElement)
+        codeElement.append(...Array.from(innerDivElement.childNodes))
+    }
+
+    htmlElement.querySelectorAll('.react-renderer.node-codeBlock').forEach((wrapper) => {
+        const parentElement = wrapper.parentElement
+        const preElement = wrapper.querySelector('pre')
+        if (!parentElement || !preElement) throw new Error('Error parsing codeblock.')
+
+        parentElement.replaceChild(preElement, wrapper)
+        removeInnerWrapper(preElement)
+    })
+}
+
 export default (htmlElement: Element) => {
     recursivelyEscape(htmlElement)
+    removeCodeBlockWrapper(htmlElement)
 }

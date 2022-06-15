@@ -5,6 +5,7 @@ import Underline from '@tiptap/extension-underline'
 import StarterKit from '@tiptap/starter-kit'
 import CodeNoExcludes from './CodeNoExcludes'
 import SizedImage from './SizedImage'
+import SyntaxHighlightCodeBlock from './SyntaxHighlightCodeBlock'
 import TextAlignAttr from './TextAlignAttr'
 
 export default [
@@ -12,6 +13,7 @@ export default [
         code: false,
         bulletList: false,
         orderedList: false,
+        codeBlock: false,
     }),
     SizedImage.configure({
         inline: true,
@@ -28,4 +30,5 @@ export default [
     OrderedList.configure({
         HTMLAttributes: { class: 'no-list-item-spacing' },
     }),
+    SyntaxHighlightCodeBlock,
 ]
