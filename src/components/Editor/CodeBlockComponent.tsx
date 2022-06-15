@@ -79,7 +79,11 @@ export default ({
                 onChange={handleOnChange}
             />
             <pre>
-                <ModifiedNodeViewContent as='code' className={`language-${language}`} />
+                <ModifiedNodeViewContent
+                    as='code'
+                    className={`language-${language}`}
+                    style={{ whiteSpace: 'pre' }}
+                />
             </pre>
         </NodeViewWrapper>
     )
