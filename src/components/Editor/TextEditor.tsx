@@ -2,7 +2,6 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import '../../githubMarkdownCss/importAllGithubCss'
-import placeholderEditorHtml from '../../placeholderEditorHtml'
 import EditorToolbar from './EditorToolbar'
 import extensions from './extensions/extensions'
 
@@ -20,7 +19,7 @@ export default ({ theme, onTextChange }: Props) => {
     const [editorContainer, setEditorContainer] = useState<HTMLElement | null>(null)
     const editor = useEditor({
         extensions,
-        content: placeholderEditorHtml,
+        content: '',
     })
 
     useEffect(() => {

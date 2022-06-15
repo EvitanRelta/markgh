@@ -10,9 +10,19 @@ type Props = {
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     lastEditedOn: string
     mdText: string
+    setMdText: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Header = ({ title, theme, toggleTheme, setTitle, onUpload, lastEditedOn, mdText }: Props) => {
+const Header = ({
+    title,
+    theme,
+    toggleTheme,
+    setTitle,
+    onUpload,
+    lastEditedOn,
+    mdText,
+    setMdText,
+}: Props) => {
     //var for current file name
     const [text, setText] = useState(title)
 
@@ -70,7 +80,12 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload, lastEditedOn, m
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer onUpload={onUpload} mdText={mdText} title={title} />
+                <ToolbarContainer
+                    onUpload={onUpload}
+                    mdText={mdText}
+                    title={title}
+                    setMdText={setMdText}
+                />
                 <div
                     style={{
                         color: 'gray',

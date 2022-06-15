@@ -120,6 +120,7 @@ export default function App(): ReactElement {
                     onUpload={onUpload}
                     lastEditedOn={lastEditedOn}
                     mdText={mdText}
+                    setMdText={setMdText}
                 />
                 <Body
                     showMarkdown={showMarkdown}
