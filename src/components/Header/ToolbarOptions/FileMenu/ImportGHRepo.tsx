@@ -29,7 +29,8 @@ window.Buffer = window.Buffer || require('buffer').Buffer
 const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
     const [showPopover, setShowPopover] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
-    const [linkError, setLinkError] = useState<boolean>(false)
+    const [showError, setShowError] = useState<boolean>(false)
+    const [showLoading, setShowLoading] = useState<boolean>(false)
 
     const openPopover = (e: React.MouseEvent) => {
         setShowPopover(true)
@@ -37,11 +38,13 @@ const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
 
     const closePopover = () => {
         setShowPopover(false)
-        setLinkError(false)
+        setShowError(false)
+        setShowLoading(false)
         setAnchor(null)
     }
 
     const getRepo = () => {
+        setShowLoading(true)
         git.clone({
             fs,
             http,
@@ -52,7 +55,7 @@ const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
             depth: 1,
         })
             .catch((err) => {
-                setLinkError(true)
+                setShowError(true)
                 console.log(err)
             })
             .then(() =>
@@ -66,6 +69,7 @@ const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
                     setMdText(data)
                     setShowPopover(false)
                     indexedDB.deleteDatabase('fs')
+                    setShowLoading(false)
                 })
             )
     }
@@ -73,14 +77,21 @@ const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
     const linkInput = (
         <Box sx={{ padding: 1, paddingTop: 1.5 }}>
             <TextField
-                error={linkError}
+                error={showError}
                 type='text'
                 size='small'
                 sx={{ minWidth: 300 }}
                 label={'Repository Link'}
                 placeholder={'https://github.com/user/project.git'}
-                onChange={(e) => setLink(e.target.value)}
-                helperText={linkError && 'Invalid link! (Repo has to be public)'}
+                onChange={(e) => {
+                    setLink(e.target.value)
+                    setShowError(false)
+                    setShowLoading(false)
+                }}
+                helperText={
+                    (showError && 'Invalid link! (Repo has to be public)') ||
+                    (showLoading && 'Loading...')
+                }
             />
             <Button sx={{ marginLeft: 0.3 }} onClick={getRepo}>
                 OK
