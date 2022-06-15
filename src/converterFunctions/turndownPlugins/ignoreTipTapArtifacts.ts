@@ -1,5 +1,5 @@
 import { Plugin } from 'turndown'
-import tipTapArtifactClassNames from './constants/tipTapArtifactClassNames'
+import tipTapArtifactClassNames from '../helpers/tipTapArtifactClassNames'
 
 const ignoreTipTapArtifacts: Plugin = (service) => {
     service.addRule('ignoreTipTapArtifacts', {

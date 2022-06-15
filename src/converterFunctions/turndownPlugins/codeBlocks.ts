@@ -1,6 +1,6 @@
 import { Plugin, Rule } from 'turndown'
-import turndownHtmlOnly from '../turndownHtmlOnly'
-import tipTapArtifactClassNames from './constants/tipTapArtifactClassNames'
+import tipTapArtifactClassNames from '../helpers/tipTapArtifactClassNames'
+import turndownHtmlOnly from '../helpers/turndownHtmlOnly'
 
 const codeBlocks: Plugin = (service) => {
     //@ts-expect-error
