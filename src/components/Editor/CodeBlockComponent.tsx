@@ -18,10 +18,21 @@ interface Props {
 }
 
 const TopRightTextField = styled(TextField)({
+    '& label.MuiInputLabel-root.MuiInputLabel-shrink': {
+        fontSize: '13px',
+    },
+    '& label.MuiInputLabel-root:not(.MuiInputLabel-shrink)': {
+        transform: 'translate(12px, 6px)',
+        fontSize: '13px',
+    },
+    '& input.MuiInputBase-input': {
+        padding: '5px 12px',
+        fontSize: '13px',
+    },
     position: 'absolute',
     right: '5px',
     top: '5px',
-    width: '120px',
+    width: '100px',
 })
 
 export default ({
