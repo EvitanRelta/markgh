@@ -9,7 +9,9 @@ import FormatQuoteIcon from '@mui/icons-material/FormatQuote'
 import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined'
 import ImageIcon from '@mui/icons-material/Image'
 import LinkIcon from '@mui/icons-material/Link'
+import { SvgIconTypeMap } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
+import { OverridableComponent } from '@mui/material/OverridableComponent'
 import { Editor } from '@tiptap/react'
 import React from 'react'
 import AlignDropDown from './AlignDropDown'
@@ -26,35 +28,46 @@ import strikethrough from './toolbarFunctions/strikethrough'
 import underline from './toolbarFunctions/underline'
 import unorderedList from './toolbarFunctions/unorderedList'
 
+interface FormatOptionIcon extends OverridableComponent<SvgIconTypeMap<{}, 'svg'>> {
+    muiName: string
+}
+type FormatOptionComponent = (props: { editor: Editor | null }) => JSX.Element
 type ToolbarFunction = (editor: Editor | null) => () => void
-type FormatOption = [ToolbarFunction, JSX.Element] | JSX.Element
+type FormatOption = [ToolbarFunction, FormatOptionIcon] | FormatOptionComponent
+
+const editorOptions: FormatOption[] = [
+    [bold, FormatBoldIcon],
+    [italic, FormatItalicIcon],
+    [underline, FormatUnderlinedIcon],
+    [strikethrough, FormatStrikethroughTwoTone],
+    [code, CodeIcon],
+    [blockQuote, FormatQuoteIcon],
+    [codeBlock, DataObjectIcon],
+    [link, LinkIcon],
+    HeadingDropDown,
+    [addUrlImage, ImageIcon],
+    [orderedList, FormatListNumberedIcon],
+    [unorderedList, FormatListBulletedIcon],
+    AlignDropDown,
+]
 
 interface Props {
     editor: Editor | null
 }
 
 const EditorToolbar = ({ editor }: Props) => {
-    const editorOptions: FormatOption[] = [
-        [bold, <FormatBoldIcon />],
-        [italic, <FormatItalicIcon />],
-        [underline, <FormatUnderlinedIcon />],
-        [strikethrough, <FormatStrikethroughTwoTone />],
-        [code, <CodeIcon />],
-        [blockQuote, <FormatQuoteIcon />],
-        [codeBlock, <DataObjectIcon />],
-        [link, <LinkIcon />],
-        <HeadingDropDown editor={editor} />,
-        [addUrlImage, <ImageIcon />],
-        [orderedList, <FormatListNumberedIcon />],
-        [unorderedList, <FormatListBulletedIcon />],
-        <AlignDropDown editor={editor} />,
-    ]
+    const optionMapping = (option: FormatOption, index: number) => {
+        if (!Array.isArray(option)) {
+            const FormatOptionComponent = option
+            return <FormatOptionComponent key={index} editor={editor} />
+        }
 
-    const optionMapping = (option: FormatOption, index: number) =>
-        Array.isArray(option) ? (
+        const [toolbarFunction, FormatOptionIcon] = option
+
+        return (
             <IconButton
                 key={index}
-                onClick={option[0](editor)}
+                onClick={toolbarFunction(editor)}
                 sx={{
                     '&:hover': {
                         borderRadius: 1,
@@ -62,15 +75,12 @@ const EditorToolbar = ({ editor }: Props) => {
                     marginTop: -1,
                 }}
             >
-                {option[1]}
+                <FormatOptionIcon />
             </IconButton>
-        ) : (
-            React.cloneElement(option, {
-                key: index,
-            })
         )
+    }
 
     return <div style={{ marginLeft: 8 }}>{editorOptions.map(optionMapping)}</div>
 }
 
-export default EditorToolbar
+export default React.memo(EditorToolbar)
