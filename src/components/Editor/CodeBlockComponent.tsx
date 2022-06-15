@@ -28,6 +28,7 @@ const TopRightTextField = styled(TextField)({
     '& input.MuiInputBase-input': {
         padding: '5px 12px',
         fontSize: '13px',
+        background: 'rgba(255, 255, 255, 0.8)',
     },
     position: 'absolute',
     right: '5px',
