@@ -27,8 +27,9 @@ window.global = window
 window.Buffer = window.Buffer || require('buffer').Buffer
 
 const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
-    const [showPopover, setShowPopover] = useState(false)
-    const [link, setLink] = useState('')
+    const [showPopover, setShowPopover] = useState<boolean>(false)
+    const [link, setLink] = useState<string>('')
+    const [linkError, setLinkError] = useState(false)
 
     const openPopover = (e: React.MouseEvent) => {
         setShowPopover(true)
@@ -48,7 +49,10 @@ const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
             singleBranch: true,
             depth: 1,
         })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                setLinkError(true)
+                console.log(err)
+            })
             .then(() =>
                 fs.readFile('/README.md', 'utf8', (err, data) => {
                     if (err) {
@@ -67,12 +71,14 @@ const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
     const linkInput = (
         <Box sx={{ padding: 1 }}>
             <TextField
+                error={linkError}
                 type='text'
                 size='small'
                 sx={{ minWidth: 300 }}
                 label={'Repository Link'}
                 placeholder={'https://github.com/user/project.git'}
                 onChange={(e) => setLink(e.target.value)}
+                helperText={linkError && 'Invalid link! (Repo has to be public)'}
             />
             <Button sx={{ marginLeft: 0.3 }} onClick={getRepo}>
                 OK
