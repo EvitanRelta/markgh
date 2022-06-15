@@ -2,8 +2,9 @@ import { TextField } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { CodeBlockLowlightOptions } from '@tiptap/extension-code-block-lowlight'
 import { NodeViewWrapper } from '@tiptap/react'
+import _ from 'lodash'
 import { lowlight } from 'lowlight/lib/all'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { ModifiedNodeViewContent } from './ModifiedNodeViewContent'
 
 interface Options extends CodeBlockLowlightOptions {
@@ -53,16 +54,18 @@ export default ({
     const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         const value = event.target.value
         setInputValue(value)
-        if (!lowlight.registered(value)) {
-            updateAttributes({ language: 'plaintext' })
-            return setIsValidLanguage(false)
-        }
-        updateAttributes({ language: value })
-        setIsValidLanguage(true)
+        const isValidLanguage = lowlight.registered(value)
+        setIsValidLanguage(isValidLanguage)
+        debouncedUpdateLanguage(isValidLanguage ? value : null)
     }
 
     const isPlainTextLanguage = (language: string) =>
         ['plaintext', 'txt', 'text'].includes(language)
+
+    const debouncedUpdateLanguage = useCallback(
+        _.debounce((language) => updateAttributes({ language: language || 'plaintext' }), 300),
+        []
+    )
 
     return (
         <NodeViewWrapper
