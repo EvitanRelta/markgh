@@ -6,7 +6,7 @@ import ThemeOption from './MenuOptions/ThemeOption'
 
 type Props = {
     theme: string
-    toggleTheme: React.MouseEventHandler<HTMLButtonElement | HTMLElement>
+    toggleTheme: () => void
     title: string
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
@@ -23,13 +23,18 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload }: Props) => {
         setAnchor(null)
     }
 
+    const handleChangeTheme = () => {
+        toggleTheme()
+        closeMenu()
+    }
+
     return (
         <div>
             <IconButton onClick={openMenu}>
                 <MoreHorizIcon />
             </IconButton>
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
-                <MenuItem onClick={toggleTheme}>
+                <MenuItem onClick={handleChangeTheme}>
                     <ThemeOption theme={theme} />
                 </MenuItem>
             </Menu>

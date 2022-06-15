@@ -5,7 +5,7 @@ import ToolbarContainer from './ToolbarContainer'
 type Props = {
     title: string
     theme: string
-    toggleTheme: React.MouseEventHandler<HTMLButtonElement>
+    toggleTheme: () => void
     setTitle: React.Dispatch<React.SetStateAction<string>>
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     lastEditedOn: string
