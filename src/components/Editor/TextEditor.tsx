@@ -1,4 +1,5 @@
 import { EditorContent, useEditor } from '@tiptap/react'
+import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import '../../githubMarkdownCss/importAllGithubCss'
 import placeholderEditorHtml from '../../placeholderEditorHtml'
@@ -33,9 +34,12 @@ export default ({ theme, onTextChange }: Props) => {
             onTextChange(editor.view.dom)
         })
 
-        editor.on('update', ({ editor }) => {
-            onTextChange(editor.view.dom)
-        })
+        editor.on(
+            'update',
+            _.debounce(({ editor }) => {
+                onTextChange(editor.view.dom)
+            }, 50)
+        )
 
         const parentContainer = editorContainer.parentElement as HTMLDivElement
         parentContainer.classList.add('markdown-container')
