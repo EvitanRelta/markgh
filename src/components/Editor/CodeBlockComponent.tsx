@@ -61,6 +61,9 @@ export default ({
         setIsValidLanguage(true)
     }
 
+    const isPlainTextLanguage = (language: string) =>
+        ['plaintext', 'txt', 'text'].includes(language)
+
     return (
         <NodeViewWrapper
             style={{
@@ -82,7 +85,11 @@ export default ({
             <pre>
                 <ModifiedNodeViewContent
                     as='code'
-                    className={`language-${language}`}
+                    className={
+                        language && !isPlainTextLanguage(language)
+                            ? `language-${language}`
+                            : undefined
+                    }
                     style={{ whiteSpace: 'pre' }}
                 />
             </pre>
