@@ -9,7 +9,7 @@ import FormatQuoteIcon from '@mui/icons-material/FormatQuote'
 import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined'
 import ImageIcon from '@mui/icons-material/Image'
 import LinkIcon from '@mui/icons-material/Link'
-import { SvgIconTypeMap } from '@mui/material'
+import { styled, SvgIconTypeMap } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import { OverridableComponent } from '@mui/material/OverridableComponent'
 import { Editor } from '@tiptap/react'
@@ -51,6 +51,13 @@ const editorOptions: FormatOption[] = [
     AlignDropDown,
 ]
 
+const StyledIconButton = styled(IconButton)({
+    '&:hover': {
+        borderRadius: 1,
+    },
+    marginTop: -1,
+})
+
 interface Props {
     editor: Editor | null
 }
@@ -65,18 +72,9 @@ const EditorToolbar = ({ editor }: Props) => {
         const [toolbarFunction, FormatOptionIcon] = option
 
         return (
-            <IconButton
-                key={index}
-                onClick={toolbarFunction(editor)}
-                sx={{
-                    '&:hover': {
-                        borderRadius: 1,
-                    },
-                    marginTop: -1,
-                }}
-            >
+            <StyledIconButton key={index} onClick={toolbarFunction(editor)}>
                 <FormatOptionIcon />
-            </IconButton>
+            </StyledIconButton>
         )
     }
 
