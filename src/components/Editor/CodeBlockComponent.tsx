@@ -1,9 +1,10 @@
 import { TextField } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { CodeBlockLowlightOptions } from '@tiptap/extension-code-block-lowlight'
-import { NodeViewContent, NodeViewWrapper } from '@tiptap/react'
+import { NodeViewWrapper } from '@tiptap/react'
 import { lowlight } from 'lowlight/lib/all'
 import { useState } from 'react'
+import { ModifiedNodeViewContent } from './ModifiedNodeViewContent'
 
 interface Options extends CodeBlockLowlightOptions {
     lowlight: typeof lowlight
@@ -78,7 +79,7 @@ export default ({
                 onChange={handleOnChange}
             />
             <pre>
-                <NodeViewContent as='code' className={`language-${language}`} />
+                <ModifiedNodeViewContent as='code' className={`language-${language}`} />
             </pre>
         </NodeViewWrapper>
     )
