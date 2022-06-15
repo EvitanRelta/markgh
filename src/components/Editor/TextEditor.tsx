@@ -9,6 +9,7 @@ import '../../customCss/fix-codeblock-bottom-spacing.css'
 import '../../customCss/fix-codeblock-cannot-type.css'
 import '../../customCss/no-list-item-spacing.css'
 import '../../customCss/remove-editing-border.css'
+import placeholderEditorHtml from '../../placeholderEditorHtml'
 
 interface Props {
     theme: 'light' | 'dark'
@@ -19,7 +20,7 @@ export default ({ theme, onTextChange }: Props) => {
     const [editorContainer, setEditorContainer] = useState<HTMLElement | null>(null)
     const editor = useEditor({
         extensions,
-        content: '',
+        content: placeholderEditorHtml,
     })
 
     useEffect(() => {
