@@ -72,6 +72,7 @@ export default ({
                 size='small'
                 variant='outlined'
                 label='Language'
+                placeholder='plaintext'
                 margin='none'
                 contentEditable={false}
                 type='text'
