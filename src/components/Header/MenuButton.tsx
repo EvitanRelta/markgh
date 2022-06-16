@@ -1,4 +1,4 @@
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { Menu, MenuItem } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import { useState } from 'react'
@@ -31,7 +31,7 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload }: Props) => {
     return (
         <div>
             <IconButton onClick={openMenu}>
-                <MoreHorizIcon />
+                <AccountCircleIcon />
             </IconButton>
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 <MenuItem onClick={handleChangeTheme}>
