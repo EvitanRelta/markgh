@@ -1,7 +1,12 @@
-import { GithubAuthProvider } from 'firebase/auth'
+import { GithubAuthProvider, User } from 'firebase/auth'
 import { useState } from 'react'
 import MenuButton from './MenuButton'
 import ToolbarContainer from './ToolbarContainer'
+
+interface UserStatus {
+    loggedIn: boolean
+    info: User | null
+}
 
 type Props = {
     title: string
@@ -14,7 +19,7 @@ type Props = {
     setMdText: React.Dispatch<React.SetStateAction<string>>
     onLogin: (provider: GithubAuthProvider) => Promise<void>
     onLogout: () => Promise<void>
-    loggedIn: boolean
+    user: UserStatus
 }
 
 const Header = ({
@@ -28,7 +33,7 @@ const Header = ({
     setMdText,
     onLogin,
     onLogout,
-    loggedIn,
+    user,
 }: Props) => {
     //var for current file name
     const [text, setText] = useState(title)
@@ -79,7 +84,7 @@ const Header = ({
                         onUpload={onUpload}
                         onLogin={onLogin}
                         onLogout={onLogout}
-                        loggedIn={loggedIn}
+                        user={user}
                     />
                 </div>
             </div>

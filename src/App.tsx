@@ -2,7 +2,7 @@ import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Dexie from 'dexie'
 import { initializeApp } from 'firebase/app'
-import { Auth, getAuth, GithubAuthProvider, onAuthStateChanged } from 'firebase/auth'
+import { Auth, getAuth, GithubAuthProvider, onAuthStateChanged, User } from 'firebase/auth'
 import { ReactElement, useEffect, useState } from 'react'
 import firebaseConfig from './components/Authentication/config/firebaseConfig'
 import loginAuth from './components/Authentication/service/loginAuth'
@@ -12,10 +12,15 @@ import Version from './components/Footer/Version'
 import Header from './components/Header/Header'
 import toMarkdown from './converterFunctions/toMarkdown'
 
+interface UserStatus {
+    loggedIn: boolean
+    info: User | null
+}
+
 export default function App(): ReactElement {
     //Initialises firebase for authentication
     const [auth, setAuth] = useState<Auth | null>(null)
-    const [loggedIn, setLoggedIn] = useState<boolean>(false)
+    const [user, setUser] = useState<UserStatus>({ loggedIn: false, info: null })
     useEffect(() => {
         const firebase = initializeApp(firebaseConfig)
         setAuth(getAuth())
@@ -27,10 +32,10 @@ export default function App(): ReactElement {
             if (user) {
                 console.log(auth.currentUser)
 
-                setLoggedIn(true)
+                setUser({ loggedIn: true, info: auth.currentUser })
             } else {
                 console.log(user)
-                setLoggedIn(false)
+                setUser({ loggedIn: false, info: null })
             }
         })
     }, [auth])
@@ -159,7 +164,7 @@ export default function App(): ReactElement {
                     setMdText={setMdText}
                     onLogin={onLogin}
                     onLogout={onLogout}
-                    loggedIn={loggedIn}
+                    user={user}
                 />
                 <Body
                     showMarkdown={showMarkdown}

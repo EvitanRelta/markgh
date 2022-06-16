@@ -8,7 +8,7 @@ type Props = {
 
 const ThemeOption = ({ theme }: Props) => {
     return (
-        <div style={{ cursor: 'pointer', minWidth: 140 }}>
+        <div style={{ cursor: 'pointer', minWidth: 140, marginLeft: -2 }}>
             <IconButton color='inherit'>
                 {theme === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>

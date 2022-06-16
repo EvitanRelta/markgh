@@ -1,11 +1,17 @@
 import { Menu, MenuItem } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
-import { GithubAuthProvider } from 'firebase/auth'
+import { GithubAuthProvider, User } from 'firebase/auth'
 import { useState } from 'react'
 import { githubProvider } from '.././Authentication/config/authMethod'
 import Login from './MenuOptions/Login'
 import Logout from './MenuOptions/Logout'
 import ThemeOption from './MenuOptions/ThemeOption'
+import UserInfo from './MenuOptions/UserInfo'
+
+interface UserStatus {
+    loggedIn: boolean
+    info: User | null
+}
 
 type Props = {
     theme: string
@@ -14,18 +20,10 @@ type Props = {
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     onLogin: (provider: GithubAuthProvider) => Promise<void>
     onLogout: () => Promise<void>
-    loggedIn: boolean
+    user: UserStatus
 }
 
-const MenuButton = ({
-    theme,
-    toggleTheme,
-    title,
-    onUpload,
-    onLogin,
-    onLogout,
-    loggedIn,
-}: Props) => {
+const MenuButton = ({ theme, toggleTheme, title, onUpload, onLogin, onLogout, user }: Props) => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
     //const [selected, setSelected] = useState(-1)
 
@@ -42,12 +40,19 @@ const MenuButton = ({
         closeMenu()
     }
 
+    const userPhoto = user.info === null ? '' : (user.info.photoURL as string)
+
     return (
         <div>
-            <Avatar src='' sx={{ width: 24, height: 24 }} onClick={openMenu} />
+            <Avatar
+                src={userPhoto}
+                sx={{ width: 30, height: 30, marginRight: 1, marginTop: 1, cursor: 'pointer' }}
+                onClick={openMenu}
+            />
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
-                <MenuItem onClick={() => (loggedIn ? onLogout() : onLogin(githubProvider))}>
-                    {loggedIn ? <Logout /> : <Login />}
+                <UserInfo user={user} />
+                <MenuItem onClick={() => (user.loggedIn ? onLogout() : onLogin(githubProvider))}>
+                    {user.loggedIn ? <Logout /> : <Login />}
                 </MenuItem>
                 <MenuItem onClick={handleChangeTheme}>
                     <ThemeOption theme={theme} />
