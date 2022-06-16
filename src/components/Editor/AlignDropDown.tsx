@@ -1,6 +1,7 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft'
 import { Menu, MenuItem } from '@mui/material'
+import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import { Editor } from '@tiptap/react'
 import { useState } from 'react'
@@ -34,7 +35,7 @@ export default ({ editor }: Props) => {
     }
 
     return (
-        <div style={{ display: 'inline' }}>
+        <Box style={{ display: 'inline' }}>
             <IconButton
                 onClick={openMenu}
                 sx={{
@@ -54,6 +55,6 @@ export default ({ editor }: Props) => {
                     </MenuItem>
                 ))}
             </Menu>
-        </div>
+        </Box>
     )
 }

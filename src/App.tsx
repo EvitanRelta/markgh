@@ -1,4 +1,5 @@
 import { CssBaseline } from '@mui/material'
+import Box from '@mui/material/Box'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Dexie, { Table } from 'dexie'
 import { initializeApp } from 'firebase/app'
@@ -218,7 +219,7 @@ export default function App(): ReactElement {
     return (
         <ThemeProvider theme={selectedTheme}>
             <CssBaseline />
-            <div id='app'>
+            <Box id='app'>
                 <Header
                     title={title}
                     setTitle={setTitle}
@@ -230,15 +231,15 @@ export default function App(): ReactElement {
                     ghToken={ghToken}
                 />
                 <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
-                <div>
+                <Box>
                     <Footer
                         onClick={() => setShowMarkdown(!showMarkdown)}
                         showMarkdown={showMarkdown}
                         db={db}
                     />
-                </div>
+                </Box>
                 <Version />
-            </div>
+            </Box>
         </ThemeProvider>
     )
 }

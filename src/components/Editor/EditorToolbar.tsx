@@ -9,7 +9,7 @@ import FormatQuoteIcon from '@mui/icons-material/FormatQuote'
 import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined'
 import ImageIcon from '@mui/icons-material/Image'
 import LinkIcon from '@mui/icons-material/Link'
-import { styled, SvgIconTypeMap } from '@mui/material'
+import { Box, styled, SvgIconTypeMap } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import { OverridableComponent } from '@mui/material/OverridableComponent'
 import { Editor } from '@tiptap/react'
@@ -78,7 +78,7 @@ const EditorToolbar = ({ editor }: Props) => {
         )
     }
 
-    return <div style={{ marginLeft: 8 }}>{editorOptions.map(optionMapping)}</div>
+    return <Box sx={{ marginLeft: 8 }}>{editorOptions.map(optionMapping)}</Box>
 }
 
 export default React.memo(EditorToolbar)
