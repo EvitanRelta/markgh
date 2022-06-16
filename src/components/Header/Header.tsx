@@ -14,6 +14,7 @@ type Props = {
     setMdText: React.Dispatch<React.SetStateAction<string>>
     onLogin: (provider: GithubAuthProvider) => Promise<void>
     onLogout: () => Promise<void>
+    loggedIn: boolean
 }
 
 const Header = ({
@@ -27,6 +28,7 @@ const Header = ({
     setMdText,
     onLogin,
     onLogout,
+    loggedIn,
 }: Props) => {
     //var for current file name
     const [text, setText] = useState(title)
@@ -77,6 +79,7 @@ const Header = ({
                         onUpload={onUpload}
                         onLogin={onLogin}
                         onLogout={onLogout}
+                        loggedIn={loggedIn}
                     />
                 </div>
             </div>

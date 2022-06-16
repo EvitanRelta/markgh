@@ -1,10 +1,10 @@
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { Menu, MenuItem } from '@mui/material'
-import IconButton from '@mui/material/IconButton'
+import Avatar from '@mui/material/Avatar'
 import { GithubAuthProvider } from 'firebase/auth'
 import { useState } from 'react'
 import { githubProvider } from '.././Authentication/config/authMethod'
 import Login from './MenuOptions/Login'
+import Logout from './MenuOptions/Logout'
 import ThemeOption from './MenuOptions/ThemeOption'
 
 type Props = {
@@ -14,9 +14,18 @@ type Props = {
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     onLogin: (provider: GithubAuthProvider) => Promise<void>
     onLogout: () => Promise<void>
+    loggedIn: boolean
 }
 
-const MenuButton = ({ theme, toggleTheme, title, onUpload, onLogin, onLogout }: Props) => {
+const MenuButton = ({
+    theme,
+    toggleTheme,
+    title,
+    onUpload,
+    onLogin,
+    onLogout,
+    loggedIn,
+}: Props) => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
     //const [selected, setSelected] = useState(-1)
 
@@ -35,12 +44,10 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload, onLogin, onLogout }: 
 
     return (
         <div>
-            <IconButton onClick={openMenu}>
-                <AccountCircleIcon />
-            </IconButton>
+            <Avatar src='' sx={{ width: 24, height: 24 }} onClick={openMenu} />
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
-                <MenuItem onClick={() => onLogin(githubProvider)}>
-                    <Login />
+                <MenuItem onClick={() => (loggedIn ? onLogout() : onLogin(githubProvider))}>
+                    {loggedIn ? <Logout /> : <Login />}
                 </MenuItem>
                 <MenuItem onClick={handleChangeTheme}>
                     <ThemeOption theme={theme} />

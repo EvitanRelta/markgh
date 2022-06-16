@@ -25,7 +25,8 @@ export default function App(): ReactElement {
         if (auth === null) return
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log(user)
+                console.log(auth.currentUser)
+
                 setLoggedIn(true)
             } else {
                 console.log(user)
@@ -158,6 +159,7 @@ export default function App(): ReactElement {
                     setMdText={setMdText}
                     onLogin={onLogin}
                     onLogout={onLogout}
+                    loggedIn={loggedIn}
                 />
                 <Body
                     showMarkdown={showMarkdown}
