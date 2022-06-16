@@ -30,11 +30,8 @@ export default function App(): ReactElement {
         if (auth === null) return
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log(auth.currentUser)
-
                 setUser({ loggedIn: true, info: auth.currentUser })
             } else {
-                console.log(user)
                 setUser({ loggedIn: false, info: null })
             }
         })
