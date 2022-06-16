@@ -6,6 +6,7 @@ import StarterKit from '@tiptap/starter-kit'
 import CodeNoExcludes from './CodeNoExcludes'
 import SizedImage from './SizedImage'
 import SyntaxHighlightCodeBlock from './SyntaxHighlightCodeBlock'
+import { TabKey } from './TabKey'
 import TextAlignAttr from './TextAlignAttr'
 
 export default [
@@ -31,4 +32,5 @@ export default [
         HTMLAttributes: { class: 'no-list-item-spacing' },
     }),
     SyntaxHighlightCodeBlock,
+    TabKey,
 ]
