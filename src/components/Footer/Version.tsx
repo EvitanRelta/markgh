@@ -1,7 +1,8 @@
+import Box from '@mui/material/Box'
 import packageInfo from '../../../package.json'
 
 export default () => (
-    <div
+    <Box
         style={{
             margin: 0,
             left: 40,
@@ -13,5 +14,5 @@ export default () => (
         <strong>
             <em>version: {packageInfo.version}</em>
         </strong>
-    </div>
+    </Box>
 )

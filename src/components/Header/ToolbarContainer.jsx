@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box'
 import { useSelector } from 'react-redux'
 import FileOption from './ToolbarOptions/FileMenu/FileOption'
 // import { RootState } from '../../store'  // Typescript
@@ -24,14 +25,14 @@ const ToolbarContainer = ({ onUpload, title, ghToken, onLogin }) => {
     }
 
     return (
-        <div>
+        <Box>
             <FileOption
                 onUpload={onUpload}
                 onDownload={onDownload}
                 ghToken={ghToken}
                 onLogin={onLogin}
             />
-        </div>
+        </Box>
     )
 }
 

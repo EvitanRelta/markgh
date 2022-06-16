@@ -1,3 +1,5 @@
+import Box from '@mui/material/Box'
+import Input from '@mui/material/Input'
 import { GithubAuthProvider, User } from 'firebase/auth'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -41,7 +43,7 @@ const Header = ({
     const textColor = theme === 'dark' ? 'white' : '#181414'
 
     return (
-        <header
+        <Box
             style={{
                 borderBottom: '1px solid gray',
                 marginBottom: '0px',
@@ -50,13 +52,24 @@ const Header = ({
                 lineHeight: '12px',
             }}
         >
-            <div
+            <Box
                 style={{
                     justifyContent: 'space-between',
                     display: 'flex',
                 }}
             >
-                <input
+                <Input
+                    sx={{
+                        '&:before': {
+                            borderBottom: '0px',
+                            transition: 'none',
+                        },
+                        '&:hover': {
+                            '&&:before': {
+                                borderBottom: '2px solid gray',
+                            },
+                        },
+                    }}
                     type='text'
                     placeholder='Untitled Document'
                     value={text}
@@ -74,7 +87,7 @@ const Header = ({
                     }}
                 />
 
-                <div>
+                <Box>
                     <MenuButton
                         title={title}
                         onUpload={onUpload}
@@ -82,9 +95,9 @@ const Header = ({
                         onLogout={onLogout}
                         user={user}
                     />
-                </div>
-            </div>
-            <div
+                </Box>
+            </Box>
+            <Box
                 style={{
                     display: 'inline-flex',
                     paddingTop: 5,
@@ -97,7 +110,7 @@ const Header = ({
                     ghToken={ghToken}
                     onLogin={onLogin}
                 />
-                <div
+                <Box
                     style={{
                         color: 'gray',
                         paddingLeft: '5px',
@@ -106,9 +119,9 @@ const Header = ({
                     }}
                 >
                     Last edited on {lastEditedOn}
-                </div>
-            </div>
-        </header>
+                </Box>
+            </Box>
+        </Box>
     )
 }
 
