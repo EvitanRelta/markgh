@@ -1,8 +1,6 @@
-import { getAuth, GithubAuthProvider, OAuthCredential, signInWithPopup } from 'firebase/auth'
+import { Auth, GithubAuthProvider, OAuthCredential, signInWithPopup } from 'firebase/auth'
 
-const loginAuth = (provider: GithubAuthProvider) => {
-    const auth = getAuth()
-
+const loginAuth = (auth: Auth, provider: GithubAuthProvider) => {
     signInWithPopup(auth, provider)
         .then((result) => {
             // This gives you a GitHub Access Token. You can use it to access the GitHub API.
