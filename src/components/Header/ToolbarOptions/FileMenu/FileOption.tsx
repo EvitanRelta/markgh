@@ -34,7 +34,11 @@ const FileOption = ({ onUpload, onDownload, setMdText }: Props) => {
                 onClose={closeMenu}
             >
                 <OpenFile onUpload={onUpload} />
-                <ImportGHRepo setMdText={setMdText} setAnchor={setAnchor} />
+                <ImportGHRepo
+                    menuOpen={Boolean(anchor)}
+                    setMdText={setMdText}
+                    setAnchor={setAnchor}
+                />
                 <ExportFile onDownload={onDownload} />
             </Menu>
         </Box>

@@ -8,11 +8,12 @@ import Popover from '@mui/material/Popover'
 import TextField from '@mui/material/TextField'
 import git from 'isomorphic-git'
 import http from 'isomorphic-git/http/web'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type Props = {
     setMdText: React.Dispatch<React.SetStateAction<string | Uint8Array>>
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
+    menuOpen: boolean
 }
 
 const fs = new FS(
@@ -26,7 +27,7 @@ const dir = '/'
 window.global = window
 window.Buffer = window.Buffer || require('buffer').Buffer
 
-const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
+const ImportGHRepo = ({ setMdText, setAnchor, menuOpen }: Props) => {
     const [showPopover, setShowPopover] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
@@ -74,6 +75,10 @@ const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
             )
     }
 
+    useEffect(() => {
+        setShowPopover(menuOpen && showPopover)
+    }, [menuOpen])
+
     const linkInput = (
         <Box sx={{ padding: 1, paddingTop: 1.5 }}>
             <TextField
@@ -100,7 +105,7 @@ const ImportGHRepo = ({ setMdText, setAnchor }: Props) => {
     )
 
     return (
-        <MenuItem divider sx={{ paddingBottom: 1.3 }}>
+        <MenuItem divider sx={{ paddingBottom: 1.3 }} onClick={openPopover}>
             <GitHubIcon sx={{ marginLeft: 0.5 }} />
             <ListItemText sx={{ marginLeft: 1.7 }}>Import from GitHub...</ListItemText>
             <ArrowForwardIosIcon
