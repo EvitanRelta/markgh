@@ -9,6 +9,7 @@ export const TabKey = Extension.create({
         return {
             Tab: () => {
                 const editor = this.editor
+                if (editor.isActive('listItem')) return false
                 if (!editor.isActive('codeBlock')) return editor.commands.insertContent('\t')
 
                 const $anchor = editor.state.selection.$anchor
@@ -21,6 +22,7 @@ export const TabKey = Extension.create({
             },
             'Shift-Tab': () => {
                 const editor = this.editor
+                if (editor.isActive('listItem')) return false
                 if (!editor.isActive('codeBlock')) return true
 
                 const $anchor = editor.state.selection.$anchor
