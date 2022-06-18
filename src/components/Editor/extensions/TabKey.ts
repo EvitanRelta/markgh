@@ -1,17 +1,26 @@
 import { Extension } from '@tiptap/core'
 
-export const TabKey = Extension.create({
+export interface TabKeyOptions {
+    codeBlockIndentSpaces: number
+}
+
+export const TabKey = Extension.create<TabKeyOptions>({
     name: 'tabKey',
 
-    addKeyboardShortcuts() {
-        const indentSpaces = 2
+    addOptions() {
+        return {
+            codeBlockIndentSpaces: 2,
+        }
+    },
 
+    addKeyboardShortcuts() {
         return {
             Tab: () => {
                 const editor = this.editor
                 if (editor.isActive('listItem')) return false
                 if (!editor.isActive('codeBlock')) return editor.commands.insertContent('\t')
 
+                const indentSpaces = this.options.codeBlockIndentSpaces
                 const $anchor = editor.state.selection.$anchor
                 const textBeforeCursor = $anchor.parent.textBetween(0, $anchor.parentOffset)
                 const textFromStartOfLine = textBeforeCursor.match(/(?<=^|\n)[^\n]*$/)?.[0] || ''
@@ -25,6 +34,7 @@ export const TabKey = Extension.create({
                 if (editor.isActive('listItem')) return false
                 if (!editor.isActive('codeBlock')) return true
 
+                const indentSpaces = this.options.codeBlockIndentSpaces
                 const $anchor = editor.state.selection.$anchor
                 const textBeforeCursor = $anchor.parent.textBetween(0, $anchor.parentOffset)
                 const textFromStartOfLine = textBeforeCursor.match(/(?<=^|\n)[^\n]*$/)?.[0] || ''
