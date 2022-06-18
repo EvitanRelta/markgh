@@ -4,6 +4,7 @@ import OrderedList from '@tiptap/extension-ordered-list'
 import Underline from '@tiptap/extension-underline'
 import StarterKit from '@tiptap/starter-kit'
 import CodeNoExcludes from './CodeNoExcludes'
+import ListItemNoTabNav from './ListItemNoTabNav'
 import SizedImage from './SizedImage'
 import SyntaxHighlightCodeBlock from './SyntaxHighlightCodeBlock'
 import { TabKey } from './TabKey'
@@ -15,6 +16,7 @@ export default [
         bulletList: false,
         orderedList: false,
         codeBlock: false,
+        listItem: false,
     }),
     SizedImage.configure({
         inline: true,
@@ -31,6 +33,7 @@ export default [
     OrderedList.configure({
         HTMLAttributes: { class: 'no-list-item-spacing' },
     }),
+    ListItemNoTabNav,
     SyntaxHighlightCodeBlock,
     TabKey,
 ]
