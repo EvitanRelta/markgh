@@ -78,7 +78,11 @@ const EditorToolbar = ({ editor }: Props) => {
         )
     }
 
-    return <Box sx={{ marginLeft: 8 }}>{editorOptions.map(optionMapping)}</Box>
+    return (
+        <Box sx={{ marginBottom: 8, borderBottom: '1px solid gray' }}>
+            <Box style={{ marginLeft: 8 }}>{editorOptions.map(optionMapping)}</Box>
+        </Box>
+    )
 }
 
 export default React.memo(EditorToolbar)
