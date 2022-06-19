@@ -10,8 +10,9 @@ import { GithubAuthProvider } from 'firebase/auth'
 import git from 'isomorphic-git'
 import http from 'isomorphic-git/http/web'
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { setMdText } from '../../../../store/mdTextSlice'
+import { useSelector } from 'react-redux'
+import { markdownToHtml } from '../../../../converterFunctions'
+import { RootState } from '../../../../store'
 import { githubProvider } from '../../../Authentication/config/authMethod'
 
 type Props = {
@@ -33,7 +34,7 @@ window.global = window
 window.Buffer = window.Buffer || require('buffer').Buffer
 
 const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
-    const dispatch = useDispatch()
+    const editor = useSelector((state: RootState) => state.editor.editor)
     const [showPopover, setShowPopover] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
@@ -69,11 +70,10 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
                 fs.readFile('/README.md', 'utf8', (err, data) => {
                     if (err) {
                         console.error(err)
-                        dispatch(setMdText(''))
                         return
                     }
                     setAnchor(null)
-                    dispatch(setMdText(data))
+                    editor.commands.setContent(markdownToHtml(data as string), true)
                     setShowPopover(false)
                     indexedDB.deleteDatabase('fs')
                     setShowLoading(false)
