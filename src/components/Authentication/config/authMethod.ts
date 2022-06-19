@@ -1,3 +1,5 @@
 import { GithubAuthProvider } from 'firebase/auth'
 
-export const githubProvider = new GithubAuthProvider()
+const githubProvider = new GithubAuthProvider()
+githubProvider.addScope('repo')
+export { githubProvider }

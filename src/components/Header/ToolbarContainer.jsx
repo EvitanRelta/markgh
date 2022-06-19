@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import FileOption from './ToolbarOptions/FileMenu/FileOption'
 // import { RootState } from '../../store'  // Typescript
 
-const ToolbarContainer = ({ onUpload, title }) => {
+const ToolbarContainer = ({ onUpload, title, ghToken, onLogin }) => {
     // const mdText = useSelector((state: RootState) => state.mdText)  // Typescript
     const mdText = useSelector((state) => state.mdText)
 
@@ -25,7 +25,12 @@ const ToolbarContainer = ({ onUpload, title }) => {
 
     return (
         <div>
-            <FileOption onUpload={onUpload} onDownload={onDownload} />
+            <FileOption
+                onUpload={onUpload}
+                onDownload={onDownload}
+                ghToken={ghToken}
+                onLogin={onLogin}
+            />
         </div>
     )
 }

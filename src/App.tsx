@@ -6,7 +6,6 @@ import { Auth, getAuth, GithubAuthProvider, onAuthStateChanged, User } from 'fir
 import { ReactElement, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import firebaseConfig from './components/Authentication/config/firebaseConfig'
-import loginAuth from './components/Authentication/service/loginAuth'
 import Body from './components/Body/Body'
 import Footer from './components/Footer/Footer'
 import Version from './components/Footer/Version'
@@ -14,6 +13,8 @@ import Header from './components/Header/Header'
 import toMarkdown from './converterFunctions/toMarkdown'
 import { RootState } from './store'
 import { setMdText } from './store/mdTextSlice'
+
+import { OAuthCredential, signInWithPopup } from 'firebase/auth'
 
 interface UserStatus {
     loggedIn: boolean
@@ -26,6 +27,7 @@ export default function App(): ReactElement {
     //Initialises firebase for authentication
     const [auth, setAuth] = useState<Auth | null>(null)
     const [user, setUser] = useState<UserStatus>({ loggedIn: false, info: null })
+    const [ghToken, setGhToken] = useState<string | undefined>(localStorage['ghToken'])
     useEffect(() => {
         const firebase = initializeApp(firebaseConfig)
         setAuth(getAuth())
@@ -52,6 +54,36 @@ export default function App(): ReactElement {
     db.open().catch((err) => {
         console.log(err.stack || err)
     })
+
+    const loginAuth = (auth: Auth, provider: GithubAuthProvider) => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+                const credential = GithubAuthProvider.credentialFromResult(
+                    result
+                ) as OAuthCredential
+                const token = credential.accessToken
+
+                setGhToken(token)
+                localStorage['ghToken'] = token
+                console.log(token)
+
+                // The signed-in user info.
+                const user = result.user
+                // ...
+            })
+            .catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code
+                const errorMessage = error.message
+                // The email of the user's account used.
+                const email = error.customData.email
+                // The AuthCredential type that was used.
+                const credential = GithubAuthProvider.credentialFromError(error)
+                // ...
+            })
+        return
+    }
 
     //var for controlling whether to show markdown
     const [showMarkdown, setShowMarkdown] = useState(false)
@@ -155,6 +187,7 @@ export default function App(): ReactElement {
                     onLogin={onLogin}
                     onLogout={onLogout}
                     user={user}
+                    ghToken={ghToken}
                 />
                 <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
                 <div>

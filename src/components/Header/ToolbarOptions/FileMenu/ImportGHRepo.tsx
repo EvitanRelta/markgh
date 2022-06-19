@@ -6,15 +6,19 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Popover from '@mui/material/Popover'
 import TextField from '@mui/material/TextField'
+import { GithubAuthProvider } from 'firebase/auth'
 import git from 'isomorphic-git'
 import http from 'isomorphic-git/http/web'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setMdText } from '../../../../store/mdTextSlice'
+import { githubProvider } from '../../../Authentication/config/authMethod'
 
 type Props = {
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
     menuOpen: boolean
+    ghToken: string | undefined
+    onLogin: (provider: GithubAuthProvider) => Promise<void>
 }
 
 const fs = new FS(
@@ -28,7 +32,7 @@ const dir = '/'
 window.global = window
 window.Buffer = window.Buffer || require('buffer').Buffer
 
-const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
+const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     const dispatch = useDispatch()
     const [showPopover, setShowPopover] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
@@ -56,11 +60,11 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
             url: link,
             singleBranch: true,
             depth: 1,
+            onAuth: () => ({
+                username: ghToken,
+                password: 'x-oauth-basic',
+            }),
         })
-            .catch((err) => {
-                setShowError(true)
-                console.log(err)
-            })
             .then(() =>
                 fs.readFile('/README.md', 'utf8', (err, data) => {
                     if (err) {
@@ -75,6 +79,15 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
                     setShowLoading(false)
                 })
             )
+            .catch((err) => {
+                const statusCode = err.data.statusCode
+                console.log(err.data)
+                if (statusCode !== 403 && statusCode !== 401) {
+                    setShowError(true)
+                    return
+                }
+                onLogin(githubProvider)
+            })
     }
 
     useEffect(() => {
@@ -95,10 +108,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
                     setShowError(false)
                     setShowLoading(false)
                 }}
-                helperText={
-                    (showError && 'Invalid link! (Repo has to be public)') ||
-                    (showLoading && 'Loading...')
-                }
+                helperText={(showError && 'Invalid link!') || (showLoading && 'Loading...')}
             />
             <Button sx={{ marginLeft: 0.3 }} onClick={getRepo}>
                 OK
