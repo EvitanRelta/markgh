@@ -4,6 +4,7 @@ import Dexie from 'dexie'
 import { initializeApp } from 'firebase/app'
 import { Auth, getAuth, GithubAuthProvider, onAuthStateChanged, User } from 'firebase/auth'
 import { ReactElement, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import firebaseConfig from './components/Authentication/config/firebaseConfig'
 import loginAuth from './components/Authentication/service/loginAuth'
 import Body from './components/Body/Body'
@@ -11,6 +12,7 @@ import Footer from './components/Footer/Footer'
 import Version from './components/Footer/Version'
 import Header from './components/Header/Header'
 import toMarkdown from './converterFunctions/toMarkdown'
+import { setMdText } from './store/mdTextSlice'
 
 interface UserStatus {
     loggedIn: boolean
@@ -18,6 +20,8 @@ interface UserStatus {
 }
 
 export default function App(): ReactElement {
+    const dispatch = useDispatch()
+
     //Initialises firebase for authentication
     const [auth, setAuth] = useState<Auth | null>(null)
     const [user, setUser] = useState<UserStatus>({ loggedIn: false, info: null })
@@ -56,9 +60,6 @@ export default function App(): ReactElement {
 
     //var for setting file title
     const [title, setTitle] = useState('')
-
-    //var for to contain markdown text
-    const [mdText, setMdText] = useState('')
 
     //var for 'Last edited on'
     const [lastEditedOn, setLastEditedOn] = useState(localStorage['lastEditedOn'])
@@ -103,13 +104,13 @@ export default function App(): ReactElement {
         //Reading file and allocating to state
         reader.readAsText(file)
         reader.onload = () => {
-            setMdText(reader.result as string)
+            dispatch(setMdText(reader.result as string))
         }
     }
 
     const onTextChange = (editorContainer: HTMLElement) => {
         const markdown = toMarkdown(editorContainer)
-        setMdText(markdown)
+        dispatch(setMdText(markdown))
 
         //Updates 'Last Edited On' in local storage when text is changed in editor
         //Formatting time as text
@@ -157,18 +158,11 @@ export default function App(): ReactElement {
                     toggleTheme={toggleTheme}
                     onUpload={onUpload}
                     lastEditedOn={lastEditedOn}
-                    mdText={mdText}
-                    setMdText={setMdText}
                     onLogin={onLogin}
                     onLogout={onLogout}
                     user={user}
                 />
-                <Body
-                    showMarkdown={showMarkdown}
-                    mdText={mdText}
-                    theme={mode}
-                    onTextChange={onTextChange}
-                />
+                <Body showMarkdown={showMarkdown} theme={mode} onTextChange={onTextChange} />
                 <div>
                     <Footer
                         onClick={() => setShowMarkdown(!showMarkdown)}

@@ -15,8 +15,6 @@ type Props = {
     setTitle: React.Dispatch<React.SetStateAction<string>>
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     lastEditedOn: string
-    mdText: string
-    setMdText: React.Dispatch<React.SetStateAction<string>>
     onLogin: (provider: GithubAuthProvider) => Promise<void>
     onLogout: () => Promise<void>
     user: UserStatus
@@ -29,8 +27,6 @@ const Header = ({
     setTitle,
     onUpload,
     lastEditedOn,
-    mdText,
-    setMdText,
     onLogin,
     onLogout,
     user,
@@ -95,12 +91,7 @@ const Header = ({
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer
-                    onUpload={onUpload}
-                    mdText={mdText}
-                    title={title}
-                    setMdText={setMdText}
-                />
+                <ToolbarContainer onUpload={onUpload} title={title} />
                 <div
                     style={{
                         color: 'gray',

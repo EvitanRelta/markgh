@@ -3,12 +3,11 @@ import MarkdownTextContainer from './MarkdownTextContainer'
 
 type Props = {
     showMarkdown: boolean
-    mdText: string
     onTextChange: (editorContainer: HTMLElement) => void | null
     theme: 'light' | 'dark'
 }
 
-const Body = ({ showMarkdown, mdText, onTextChange, theme }: Props) => {
+const Body = ({ showMarkdown, onTextChange, theme }: Props) => {
     const editorWidth = showMarkdown ? '50%' : '100%'
 
     return (
@@ -29,7 +28,7 @@ const Body = ({ showMarkdown, mdText, onTextChange, theme }: Props) => {
                 >
                     <TextEditor theme={theme} onTextChange={onTextChange} />
                 </div>
-                {showMarkdown && <MarkdownTextContainer mdText={mdText} theme={theme} />}
+                {showMarkdown && <MarkdownTextContainer theme={theme} />}
             </div>
         </div>
     )

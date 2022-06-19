@@ -8,10 +8,9 @@ import OpenFile from './OpenFile'
 type Props = {
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     onDownload: () => void
-    setMdText: React.Dispatch<React.SetStateAction<string | Uint8Array>>
 }
 
-const FileOption = ({ onUpload, onDownload, setMdText }: Props) => {
+const FileOption = ({ onUpload, onDownload }: Props) => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
 
     const openMenu = (e: React.MouseEvent) => {
@@ -34,11 +33,7 @@ const FileOption = ({ onUpload, onDownload, setMdText }: Props) => {
                 onClose={closeMenu}
             >
                 <OpenFile onUpload={onUpload} />
-                <ImportGHRepo
-                    menuOpen={Boolean(anchor)}
-                    setMdText={setMdText}
-                    setAnchor={setAnchor}
-                />
+                <ImportGHRepo menuOpen={Boolean(anchor)} setAnchor={setAnchor} />
                 <ExportFile onDownload={onDownload} />
             </Menu>
         </Box>

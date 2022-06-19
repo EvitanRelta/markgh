@@ -1,6 +1,11 @@
+import { useSelector } from 'react-redux'
 import FileOption from './ToolbarOptions/FileMenu/FileOption'
+// import { RootState } from '../../store'  // Typescript
 
-const ToolbarContainer = ({ onUpload, mdText, title, setMdText }) => {
+const ToolbarContainer = ({ onUpload, title }) => {
+    // const mdText = useSelector((state: RootState) => state.mdText)  // Typescript
+    const mdText = useSelector((state) => state.mdText)
+
     const onDownload = () => {
         const fileName = `${title || 'NewFile'}.md`
         //const markdownText = toMarkdown(mdText)
@@ -20,7 +25,7 @@ const ToolbarContainer = ({ onUpload, mdText, title, setMdText }) => {
 
     return (
         <div>
-            <FileOption onUpload={onUpload} onDownload={onDownload} setMdText={setMdText} />
+            <FileOption onUpload={onUpload} onDownload={onDownload} />
         </div>
     )
 }
