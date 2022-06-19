@@ -39,7 +39,7 @@ export default ({ editor }: Props) => {
             <IconButton
                 onClick={openMenu}
                 sx={{
-                    marginTop: -1,
+                    transition: 'none',
                     '&:hover': {
                         borderRadius: 1,
                     },
