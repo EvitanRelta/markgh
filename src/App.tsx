@@ -65,11 +65,14 @@ export default function App(): ReactElement {
     useEffect(() => {
         const getPersistedText = async () => {
             const data = await db.text.get(0)
+            return data
+        }
+        getPersistedText().then((data) => {
             if (data === undefined) return
             editor.commands.setContent(markdownToHtml(data.value as string), true)
-        }
-        getPersistedText()
+        })
     }, [])
+
     //Initialises firebase for authentication
     const [auth, setAuth] = useState<Auth | null>(null)
     const [user, setUser] = useState<UserStatus>({ loggedIn: false, info: null })
