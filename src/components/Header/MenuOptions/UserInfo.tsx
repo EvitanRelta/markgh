@@ -1,16 +1,9 @@
 import { Box } from '@mui/material'
-import { User } from 'firebase/auth'
+import { useAppSelector } from '../../../store/hooks'
 
-interface UserStatus {
-    loggedIn: boolean
-    info: User | null
-}
+const UserInfo = () => {
+    const user = useAppSelector((state) => state.user)
 
-type Props = {
-    user: UserStatus
-}
-
-const UserInfo = ({ user }: Props) => {
     return (
         <Box sx={{ padding: 1, fontSize: 15, marginLeft: 3 }}>
             {user.loggedIn && user.info?.displayName}

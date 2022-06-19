@@ -1,15 +1,10 @@
 import Box from '@mui/material/Box'
 import Input from '@mui/material/Input'
-import { GithubAuthProvider, User } from 'firebase/auth'
+import { GithubAuthProvider } from 'firebase/auth'
 import { useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
 import MenuButton from './MenuButton'
 import ToolbarContainer from './ToolbarContainer'
-
-interface UserStatus {
-    loggedIn: boolean
-    info: User | null
-}
 
 type Props = {
     title: string
@@ -18,20 +13,10 @@ type Props = {
     lastEditedOn: string
     onLogin: (provider: GithubAuthProvider) => Promise<string | void>
     onLogout: () => Promise<void>
-    user: UserStatus
     ghToken: string | undefined
 }
 
-const Header = ({
-    title,
-    setTitle,
-    onUpload,
-    lastEditedOn,
-    onLogin,
-    onLogout,
-    user,
-    ghToken,
-}: Props) => {
+const Header = ({ title, setTitle, onUpload, lastEditedOn, onLogin, onLogout, ghToken }: Props) => {
     const theme = useAppSelector((state) => state.theme)
 
     //var for current file name
@@ -94,7 +79,6 @@ const Header = ({
                         onUpload={onUpload}
                         onLogin={onLogin}
                         onLogout={onLogout}
-                        user={user}
                     />
                 </Box>
             </Box>

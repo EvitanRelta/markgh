@@ -10,7 +10,6 @@ import {
     OAuthCredential,
     onAuthStateChanged,
     signInWithPopup,
-    User,
 } from 'firebase/auth'
 import React, { ReactElement, useEffect, useState } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
@@ -27,11 +26,7 @@ import { removeTipTapArtifacts } from './converterFunctions/helpers/removeTipTap
 import toMarkdown from './converterFunctions/toMarkdown'
 import { useAppDispatch, useAppSelector } from './store/hooks'
 import { setMdText } from './store/mdTextSlice'
-
-interface UserStatus {
-    loggedIn: boolean
-    info: User | null
-}
+import { loginUser, logoutUser } from './store/userSlice'
 
 class EditorDB extends Dexie {
     images!: Table<EditorImage>
@@ -87,7 +82,6 @@ export default function App(): ReactElement {
 
     //Initialises firebase for authentication
     const [auth, setAuth] = useState<Auth | null>(null)
-    const [user, setUser] = useState<UserStatus>({ loggedIn: false, info: null })
     const [ghToken, setGhToken] = useState<string | undefined>(localStorage['ghToken'])
     useEffect(() => {
         const firebase = initializeApp(firebaseConfig)
@@ -98,9 +92,9 @@ export default function App(): ReactElement {
         if (auth === null) return
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                setUser({ loggedIn: true, info: auth.currentUser })
+                dispatch(loginUser(user))
             } else {
-                setUser({ loggedIn: false, info: null })
+                dispatch(logoutUser())
             }
         })
     }, [auth])
@@ -117,7 +111,7 @@ export default function App(): ReactElement {
                 setGhToken(token)
                 localStorage['ghToken'] = token
 
-                setUser({ loggedIn: true, info: result.user })
+                dispatch(loginUser(result.user))
                 // ...
                 return token
             })
@@ -255,7 +249,6 @@ export default function App(): ReactElement {
                         lastEditedOn={lastEditedOn}
                         onLogin={onLogin}
                         onLogout={onLogout}
-                        user={user}
                         ghToken={ghToken}
                     />
                     <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
