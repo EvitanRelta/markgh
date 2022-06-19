@@ -1,18 +1,40 @@
+import { GithubAuthProvider, User } from 'firebase/auth'
 import { useState } from 'react'
 import MenuButton from './MenuButton'
 import ToolbarContainer from './ToolbarContainer'
 
+interface UserStatus {
+    loggedIn: boolean
+    info: User | null
+}
+
 type Props = {
     title: string
     theme: string
-    toggleTheme: React.MouseEventHandler<HTMLButtonElement>
+    toggleTheme: () => void
     setTitle: React.Dispatch<React.SetStateAction<string>>
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     lastEditedOn: string
     mdText: string
+    setMdText: React.Dispatch<React.SetStateAction<string>>
+    onLogin: (provider: GithubAuthProvider) => Promise<void>
+    onLogout: () => Promise<void>
+    user: UserStatus
 }
 
-const Header = ({ title, theme, toggleTheme, setTitle, onUpload, lastEditedOn, mdText }: Props) => {
+const Header = ({
+    title,
+    theme,
+    toggleTheme,
+    setTitle,
+    onUpload,
+    lastEditedOn,
+    mdText,
+    setMdText,
+    onLogin,
+    onLogout,
+    user,
+}: Props) => {
     //var for current file name
     const [text, setText] = useState(title)
 
@@ -60,6 +82,9 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload, lastEditedOn, m
                         toggleTheme={toggleTheme}
                         title={title}
                         onUpload={onUpload}
+                        onLogin={onLogin}
+                        onLogout={onLogout}
+                        user={user}
                     />
                 </div>
             </div>
@@ -70,7 +95,12 @@ const Header = ({ title, theme, toggleTheme, setTitle, onUpload, lastEditedOn, m
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer onUpload={onUpload} mdText={mdText} title={title} />
+                <ToolbarContainer
+                    onUpload={onUpload}
+                    mdText={mdText}
+                    title={title}
+                    setMdText={setMdText}
+                />
                 <div
                     style={{
                         color: 'gray',

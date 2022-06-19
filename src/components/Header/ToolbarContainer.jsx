@@ -1,6 +1,6 @@
 import FileOption from './ToolbarOptions/FileMenu/FileOption'
 
-const ToolbarContainer = ({ onUpload, mdText, title }) => {
+const ToolbarContainer = ({ onUpload, mdText, title, setMdText }) => {
     const onDownload = () => {
         const fileName = `${title || 'NewFile'}.md`
         //const markdownText = toMarkdown(mdText)
@@ -20,7 +20,7 @@ const ToolbarContainer = ({ onUpload, mdText, title }) => {
 
     return (
         <div>
-            <FileOption onUpload={onUpload} onDownload={onDownload} />
+            <FileOption onUpload={onUpload} onDownload={onDownload} setMdText={setMdText} />
         </div>
     )
 }

@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton'
 
 const ExportFile = ({ onDownload }) => {
     return (
-        <MenuItem style={{ padding: 0 }} onClick={onDownload}>
+        <MenuItem style={{ padding: 0, marginTop: 2 }} onClick={onDownload}>
             <label style={{ cursor: 'pointer' }}>
                 <div
                     style={{

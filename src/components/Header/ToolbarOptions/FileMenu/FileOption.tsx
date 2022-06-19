@@ -1,15 +1,17 @@
-import { Menu } from '@mui/material'
+import { Box, Menu } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useState } from 'react'
 import ExportFile from './ExportFile'
+import ImportGHRepo from './ImportGHRepo'
 import OpenFile from './OpenFile'
 
 type Props = {
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     onDownload: () => void
+    setMdText: React.Dispatch<React.SetStateAction<string | Uint8Array>>
 }
 
-const OpenFileOption = ({ onUpload, onDownload }: Props) => {
+const FileOption = ({ onUpload, onDownload, setMdText }: Props) => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
 
     const openMenu = (e: React.MouseEvent) => {
@@ -21,16 +23,26 @@ const OpenFileOption = ({ onUpload, onDownload }: Props) => {
     }
 
     return (
-        <div style={{ display: 'inline-block' }}>
-            <Button style={{ padding: 0 }} onClick={openMenu}>
+        <Box style={{ display: 'inline-block' }}>
+            <Button id='file-button' style={{ padding: 0 }} onClick={openMenu}>
                 File
             </Button>
-            <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
+            <Menu
+                open={Boolean(anchor)}
+                keepMounted
+                anchorEl={document.getElementById('file-button')}
+                onClose={closeMenu}
+            >
                 <OpenFile onUpload={onUpload} />
+                <ImportGHRepo
+                    menuOpen={Boolean(anchor)}
+                    setMdText={setMdText}
+                    setAnchor={setAnchor}
+                />
                 <ExportFile onDownload={onDownload} />
             </Menu>
-        </div>
+        </Box>
     )
 }
 
-export default OpenFileOption
+export default FileOption

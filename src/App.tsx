@@ -1,14 +1,42 @@
 import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Dexie from 'dexie'
+import { initializeApp } from 'firebase/app'
+import { Auth, getAuth, GithubAuthProvider, onAuthStateChanged, User } from 'firebase/auth'
 import { ReactElement, useEffect, useState } from 'react'
+import firebaseConfig from './components/Authentication/config/firebaseConfig'
+import loginAuth from './components/Authentication/service/loginAuth'
 import Body from './components/Body/Body'
 import Footer from './components/Footer/Footer'
 import Version from './components/Footer/Version'
 import Header from './components/Header/Header'
 import toMarkdown from './converterFunctions/toMarkdown'
 
+interface UserStatus {
+    loggedIn: boolean
+    info: User | null
+}
+
 export default function App(): ReactElement {
+    //Initialises firebase for authentication
+    const [auth, setAuth] = useState<Auth | null>(null)
+    const [user, setUser] = useState<UserStatus>({ loggedIn: false, info: null })
+    useEffect(() => {
+        const firebase = initializeApp(firebaseConfig)
+        setAuth(getAuth())
+    }, [])
+
+    useEffect(() => {
+        if (auth === null) return
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser({ loggedIn: true, info: auth.currentUser })
+            } else {
+                setUser({ loggedIn: false, info: null })
+            }
+        })
+    }, [auth])
+
     //Inititalises db, doesn't execute if db of the same name already exists
     const db = new Dexie('EditorData')
     db.version(1).stores({
@@ -108,6 +136,16 @@ export default function App(): ReactElement {
     useEffect(() => {
         localStorage['selectedTheme'] = mode
     }, [mode])
+
+    const onLogin = async (provider: GithubAuthProvider) => {
+        if (auth === null) return
+        const res = await loginAuth(auth, provider)
+    }
+
+    const onLogout = async () => {
+        auth?.signOut()
+    }
+
     return (
         <ThemeProvider theme={selectedTheme}>
             <CssBaseline />
@@ -120,6 +158,10 @@ export default function App(): ReactElement {
                     onUpload={onUpload}
                     lastEditedOn={lastEditedOn}
                     mdText={mdText}
+                    setMdText={setMdText}
+                    onLogin={onLogin}
+                    onLogout={onLogout}
+                    user={user}
                 />
                 <Body
                     showMarkdown={showMarkdown}
