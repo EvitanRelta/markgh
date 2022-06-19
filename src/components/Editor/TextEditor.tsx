@@ -12,13 +12,13 @@ import '../../customCss/no-list-item-spacing.css'
 import '../../customCss/remove-editing-border.css'
 
 interface Props {
-    theme: 'light' | 'dark'
     onTextChange: (editorContainer: HTMLElement) => void | null
 }
 
-export default ({ theme, onTextChange }: Props) => {
+export default ({ onTextChange }: Props) => {
     const [editorContainer, setEditorContainer] = useState<HTMLElement | null>(null)
     const editor = useSelector((state: RootState) => state.editor.editor)
+    const theme = useSelector((state: RootState) => state.theme)
 
     useEffect(() => {
         if (!editor) return

@@ -1,12 +1,14 @@
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import IconButton from '@mui/material/IconButton'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../store'
 
-type Props = {
-    theme: string
-}
+type Props = {}
 
-const ThemeOption = ({ theme }: Props) => {
+const ThemeOption = ({}: Props) => {
+    const theme = useSelector((state: RootState) => state.theme)
+
     return (
         <div style={{ cursor: 'pointer', minWidth: 140, marginLeft: -2 }}>
             <IconButton color='inherit'>

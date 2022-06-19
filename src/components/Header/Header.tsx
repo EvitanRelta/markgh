@@ -1,5 +1,7 @@
 import { GithubAuthProvider, User } from 'firebase/auth'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store'
 import MenuButton from './MenuButton'
 import ToolbarContainer from './ToolbarContainer'
 
@@ -10,8 +12,6 @@ interface UserStatus {
 
 type Props = {
     title: string
-    theme: string
-    toggleTheme: () => void
     setTitle: React.Dispatch<React.SetStateAction<string>>
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     lastEditedOn: string
@@ -20,17 +20,9 @@ type Props = {
     user: UserStatus
 }
 
-const Header = ({
-    title,
-    theme,
-    toggleTheme,
-    setTitle,
-    onUpload,
-    lastEditedOn,
-    onLogin,
-    onLogout,
-    user,
-}: Props) => {
+const Header = ({ title, setTitle, onUpload, lastEditedOn, onLogin, onLogout, user }: Props) => {
+    const theme = useSelector((state: RootState) => state.theme)
+
     //var for current file name
     const [text, setText] = useState(title)
 
@@ -74,8 +66,6 @@ const Header = ({
 
                 <div>
                     <MenuButton
-                        theme={theme}
-                        toggleTheme={toggleTheme}
                         title={title}
                         onUpload={onUpload}
                         onLogin={onLogin}

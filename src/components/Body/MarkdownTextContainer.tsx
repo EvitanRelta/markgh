@@ -4,11 +4,10 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import CopyClipboardButton from './CopyClipboardButton'
 
-type Props = {
-    theme: 'light' | 'dark'
-}
+type Props = {}
 
-const MarkdownTextContainer = ({ theme }: Props) => {
+const MarkdownTextContainer = ({}: Props) => {
+    const theme = useSelector((state: RootState) => state.theme)
     const mdText = useSelector((state: RootState) => state.mdText)
     const [isHovering, setIsHovering] = useState(false)
 
