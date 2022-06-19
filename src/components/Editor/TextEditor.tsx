@@ -1,27 +1,24 @@
-import { EditorContent, useEditor } from '@tiptap/react'
+import { EditorContent } from '@tiptap/react'
 import _ from 'lodash'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import '../../githubMarkdownCss/importAllGithubCss'
+import { RootState } from '../../store'
 import EditorToolbar from './EditorToolbar'
-import extensions from './extensions/extensions'
 
 import '../../customCss/fix-codeblock-bottom-spacing.css'
 import '../../customCss/fix-codeblock-cannot-type.css'
 import '../../customCss/no-list-item-spacing.css'
 import '../../customCss/remove-editing-border.css'
-import placeholderEditorHtml from '../../placeholderEditorHtml'
 
 interface Props {
-    theme: 'light' | 'dark'
     onTextChange: (editorContainer: HTMLElement) => void | null
 }
 
-export default ({ theme, onTextChange }: Props) => {
+export default ({ onTextChange }: Props) => {
     const [editorContainer, setEditorContainer] = useState<HTMLElement | null>(null)
-    const editor = useEditor({
-        extensions,
-        content: placeholderEditorHtml,
-    })
+    const editor = useSelector((state: RootState) => state.editor.editor)
+    const theme = useSelector((state: RootState) => state.theme)
 
     useEffect(() => {
         if (!editor) return

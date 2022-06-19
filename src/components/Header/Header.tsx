@@ -1,5 +1,7 @@
 import { GithubAuthProvider, User } from 'firebase/auth'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store'
 import MenuButton from './MenuButton'
 import ToolbarContainer from './ToolbarContainer'
 
@@ -10,31 +12,17 @@ interface UserStatus {
 
 type Props = {
     title: string
-    theme: string
-    toggleTheme: () => void
     setTitle: React.Dispatch<React.SetStateAction<string>>
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     lastEditedOn: string
-    mdText: string
-    setMdText: React.Dispatch<React.SetStateAction<string>>
     onLogin: (provider: GithubAuthProvider) => Promise<void>
     onLogout: () => Promise<void>
     user: UserStatus
 }
 
-const Header = ({
-    title,
-    theme,
-    toggleTheme,
-    setTitle,
-    onUpload,
-    lastEditedOn,
-    mdText,
-    setMdText,
-    onLogin,
-    onLogout,
-    user,
-}: Props) => {
+const Header = ({ title, setTitle, onUpload, lastEditedOn, onLogin, onLogout, user }: Props) => {
+    const theme = useSelector((state: RootState) => state.theme)
+
     //var for current file name
     const [text, setText] = useState(title)
 
@@ -78,8 +66,6 @@ const Header = ({
 
                 <div>
                     <MenuButton
-                        theme={theme}
-                        toggleTheme={toggleTheme}
                         title={title}
                         onUpload={onUpload}
                         onLogin={onLogin}
@@ -95,12 +81,7 @@ const Header = ({
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer
-                    onUpload={onUpload}
-                    mdText={mdText}
-                    title={title}
-                    setMdText={setMdText}
-                />
+                <ToolbarContainer onUpload={onUpload} title={title} />
                 <div
                     style={{
                         color: 'gray',

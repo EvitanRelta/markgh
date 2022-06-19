@@ -9,9 +9,10 @@ import TextField from '@mui/material/TextField'
 import git from 'isomorphic-git'
 import http from 'isomorphic-git/http/web'
 import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setMdText } from '../../../../store/mdTextSlice'
 
 type Props = {
-    setMdText: React.Dispatch<React.SetStateAction<string | Uint8Array>>
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
     menuOpen: boolean
 }
@@ -27,7 +28,8 @@ const dir = '/'
 window.global = window
 window.Buffer = window.Buffer || require('buffer').Buffer
 
-const ImportGHRepo = ({ setMdText, setAnchor, menuOpen }: Props) => {
+const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
+    const dispatch = useDispatch()
     const [showPopover, setShowPopover] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
@@ -63,11 +65,11 @@ const ImportGHRepo = ({ setMdText, setAnchor, menuOpen }: Props) => {
                 fs.readFile('/README.md', 'utf8', (err, data) => {
                     if (err) {
                         console.error(err)
-                        setMdText('')
+                        dispatch(setMdText(''))
                         return
                     }
                     setAnchor(null)
-                    setMdText(data)
+                    dispatch(setMdText(data))
                     setShowPopover(false)
                     indexedDB.deleteDatabase('fs')
                     setShowLoading(false)

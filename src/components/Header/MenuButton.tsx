@@ -2,6 +2,8 @@ import { Menu, MenuItem } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import { GithubAuthProvider, User } from 'firebase/auth'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { toggleTheme } from '../../store/themeSlice'
 import { githubProvider } from '.././Authentication/config/authMethod'
 import Login from './MenuOptions/Login'
 import Logout from './MenuOptions/Logout'
@@ -14,8 +16,6 @@ interface UserStatus {
 }
 
 type Props = {
-    theme: string
-    toggleTheme: () => void
     title: string
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     onLogin: (provider: GithubAuthProvider) => Promise<void>
@@ -23,7 +23,9 @@ type Props = {
     user: UserStatus
 }
 
-const MenuButton = ({ theme, toggleTheme, title, onUpload, onLogin, onLogout, user }: Props) => {
+const MenuButton = ({ title, onUpload, onLogin, onLogout, user }: Props) => {
+    const dispatch = useDispatch()
+
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
     //const [selected, setSelected] = useState(-1)
 
@@ -36,7 +38,7 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload, onLogin, onLogout, us
     }
 
     const handleChangeTheme = () => {
-        toggleTheme()
+        dispatch(toggleTheme())
         closeMenu()
     }
 
@@ -55,7 +57,7 @@ const MenuButton = ({ theme, toggleTheme, title, onUpload, onLogin, onLogout, us
                     {user.loggedIn ? <Logout /> : <Login />}
                 </MenuItem>
                 <MenuItem onClick={handleChangeTheme}>
-                    <ThemeOption theme={theme} />
+                    <ThemeOption />
                 </MenuItem>
             </Menu>
         </div>

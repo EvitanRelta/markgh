@@ -4,6 +4,7 @@ import Dexie from 'dexie'
 import { initializeApp } from 'firebase/app'
 import { Auth, getAuth, GithubAuthProvider, onAuthStateChanged, User } from 'firebase/auth'
 import { ReactElement, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import firebaseConfig from './components/Authentication/config/firebaseConfig'
 import loginAuth from './components/Authentication/service/loginAuth'
 import Body from './components/Body/Body'
@@ -11,6 +12,8 @@ import Footer from './components/Footer/Footer'
 import Version from './components/Footer/Version'
 import Header from './components/Header/Header'
 import toMarkdown from './converterFunctions/toMarkdown'
+import { RootState } from './store'
+import { setMdText } from './store/mdTextSlice'
 
 interface UserStatus {
     loggedIn: boolean
@@ -18,6 +21,8 @@ interface UserStatus {
 }
 
 export default function App(): ReactElement {
+    const dispatch = useDispatch()
+
     //Initialises firebase for authentication
     const [auth, setAuth] = useState<Auth | null>(null)
     const [user, setUser] = useState<UserStatus>({ loggedIn: false, info: null })
@@ -52,13 +57,10 @@ export default function App(): ReactElement {
     const [showMarkdown, setShowMarkdown] = useState(false)
 
     //var for theme control
-    const [mode, setMode] = useState<'light' | 'dark'>(localStorage['selectedTheme'] || 'light')
+    const theme = useSelector((state: RootState) => state.theme)
 
     //var for setting file title
     const [title, setTitle] = useState('')
-
-    //var for to contain markdown text
-    const [mdText, setMdText] = useState('')
 
     //var for 'Last edited on'
     const [lastEditedOn, setLastEditedOn] = useState(localStorage['lastEditedOn'])
@@ -77,7 +79,7 @@ export default function App(): ReactElement {
     })
 
     //Check selectedTheme
-    const selectedTheme = mode === 'dark' ? darkTheme : lightTheme
+    const selectedTheme = theme === 'dark' ? darkTheme : lightTheme
 
     //Executes when user uploads a .md or .txt file
     const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,13 +105,13 @@ export default function App(): ReactElement {
         //Reading file and allocating to state
         reader.readAsText(file)
         reader.onload = () => {
-            setMdText(reader.result as string)
+            dispatch(setMdText(reader.result as string))
         }
     }
 
     const onTextChange = (editorContainer: HTMLElement) => {
         const markdown = toMarkdown(editorContainer)
-        setMdText(markdown)
+        dispatch(setMdText(markdown))
 
         //Updates 'Last Edited On' in local storage when text is changed in editor
         //Formatting time as text
@@ -127,15 +129,10 @@ export default function App(): ReactElement {
         localStorage['lastEditedOn'] = dateTime
     }
 
-    //Toggle theme
-    const toggleTheme = () => {
-        setMode(mode === 'light' ? 'dark' : 'light')
-    }
-
     //Updates preferred theme in localStorage
     useEffect(() => {
-        localStorage['selectedTheme'] = mode
-    }, [mode])
+        localStorage['selectedTheme'] = theme
+    }, [theme])
 
     const onLogin = async (provider: GithubAuthProvider) => {
         if (auth === null) return
@@ -151,29 +148,19 @@ export default function App(): ReactElement {
             <CssBaseline />
             <div id='app'>
                 <Header
-                    theme={mode}
                     title={title}
                     setTitle={setTitle}
-                    toggleTheme={toggleTheme}
                     onUpload={onUpload}
                     lastEditedOn={lastEditedOn}
-                    mdText={mdText}
-                    setMdText={setMdText}
                     onLogin={onLogin}
                     onLogout={onLogout}
                     user={user}
                 />
-                <Body
-                    showMarkdown={showMarkdown}
-                    mdText={mdText}
-                    theme={mode}
-                    onTextChange={onTextChange}
-                />
+                <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
                 <div>
                     <Footer
                         onClick={() => setShowMarkdown(!showMarkdown)}
                         showMarkdown={showMarkdown}
-                        theme={mode}
                         db={db}
                     />
                 </div>

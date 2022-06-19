@@ -1,13 +1,14 @@
 import Button from '@mui/material/Button'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store'
 import CopyClipboardButton from './CopyClipboardButton'
 
-type Props = {
-    mdText: string
-    theme: 'light' | 'dark'
-}
+type Props = {}
 
-const MarkdownTextContainer = ({ mdText, theme }: Props) => {
+const MarkdownTextContainer = ({}: Props) => {
+    const theme = useSelector((state: RootState) => state.theme)
+    const mdText = useSelector((state: RootState) => state.mdText)
     const [isHovering, setIsHovering] = useState(false)
 
     const [showCopiedPopup, setShowCopiedPopup] = useState(false)
