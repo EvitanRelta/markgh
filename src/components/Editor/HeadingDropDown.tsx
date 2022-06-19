@@ -4,6 +4,8 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import { Editor } from '@tiptap/react'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store'
 import heading from './toolbarFunctions/heading'
 
 type HeadingLevels = 0 | 1 | 2 | 3 | 4 | 5 | 6
@@ -13,6 +15,7 @@ interface Props {
 
 const HeadingDropDown = ({ editor }: Props) => {
     const [anchor, setAnchor] = useState<Element | null>(null)
+    const theme = useSelector((state: RootState) => state.theme)
 
     const openMenu: React.MouseEventHandler<HTMLButtonElement> = (e) => {
         setAnchor(e.currentTarget)
@@ -49,7 +52,7 @@ const HeadingDropDown = ({ editor }: Props) => {
                 onClick={openMenu}
                 sx={{
                     textTransform: 'none',
-                    color: 'black',
+                    color: theme === 'dark' ? 'white' : 'black',
                     borderLeft: '1px solid #d0cccc',
                     borderRight: '1px solid #d0cccc',
                     minWidth: 117.43,
@@ -59,7 +62,6 @@ const HeadingDropDown = ({ editor }: Props) => {
                     borderRadius: 0,
                     display: 'flex inline',
                     justifyContent: 'space-between',
-                    marginTop: -1,
                 }}
             >
                 <Box style={{ display: 'inline' }}>
