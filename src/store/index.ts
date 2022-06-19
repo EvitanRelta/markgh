@@ -9,6 +9,13 @@ export const store = configureStore({
         mdText: mdTextReducer,
         theme: themeReducer,
     },
+    // Ignore Redux's non-serializable error.
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredPaths: ['editor.editor'],
+            },
+        }),
 })
 
 export type RootState = ReturnType<typeof store.getState>
