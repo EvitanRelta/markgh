@@ -5,6 +5,7 @@ import {
     align,
     codeBlocks,
     ignoreTipTapArtifacts,
+    lineBreak,
     resizedImage,
     strikethrough,
     underline,
@@ -24,8 +25,9 @@ export default (html: HTMLElement) => {
         align,
         strikethrough,
         resizedImage,
-        ignoreTipTapArtifacts,
         noListItemSpacing,
+        lineBreak,
+        ignoreTipTapArtifacts,
     ])
 
     const markdown = turndownService.turndown(htmlCopy)
