@@ -52,6 +52,7 @@ const editorOptions: FormatOption[] = [
 ]
 
 const StyledIconButton = styled(IconButton)({
+    transition: 'none',
     '&:hover': {
         borderRadius: 1,
     },
