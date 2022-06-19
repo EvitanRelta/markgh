@@ -91,7 +91,12 @@ const Header = ({
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer onUpload={onUpload} title={title} ghToken={ghToken} />
+                <ToolbarContainer
+                    onUpload={onUpload}
+                    title={title}
+                    ghToken={ghToken}
+                    onLogin={onLogin}
+                />
                 <div
                     style={{
                         color: 'gray',
