@@ -49,7 +49,6 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken }: Props) => {
 
     const getRepo = () => {
         setShowLoading(true)
-        console.log(ghToken)
         git.clone({
             fs,
             http,
@@ -85,7 +84,6 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken }: Props) => {
 
     useEffect(() => {
         setShowPopover(menuOpen && showPopover)
-        console.log(ghToken)
     }, [menuOpen])
 
     const linkInput = (
