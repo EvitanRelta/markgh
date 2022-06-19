@@ -108,10 +108,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
                     setShowError(false)
                     setShowLoading(false)
                 }}
-                helperText={
-                    (showError && 'Invalid link! (Repo has to be public)') ||
-                    (showLoading && 'Loading...')
-                }
+                helperText={(showError && 'Invalid link!') || (showLoading && 'Loading...')}
             />
             <Button sx={{ marginLeft: 0.3 }} onClick={getRepo}>
                 OK
