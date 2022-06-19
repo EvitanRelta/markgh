@@ -18,9 +18,19 @@ type Props = {
     onLogin: (provider: GithubAuthProvider) => Promise<void>
     onLogout: () => Promise<void>
     user: UserStatus
+    ghToken: string | undefined
 }
 
-const Header = ({ title, setTitle, onUpload, lastEditedOn, onLogin, onLogout, user }: Props) => {
+const Header = ({
+    title,
+    setTitle,
+    onUpload,
+    lastEditedOn,
+    onLogin,
+    onLogout,
+    user,
+    ghToken,
+}: Props) => {
     const theme = useSelector((state: RootState) => state.theme)
 
     //var for current file name
@@ -81,7 +91,7 @@ const Header = ({ title, setTitle, onUpload, lastEditedOn, onLogin, onLogout, us
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer onUpload={onUpload} title={title} />
+                <ToolbarContainer onUpload={onUpload} title={title} ghToken={ghToken} />
                 <div
                     style={{
                         color: 'gray',

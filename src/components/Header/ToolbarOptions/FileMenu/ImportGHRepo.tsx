@@ -15,6 +15,7 @@ import { setMdText } from '../../../../store/mdTextSlice'
 type Props = {
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
     menuOpen: boolean
+    ghToken: string | undefined
 }
 
 const fs = new FS(
@@ -28,7 +29,7 @@ const dir = '/'
 window.global = window
 window.Buffer = window.Buffer || require('buffer').Buffer
 
-const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
+const ImportGHRepo = ({ setAnchor, menuOpen, ghToken }: Props) => {
     const dispatch = useDispatch()
     const [showPopover, setShowPopover] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
@@ -48,6 +49,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
 
     const getRepo = () => {
         setShowLoading(true)
+        console.log(ghToken)
         git.clone({
             fs,
             http,
@@ -56,6 +58,10 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
             url: link,
             singleBranch: true,
             depth: 1,
+            onAuth: () => ({
+                username: ghToken,
+                password: 'x-oauth-basic',
+            }),
         })
             .catch((err) => {
                 setShowError(true)
@@ -79,6 +85,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
 
     useEffect(() => {
         setShowPopover(menuOpen && showPopover)
+        console.log(ghToken)
     }, [menuOpen])
 
     const linkInput = (
