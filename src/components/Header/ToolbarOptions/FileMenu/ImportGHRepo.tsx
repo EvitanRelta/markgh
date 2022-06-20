@@ -86,7 +86,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
                     setShowError(true)
                     return
                 }
-                onLogin(githubProvider)
+                onLogin(githubProvider).then(() => setAnchor(null))
             })
     }
 
