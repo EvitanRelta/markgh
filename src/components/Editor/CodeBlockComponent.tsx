@@ -40,13 +40,8 @@ const TopRightTextField = styled(TextField)({
     width: '100px',
 })
 
-export default ({
-    node: {
-        attrs: { language },
-    },
-    updateAttributes,
-    extension,
-}: Props) => {
+export default ({ node, updateAttributes, extension }: Props) => {
+    const language = node.attrs.language
     const lowlight = extension.options.lowlight
     const [inputValue, setInputValue] = useState<string>(language || '')
     const [isValidLanguage, setIsValidLanguage] = useState<boolean>(
