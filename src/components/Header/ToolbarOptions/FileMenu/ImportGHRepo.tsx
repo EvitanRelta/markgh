@@ -40,6 +40,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     const [link, setLink] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
     const [showLoading, setShowLoading] = useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = useState<string>('')
 
     const openPopover = (e: React.MouseEvent) => {
         setShowPopover(true)
@@ -50,6 +51,27 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
         setShowError(false)
         setShowLoading(false)
         setAnchor(null)
+    }
+
+    const cloneErrorHandling = (err: any) => {
+        const statusCode = err.data.statusCode
+
+        if (statusCode >= 500) {
+            setErrorMessage('Error ' + statusCode)
+            setShowError(true)
+        }
+
+        if (statusCode !== 403 && statusCode !== 401) {
+            setShowError(true)
+            setErrorMessage(
+                link.slice(-3) !== 'git'
+                    ? "Link must end with 'git"
+                    : 'Invalid Link! ' + (statusCode === undefined ? '404' : statusCode)
+            )
+            return
+        }
+
+        onLogin(githubProvider).then(() => setAnchor(null))
     }
 
     const getRepo = () => {
@@ -70,7 +92,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
             .then(() =>
                 fs.readFile('/README.md', 'utf8', (err, data) => {
                     if (err) {
-                        console.error(err)
+                        console.error([err])
                         return
                     }
                     setAnchor(null)
@@ -80,16 +102,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
                     setShowLoading(false)
                 })
             )
-            .catch((err) => {
-                const statusCode = err.data.statusCode
-                console.log(err.data)
-                if (statusCode !== 403 && statusCode !== 401) {
-                    setShowError(true)
-                    return
-                }
-
-                onLogin(githubProvider).then(() => setAnchor(null))
-            })
+            .catch(cloneErrorHandling)
     }
 
     useEffect(() => {
@@ -112,13 +125,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
                     setShowError(false)
                     setShowLoading(false)
                 }}
-                helperText={
-                    showError
-                        ? link.slice(-3) !== 'git'
-                            ? "Link must end with '.git'"
-                            : 'Invalid link!'
-                        : null
-                }
+                helperText={showError ? errorMessage : null}
             />
             {showLoading && !showError ? (
                 <Box sx={{ marginRight: 2.1, marginLeft: 0.5, display: 'inline' }}>
