@@ -1,28 +1,77 @@
 import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import Dexie from 'dexie'
+import Dexie, { Table } from 'dexie'
 import { initializeApp } from 'firebase/app'
-import { Auth, getAuth, GithubAuthProvider, onAuthStateChanged, User } from 'firebase/auth'
-import { ReactElement, useEffect, useState } from 'react'
+import {
+    Auth,
+    getAuth,
+    GithubAuthProvider,
+    OAuthCredential,
+    onAuthStateChanged,
+    signInWithPopup,
+    User,
+} from 'firebase/auth'
+import React, { ReactElement, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import firebaseConfig from './components/Authentication/config/firebaseConfig'
 import Body from './components/Body/Body'
 import Footer from './components/Footer/Footer'
 import Version from './components/Footer/Version'
 import Header from './components/Header/Header'
+import { markdownToHtml } from './converterFunctions'
 import toMarkdown from './converterFunctions/toMarkdown'
 import { RootState } from './store'
 import { setMdText } from './store/mdTextSlice'
-
-import { OAuthCredential, signInWithPopup } from 'firebase/auth'
 
 interface UserStatus {
     loggedIn: boolean
     info: User | null
 }
 
+class EditorDB extends Dexie {
+    images!: Table<EditorImage>
+    text!: Table<EditorText, number>
+    constructor() {
+        super('EditorDB')
+        this.version(1).stores({
+            images: 'id',
+            text: 'id',
+        })
+    }
+}
+
+interface EditorImage {
+    id?: number
+    value: string
+}
+interface EditorText {
+    id?: number
+    value: string
+}
+
 export default function App(): ReactElement {
+    const db = new EditorDB()
+
     const dispatch = useDispatch()
+
+    const editor = useSelector((state: RootState) => state.editor.editor)
+
+    const saveEditorText = async () => {
+        await db.transaction('rw', db.text, async function () {
+            db.text.put({ id: 0, value: editor.view.dom.innerHTML as string })
+        })
+    }
+
+    useEffect(() => {
+        const getPersistedText = async () => {
+            const data = await db.text.get(0)
+            return data
+        }
+        getPersistedText().then((data) => {
+            if (data === undefined) return
+            editor.commands.setContent(markdownToHtml(data.value as string), true)
+        })
+    }, [])
 
     //Initialises firebase for authentication
     const [auth, setAuth] = useState<Auth | null>(null)
@@ -43,17 +92,6 @@ export default function App(): ReactElement {
             }
         })
     }, [auth])
-
-    //Inititalises db, doesn't execute if db of the same name already exists
-    const db = new Dexie('EditorData')
-    db.version(1).stores({
-        images: 'id, base64',
-        text: 'value',
-    })
-
-    db.open().catch((err) => {
-        console.log(err.stack || err)
-    })
 
     const loginAuth = (auth: Auth, provider: GithubAuthProvider) => {
         signInWithPopup(auth, provider)
@@ -143,6 +181,7 @@ export default function App(): ReactElement {
 
     const onTextChange = (editorContainer: HTMLElement) => {
         const markdown = toMarkdown(editorContainer)
+        saveEditorText()
         dispatch(setMdText(markdown))
 
         //Updates 'Last Edited On' in local storage when text is changed in editor
