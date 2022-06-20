@@ -13,6 +13,7 @@ import {
     User,
 } from 'firebase/auth'
 import React, { ReactElement, useEffect, useState } from 'react'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { useDispatch, useSelector } from 'react-redux'
 import firebaseConfig from './components/Authentication/config/firebaseConfig'
 import Body from './components/Body/Body'
@@ -217,29 +218,47 @@ export default function App(): ReactElement {
     }
 
     return (
-        <ThemeProvider theme={selectedTheme}>
-            <CssBaseline />
-            <Box id='app'>
-                <Header
-                    title={title}
-                    setTitle={setTitle}
-                    onUpload={onUpload}
-                    lastEditedOn={lastEditedOn}
-                    onLogin={onLogin}
-                    onLogout={onLogout}
-                    user={user}
-                    ghToken={ghToken}
-                />
-                <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
-                <Box>
-                    <Footer
-                        onClick={() => setShowMarkdown(!showMarkdown)}
-                        showMarkdown={showMarkdown}
-                        db={db}
+        <HelmetProvider>
+            <ThemeProvider theme={selectedTheme}>
+                <CssBaseline />
+                <Helmet>
+                    {/* Verification to be indexed in Google Search */}
+                    <meta
+                        name='google-site-verification'
+                        content='k_CidVKA4Ha_6LYDQrDAZTR7StqP1zaM93hHP6FSB-Q' //this will change for when we actually deploy it.
+                        //go to https://search.google.com/search-console/welcome to get a verification key
                     />
+                    {/* Keywords for Google search terms */}
+                    <meta name='keywords' content='Markdown, Editor, Edit, HTML, Convert, Github' />
+
+                    {/* Brief description of website when it appears in Google search */}
+                    <meta
+                        name='description'
+                        content='Write in Rich Text and export it as Markdown for GitHub!'
+                    />
+                </Helmet>
+                <Box id='app'>
+                    <Header
+                        title={title}
+                        setTitle={setTitle}
+                        onUpload={onUpload}
+                        lastEditedOn={lastEditedOn}
+                        onLogin={onLogin}
+                        onLogout={onLogout}
+                        user={user}
+                        ghToken={ghToken}
+                    />
+                    <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
+                    <Box>
+                        <Footer
+                            onClick={() => setShowMarkdown(!showMarkdown)}
+                            showMarkdown={showMarkdown}
+                            db={db}
+                        />
+                    </Box>
+                    <Version />
                 </Box>
-                <Version />
-            </Box>
-        </ThemeProvider>
+            </ThemeProvider>
+        </HelmetProvider>
     )
 }
