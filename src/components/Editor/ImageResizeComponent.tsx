@@ -23,6 +23,8 @@ interface Props extends NodeViewProps {
 const StyledResizableBox = styled(ResizableBox)({
     display: 'inline-block',
     cursor: 'move',
+    paddingRight: 1,
+    paddingLeft: 1,
 })
 
 export default ({ node, updateAttributes, extension }: Props) => {
