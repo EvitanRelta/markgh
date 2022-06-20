@@ -91,7 +91,9 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     }
 
     useEffect(() => {
-        setShowPopover(menuOpen && showPopover)
+        if (!menuOpen) {
+            setShowPopover(false)
+        }
     }, [menuOpen])
 
     const linkInput = (

@@ -3,7 +3,7 @@ import MarkdownTextContainer from './MarkdownTextContainer'
 
 type Props = {
     showMarkdown: boolean
-    onTextChange: (editorContainer: HTMLElement) => void | null
+    onTextChange: (editorContainer: Element) => void | null
 }
 
 const Body = ({ showMarkdown, onTextChange }: Props) => {

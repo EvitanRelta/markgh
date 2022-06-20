@@ -12,6 +12,7 @@ const ImageConatiner = ({ db }) => {
     //Retrieve images from db when page is loaded
     useEffect(() => {
         updateImagesFromDb()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     //Upload an image
