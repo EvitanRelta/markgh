@@ -4,6 +4,7 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import { ListItemText, MenuItem } from '@mui/material'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
 import Popover from '@mui/material/Popover'
 import TextField from '@mui/material/TextField'
 import { GithubAuthProvider } from 'firebase/auth'
@@ -86,6 +87,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
                     setShowError(true)
                     return
                 }
+
                 onLogin(githubProvider).then(() => setAnchor(null))
             })
     }
@@ -110,11 +112,23 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
                     setShowError(false)
                     setShowLoading(false)
                 }}
-                helperText={(showError && 'Invalid link!') || (showLoading && 'Loading...')}
+                helperText={
+                    showError
+                        ? link.slice(-3) !== 'git'
+                            ? "Link must end with '.git'"
+                            : 'Invalid link!'
+                        : null
+                }
             />
-            <Button sx={{ marginLeft: 0.3 }} onClick={getRepo}>
-                OK
-            </Button>
+            {showLoading && !showError ? (
+                <Box sx={{ marginRight: 2.1, marginLeft: 0.5, display: 'inline' }}>
+                    <CircularProgress size={25} sx={{ marginTop: 0.8 }} />
+                </Box>
+            ) : (
+                <Button sx={{ marginLeft: 0.9 }} onClick={getRepo}>
+                    OK
+                </Button>
+            )}
         </Box>
     )
 
