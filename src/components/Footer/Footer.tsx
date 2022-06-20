@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Dexie from 'dexie'
 import { useSelector } from 'react-redux'
@@ -13,9 +14,9 @@ const Footer = ({ onClick, showMarkdown, db }: Props) => {
     const theme = useSelector((state: RootState) => state.theme)
 
     return (
-        <footer className='footer'>
+        <Box className='footer'>
             <ImageContainer db={db} />
-            <div
+            <Box
                 style={{
                     margin: 0,
                     right: 40,
@@ -39,8 +40,8 @@ const Footer = ({ onClick, showMarkdown, db }: Props) => {
                         Show Markdown
                     </Button>
                 )}
-            </div>
-        </footer>
+            </Box>
+        </Box>
     )
 }
 

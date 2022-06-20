@@ -1,5 +1,6 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Menu, MenuItem } from '@mui/material'
+import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import { Editor } from '@tiptap/react'
 import { useState } from 'react'
@@ -43,7 +44,7 @@ const HeadingDropDown = ({ editor }: Props) => {
     const headingOptions: HeadingLevels[] = [1, 2, 3, 4, 5, 6, 0]
 
     return (
-        <div style={{ display: 'inline' }}>
+        <Box style={{ display: 'inline' }}>
             <Button
                 onClick={openMenu}
                 sx={{
@@ -61,13 +62,13 @@ const HeadingDropDown = ({ editor }: Props) => {
                     marginTop: -1,
                 }}
             >
-                <span style={{ display: 'inline' }}>
+                <Box style={{ display: 'inline' }}>
                     {headingLevel === 0
                         ? 'Normal'
                         : headingLevel === null
                         ? ''
                         : 'Heading ' + headingLevel}
-                </span>
+                </Box>
                 <ExpandMoreIcon
                     sx={{
                         fontSize: 'medium',
@@ -85,7 +86,7 @@ const HeadingDropDown = ({ editor }: Props) => {
                     </MenuItem>
                 ))}
             </Menu>
-        </div>
+        </Box>
     )
 }
 

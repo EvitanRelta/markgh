@@ -1,5 +1,6 @@
 import { Menu, MenuItem } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
+import Box from '@mui/material/Box'
 import { GithubAuthProvider, User } from 'firebase/auth'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -45,7 +46,7 @@ const MenuButton = ({ title, onUpload, onLogin, onLogout, user }: Props) => {
     const userPhoto = user.info === null ? '' : (user.info.photoURL as string)
 
     return (
-        <div>
+        <Box>
             <Avatar
                 src={userPhoto}
                 sx={{ width: 30, height: 30, marginRight: 1, marginTop: 1, cursor: 'pointer' }}
@@ -60,7 +61,7 @@ const MenuButton = ({ title, onUpload, onLogin, onLogout, user }: Props) => {
                     <ThemeOption />
                 </MenuItem>
             </Menu>
-        </div>
+        </Box>
     )
 }
 

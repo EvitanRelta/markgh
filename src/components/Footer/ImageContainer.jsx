@@ -1,3 +1,6 @@
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Input from '@mui/material/Input'
 import { useEffect, useState } from 'react'
 
 const ImageConatiner = ({ db }) => {
@@ -50,10 +53,10 @@ const ImageConatiner = ({ db }) => {
     }
 
     return (
-        <div>
-            <input accept='image/' type='file' onChange={uploadImage} />
+        <Box>
+            <Input accept='image/' type='file' onChange={uploadImage} />
             {images.map((image) => (
-                <div key={image.id}>
+                <Box key={image.id}>
                     id:{image.id}
                     <img
                         style={{ maxWidth: 320, maxHeight: 180 }}
@@ -61,10 +64,10 @@ const ImageConatiner = ({ db }) => {
                         alt={image.id}
                     />
                     <button onClick={() => deleteImage(image.id)}>Delete</button>
-                </div>
+                </Box>
             ))}
-            <button onClick={() => deleteAllImages()}>Delete all images</button>
-        </div>
+            <Button onClick={() => deleteAllImages()}>Delete all images</Button>
+        </Box>
     )
 }
 

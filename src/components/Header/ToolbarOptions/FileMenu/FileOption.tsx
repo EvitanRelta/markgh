@@ -25,8 +25,8 @@ const FileOption = ({ onUpload, onDownload, ghToken, onLogin }: Props) => {
     }
 
     return (
-        <Box style={{ display: 'inline-block' }}>
-            <Button id='file-button' style={{ padding: 0 }} onClick={openMenu}>
+        <Box id='file-button' style={{ display: 'inline-block' }}>
+            <Button style={{ padding: 0 }} onClick={openMenu}>
                 File
             </Button>
             <Menu

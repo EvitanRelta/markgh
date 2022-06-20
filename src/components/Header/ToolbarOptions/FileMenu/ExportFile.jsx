@@ -1,24 +1,25 @@
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import { MenuItem } from '@mui/material'
+import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 
 const ExportFile = ({ onDownload }) => {
     return (
         <MenuItem style={{ padding: 0, marginTop: 2 }} onClick={onDownload}>
-            <label style={{ cursor: 'pointer' }}>
-                <div
+            <Box style={{ cursor: 'pointer' }}>
+                <Box
                     style={{
-                        display: 'inline-block',
+                        display: 'inline',
                         marginRight: 6,
                         paddingLeft: 11,
                     }}
                 >
-                    <IconButton component='span'>
+                    <IconButton>
                         <FileDownloadIcon />
                     </IconButton>
-                </div>
-                <span>Export Markdown</span>
-            </label>
+                </Box>
+                <Box sx={{ display: 'inline' }}>Export Markdown</Box>
+            </Box>
         </MenuItem>
     )
 }

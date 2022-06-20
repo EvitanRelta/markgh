@@ -1,4 +1,5 @@
 import FileUploadIcon from '@mui/icons-material/FileUpload'
+import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Input from '@mui/material/Input'
 
@@ -6,7 +7,7 @@ type Props = {
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 const UploadFileOption = ({ onUpload }: Props) => (
-    <label
+    <Box
         style={{
             paddingLeft: '16px',
             paddingTop: '5px',
@@ -15,14 +16,14 @@ const UploadFileOption = ({ onUpload }: Props) => (
             cursor: 'pointer',
         }}
     >
-        <div style={{ display: 'none' }}>
+        <Box style={{ display: 'none' }}>
             <Input type='file' onChange={onUpload} />
-        </div>
+        </Box>
         <IconButton component='span'>
             <FileUploadIcon />
         </IconButton>
         Upload File
-    </label>
+    </Box>
 )
 
 export default UploadFileOption

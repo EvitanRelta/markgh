@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box'
 import TextEditor from '../Editor/TextEditor'
 import MarkdownTextContainer from './MarkdownTextContainer'
 
@@ -10,15 +11,15 @@ const Body = ({ showMarkdown, onTextChange }: Props) => {
     const editorWidth = showMarkdown ? '50%' : '100%'
 
     return (
-        <div>
-            <div
+        <Box>
+            <Box
                 style={{
                     justifyContent: 'center',
                     alignItems: 'stretch',
                     display: 'flex',
                 }}
             >
-                <div
+                <Box
                     style={{
                         margin: '10px',
                         width: editorWidth,
@@ -26,10 +27,10 @@ const Body = ({ showMarkdown, onTextChange }: Props) => {
                     }}
                 >
                     <TextEditor onTextChange={onTextChange} />
-                </div>
+                </Box>
                 {showMarkdown && <MarkdownTextContainer />}
-            </div>
-        </div>
+            </Box>
+        </Box>
     )
 }
 

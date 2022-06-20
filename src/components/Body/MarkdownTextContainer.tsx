@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -26,7 +27,7 @@ const MarkdownTextContainer = ({}: Props) => {
     const copyButtonColor = theme === 'dark' ? '#2a2a2a' : '#F5F5F5'
 
     return (
-        <div
+        <Box
             style={{
                 width: '50%',
                 border: '1px solid #d0cccc',
@@ -42,7 +43,7 @@ const MarkdownTextContainer = ({}: Props) => {
             onMouseEnter={() => setIsHovering(true)}
         >
             {isHovering && (
-                <div
+                <Box
                     style={{
                         margin: 0,
                         right: 20,
@@ -64,10 +65,10 @@ const MarkdownTextContainer = ({}: Props) => {
                     ) : (
                         <CopyClipboardButton onClick={onCopy} />
                     )}
-                </div>
+                </Box>
             )}
             <pre style={{ marginTop: 15, display: 'inline' }}>{mdText}</pre>
-        </div>
+        </Box>
     )
 }
 
