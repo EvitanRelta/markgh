@@ -71,6 +71,7 @@ export default function App(): ReactElement {
             if (data === undefined) return
             editor.commands.setContent(markdownToHtml(data.value as string), true)
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     //Initialises firebase for authentication
@@ -179,7 +180,7 @@ export default function App(): ReactElement {
         }
     }
 
-    const onTextChange = (editorContainer: HTMLElement) => {
+    const onTextChange = (editorContainer: Element) => {
         const markdown = toMarkdown(editorContainer)
         saveEditorText()
         dispatch(setMdText(markdown))
