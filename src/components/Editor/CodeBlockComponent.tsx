@@ -1,22 +1,24 @@
 import { TextField } from '@mui/material'
 import { styled } from '@mui/material/styles'
+import { Node } from '@tiptap/core'
 import { CodeBlockLowlightOptions } from '@tiptap/extension-code-block-lowlight'
-import { NodeViewWrapper } from '@tiptap/react'
+import { NodeViewProps, NodeViewWrapper } from '@tiptap/react'
 import _ from 'lodash'
 import { lowlight } from 'lowlight/lib/all'
 import { useCallback, useState } from 'react'
 import { ModifiedNodeViewContent } from './ModifiedNodeViewContent'
 
-interface Options extends CodeBlockLowlightOptions {
+interface OptionsFixLowLightType extends CodeBlockLowlightOptions {
     lowlight: typeof lowlight
 }
 
-interface Props {
-    node: {
-        attrs: { language: string | null | undefined }
+interface Props extends NodeViewProps {
+    extension: Node<OptionsFixLowLightType, any>
+    node: NodeViewProps['node'] & {
+        attrs: {
+            language: string | null | undefined
+        }
     }
-    updateAttributes: (attributes: Record<string, any>) => any
-    extension: { options: Options }
 }
 
 const TopRightTextField = styled(TextField)({
