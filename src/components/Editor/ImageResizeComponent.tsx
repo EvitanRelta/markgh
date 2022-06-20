@@ -28,20 +28,22 @@ const StyledResizableBox = styled(ResizableBox)({
 })
 
 export default ({ node, updateAttributes, extension }: Props) => {
-    const { width, height } = node.attrs
+    const [startingWidth, setStartingWidth] = useState(-1)
+    const [startingHeight, setStartingHeight] = useState(-1)
     const [isResizing, setIsResizing] = useState(false)
 
     const onImgLoad: React.ReactEventHandler<HTMLImageElement> = (event) => {
         const img = event.target as HTMLImageElement
-        updateAttributes({ width: img.offsetWidth, height: img.offsetHeight })
+        setStartingWidth(img.offsetWidth)
+        setStartingHeight(img.offsetHeight)
     }
 
     return (
         <NodeViewWrapper as='span' onClick={() => setIsResizing(true)}>
             <DetectOutsideClick onOutsideClick={() => setIsResizing(false)}>
                 <StyledResizableBox
-                    width={width ?? -1}
-                    height={height ?? -1}
+                    width={startingWidth}
+                    height={startingHeight}
                     onResize={(e, data) => {
                         const { width, height } = data.size
                         updateAttributes({ width, height })
