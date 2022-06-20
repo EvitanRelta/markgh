@@ -25,6 +25,58 @@ const StyledResizableBox = styled(ResizableBox)({
     cursor: 'move',
     paddingRight: 1,
     paddingLeft: 1,
+
+    // Custom handle based on the "<ResizableBox> with custom handles in all locations." example
+    // in https://github.com/react-grid-layout/react-resizable/blob/master/examples/ExampleLayout.js
+    '& .custom-handle': {
+        position: 'absolute',
+        width: '8px',
+        height: '8px',
+        backgroundColor: 'gray',
+        borderRadius: '4px',
+    },
+    '& .custom-handle-sw': {
+        bottom: '-4px',
+        left: '-4px',
+        cursor: 'sw-resize',
+    },
+    '& .custom-handle-se': {
+        bottom: '-4px',
+        right: '-4px',
+        cursor: 'se-resize',
+    },
+    '& .custom-handle-nw': {
+        top: '-4px',
+        left: '-4px',
+        cursor: 'nw-resize',
+    },
+    '& .custom-handle-ne': {
+        top: '-4px',
+        right: '-4px',
+        cursor: 'ne-resize',
+    },
+    '& .custom-handle-w,& .custom-handle-e': {
+        top: '50%',
+        marginTop: '-4px',
+        cursor: 'ew-resize',
+    },
+    '& .custom-handle-w': {
+        left: '-4px',
+    },
+    '& .custom-handle-e': {
+        right: '-4px',
+    },
+    '& .custom-handle-n,& .custom-handle-s': {
+        left: '50%',
+        marginLeft: '-4px',
+        cursor: 'ns-resize',
+    },
+    '& .custom-handle-n': {
+        top: '-4px',
+    },
+    '& .custom-handle-s': {
+        bottom: '-4px',
+    },
 })
 
 export default ({ node, updateAttributes, extension }: Props) => {
@@ -50,7 +102,18 @@ export default ({ node, updateAttributes, extension }: Props) => {
                     }}
                     draggableOpts={{ grid: [1, 1] }}
                     lockAspectRatio={true}
-                    handle={isResizing ? undefined : <div />}
+                    handle={(direction, ref) =>
+                        isResizing ? (
+                            <span
+                                className={`custom-handle custom-handle-${direction}`}
+                                ref={ref}
+                            />
+                        ) : (
+                            <div />
+                        )
+                    }
+                    handleSize={[8, 8]}
+                    resizeHandles={['sw', 'se', 'nw', 'ne', 'n', 's', 'e', 'w']}
                 >
                     <NodeViewContent
                         as='img'
