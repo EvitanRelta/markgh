@@ -80,8 +80,8 @@ const EditorToolbar = ({ editor }: Props) => {
     }
 
     return (
-        <Box sx={{ marginBottom: 8, borderBottom: '1px solid gray' }}>
-            <Box style={{ marginLeft: 8 }}>{editorOptions.map(optionMapping)}</Box>
+        <Box sx={{ borderBottom: '1px solid gray' }}>
+            <Box>{editorOptions.map(optionMapping)}</Box>
         </Box>
     )
 }
