@@ -1,4 +1,6 @@
 import Image from '@tiptap/extension-image'
+import { ReactNodeViewRenderer } from '@tiptap/react'
+import ImageResizeComponent from '../ImageResizeComponent'
 
 // Based on https://github.com/ueberdosis/tiptap/issues/1365#issuecomment-853799239
 export default Image.extend({
@@ -8,5 +10,8 @@ export default Image.extend({
             width: { default: null },
             height: { default: null },
         }
+    },
+    addNodeView() {
+        return ReactNodeViewRenderer(ImageResizeComponent)
     },
 })
