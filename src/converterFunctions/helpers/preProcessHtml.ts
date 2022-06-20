@@ -47,7 +47,18 @@ const removeCodeBlockWrapper = (htmlElement: Element) => {
     })
 }
 
+const removeImageWrapper = (htmlElement: Element) => {
+    htmlElement.querySelectorAll('.react-renderer.node-image').forEach((wrapper) => {
+        const parentElement = wrapper.parentElement
+        const imgElement = wrapper.querySelector('img')
+        if (!parentElement || !imgElement) throw new Error('Error parsing codeblock.')
+
+        parentElement.replaceChild(imgElement, wrapper)
+    })
+}
+
 export default (htmlElement: Element) => {
     recursivelyEscape(htmlElement)
     removeCodeBlockWrapper(htmlElement)
+    removeImageWrapper(htmlElement)
 }
