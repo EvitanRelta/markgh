@@ -3,7 +3,7 @@ import postProcessMarkdown from './helpers/postProcessMarkdown'
 import preProcessHtml from './helpers/preProcessHtml'
 import { plugins } from './turndownPlugins/plugins'
 
-export default (html: HTMLElement) => {
+export default (html: Element) => {
     const htmlCopy = html.cloneNode(true) as HTMLElement
     preProcessHtml(htmlCopy)
 
