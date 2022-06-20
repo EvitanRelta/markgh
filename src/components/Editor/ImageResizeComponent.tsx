@@ -84,6 +84,14 @@ export default ({ node, updateAttributes, extension }: Props) => {
     const [startingHeight, setStartingHeight] = useState(-1)
     const [isResizing, setIsResizing] = useState(false)
 
+    const minLength = 15
+    const minConstraints: [number, number] =
+        startingWidth === -1
+            ? [minLength, minLength]
+            : startingWidth > startingHeight
+            ? [(startingWidth / startingHeight) * minLength, minLength]
+            : [minLength, (startingHeight / startingWidth) * minLength]
+
     const onImgLoad: React.ReactEventHandler<HTMLImageElement> = (event) => {
         const img = event.target as HTMLImageElement
         setStartingWidth(img.offsetWidth)
@@ -114,6 +122,7 @@ export default ({ node, updateAttributes, extension }: Props) => {
                     }
                     handleSize={[8, 8]}
                     resizeHandles={['sw', 'se', 'nw', 'ne', 'n', 's', 'e', 'w']}
+                    minConstraints={minConstraints}
                 >
                     <NodeViewContent
                         as='img'
