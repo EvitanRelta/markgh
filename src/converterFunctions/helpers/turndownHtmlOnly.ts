@@ -23,7 +23,7 @@ const allowedAttr: AllowedAttr[] = [
         allowedAttributes: ['src', 'alt', 'width', 'height'],
     },
     {
-        filter: ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'blockquote'],
+        filter: ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'blockquote', 'table'],
         allowedAttributes: ['align'],
     },
     {
@@ -33,6 +33,14 @@ const allowedAttr: AllowedAttr[] = [
     {
         filter: ['br', 'hr', 'em', 'i', 'strong', 'b', 's', 'code'],
         allowedAttributes: [],
+    },
+    {
+        filter: ['thead', 'tbody', 'tr'],
+        allowedAttributes: ['align', 'height'],
+    },
+    {
+        filter: ['td', 'th'],
+        allowedAttributes: ['align', 'width', 'height'],
     },
 ]
 
