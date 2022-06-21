@@ -62,10 +62,12 @@ const Header = ({
                     sx={{
                         '&:before': {
                             borderBottom: '0px',
-                            transition: 'none',
+                            transform: 'scaleX(0)',
+                            transition: 'transform 150ms ease-in-out',
                         },
                         '&:hover': {
                             '&&:before': {
+                                transform: 'scaleX(1)',
                                 borderBottom: '2px solid gray',
                             },
                         },
