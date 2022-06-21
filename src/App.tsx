@@ -80,6 +80,7 @@ export default function App(): ReactElement {
         }
         getPersistedText().then((data) => {
             if (data === undefined) return
+            editor.commands.clearContent(false)
             editor.commands.setContent(data.value, true)
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
