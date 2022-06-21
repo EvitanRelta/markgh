@@ -20,7 +20,6 @@ import Body from './components/Body/Body'
 import Footer from './components/Footer/Footer'
 import Version from './components/Footer/Version'
 import Header from './components/Header/Header'
-import { markdownToHtml } from './converterFunctions'
 import toMarkdown from './converterFunctions/toMarkdown'
 import { RootState } from './store'
 import { setMdText } from './store/mdTextSlice'
@@ -71,7 +70,7 @@ export default function App(): ReactElement {
         }
         getPersistedText().then((data) => {
             if (data === undefined) return
-            editor.commands.setContent(markdownToHtml(data.value as string), true)
+            editor.commands.setContent(data.value as string, true)
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
