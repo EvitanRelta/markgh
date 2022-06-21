@@ -10,36 +10,13 @@ import { GithubAuthProvider } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../../store'
-import { githubProvider } from '../../../Authentication/config/authMethod'
+//import { githubProvider } from '../../../Authentication/config/authMethod'
 
 type Props = {
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
     menuOpen: boolean
     ghToken: string | undefined
     onLogin: (provider: GithubAuthProvider) => Promise<void>
-}
-
-function httpGet(theUrl: string) {
-    let xmlhttp: XMLHttpRequest
-
-    if (window.XMLHttpRequest) {
-        // code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest()
-    } else {
-        // code for IE6, IE5
-        xmlhttp = new ActiveXObject('Microsoft.XMLHTTP')
-    }
-
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            return xmlhttp.responseText
-        }
-    }
-    xmlhttp.open('GET', theUrl, false)
-    xmlhttp.send()
-
-    console.log(xmlhttp.response)
-    return xmlhttp.response
 }
 
 const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
@@ -49,6 +26,55 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     const [showError, setShowError] = useState<boolean>(false)
     const [showLoading, setShowLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
+
+    const generateRawURL = (url: string) => {
+        const urlInfo = url.split('https://github.com/')[1].split('/')
+        const [user, repo] = urlInfo
+        //to implement branch name input  (default as master)
+        //corsproxy needs to be changed
+        const rawLink = `https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/${user}/${repo}/master/README.md`
+
+        return rawLink
+    }
+
+    const httpErrorHandling = (statusCode: number) => {
+        //probably 404 error, if repo is private or typo
+        if (statusCode < 500) {
+            //onLogin(githubProvider)
+            //if still fails, invalid link
+        }
+
+        if (statusCode >= 500) {
+            setErrorMessage('GitHub servers maybe down...')
+        }
+    }
+
+    const httpGet = (theUrl: string) => {
+        console.log(theUrl)
+        let xmlHttp: XMLHttpRequest
+
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlHttp = new XMLHttpRequest()
+        } else {
+            // code for IE6, IE5
+            xmlHttp = new ActiveXObject('Microsoft.XMLHTTP')
+        }
+
+        xmlHttp.onreadystatechange = () => {
+            if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+                return xmlHttp.responseText
+            }
+            return false //returns false if error, use this conditional for checking error later
+        }
+        xmlHttp.open('GET', theUrl, false)
+        //for private repos, but CORS issues
+        xmlHttp.setRequestHeader('Authorization', 'Bearer ' + ghToken)
+        xmlHttp.send()
+
+        console.log(xmlHttp.response)
+        return xmlHttp.response
+    }
 
     const openPopover = (e: React.MouseEvent) => {
         setShowPopover(true)
@@ -61,40 +87,9 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
         setAnchor(null)
     }
 
-    const httpErrorHandling = (err: any) => {
-        indexedDB.deleteDatabase('fs')
-        const statusCode = err.data.statusCode
-
-        if (statusCode >= 500) {
-            setErrorMessage('Error ' + statusCode)
-            setShowError(true)
-        }
-
-        if (statusCode !== 403 && statusCode !== 401) {
-            setShowError(true)
-            setErrorMessage(
-                link.slice(-3) !== 'git'
-                    ? "Link must end with 'git"
-                    : 'Invalid Link! ' + (statusCode === undefined ? '404' : statusCode)
-            )
-            return
-        }
-
-        onLogin(githubProvider).then(() => setAnchor(null))
-    }
-
     const getRepo = () => {
         setShowLoading(false)
-
-        const generateRawURL = (url: string) => {
-            // https://github.com/ShenyiCui/simple_form-bootstrap
-            const urlInfo = url.split('https://github.com/')[1].split('/')
-            const [user, repo] = urlInfo
-            const rawLink = `https://raw.githubusercontent.com/${user}/${repo}/master/README.md`
-
-            return rawLink
-        }
-
+        //onLogin(githubProvider)
         let res = httpGet(generateRawURL(link))
     }
 
