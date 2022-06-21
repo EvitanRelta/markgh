@@ -54,6 +54,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     }
 
     const cloneErrorHandling = (err: any) => {
+        indexedDB.deleteDatabase('fs')
         const statusCode = err.data.statusCode
 
         if (statusCode >= 500) {
