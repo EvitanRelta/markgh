@@ -27,7 +27,7 @@ const recursivelyEscape = (element: Element) => {
     Array.from(element.children).forEach(recursivelyEscape)
 }
 
-const removeCodeBlockWrapper = (htmlElement: Element) => {
+export const removeCodeBlockWrapper = (htmlElement: Element) => {
     const removeInnerWrapper = (preElement: Element) => {
         const codeElement = preElement.firstElementChild
         const innerDivElement = codeElement?.firstElementChild
@@ -47,7 +47,7 @@ const removeCodeBlockWrapper = (htmlElement: Element) => {
     })
 }
 
-const removeImageWrapper = (htmlElement: Element) => {
+export const removeImageWrapper = (htmlElement: Element) => {
     htmlElement.querySelectorAll('.react-renderer.node-image').forEach((wrapper) => {
         const parentElement = wrapper.parentElement
         const imgElement = wrapper.querySelector('img')
