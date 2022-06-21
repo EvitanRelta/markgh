@@ -4,6 +4,7 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import { ListItemText, MenuItem } from '@mui/material'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
 import Popover from '@mui/material/Popover'
 import TextField from '@mui/material/TextField'
 import { GithubAuthProvider } from 'firebase/auth'
@@ -39,6 +40,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     const [link, setLink] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
     const [showLoading, setShowLoading] = useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = useState<string>('')
 
     const openPopover = (e: React.MouseEvent) => {
         setShowPopover(true)
@@ -49,6 +51,28 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
         setShowError(false)
         setShowLoading(false)
         setAnchor(null)
+    }
+
+    const cloneErrorHandling = (err: any) => {
+        indexedDB.deleteDatabase('fs')
+        const statusCode = err.data.statusCode
+
+        if (statusCode >= 500) {
+            setErrorMessage('Error ' + statusCode)
+            setShowError(true)
+        }
+
+        if (statusCode !== 403 && statusCode !== 401) {
+            setShowError(true)
+            setErrorMessage(
+                link.slice(-3) !== 'git'
+                    ? "Link must end with 'git"
+                    : 'Invalid Link! ' + (statusCode === undefined ? '404' : statusCode)
+            )
+            return
+        }
+
+        onLogin(githubProvider).then(() => setAnchor(null))
     }
 
     const getRepo = () => {
@@ -69,7 +93,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
             .then(() =>
                 fs.readFile('/README.md', 'utf8', (err, data) => {
                     if (err) {
-                        console.error(err)
+                        console.error([err])
                         return
                     }
                     setAnchor(null)
@@ -79,15 +103,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
                     setShowLoading(false)
                 })
             )
-            .catch((err) => {
-                const statusCode = err.data.statusCode
-                console.log(err.data)
-                if (statusCode !== 403 && statusCode !== 401) {
-                    setShowError(true)
-                    return
-                }
-                onLogin(githubProvider)
-            })
+            .catch(cloneErrorHandling)
     }
 
     useEffect(() => {
@@ -110,11 +126,17 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
                     setShowError(false)
                     setShowLoading(false)
                 }}
-                helperText={(showError && 'Invalid link!') || (showLoading && 'Loading...')}
+                helperText={showError ? errorMessage : null}
             />
-            <Button sx={{ marginLeft: 0.3 }} onClick={getRepo}>
-                OK
-            </Button>
+            {showLoading && !showError ? (
+                <Box sx={{ marginRight: 2.1, marginLeft: 0.5, display: 'inline' }}>
+                    <CircularProgress size={25} sx={{ marginTop: 0.8 }} />
+                </Box>
+            ) : (
+                <Button sx={{ marginLeft: 0.9 }} onClick={getRepo}>
+                    OK
+                </Button>
+            )}
         </Box>
     )
 

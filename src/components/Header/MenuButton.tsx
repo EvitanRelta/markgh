@@ -49,11 +49,18 @@ const MenuButton = ({ title, onUpload, onLogin, onLogout, user }: Props) => {
         <Box>
             <Avatar
                 src={userPhoto}
-                sx={{ width: 30, height: 30, marginRight: 1, marginTop: 1, cursor: 'pointer' }}
+                sx={{
+                    width: 35,
+                    height: 35,
+                    marginRight: 1,
+                    marginTop: 1,
+                    cursor: 'pointer',
+                    border: '2px solid #1976d2',
+                }}
                 onClick={openMenu}
             />
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
-                <UserInfo user={user} />
+                {user.loggedIn && <UserInfo user={user} />}
                 <MenuItem onClick={() => (user.loggedIn ? onLogout() : onLogin(githubProvider))}>
                     {user.loggedIn ? <Logout /> : <Login />}
                 </MenuItem>

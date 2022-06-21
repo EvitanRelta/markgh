@@ -119,8 +119,7 @@ export default function App(): ReactElement {
                 localStorage['ghToken'] = token
                 console.log(token)
 
-                // The signed-in user info.
-                const user = result.user
+                setUser({ loggedIn: true, info: result.user })
                 // ...
             })
             .catch((error) => {
@@ -224,6 +223,8 @@ export default function App(): ReactElement {
     }
 
     const onLogout = async () => {
+        localStorage['ghToken'] = undefined
+        setGhToken(undefined)
         auth?.signOut()
     }
 

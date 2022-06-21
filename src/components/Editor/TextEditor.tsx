@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import '../../githubMarkdownCss/importAllGithubCss'
 import { RootState } from '../../store'
-import EditorToolbar from './EditorToolbar'
 
 import '../../customCss/fix-codeblock-bottom-spacing.css'
 import '../../customCss/fix-codeblock-cannot-type.css'
@@ -54,10 +53,5 @@ export default ({ onTextChange }: Props) => {
         classList.add(`gh-${theme}`)
     }, [editorContainer, theme])
 
-    return (
-        <div>
-            <EditorToolbar editor={editor} />
-            <EditorContent editor={editor} />
-        </div>
-    )
+    return <EditorContent editor={editor} />
 }

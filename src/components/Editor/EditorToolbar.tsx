@@ -52,6 +52,7 @@ const editorOptions: FormatOption[] = [
 ]
 
 const StyledIconButton = styled(IconButton)({
+    transition: 'none',
     '&:hover': {
         borderRadius: 1,
     },
@@ -78,7 +79,11 @@ const EditorToolbar = ({ editor }: Props) => {
         )
     }
 
-    return <Box sx={{ marginLeft: 8 }}>{editorOptions.map(optionMapping)}</Box>
+    return (
+        <Box sx={{ borderBottom: '1px solid gray' }}>
+            <Box>{editorOptions.map(optionMapping)}</Box>
+        </Box>
+    )
 }
 
 export default React.memo(EditorToolbar)
