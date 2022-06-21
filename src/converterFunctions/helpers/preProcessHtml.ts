@@ -67,9 +67,25 @@ export const removeWrapperParagraphs = (htmlElement: Element) => {
     })
 }
 
+// TipTap puts header rows in the 'tbody' element.
+export const addThead = (htmlElement: Element) => {
+    Array.from(htmlElement.querySelectorAll('tr'))
+        .filter((tr) => tr.cells[0].tagName === 'TH')
+        .forEach((headerRow) => {
+            const tBody = headerRow.parentElement
+            const table = tBody?.parentElement
+            if (!tBody || !table) throw new Error('Error parsing codeblock.')
+
+            const tHead = document.createElement('thead')
+            tHead.appendChild(headerRow)
+            table.prepend(tHead)
+        })
+}
+
 export default (htmlElement: Element) => {
     recursivelyEscape(htmlElement)
     removeCodeBlockWrapper(htmlElement)
     removeImageWrapper(htmlElement)
     removeWrapperParagraphs(htmlElement)
+    addThead(htmlElement)
 }
