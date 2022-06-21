@@ -8,11 +8,8 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Popover from '@mui/material/Popover'
 import TextField from '@mui/material/TextField'
 import { GithubAuthProvider } from 'firebase/auth'
-import git from 'isomorphic-git'
-import http from 'isomorphic-git/http/web'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { markdownToHtml } from '../../../../converterFunctions'
 import { RootState } from '../../../../store'
 import { githubProvider } from '../../../Authentication/config/authMethod'
 
@@ -22,7 +19,28 @@ type Props = {
     ghToken: string | undefined
     onLogin: (provider: GithubAuthProvider) => Promise<void>
 }
+function httpGet(theUrl: string) {
+    let xmlhttp: XMLHttpRequest
 
+    if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest()
+    } else {
+        // code for IE6, IE5
+        xmlhttp = new ActiveXObject('Microsoft.XMLHTTP')
+    }
+
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            return xmlhttp.responseText
+        }
+    }
+    xmlhttp.open('GET', theUrl, false)
+    xmlhttp.send()
+
+    console.log(xmlhttp.response)
+    return xmlhttp.response
+}
 const fs = new FS(
     'fs'
     //cant get this to work in typescript, but it would be good to have this option. Using workaround for now.
@@ -77,33 +95,49 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
 
     const getRepo = () => {
         setShowLoading(true)
-        git.clone({
-            fs,
-            http,
-            dir,
-            corsProxy: 'https://cors.isomorphic-git.org',
-            url: link,
-            singleBranch: true,
-            depth: 1,
-            onAuth: () => ({
-                username: ghToken,
-                password: 'x-oauth-basic',
-            }),
-        })
-            .then(() =>
-                fs.readFile('/README.md', 'utf8', (err, data) => {
-                    if (err) {
-                        console.error([err])
-                        return
-                    }
-                    setAnchor(null)
-                    editor.commands.setContent(markdownToHtml(data as string), true)
-                    setShowPopover(false)
-                    indexedDB.deleteDatabase('fs')
-                    setShowLoading(false)
-                })
-            )
-            .catch(cloneErrorHandling)
+
+        httpGet('https://raw.githubusercontent.com/ueberdosis/tiptap/main/README.md')
+        // indexedDB.deleteDatabase('fs')
+        // git.clone({
+        //     fs,
+        //     http,
+        //     dir,
+        //     corsProxy: 'https://cors.isomorphic-git.org',
+        //     url: link,
+        //     singleBranch: true,
+        //     depth: 1,
+        //     onAuth: () => ({
+        //         username: ghToken,
+        //         password: 'x-oauth-basic',
+        //     }),
+        // })
+        //     .then(() => {
+        //         fs.readdir('/', undefined, (err, files) => {
+        //             console.log([files])
+        //         })
+        //         fs.readFile('/', 'utf8', (err, data) => {
+        //             if (err) {
+        //                 console.error(err)
+        //                 return
+        //             }
+        //             var content = data
+        //             console.log(content)
+        //             setAnchor(null)
+        //             editor.commands.setContent(markdownToHtml(data as string), true)
+        //             setShowPopover(false)
+        //             indexedDB.deleteDatabase('fs')
+        //             setShowLoading(false)
+        //         })
+        //     })
+        //     .catch((err) => {
+        //         const statusCode = err.data.statusCode
+        //         console.log(err.data)
+        //         if (statusCode !== 403 && statusCode !== 401) {
+        //             setShowError(true)
+        //             return
+        //         }
+        //         onLogin(githubProvider)
+        //     })
     }
 
     useEffect(() => {
