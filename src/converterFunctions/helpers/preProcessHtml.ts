@@ -57,8 +57,19 @@ export const removeImageWrapper = (htmlElement: Element) => {
     })
 }
 
+export const removeWrapperParagraphs = (htmlElement: Element) => {
+    htmlElement.querySelectorAll('li > p').forEach((wrapper) => {
+        const parentElement = wrapper.parentElement
+        if (!parentElement) throw new Error('Error parsing codeblock.')
+
+        parentElement.removeChild(wrapper)
+        parentElement.append(...Array.from(wrapper.childNodes))
+    })
+}
+
 export default (htmlElement: Element) => {
     recursivelyEscape(htmlElement)
     removeCodeBlockWrapper(htmlElement)
     removeImageWrapper(htmlElement)
+    removeWrapperParagraphs(htmlElement)
 }
