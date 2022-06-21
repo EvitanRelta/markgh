@@ -20,6 +20,11 @@ import Body from './components/Body/Body'
 import Footer from './components/Footer/Footer'
 import Version from './components/Footer/Version'
 import Header from './components/Header/Header'
+import {
+    removeCodeBlockWrapper,
+    removeImageWrapper,
+} from './converterFunctions/helpers/preProcessHtml'
+import { removeTipTapArtifacts } from './converterFunctions/helpers/removeTipTapArtifacts'
 import toMarkdown from './converterFunctions/toMarkdown'
 import { RootState } from './store'
 import { setMdText } from './store/mdTextSlice'
@@ -58,8 +63,13 @@ export default function App(): ReactElement {
     const editor = useSelector((state: RootState) => state.editor.editor)
 
     const saveEditorText = async () => {
+        const htmlCopy = editor.view.dom.cloneNode(true) as HTMLElement
+        removeCodeBlockWrapper(htmlCopy)
+        removeImageWrapper(htmlCopy)
+        removeTipTapArtifacts(htmlCopy)
+
         await db.transaction('rw', db.text, async function () {
-            db.text.put({ id: 0, value: editor.view.dom.innerHTML })
+            db.text.put({ id: 0, value: htmlCopy.innerHTML })
         })
     }
 
