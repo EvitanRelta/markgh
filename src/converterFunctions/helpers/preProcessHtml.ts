@@ -58,7 +58,7 @@ export const removeImageWrapper = (htmlElement: Element) => {
 }
 
 export const removeWrapperParagraphs = (htmlElement: Element) => {
-    htmlElement.querySelectorAll('li > p').forEach((wrapper) => {
+    htmlElement.querySelectorAll(':is(th, td, li) > p').forEach((wrapper) => {
         const parentElement = wrapper.parentElement
         if (!parentElement) throw new Error('Error parsing codeblock.')
 
