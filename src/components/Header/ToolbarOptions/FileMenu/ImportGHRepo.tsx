@@ -1,4 +1,3 @@
-import FS from '@isomorphic-git/lightning-fs'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { ListItemText, MenuItem } from '@mui/material'
@@ -19,6 +18,7 @@ type Props = {
     ghToken: string | undefined
     onLogin: (provider: GithubAuthProvider) => Promise<void>
 }
+
 function httpGet(theUrl: string) {
     let xmlhttp: XMLHttpRequest
 
@@ -41,16 +41,6 @@ function httpGet(theUrl: string) {
     console.log(xmlhttp.response)
     return xmlhttp.response
 }
-const fs = new FS(
-    'fs'
-    //cant get this to work in typescript, but it would be good to have this option. Using workaround for now.
-    //clears previous git clones in FS on refresh
-    //{wipe: true}
-)
-
-const dir = '/'
-window.global = window
-window.Buffer = window.Buffer || require('buffer').Buffer
 
 const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     const editor = useSelector((state: RootState) => state.editor.editor)
@@ -71,7 +61,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
         setAnchor(null)
     }
 
-    const cloneErrorHandling = (err: any) => {
+    const httpErrorHandling = (err: any) => {
         indexedDB.deleteDatabase('fs')
         const statusCode = err.data.statusCode
 
@@ -94,50 +84,18 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     }
 
     const getRepo = () => {
-        setShowLoading(true)
+        setShowLoading(false)
 
-        httpGet('https://raw.githubusercontent.com/ueberdosis/tiptap/main/README.md')
-        // indexedDB.deleteDatabase('fs')
-        // git.clone({
-        //     fs,
-        //     http,
-        //     dir,
-        //     corsProxy: 'https://cors.isomorphic-git.org',
-        //     url: link,
-        //     singleBranch: true,
-        //     depth: 1,
-        //     onAuth: () => ({
-        //         username: ghToken,
-        //         password: 'x-oauth-basic',
-        //     }),
-        // })
-        //     .then(() => {
-        //         fs.readdir('/', undefined, (err, files) => {
-        //             console.log([files])
-        //         })
-        //         fs.readFile('/', 'utf8', (err, data) => {
-        //             if (err) {
-        //                 console.error(err)
-        //                 return
-        //             }
-        //             var content = data
-        //             console.log(content)
-        //             setAnchor(null)
-        //             editor.commands.setContent(markdownToHtml(data as string), true)
-        //             setShowPopover(false)
-        //             indexedDB.deleteDatabase('fs')
-        //             setShowLoading(false)
-        //         })
-        //     })
-        //     .catch((err) => {
-        //         const statusCode = err.data.statusCode
-        //         console.log(err.data)
-        //         if (statusCode !== 403 && statusCode !== 401) {
-        //             setShowError(true)
-        //             return
-        //         }
-        //         onLogin(githubProvider)
-        //     })
+        const generateRawURL = (url: string) => {
+            // https://github.com/ShenyiCui/simple_form-bootstrap
+            const urlInfo = url.split('https://github.com/')[1].split('/')
+            const [user, repo] = urlInfo
+            const rawLink = `https://raw.githubusercontent.com/${user}/${repo}/master/README.md`
+
+            return rawLink
+        }
+
+        let res = httpGet(generateRawURL(link))
     }
 
     useEffect(() => {
