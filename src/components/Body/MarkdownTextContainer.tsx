@@ -36,7 +36,7 @@ const MarkdownTextContainer = ({}: Props) => {
                 paddingRight: 8,
                 margin: '10px',
                 overflowX: 'auto',
-                marginTop: 41,
+                marginTop: 9.5,
                 borderRadius: 6.5,
             }}
             onMouseLeave={() => setIsHovering(false)}
@@ -46,12 +46,13 @@ const MarkdownTextContainer = ({}: Props) => {
                 <Box
                     style={{
                         margin: 0,
-                        right: 20,
-                        top: 120,
+                        right: 23,
+                        top: 151,
                         position: 'absolute',
                         backgroundColor: copyButtonColor,
                         borderRadius: 7,
                         paddingBottom: 1,
+                        zIndex: 1000,
                     }}
                 >
                     {showCopiedPopup ? (
