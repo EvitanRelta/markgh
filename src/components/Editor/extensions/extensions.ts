@@ -4,8 +4,6 @@ import OrderedList from '@tiptap/extension-ordered-list'
 import Subscript from '@tiptap/extension-subscript'
 import Superscript from '@tiptap/extension-superscript'
 import Table from '@tiptap/extension-table'
-import TableCell from '@tiptap/extension-table-cell'
-import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
 import Underline from '@tiptap/extension-underline'
 import StarterKit from '@tiptap/starter-kit'
@@ -14,6 +12,8 @@ import ListItemNoTabNav from './ListItemNoTabNav'
 import SizedImage from './SizedImage'
 import SyntaxHighlightCodeBlock from './SyntaxHighlightCodeBlock'
 import { TabKey } from './TabKey'
+import TableCellAllowAttrs from './TableCellAllowAttrs'
+import TableHeaderAllowAttrs from './TableHeaderAllowAttrs'
 import TextAlignAttr from './TextAlignAttr'
 
 export default [
@@ -45,7 +45,7 @@ export default [
     Superscript,
     Subscript,
     Table,
-    TableHeader,
+    TableHeaderAllowAttrs,
     TableRow,
-    TableCell,
+    TableCellAllowAttrs,
 ]
