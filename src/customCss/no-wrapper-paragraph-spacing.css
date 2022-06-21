@@ -2,3 +2,8 @@
 .markdown-body ul.no-list-item-spacing > li > p {
     margin: 0;
 }
+
+.markdown-body th.no-table-cell-spacing > p,
+.markdown-body td.no-table-cell-spacing > p {
+    margin: 0;
+}

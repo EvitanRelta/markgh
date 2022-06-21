@@ -45,7 +45,11 @@ export default [
     Superscript,
     Subscript,
     Table,
-    TableHeaderAllowAttrs,
+    TableHeaderAllowAttrs.configure({
+        HTMLAttributes: { class: 'no-table-cell-spacing' },
+    }),
     TableRow,
-    TableCellAllowAttrs,
+    TableCellAllowAttrs.configure({
+        HTMLAttributes: { class: 'no-table-cell-spacing' },
+    }),
 ]
