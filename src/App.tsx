@@ -59,7 +59,7 @@ export default function App(): ReactElement {
 
     const saveEditorText = async () => {
         await db.transaction('rw', db.text, async function () {
-            db.text.put({ id: 0, value: editor.view.dom.innerHTML as string })
+            db.text.put({ id: 0, value: editor.view.dom.innerHTML })
         })
     }
 
@@ -70,7 +70,7 @@ export default function App(): ReactElement {
         }
         getPersistedText().then((data) => {
             if (data === undefined) return
-            editor.commands.setContent(data.value as string, true)
+            editor.commands.setContent(data.value, true)
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
