@@ -3,6 +3,10 @@ import Link from '@tiptap/extension-link'
 import OrderedList from '@tiptap/extension-ordered-list'
 import Subscript from '@tiptap/extension-subscript'
 import Superscript from '@tiptap/extension-superscript'
+import Table from '@tiptap/extension-table'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import TableRow from '@tiptap/extension-table-row'
 import Underline from '@tiptap/extension-underline'
 import StarterKit from '@tiptap/starter-kit'
 import CodeNoExcludes from './CodeNoExcludes'
@@ -40,4 +44,8 @@ export default [
     TabKey,
     Superscript,
     Subscript,
+    Table,
+    TableHeader,
+    TableRow,
+    TableCell,
 ]
