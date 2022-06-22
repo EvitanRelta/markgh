@@ -31,7 +31,7 @@ export default [
     Underline,
     CodeNoExcludes,
     TextAlignAttr.configure({
-        types: ['heading', 'paragraph', 'tableCell'],
+        types: ['heading', 'paragraph', 'tableCell', 'tableHeader'],
     }),
     BulletList.configure({
         HTMLAttributes: { class: 'no-list-item-spacing' },
