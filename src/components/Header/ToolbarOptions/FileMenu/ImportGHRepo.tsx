@@ -101,7 +101,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     }, [menuOpen])
 
     const linkInput = (
-        <Box sx={{ padding: 1, paddingTop: 1.5 }}>
+        <Box sx={{ padding: 1, paddingTop: 1.5, justifyContent: 'space-between', display: 'flex' }}>
             <Box>
                 <TextField
                     error={showError}
@@ -117,31 +117,32 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
                         setShowLoading(false)
                     }}
                     helperText={showError ? errorMessage : null}
+                />{' '}
+                <br />
+                <TextField
+                    error={showError}
+                    type='text'
+                    size='small'
+                    sx={{ minWidth: 300, marginTop: 1.5 }}
+                    label={'Branch name'}
+                    placeholder={'branch'}
+                    defaultValue={branch}
+                    InputLabelProps={{ shrink: true }}
+                    onChange={(e) => {
+                        setBranch(e.target.value)
+                        setShowError(false)
+                        setShowLoading(false)
+                    }}
+                    helperText={showError ? errorMessage : null}
                 />
             </Box>
-            <TextField
-                error={showError}
-                type='text'
-                size='small'
-                sx={{ minWidth: 300, marginTop: 1.5 }}
-                label={'Branch name'}
-                placeholder={'branch'}
-                defaultValue={branch}
-                InputLabelProps={{ shrink: true }}
-                onChange={(e) => {
-                    setBranch(e.target.value)
-                    setShowError(false)
-                    setShowLoading(false)
-                }}
-                helperText={showError ? errorMessage : null}
-            />
-            <Box sx={{ display: 'inline' }}>
+            <Box sx={{}}>
                 {showLoading && !showError ? (
                     <Box sx={{ marginRight: 2.1, marginLeft: 0.5 }}>
                         <CircularProgress size={25} sx={{ marginTop: 0.8 }} />
                     </Box>
                 ) : (
-                    <Button sx={{ marginTop: -2, marginLeft: 0.9 }} onClick={getRepo}>
+                    <Button sx={{ marginTop: 1, marginLeft: 0.9, pt: 3, pb: 3 }} onClick={getRepo}>
                         OK
                     </Button>
                 )}
@@ -159,7 +160,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
                 id='popover'
             />
             <Popover
-                sx={{ marginLeft: 3.8, marginTop: -2.5 }}
+                sx={{ marginLeft: 3.8, marginTop: -1.8 }}
                 open={showPopover}
                 onClose={closePopover}
                 anchorEl={document.getElementById('popover')}
