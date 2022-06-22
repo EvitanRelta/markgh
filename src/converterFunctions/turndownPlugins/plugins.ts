@@ -6,6 +6,7 @@ import resizedImage from './resizedImage'
 import strikethrough from './strikethrough'
 import subscript from './subscript'
 import superscript from './superscript'
+import tables from './table'
 import underline from './underline'
 
 export const plugins = [
@@ -17,6 +18,7 @@ export const plugins = [
     underline,
     subscript,
     superscript,
+    tables,
 
     // Must be last
     ignoreTipTapArtifacts,
