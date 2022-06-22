@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import Input from '@mui/material/Input'
 import { useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
+import LastEdited from './LastEdited'
 import MenuButton from './MenuButton'
 import Snapshot from './Snapshot'
 import ToolbarContainer from './ToolbarContainer'
@@ -81,16 +82,8 @@ const Header = ({ title, setTitle, lastEditedOn }: Props) => {
                 }}
             >
                 <ToolbarContainer title={title} />
-                <Box
-                    style={{
-                        color: 'gray',
-                        paddingLeft: '5px',
-                        marginTop: 4,
-                        textDecoration: 'underline',
-                        fontSize: 14.5,
-                    }}
-                >
-                    Last edited on {lastEditedOn}
+                <Box>
+                    <LastEdited lastEditedOn={lastEditedOn} />
                     <Snapshot />
                 </Box>
             </Box>
