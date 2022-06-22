@@ -33,7 +33,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
         const [user, repo] = urlInfo
         //to implement branch name input  (default as master)
         //corsproxy needs to be changed
-        const rawLink = `https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/${user}/${repo}/${branch}/README.md`
+        const rawLink = `https://thingproxy.freeboard.io/fetch/https://raw.githubusercontent.com/${user}/${repo}/${branch}/README.md`
 
         return rawLink
     }
