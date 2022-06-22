@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField'
 import { GithubAuthProvider } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { markdownToHtml } from '../../../../converterFunctions'
 import { RootState } from '../../../../store'
 //import { githubProvider } from '../../../Authentication/config/authMethod'
 
@@ -51,7 +52,6 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     }
 
     const httpGet = (theUrl: string) => {
-        console.log(theUrl)
         let xmlHttp: XMLHttpRequest
 
         if (window.XMLHttpRequest) {
@@ -73,7 +73,6 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
         xmlHttp.setRequestHeader('Authorization', 'Bearer ' + ghToken)
         xmlHttp.send()
 
-        console.log(xmlHttp.response)
         return xmlHttp.response
     }
 
@@ -90,8 +89,11 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
 
     const getRepo = () => {
         setShowLoading(false)
-        //onLogin(githubProvider)
         let res = httpGet(generateRawURL(link))
+        if (!showError) {
+            setAnchor(null)
+            editor.commands.setContent(markdownToHtml(res as string), true)
+        }
     }
 
     useEffect(() => {
