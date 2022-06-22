@@ -23,6 +23,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     const editor = useSelector((state: RootState) => state.editor.editor)
     const [showPopover, setShowPopover] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
+    const [branch, setBranch] = useState<string>('master')
     const [showError, setShowError] = useState<boolean>(false)
     const [showLoading, setShowLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
@@ -32,7 +33,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
         const [user, repo] = urlInfo
         //to implement branch name input  (default as master)
         //corsproxy needs to be changed
-        const rawLink = `https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/${user}/${repo}/master/README.md`
+        const rawLink = `https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/${user}/${repo}/${branch}/README.md`
 
         return rawLink
     }
@@ -101,29 +102,50 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
 
     const linkInput = (
         <Box sx={{ padding: 1, paddingTop: 1.5 }}>
+            <Box>
+                <TextField
+                    error={showError}
+                    type='text'
+                    size='small'
+                    sx={{ minWidth: 300 }}
+                    label={'Repository Link'}
+                    placeholder={'https://github.com/user/project'}
+                    InputLabelProps={{ shrink: true }}
+                    onChange={(e) => {
+                        setLink(e.target.value)
+                        setShowError(false)
+                        setShowLoading(false)
+                    }}
+                    helperText={showError ? errorMessage : null}
+                />
+            </Box>
             <TextField
                 error={showError}
                 type='text'
                 size='small'
-                sx={{ minWidth: 300 }}
-                label={'Repository Link'}
-                placeholder={'https://github.com/user/project.git'}
+                sx={{ minWidth: 300, marginTop: 1.5 }}
+                label={'Branch name'}
+                placeholder={'branch'}
+                defaultValue={branch}
+                InputLabelProps={{ shrink: true }}
                 onChange={(e) => {
-                    setLink(e.target.value)
+                    setBranch(e.target.value)
                     setShowError(false)
                     setShowLoading(false)
                 }}
                 helperText={showError ? errorMessage : null}
             />
-            {showLoading && !showError ? (
-                <Box sx={{ marginRight: 2.1, marginLeft: 0.5, display: 'inline' }}>
-                    <CircularProgress size={25} sx={{ marginTop: 0.8 }} />
-                </Box>
-            ) : (
-                <Button sx={{ marginLeft: 0.9 }} onClick={getRepo}>
-                    OK
-                </Button>
-            )}
+            <Box sx={{ display: 'inline' }}>
+                {showLoading && !showError ? (
+                    <Box sx={{ marginRight: 2.1, marginLeft: 0.5 }}>
+                        <CircularProgress size={25} sx={{ marginTop: 0.8 }} />
+                    </Box>
+                ) : (
+                    <Button sx={{ marginTop: -2, marginLeft: 0.9 }} onClick={getRepo}>
+                        OK
+                    </Button>
+                )}
+            </Box>
         </Box>
     )
 
