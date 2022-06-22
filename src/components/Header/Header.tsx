@@ -3,6 +3,7 @@ import Input from '@mui/material/Input'
 import { useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
 import MenuButton from './MenuButton'
+import Snapshot from './Snapshot'
 import ToolbarContainer from './ToolbarContainer'
 
 type Props = {
@@ -84,11 +85,13 @@ const Header = ({ title, setTitle, lastEditedOn }: Props) => {
                     style={{
                         color: 'gray',
                         paddingLeft: '5px',
-                        marginTop: 5.5,
+                        marginTop: 4,
                         textDecoration: 'underline',
+                        fontSize: 14.5,
                     }}
                 >
                     Last edited on {lastEditedOn}
+                    <Snapshot />
                 </Box>
             </Box>
         </Box>
