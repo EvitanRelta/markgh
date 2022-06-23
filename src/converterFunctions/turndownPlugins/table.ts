@@ -38,9 +38,9 @@ const canBeInMarkdown = (element: HTMLTableElement) => {
     return true
 }
 
-const getTableRowMarkdownHOF = (longestTextLens: number[]) => (cells: HTMLTableCellElement[]) => {
+const getTableRowMarkdownHOF = (longestTextLens: number[]) => (contentRow: string[]) => {
     return (
-        '| ' + cells.map((cell, i) => cell.innerText.padEnd(longestTextLens[i])).join(' | ') + ' |'
+        '| ' + contentRow.map((content, i) => content.padEnd(longestTextLens[i])).join(' | ') + ' |'
     )
 }
 
@@ -62,8 +62,16 @@ const table: Plugin = (service) => {
                 ...Array.from(element.tBodies[0].rows).map(getCells),
             ]
 
-            const getCellLen = (cell: HTMLTableCellElement) => cell.innerText.length
-            const textLens = cells.map((row) => row.map(getCellLen))
+            const cellContents = cells.map((row) =>
+                row.map((cell) => service.turndown(cell.innerHTML))
+            )
+            const isMultiLined = (markdown: string) => /\n/i.test(markdown)
+            const hasHtml = (markdown: string) => /(?<!\\)<[a-z]/i.test(markdown)
+            const test = (markdown: string) => isMultiLined(markdown) || hasHtml(markdown)
+            if (cellContents.some((row) => row.some(test)))
+                return turndownHtmlOnly.turndown(element)
+
+            const textLens = cellContents.map((row) => row.map((content) => content.length))
 
             // Getting longest text length of each rows.
             let longestTextLens: number[] = []
@@ -76,8 +84,8 @@ const table: Plugin = (service) => {
                 longestTextLens = longestTextLens.map(() => 0)
 
             const getTableRowMarkdown = getTableRowMarkdownHOF(longestTextLens)
-            const header = getTableRowMarkdown(cells[0])
-            const body = cells.slice(1).map(getTableRowMarkdown).join('\n')
+            const header = getTableRowMarkdown(cellContents[0])
+            const body = cellContents.slice(1).map(getTableRowMarkdown).join('\n')
             const separatorRow =
                 '| ' +
                 longestTextLens
