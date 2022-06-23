@@ -2,10 +2,8 @@ import { CssBaseline } from '@mui/material'
 import Box from '@mui/material/Box'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Dexie, { Table } from 'dexie'
-import { initializeApp } from 'firebase/app'
 import {
     Auth,
-    getAuth,
     GithubAuthProvider,
     OAuthCredential,
     onAuthStateChanged,
@@ -13,7 +11,6 @@ import {
 } from 'firebase/auth'
 import React, { ReactElement, useEffect, useState } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import firebaseConfig from './components/Authentication/config/firebaseConfig'
 import Body from './components/Body/Body'
 import Footer from './components/Footer/Footer'
 import Version from './components/Footer/Version'
@@ -51,7 +48,6 @@ interface EditorText {
 
 export default function App(): ReactElement {
     const db = new EditorDB()
-
     const dispatch = useAppDispatch()
 
     const editor = useAppSelector((state) => state.editor.editor)
@@ -80,16 +76,10 @@ export default function App(): ReactElement {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    //Initialises firebase for authentication
-    const [auth, setAuth] = useState<Auth | null>(null)
+    const auth = useAppSelector((state) => state.user.auth)
     const [ghToken, setGhToken] = useState<string | undefined>(localStorage['ghToken'])
-    useEffect(() => {
-        const firebase = initializeApp(firebaseConfig)
-        setAuth(getAuth())
-    }, [])
 
     useEffect(() => {
-        if (auth === null) return
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 dispatch(loginUser(user))
@@ -218,7 +208,7 @@ export default function App(): ReactElement {
     const onLogout = async () => {
         localStorage['ghToken'] = undefined
         setGhToken(undefined)
-        auth?.signOut()
+        auth.signOut()
     }
 
     return (
