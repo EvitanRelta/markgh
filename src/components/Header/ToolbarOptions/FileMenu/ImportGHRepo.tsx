@@ -40,6 +40,8 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     }
 
     const httpErrorHandling = () => {
+        setShowError(true)
+        setErrorMessage("Checking if it's a private repo...")
         onLogin(githubProvider).then(() => {
             try {
                 let res = httpGet(generateRawURL(link))
@@ -47,7 +49,6 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
                 editor.commands.setContent(markdownToHtml(res as string), true)
             } catch (e) {
                 console.log('here')
-                setShowError(true)
                 setErrorMessage('Invalid Link!')
             }
         })
