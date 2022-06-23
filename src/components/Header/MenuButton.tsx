@@ -38,7 +38,7 @@ const MenuButton = ({ title, onUpload, onLogin, onLogout }: Props) => {
         closeMenu()
     }
 
-    const userPhoto = user.info === null ? '' : (user.info.photoURL as string)
+    const userPhoto = user.user === null ? '' : (user.user.photoURL as string)
 
     return (
         <Box>

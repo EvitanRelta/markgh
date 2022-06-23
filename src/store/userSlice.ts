@@ -5,7 +5,7 @@ import firebaseConfig from '../components/Authentication/config/firebaseConfig'
 
 interface UserStatus {
     loggedIn: boolean
-    info: User | null
+    user: User | null
     auth: Auth
     firebaseApp: FirebaseApp
 }
@@ -17,7 +17,7 @@ const userSlice = createSlice({
     name: 'user',
     initialState: {
         loggedIn: false,
-        info: null,
+        user: null,
         auth: getAuth(firebaseApp),
         firebaseApp,
     } as UserStatus,
@@ -26,14 +26,14 @@ const userSlice = createSlice({
             return {
                 ...state,
                 loggedIn: true,
-                info: action.payload,
+                user: action.payload,
             }
         },
         logoutUser(state) {
             return {
                 ...state,
                 loggedIn: false,
-                info: null,
+                user: null,
             }
         },
     },

@@ -16,7 +16,7 @@ export const store = configureStore({
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: ['user/loginUser'],
-                ignoredPaths: ['editor.editor', 'user.info'],
+                ignoredPaths: ['editor.editor', 'user.user'],
             },
         }),
 })

@@ -6,7 +6,7 @@ const UserInfo = () => {
 
     return (
         <Box sx={{ padding: 1, fontSize: 15, marginLeft: 3 }}>
-            {user.loggedIn && user.info?.displayName}
+            {user.loggedIn && user.user?.displayName}
         </Box>
     )
 }
