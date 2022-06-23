@@ -32,10 +32,14 @@ const replaceGithubClassName = (text, [githubClassName, arrHljsClassNames]) => {
 }
 const replaceAllGithubClassNames = (text) =>
     Object.entries(githubToHljsClassMapping).reduce(replaceGithubClassName, text)
+const addThemeName = (fileName, text) => {
+    const theme = /^[^.]+/.exec(fileName)[0]
+    return text.replaceAll(/(?<=.markdown-body)/g, `.gh-${theme}`)
+}
 
 fileNames.forEach(async (fileName) => {
     const fileText = await getFileContents(fileName)
-    const outputText = replaceAllGithubClassNames(fileText)
+    const outputText = addThemeName(fileName, replaceAllGithubClassNames(fileText))
 
     writeFile(fileName, outputText)
 })
