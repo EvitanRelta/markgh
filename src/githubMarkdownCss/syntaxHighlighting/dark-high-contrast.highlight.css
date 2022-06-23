@@ -6,7 +6,9 @@
 .markdown-body.gh-dark-high-contrast .hljs-number,
 .markdown-body.gh-dark-high-contrast .hljs-attribute,
 .markdown-body.gh-dark-high-contrast .hljs-literal,
-.markdown-body.gh-dark-high-contrast .hljs-string .hljs-title.class_ {
+.markdown-body.gh-dark-high-contrast .hljs-attr.hljs-tag,
+.markdown-body.gh-dark-high-contrast .hljs-string .hljs-title.class_,
+.markdown-body.gh-dark-high-contrast .hljs-string.hljs-tag .hljs-title.class_ {
     color: #91cbff;
 }
 
@@ -19,11 +21,13 @@
 
 .markdown-body.gh-dark-high-contrast .hljs-tag,
 .markdown-body.gh-dark-high-contrast .hljs-params,
-.markdown-body.gh-dark-high-contrast .hljs-string .pl-s1 {
+.markdown-body.gh-dark-high-contrast .hljs-string .pl-s1,
+.markdown-body.gh-dark-high-contrast .hljs-string.hljs-tag .pl-s1 {
     color: #f0f3f6;
 }
 
-.markdown-body.gh-dark-high-contrast .hljs-name {
+.markdown-body.gh-dark-high-contrast .hljs-name,
+.markdown-body.gh-dark-high-contrast .hljs-name.hljs-tag {
     color: #72f088;
 }
 
@@ -33,8 +37,10 @@
 }
 
 .markdown-body.gh-dark-high-contrast .hljs-string,
+.markdown-body.gh-dark-high-contrast .hljs-string.hljs-tag,
 .markdown-body.gh-dark-high-contrast .pl-pds,
 .markdown-body.gh-dark-high-contrast .hljs-string .pl-pse .pl-s1,
+.markdown-body.gh-dark-high-contrast .hljs-string.hljs-tag .pl-pse .pl-s1,
 .markdown-body.gh-dark-high-contrast .pl-sr,
 .markdown-body.gh-dark-high-contrast .pl-sr .pl-cce,
 .markdown-body.gh-dark-high-contrast .pl-sr .pl-sre,

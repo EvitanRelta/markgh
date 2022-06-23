@@ -6,7 +6,9 @@
 .markdown-body.gh-dark-dimmed .hljs-number,
 .markdown-body.gh-dark-dimmed .hljs-attribute,
 .markdown-body.gh-dark-dimmed .hljs-literal,
-.markdown-body.gh-dark-dimmed .hljs-string .hljs-title.class_ {
+.markdown-body.gh-dark-dimmed .hljs-attr.hljs-tag,
+.markdown-body.gh-dark-dimmed .hljs-string .hljs-title.class_,
+.markdown-body.gh-dark-dimmed .hljs-string.hljs-tag .hljs-title.class_ {
     color: #6cb6ff;
 }
 
@@ -19,11 +21,13 @@
 
 .markdown-body.gh-dark-dimmed .hljs-tag,
 .markdown-body.gh-dark-dimmed .hljs-params,
-.markdown-body.gh-dark-dimmed .hljs-string .pl-s1 {
+.markdown-body.gh-dark-dimmed .hljs-string .pl-s1,
+.markdown-body.gh-dark-dimmed .hljs-string.hljs-tag .pl-s1 {
     color: #adbac7;
 }
 
-.markdown-body.gh-dark-dimmed .hljs-name {
+.markdown-body.gh-dark-dimmed .hljs-name,
+.markdown-body.gh-dark-dimmed .hljs-name.hljs-tag {
     color: #8ddb8c;
 }
 
@@ -33,8 +37,10 @@
 }
 
 .markdown-body.gh-dark-dimmed .hljs-string,
+.markdown-body.gh-dark-dimmed .hljs-string.hljs-tag,
 .markdown-body.gh-dark-dimmed .pl-pds,
 .markdown-body.gh-dark-dimmed .hljs-string .pl-pse .pl-s1,
+.markdown-body.gh-dark-dimmed .hljs-string.hljs-tag .pl-pse .pl-s1,
 .markdown-body.gh-dark-dimmed .pl-sr,
 .markdown-body.gh-dark-dimmed .pl-sr .pl-cce,
 .markdown-body.gh-dark-dimmed .pl-sr .pl-sre,
