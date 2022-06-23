@@ -107,20 +107,20 @@ export default function App(): ReactElement {
     }, [auth])
 
     const loginAuth = (auth: Auth, provider: GithubAuthProvider) => {
-        signInWithPopup(auth, provider)
+        return signInWithPopup(auth, provider)
             .then((result) => {
                 // This gives you a GitHub Access Token. You can use it to access the GitHub API.
                 const credential = GithubAuthProvider.credentialFromResult(
                     result
                 ) as OAuthCredential
-                const token = credential.accessToken
+                const token = credential.accessToken as string
 
                 setGhToken(token)
                 localStorage['ghToken'] = token
-                console.log(token)
 
                 setUser({ loggedIn: true, info: result.user })
                 // ...
+                return token
             })
             .catch((error) => {
                 // Handle Errors here.
@@ -132,7 +132,6 @@ export default function App(): ReactElement {
                 const credential = GithubAuthProvider.credentialFromError(error)
                 // ...
             })
-        return
     }
 
     //var for controlling whether to show markdown
@@ -219,7 +218,8 @@ export default function App(): ReactElement {
 
     const onLogin = async (provider: GithubAuthProvider) => {
         if (auth === null) return
-        const res = await loginAuth(auth, provider)
+        const token = await loginAuth(auth, provider)
+        return token
     }
 
     const onLogout = async () => {

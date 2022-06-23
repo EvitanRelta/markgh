@@ -17,7 +17,7 @@ type Props = {
     setTitle: React.Dispatch<React.SetStateAction<string>>
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     lastEditedOn: string
-    onLogin: (provider: GithubAuthProvider) => Promise<void>
+    onLogin: (provider: GithubAuthProvider) => Promise<string | void>
     onLogout: () => Promise<void>
     user: UserStatus
     ghToken: string | undefined

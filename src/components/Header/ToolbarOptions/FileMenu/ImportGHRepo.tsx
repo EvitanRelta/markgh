@@ -11,13 +11,12 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { markdownToHtml } from '../../../../converterFunctions'
 import { RootState } from '../../../../store'
-import { githubProvider } from '../../../Authentication/config/authMethod'
 
 type Props = {
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
     menuOpen: boolean
     ghToken: string | undefined
-    onLogin: (provider: GithubAuthProvider) => Promise<void>
+    onLogin: (provider: GithubAuthProvider) => Promise<string | void>
 }
 
 const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
@@ -40,30 +39,24 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     }
 
     const httpErrorHandling = () => {
-        setShowError(true)
-        setErrorMessage("Checking if it's a private repo...")
-        onLogin(githubProvider).then(() => {
-            try {
-                let res = httpGet(generateRawURL(link))
-                setAnchor(null)
-                editor.commands.setContent(markdownToHtml(res as string), true)
-            } catch (e) {
-                console.log('here')
-                setErrorMessage('Invalid Link!')
-            }
-        })
+        // setShowError(true)
+        // setErrorMessage("Checking if it's a private repo...")
+        // setShowLoading(true)
+        // onLogin(githubProvider).then((token) => {
+        //     try {
+        //         console.log(token)
+        //         let res = httpGet(generateRawURL(link), token as string)
+        //         setAnchor(null)
+        //         editor.commands.setContent(markdownToHtml(res as string), true)
+        //     } catch (e) {
+        //         setShowLoading(false)
+        //         setErrorMessage('Invalid Link!')
+        //     }
+        // })
     }
-    //probably 404 error, if repo is private or typo
-    // if (statusCode < 500) {
 
-    //     //if still fails, invalid link
-    // }
-
-    // if (statusCode >= 500) {
-    //     setErrorMessage('GitHub servers maybe down...')
-    // }
-
-    const httpGet = (theUrl: string) => {
+    const httpGet = (theUrl: string, token?: string) => {
+        console.log(token)
         let xmlHttp: XMLHttpRequest
 
         if (window.XMLHttpRequest) {
@@ -80,8 +73,10 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
             }
         }
         xmlHttp.open('GET', theUrl, false)
-        //for private repos, but CORS issues
-        xmlHttp.setRequestHeader('Authorization', 'Bearer ' + ghToken)
+        if (token !== 'undefined') {
+            console.log('setting token: ' + token)
+            xmlHttp.setRequestHeader('Authorization', 'Bearer ' + token)
+        }
         xmlHttp.send()
         if (xmlHttp.status !== 200) {
             throw new Error('Unable to import')
@@ -104,11 +99,11 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     const getRepo = () => {
         setShowLoading(false)
         try {
-            let res = httpGet(generateRawURL(link))
+            let res = httpGet(generateRawURL(link), ghToken)
             setAnchor(null)
             editor.commands.setContent(markdownToHtml(res as string), true)
         } catch (e) {
-            httpErrorHandling()
+            // httpErrorHandling()
         }
     }
 
