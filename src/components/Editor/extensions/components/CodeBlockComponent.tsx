@@ -6,6 +6,8 @@ import { NodeViewProps, NodeViewWrapper } from '@tiptap/react'
 import _ from 'lodash'
 import { lowlight } from 'lowlight/lib/all'
 import { useCallback, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../../store'
 import { ModifiedNodeViewContent } from './ModifiedNodeViewContent'
 
 interface OptionsFixLowLightType extends CodeBlockLowlightOptions {
@@ -34,6 +36,9 @@ const TopRightTextFieldIcon = styled(TextFieldIcon)({
         fontSize: '13px',
         background: 'rgba(255, 255, 255, 0.8)',
     },
+    '&.theme-dark input.MuiInputBase-input': {
+        background: 'rgba(13, 17, 23, 0.8)',
+    },
     position: 'absolute',
     right: '5px',
     top: '5px',
@@ -43,6 +48,7 @@ const TopRightTextFieldIcon = styled(TextFieldIcon)({
 export default ({ node, updateAttributes, extension }: Props) => {
     const language = node.attrs.language
     const lowlight = extension.options.lowlight
+    const theme = useSelector((state: RootState) => state.theme)
     const [inputValue, setInputValue] = useState<string>(language || '')
     const [isValidLanguage, setIsValidLanguage] = useState<boolean>(
         language ? lowlight.registered(language) : false
@@ -79,6 +85,7 @@ export default ({ node, updateAttributes, extension }: Props) => {
                 margin='none'
                 contentEditable={false}
                 type='text'
+                className={`theme-${theme}`}
                 value={inputValue}
                 onChange={handleOnChange}
             />
