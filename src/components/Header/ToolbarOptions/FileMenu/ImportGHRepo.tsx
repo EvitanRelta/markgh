@@ -40,16 +40,17 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     }
 
     const httpErrorHandling = () => {
-        onLogin(githubProvider)
-        try {
-            let res = httpGet(generateRawURL(link))
-            setAnchor(null)
-            editor.commands.setContent(markdownToHtml(res as string), true)
-        } catch (e) {
-            console.log('here')
-            setShowError(true)
-            setErrorMessage('Invalid Link!')
-        }
+        onLogin(githubProvider).then(() => {
+            try {
+                let res = httpGet(generateRawURL(link))
+                setAnchor(null)
+                editor.commands.setContent(markdownToHtml(res as string), true)
+            } catch (e) {
+                console.log('here')
+                setShowError(true)
+                setErrorMessage('Invalid Link!')
+            }
+        })
     }
     //probably 404 error, if repo is private or typo
     // if (statusCode < 500) {
