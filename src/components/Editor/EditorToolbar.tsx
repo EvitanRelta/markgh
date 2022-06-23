@@ -1,16 +1,17 @@
-import { FormatStrikethroughTwoTone as FormatStrikethroughTwoToneIcon } from '@mui/icons-material'
-import CodeIcon from '@mui/icons-material/Code'
-import DataObjectIcon from '@mui/icons-material/DataObject'
-import FormatBoldIcon from '@mui/icons-material/FormatBold'
-import FormatItalicIcon from '@mui/icons-material/FormatItalic'
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
-import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
-import FormatQuoteIcon from '@mui/icons-material/FormatQuote'
-import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined'
-import ImageIcon from '@mui/icons-material/Image'
-import LinkIcon from '@mui/icons-material/Link'
-import { Box, styled, SvgIconTypeMap } from '@mui/material'
-import IconButton from '@mui/material/IconButton'
+import {
+    Code as CodeIcon,
+    DataObject as DataObjectIcon,
+    FormatBold as FormatBoldIcon,
+    FormatItalic as FormatItalicIcon,
+    FormatListBulleted as FormatListBulletedIcon,
+    FormatListNumbered as FormatListNumberedIcon,
+    FormatQuote as FormatQuoteIcon,
+    FormatStrikethroughTwoTone as FormatStrikethroughTwoToneIcon,
+    FormatUnderlined as FormatUnderlinedIcon,
+    Image as ImageIcon,
+    Link as LinkIcon,
+} from '@mui/icons-material'
+import { Box, IconButton, styled, SvgIconTypeMap } from '@mui/material'
 import { OverridableComponent } from '@mui/material/OverridableComponent'
 import { Editor } from '@tiptap/react'
 import React from 'react'
