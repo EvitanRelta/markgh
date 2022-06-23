@@ -6,7 +6,7 @@ import { Editor } from '@tiptap/react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
-import heading from './toolbarFunctions/heading'
+import { heading } from './toolbarFunctions'
 
 type HeadingLevels = 0 | 1 | 2 | 3 | 4 | 5 | 6
 interface Props {

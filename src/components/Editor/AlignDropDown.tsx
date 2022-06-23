@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import { Editor } from '@tiptap/react'
 import { useState } from 'react'
-import textAlign from './toolbarFunctions/textAlign'
+import { textAlign } from './toolbarFunctions'
 
 type Alignment = 'left' | 'center' | 'right' | 'justify'
 

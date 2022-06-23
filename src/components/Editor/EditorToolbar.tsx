@@ -16,17 +16,19 @@ import { Editor } from '@tiptap/react'
 import React from 'react'
 import AlignDropDown from './AlignDropDown'
 import HeadingDropDown from './HeadingDropDown'
-import addUrlImage from './toolbarFunctions/addUrlImage'
-import blockQuote from './toolbarFunctions/blockQuote'
-import bold from './toolbarFunctions/bold'
-import code from './toolbarFunctions/code'
-import codeBlock from './toolbarFunctions/codeBlock'
-import italic from './toolbarFunctions/italic'
-import link from './toolbarFunctions/link'
-import orderedList from './toolbarFunctions/orderedList'
-import strikethrough from './toolbarFunctions/strikethrough'
-import underline from './toolbarFunctions/underline'
-import unorderedList from './toolbarFunctions/unorderedList'
+import {
+    addUrlImage,
+    blockQuote,
+    bold,
+    code,
+    codeBlock,
+    italic,
+    link,
+    orderedList,
+    strikethrough,
+    underline,
+    unorderedList,
+} from './toolbarFunctions'
 
 interface FormatOptionIcon extends OverridableComponent<SvgIconTypeMap<{}, 'svg'>> {
     muiName: string
