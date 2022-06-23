@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { markdownToHtml } from '../../../../converterFunctions'
 import { RootState } from '../../../../store'
-//import { githubProvider } from '../../../Authentication/config/authMethod'
+import { githubProvider } from '../../../Authentication/config/authMethod'
 
 type Props = {
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
@@ -35,21 +35,31 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
         //to implement branch name input  (default as master)
         //corsproxy needs to be changed
         const rawLink = `https://thingproxy.freeboard.io/fetch/https://raw.githubusercontent.com/${user}/${repo}/${branch}/README.md`
-
+        console.log(rawLink)
         return rawLink
     }
 
-    const httpErrorHandling = (statusCode: number) => {
-        //probably 404 error, if repo is private or typo
-        if (statusCode < 500) {
-            //onLogin(githubProvider)
-            //if still fails, invalid link
-        }
-
-        if (statusCode >= 500) {
-            setErrorMessage('GitHub servers maybe down...')
+    const httpErrorHandling = () => {
+        onLogin(githubProvider)
+        try {
+            let res = httpGet(generateRawURL(link))
+            setAnchor(null)
+            editor.commands.setContent(markdownToHtml(res as string), true)
+        } catch (e) {
+            console.log('here')
+            setShowError(true)
+            setErrorMessage('Invalid Link!')
         }
     }
+    //probably 404 error, if repo is private or typo
+    // if (statusCode < 500) {
+
+    //     //if still fails, invalid link
+    // }
+
+    // if (statusCode >= 500) {
+    //     setErrorMessage('GitHub servers maybe down...')
+    // }
 
     const httpGet = (theUrl: string) => {
         let xmlHttp: XMLHttpRequest
@@ -66,12 +76,14 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
                 return xmlHttp.responseText
             }
-            return false //returns false if error, use this conditional for checking error later
         }
         xmlHttp.open('GET', theUrl, false)
         //for private repos, but CORS issues
         xmlHttp.setRequestHeader('Authorization', 'Bearer ' + ghToken)
         xmlHttp.send()
+        if (xmlHttp.status !== 200) {
+            throw new Error('Unable to import')
+        }
 
         return xmlHttp.response
     }
@@ -89,10 +101,12 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
 
     const getRepo = () => {
         setShowLoading(false)
-        let res = httpGet(generateRawURL(link))
-        if (!showError) {
+        try {
+            let res = httpGet(generateRawURL(link))
             setAnchor(null)
             editor.commands.setContent(markdownToHtml(res as string), true)
+        } catch (e) {
+            httpErrorHandling()
         }
     }
 
@@ -118,8 +132,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
                         setShowError(false)
                         setShowLoading(false)
                     }}
-                    helperText={showError ? errorMessage : null}
-                />{' '}
+                />
                 <br />
                 <TextField
                     error={showError}
