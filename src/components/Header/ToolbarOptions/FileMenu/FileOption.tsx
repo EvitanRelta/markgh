@@ -10,7 +10,7 @@ type Props = {
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     onDownload: () => void
     ghToken: string | undefined
-    onLogin: (provider: GithubAuthProvider) => Promise<void>
+    onLogin: (provider: GithubAuthProvider) => Promise<string | void>
 }
 
 const FileOption = ({ onUpload, onDownload, ghToken, onLogin }: Props) => {

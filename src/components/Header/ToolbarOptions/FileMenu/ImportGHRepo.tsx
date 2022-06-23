@@ -1,4 +1,3 @@
-import FS from '@isomorphic-git/lightning-fs'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { ListItemText, MenuItem } from '@mui/material'
@@ -8,39 +7,83 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Popover from '@mui/material/Popover'
 import TextField from '@mui/material/TextField'
 import { GithubAuthProvider } from 'firebase/auth'
-import git from 'isomorphic-git'
-import http from 'isomorphic-git/http/web'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { markdownToHtml } from '../../../../converterFunctions'
 import { RootState } from '../../../../store'
-import { githubProvider } from '../../../Authentication/config/authMethod'
 
 type Props = {
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
     menuOpen: boolean
     ghToken: string | undefined
-    onLogin: (provider: GithubAuthProvider) => Promise<void>
+    onLogin: (provider: GithubAuthProvider) => Promise<string | void>
 }
-
-const fs = new FS(
-    'fs'
-    //cant get this to work in typescript, but it would be good to have this option. Using workaround for now.
-    //clears previous git clones in FS on refresh
-    //{wipe: true}
-)
-
-const dir = '/'
-window.global = window
-window.Buffer = window.Buffer || require('buffer').Buffer
 
 const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     const editor = useSelector((state: RootState) => state.editor.editor)
     const [showPopover, setShowPopover] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
+    const [branch, setBranch] = useState<string>('master')
     const [showError, setShowError] = useState<boolean>(false)
     const [showLoading, setShowLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
+
+    const generateRawURL = (url: string) => {
+        const urlInfo = url.split('https://github.com/')[1].split('/')
+        const [user, repo] = urlInfo
+        //to implement branch name input  (default as master)
+        //corsproxy needs to be changed
+        const rawLink = `https://thingproxy.freeboard.io/fetch/https://raw.githubusercontent.com/${user}/${repo}/${branch}/README.md`
+        console.log(rawLink)
+        return rawLink
+    }
+
+    const httpErrorHandling = () => {
+        // setShowError(true)
+        // setErrorMessage("Checking if it's a private repo...")
+        // setShowLoading(true)
+        // onLogin(githubProvider).then((token) => {
+        //     try {
+        //         console.log(token)
+        //         let res = httpGet(generateRawURL(link), token as string)
+        //         setAnchor(null)
+        //         editor.commands.setContent(markdownToHtml(res as string), true)
+        //     } catch (e) {
+        //         setShowLoading(false)
+        //         setErrorMessage('Invalid Link!')
+        //     }
+        // })
+    }
+
+    const httpGet = (theUrl: string, token?: string) => {
+        console.log(token)
+        let xmlHttp: XMLHttpRequest
+
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlHttp = new XMLHttpRequest()
+        } else {
+            // code for IE6, IE5
+            xmlHttp = new ActiveXObject('Microsoft.XMLHTTP')
+        }
+
+        xmlHttp.onreadystatechange = () => {
+            if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+                return xmlHttp.responseText
+            }
+        }
+        xmlHttp.open('GET', theUrl, false)
+        if (token !== 'undefined') {
+            console.log('setting token: ' + token)
+            xmlHttp.setRequestHeader('Authorization', 'Bearer ' + token)
+        }
+        xmlHttp.send()
+        if (xmlHttp.status !== 200) {
+            throw new Error('Unable to import')
+        }
+
+        return xmlHttp.response
+    }
 
     const openPopover = (e: React.MouseEvent) => {
         setShowPopover(true)
@@ -53,57 +96,15 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
         setAnchor(null)
     }
 
-    const cloneErrorHandling = (err: any) => {
-        indexedDB.deleteDatabase('fs')
-        const statusCode = err.data.statusCode
-
-        if (statusCode >= 500) {
-            setErrorMessage('Error ' + statusCode)
-            setShowError(true)
-        }
-
-        if (statusCode !== 403 && statusCode !== 401) {
-            setShowError(true)
-            setErrorMessage(
-                link.slice(-3) !== 'git'
-                    ? "Link must end with 'git"
-                    : 'Invalid Link! ' + (statusCode === undefined ? '404' : statusCode)
-            )
-            return
-        }
-
-        onLogin(githubProvider).then(() => setAnchor(null))
-    }
-
     const getRepo = () => {
-        setShowLoading(true)
-        git.clone({
-            fs,
-            http,
-            dir,
-            corsProxy: 'https://cors.isomorphic-git.org',
-            url: link,
-            singleBranch: true,
-            depth: 1,
-            onAuth: () => ({
-                username: ghToken,
-                password: 'x-oauth-basic',
-            }),
-        })
-            .then(() =>
-                fs.readFile('/README.md', 'utf8', (err, data) => {
-                    if (err) {
-                        console.error([err])
-                        return
-                    }
-                    setAnchor(null)
-                    editor.commands.setContent(markdownToHtml(data as string), true)
-                    setShowPopover(false)
-                    indexedDB.deleteDatabase('fs')
-                    setShowLoading(false)
-                })
-            )
-            .catch(cloneErrorHandling)
+        setShowLoading(false)
+        try {
+            let res = httpGet(generateRawURL(link), ghToken)
+            setAnchor(null)
+            editor.commands.setContent(markdownToHtml(res as string), true)
+        } catch (e) {
+            // httpErrorHandling()
+        }
     }
 
     useEffect(() => {
@@ -113,30 +114,51 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
     }, [menuOpen])
 
     const linkInput = (
-        <Box sx={{ padding: 1, paddingTop: 1.5 }}>
-            <TextField
-                error={showError}
-                type='text'
-                size='small'
-                sx={{ minWidth: 300 }}
-                label={'Repository Link'}
-                placeholder={'https://github.com/user/project.git'}
-                onChange={(e) => {
-                    setLink(e.target.value)
-                    setShowError(false)
-                    setShowLoading(false)
-                }}
-                helperText={showError ? errorMessage : null}
-            />
-            {showLoading && !showError ? (
-                <Box sx={{ marginRight: 2.1, marginLeft: 0.5, display: 'inline' }}>
-                    <CircularProgress size={25} sx={{ marginTop: 0.8 }} />
-                </Box>
-            ) : (
-                <Button sx={{ marginLeft: 0.9 }} onClick={getRepo}>
-                    OK
-                </Button>
-            )}
+        <Box sx={{ padding: 1, paddingTop: 1.5, justifyContent: 'space-between', display: 'flex' }}>
+            <Box>
+                <TextField
+                    error={showError}
+                    type='text'
+                    size='small'
+                    sx={{ minWidth: 300 }}
+                    label={'Repository Link'}
+                    placeholder={'https://github.com/user/project'}
+                    InputLabelProps={{ shrink: true }}
+                    onChange={(e) => {
+                        setLink(e.target.value)
+                        setShowError(false)
+                        setShowLoading(false)
+                    }}
+                />
+                <br />
+                <TextField
+                    error={showError}
+                    type='text'
+                    size='small'
+                    sx={{ minWidth: 300, marginTop: 1.5 }}
+                    label={'Branch name'}
+                    placeholder={'branch'}
+                    defaultValue={branch}
+                    InputLabelProps={{ shrink: true }}
+                    onChange={(e) => {
+                        setBranch(e.target.value)
+                        setShowError(false)
+                        setShowLoading(false)
+                    }}
+                    helperText={showError ? errorMessage : null}
+                />
+            </Box>
+            <Box sx={{}}>
+                {showLoading && !showError ? (
+                    <Box sx={{ marginRight: 2.1, marginLeft: 0.5 }}>
+                        <CircularProgress size={25} sx={{ marginTop: 0.8 }} />
+                    </Box>
+                ) : (
+                    <Button sx={{ marginTop: 1, marginLeft: 0.9, pt: 3, pb: 3 }} onClick={getRepo}>
+                        OK
+                    </Button>
+                )}
+            </Box>
         </Box>
     )
 
@@ -150,7 +172,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
                 id='popover'
             />
             <Popover
-                sx={{ marginLeft: 3.8, marginTop: -2.5 }}
+                sx={{ marginLeft: 3.8, marginTop: -1.8 }}
                 open={showPopover}
                 onClose={closePopover}
                 anchorEl={document.getElementById('popover')}

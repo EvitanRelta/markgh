@@ -19,7 +19,7 @@ interface UserStatus {
 type Props = {
     title: string
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
-    onLogin: (provider: GithubAuthProvider) => Promise<void>
+    onLogin: (provider: GithubAuthProvider) => Promise<string | void>
     onLogout: () => Promise<void>
     user: UserStatus
 }
