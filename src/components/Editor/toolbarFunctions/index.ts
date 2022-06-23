@@ -8,6 +8,8 @@ import italic from './italic'
 import link from './link'
 import orderedList from './orderedList'
 import strikethrough from './strikethrough'
+import subscript from './subscript'
+import superscript from './superscript'
 import textAlign from './textAlign'
 import underline from './underline'
 import unorderedList from './unorderedList'
@@ -23,6 +25,8 @@ export {
     link,
     orderedList,
     strikethrough,
+    subscript,
+    superscript,
     textAlign,
     underline,
     unorderedList,

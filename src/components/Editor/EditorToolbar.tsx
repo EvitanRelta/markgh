@@ -10,6 +10,8 @@ import {
     FormatUnderlined as FormatUnderlinedIcon,
     Image as ImageIcon,
     Link as LinkIcon,
+    Subscript as SubscriptIcon,
+    Superscript as SuperscriptIcon,
 } from '@mui/icons-material'
 import { Box, IconButton, styled, SvgIconTypeMap } from '@mui/material'
 import { OverridableComponent } from '@mui/material/OverridableComponent'
@@ -27,6 +29,8 @@ import {
     link,
     orderedList,
     strikethrough,
+    subscript,
+    superscript,
     underline,
     unorderedList,
 } from './toolbarFunctions'
@@ -43,6 +47,8 @@ const editorOptions: FormatOption[] = [
     [italic, FormatItalicIcon],
     [underline, FormatUnderlinedIcon],
     [strikethrough, FormatStrikethroughTwoToneIcon],
+    [superscript, SuperscriptIcon],
+    [subscript, SubscriptIcon],
     [code, CodeIcon],
     [blockQuote, FormatQuoteIcon],
     [codeBlock, DataObjectIcon],

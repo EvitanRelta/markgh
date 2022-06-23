@@ -5,6 +5,8 @@ import lineBreak from './lineBreak'
 import noListItemSpacing from './noListItemSpacing'
 import resizedImage from './resizedImage'
 import strikethrough from './strikethrough'
+import subscript from './subscript'
+import superscript from './superscript'
 import underline from './underline'
 
 export const plugins = [
@@ -15,6 +17,8 @@ export const plugins = [
     resizedImage,
     strikethrough,
     underline,
+    subscript,
+    superscript,
 
     // Must be last
     ignoreTipTapArtifacts,

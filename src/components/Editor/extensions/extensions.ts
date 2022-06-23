@@ -1,6 +1,8 @@
 import BulletList from '@tiptap/extension-bullet-list'
 import Link from '@tiptap/extension-link'
 import OrderedList from '@tiptap/extension-ordered-list'
+import Subscript from '@tiptap/extension-subscript'
+import Superscript from '@tiptap/extension-superscript'
 import Underline from '@tiptap/extension-underline'
 import StarterKit from '@tiptap/starter-kit'
 import CodeNoExcludes from './CodeNoExcludes'
@@ -36,4 +38,6 @@ export default [
     ListItemNoTabNav,
     SyntaxHighlightCodeBlock,
     TabKey,
+    Superscript,
+    Subscript,
 ]
