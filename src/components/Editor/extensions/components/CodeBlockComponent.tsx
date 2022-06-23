@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material'
+import { TextField as TextFieldIcon } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { Node } from '@tiptap/core'
 import { CodeBlockLowlightOptions } from '@tiptap/extension-code-block-lowlight'
@@ -21,7 +21,7 @@ interface Props extends NodeViewProps {
     }
 }
 
-const TopRightTextField = styled(TextField)({
+const TopRightTextFieldIcon = styled(TextFieldIcon)({
     '& label.MuiInputLabel-root.MuiInputLabel-shrink': {
         fontSize: '13px',
     },
@@ -70,7 +70,7 @@ export default ({ node, updateAttributes, extension }: Props) => {
                 position: 'relative',
             }}
         >
-            <TopRightTextField
+            <TopRightTextFieldIcon
                 error={inputValue !== '' && !isValidLanguage}
                 size='small'
                 variant='outlined'

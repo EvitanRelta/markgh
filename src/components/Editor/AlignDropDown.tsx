@@ -1,11 +1,11 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft'
-import { Menu, MenuItem } from '@mui/material'
-import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
+import {
+    ExpandMore as ExpandMoreIcon,
+    FormatAlignLeft as FormatAlignLeftIcon,
+} from '@mui/icons-material'
+import { Box, IconButton, Menu, MenuItem } from '@mui/material'
 import { Editor } from '@tiptap/react'
 import { useState } from 'react'
-import textAlign from './toolbarFunctions/textAlign'
+import { textAlign } from './toolbarFunctions'
 
 type Alignment = 'left' | 'center' | 'right' | 'justify'
 

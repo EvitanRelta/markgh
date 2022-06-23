@@ -1,12 +1,10 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { Menu, MenuItem } from '@mui/material'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
+import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material'
+import { Box, Button, Menu, MenuItem } from '@mui/material'
 import { Editor } from '@tiptap/react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
-import heading from './toolbarFunctions/heading'
+import { heading } from './toolbarFunctions'
 
 type HeadingLevels = 0 | 1 | 2 | 3 | 4 | 5 | 6
 interface Props {
