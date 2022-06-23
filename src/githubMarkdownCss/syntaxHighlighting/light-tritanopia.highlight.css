@@ -6,7 +6,9 @@
 .markdown-body.gh-light-tritanopia .hljs-number,
 .markdown-body.gh-light-tritanopia .hljs-attribute,
 .markdown-body.gh-light-tritanopia .hljs-literal,
-.markdown-body.gh-light-tritanopia .hljs-string .hljs-title.class_ {
+.markdown-body.gh-light-tritanopia .hljs-attr.hljs-tag,
+.markdown-body.gh-light-tritanopia .hljs-string .hljs-title.class_,
+.markdown-body.gh-light-tritanopia .hljs-string.hljs-tag .hljs-title.class_ {
     color: #0550ae;
 }
 
@@ -19,11 +21,13 @@
 
 .markdown-body.gh-light-tritanopia .hljs-tag,
 .markdown-body.gh-light-tritanopia .hljs-params,
-.markdown-body.gh-light-tritanopia .hljs-string .pl-s1 {
+.markdown-body.gh-light-tritanopia .hljs-string .pl-s1,
+.markdown-body.gh-light-tritanopia .hljs-string.hljs-tag .pl-s1 {
     color: #24292f;
 }
 
-.markdown-body.gh-light-tritanopia .hljs-name {
+.markdown-body.gh-light-tritanopia .hljs-name,
+.markdown-body.gh-light-tritanopia .hljs-name.hljs-tag {
     color: #0550ae;
 }
 
@@ -33,8 +37,10 @@
 }
 
 .markdown-body.gh-light-tritanopia .hljs-string,
+.markdown-body.gh-light-tritanopia .hljs-string.hljs-tag,
 .markdown-body.gh-light-tritanopia .pl-pds,
 .markdown-body.gh-light-tritanopia .hljs-string .pl-pse .pl-s1,
+.markdown-body.gh-light-tritanopia .hljs-string.hljs-tag .pl-pse .pl-s1,
 .markdown-body.gh-light-tritanopia .pl-sr,
 .markdown-body.gh-light-tritanopia .pl-sr .pl-cce,
 .markdown-body.gh-light-tritanopia .pl-sr .pl-sre,

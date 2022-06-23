@@ -4,9 +4,9 @@ const inputDir = './'
 const githubClassPrefix = 'pl-'
 const hljsClassPrefix = 'hljs-'
 const githubToHljsClassMapping = {
-    ent: ['name'],
-    c1: ['attr', 'number', 'attribute', 'literal'],
-    s: ['string'],
+    ent: ['name', `name.${hljsClassPrefix}tag`],
+    c1: ['attr', 'number', 'attribute', 'literal', `attr.${hljsClassPrefix}tag`],
+    s: ['string', `string.${hljsClassPrefix}tag`],
     k: ['keyword', 'type'],
     v: ['title.class_'],
     c: ['comment'],
