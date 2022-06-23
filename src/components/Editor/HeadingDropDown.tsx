@@ -1,7 +1,8 @@
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material'
 import { Box, Button, Menu, MenuItem } from '@mui/material'
+import { Editor as CoreEditor } from '@tiptap/core'
 import { Editor } from '@tiptap/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { heading } from './toolbarFunctions'
@@ -13,6 +14,7 @@ interface Props {
 
 const HeadingDropDown = ({ editor }: Props) => {
     const [anchor, setAnchor] = useState<Element | null>(null)
+    const [headingLevel, setHeadingLevel] = useState<HeadingLevels | null>(null)
     const theme = useSelector((state: RootState) => state.theme)
 
     const openMenu: React.MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -23,19 +25,25 @@ const HeadingDropDown = ({ editor }: Props) => {
         setAnchor(null)
     }
 
-    const getHeadingLevel = (editor: Editor) => {
-        if (editor.isActive('paragraph')) return 0
+    useEffect(() => {
+        if (!editor) return
 
-        // If multiple different headings types are selected, 'headingAttr.level'
-        // will have a value, but 'editor.isActive('heading')' will be false.
-        if (!editor.isActive('heading')) return null
+        const getHeadingLevel = (editor: CoreEditor) => {
+            if (editor.isActive('paragraph')) return 0
 
-        const headingAttr = editor.getAttributes('heading')
+            // If multiple different headings types are selected, 'headingAttr.level'
+            // will have a value, but 'editor.isActive('heading')' will be false.
+            if (!editor.isActive('heading')) return null
 
-        return headingAttr.level === undefined ? null : headingAttr.level
-    }
+            const headingAttr = editor.getAttributes('heading')
 
-    const headingLevel = editor ? getHeadingLevel(editor) : null
+            return headingAttr.level === undefined ? null : (headingAttr.level as HeadingLevels)
+        }
+
+        editor.on('selectionUpdate', ({ editor }) => {
+            setHeadingLevel(getHeadingLevel(editor))
+        })
+    }, [editor])
 
     const onChange = (value: HeadingLevels) => {
         heading(editor)(value)
