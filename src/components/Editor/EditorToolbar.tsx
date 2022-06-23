@@ -1,4 +1,4 @@
-import { FormatStrikethroughTwoTone } from '@mui/icons-material'
+import { FormatStrikethroughTwoTone as FormatStrikethroughTwoToneIcon } from '@mui/icons-material'
 import CodeIcon from '@mui/icons-material/Code'
 import DataObjectIcon from '@mui/icons-material/DataObject'
 import FormatBoldIcon from '@mui/icons-material/FormatBold'
@@ -41,7 +41,7 @@ const editorOptions: FormatOption[] = [
     [bold, FormatBoldIcon],
     [italic, FormatItalicIcon],
     [underline, FormatUnderlinedIcon],
-    [strikethrough, FormatStrikethroughTwoTone],
+    [strikethrough, FormatStrikethroughTwoToneIcon],
     [code, CodeIcon],
     [blockQuote, FormatQuoteIcon],
     [codeBlock, DataObjectIcon],
