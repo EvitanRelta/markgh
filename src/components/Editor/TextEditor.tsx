@@ -7,7 +7,7 @@ import { RootState } from '../../store'
 
 import '../../customCss/fix-codeblock-bottom-spacing.css'
 import '../../customCss/fix-codeblock-cannot-type.css'
-import '../../customCss/no-list-item-spacing.css'
+import '../../customCss/no-wrapper-paragraph-spacing.css'
 import '../../customCss/remove-editing-border.css'
 interface Props {
     onTextChange: (editorContainer: Element) => void | null
