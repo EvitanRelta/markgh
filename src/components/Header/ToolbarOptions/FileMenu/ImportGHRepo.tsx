@@ -25,7 +25,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     const [showLoading, setShowLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
 
-    const isValidLink = (url: string) => /(https?:\/\/)?(www\.)?github.com(\/[\w-]+){2}/.test(url)
+    const isValidLink = (url: string) => /(https?:\/\/)?(www\.)?github.com(\/[\w-]+){2}/i.test(url)
 
     const getDefaultBranch = async (user: string, repo: string) => {
         interface GetRepoResponseDataType {
@@ -40,16 +40,16 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
 
     const generateRawURL = async (url: string) => {
         let filePath = '/README.md'
-        const [user, repo] = /github.com\/([\w-]+)\/([\w-]+)/.exec(url)?.slice(1) as [
+        const [user, repo] = /github.com\/([\w-]+)\/([\w-]+)/i.exec(url)?.slice(1) as [
             string,
             string
         ]
-        let branch = /github.com(\/([\w-]+)){4}/.exec(url)?.[2]
+        let branch = /github.com(\/([\w-]+)){4}/i.exec(url)?.[2]
 
         if (branch === undefined) branch = await getDefaultBranch(user, repo)
         else
             filePath =
-                /github.com(\/[\w-]+){2}\/blob\/[\w-]+((\/[\w-]+)+.md)/.exec(url)?.[2] ?? filePath
+                /github.com(\/[\w-]+){2}\/blob\/[\w-]+((\/[\w-]+)+.md)/i.exec(url)?.[2] ?? filePath
 
         //to implement branch name input  (default as master)
         //corsproxy needs to be changed
