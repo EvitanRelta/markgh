@@ -1,8 +1,7 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Dexie from 'dexie'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store'
+import { useAppSelector } from '../../store/hooks'
 import ImageContainer from './ImageContainer'
 
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
     db: Dexie
 }
 const Footer = ({ onClick, showMarkdown, db }: Props) => {
-    const theme = useSelector((state: RootState) => state.theme)
+    const theme = useAppSelector((state) => state.theme)
 
     return (
         <Box className='footer'>

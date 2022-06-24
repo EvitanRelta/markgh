@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store'
+import { useAppSelector } from '../../store/hooks'
 import EditorToolbar from '../Editor/EditorToolbar'
 import TextEditor from '../Editor/TextEditor'
 import MarkdownTextContainer from './MarkdownTextContainer'
@@ -12,7 +11,7 @@ type Props = {
 
 const Body = ({ showMarkdown, onTextChange }: Props) => {
     const editorWidth = showMarkdown ? '50%' : '100%'
-    const editor = useSelector((state: RootState) => state.editor.editor)
+    const editor = useAppSelector((state) => state.editor.editor)
 
     return (
         <Box>

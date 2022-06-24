@@ -8,9 +8,8 @@ import Popover from '@mui/material/Popover'
 import TextField from '@mui/material/TextField'
 import { GithubAuthProvider } from 'firebase/auth'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { markdownToHtml } from '../../../../converterFunctions'
-import { RootState } from '../../../../store'
+import { useAppSelector } from '../../../../store/hooks'
 
 type Props = {
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
@@ -20,7 +19,7 @@ type Props = {
 }
 
 const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
-    const editor = useSelector((state: RootState) => state.editor.editor)
+    const editor = useAppSelector((state) => state.editor.editor)
     const [showPopover, setShowPopover] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
     const [branch, setBranch] = useState<string>('master')

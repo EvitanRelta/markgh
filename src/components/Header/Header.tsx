@@ -2,8 +2,7 @@ import Box from '@mui/material/Box'
 import Input from '@mui/material/Input'
 import { GithubAuthProvider, User } from 'firebase/auth'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store'
+import { useAppSelector } from '../../store/hooks'
 import MenuButton from './MenuButton'
 import ToolbarContainer from './ToolbarContainer'
 
@@ -33,7 +32,7 @@ const Header = ({
     user,
     ghToken,
 }: Props) => {
-    const theme = useSelector((state: RootState) => state.theme)
+    const theme = useAppSelector((state) => state.theme)
 
     //var for current file name
     const [text, setText] = useState(title)

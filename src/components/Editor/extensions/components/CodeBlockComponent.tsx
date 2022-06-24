@@ -6,8 +6,7 @@ import { NodeViewProps, NodeViewWrapper } from '@tiptap/react'
 import _ from 'lodash'
 import { lowlight } from 'lowlight/lib/all'
 import { useCallback, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../../../store'
+import { useAppSelector } from '../../../../store/hooks'
 import { ModifiedNodeViewContent } from './ModifiedNodeViewContent'
 
 interface OptionsFixLowLightType extends CodeBlockLowlightOptions {
@@ -48,7 +47,7 @@ const TopRightTextFieldIcon = styled(TextFieldIcon)({
 export default ({ node, updateAttributes, extension }: Props) => {
     const language = node.attrs.language
     const lowlight = extension.options.lowlight
-    const theme = useSelector((state: RootState) => state.theme)
+    const theme = useAppSelector((state) => state.theme)
     const [inputValue, setInputValue] = useState<string>(language || '')
     const [isValidLanguage, setIsValidLanguage] = useState<boolean>(
         language ? lowlight.registered(language) : false
