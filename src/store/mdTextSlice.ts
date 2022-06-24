@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const mdTextSlice = createSlice({
     name: 'mdText',
     initialState: '',
     reducers: {
-        setMdText(state, actions) {
+        setMdText(state, actions: PayloadAction<string>) {
             return actions.payload
         },
     },

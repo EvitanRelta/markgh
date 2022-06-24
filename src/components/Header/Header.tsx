@@ -1,37 +1,18 @@
 import Box from '@mui/material/Box'
 import Input from '@mui/material/Input'
-import { GithubAuthProvider, User } from 'firebase/auth'
 import { useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
 import MenuButton from './MenuButton'
 import ToolbarContainer from './ToolbarContainer'
-
-interface UserStatus {
-    loggedIn: boolean
-    info: User | null
-}
 
 type Props = {
     title: string
     setTitle: React.Dispatch<React.SetStateAction<string>>
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     lastEditedOn: string
-    onLogin: (provider: GithubAuthProvider) => Promise<string | void>
-    onLogout: () => Promise<void>
-    user: UserStatus
-    ghToken: string | undefined
 }
 
-const Header = ({
-    title,
-    setTitle,
-    onUpload,
-    lastEditedOn,
-    onLogin,
-    onLogout,
-    user,
-    ghToken,
-}: Props) => {
+const Header = ({ title, setTitle, onUpload, lastEditedOn }: Props) => {
     const theme = useAppSelector((state) => state.theme)
 
     //var for current file name
@@ -89,13 +70,7 @@ const Header = ({
                 />
 
                 <Box>
-                    <MenuButton
-                        title={title}
-                        onUpload={onUpload}
-                        onLogin={onLogin}
-                        onLogout={onLogout}
-                        user={user}
-                    />
+                    <MenuButton title={title} onUpload={onUpload} />
                 </Box>
             </Box>
             <Box
@@ -105,12 +80,7 @@ const Header = ({
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer
-                    onUpload={onUpload}
-                    title={title}
-                    ghToken={ghToken}
-                    onLogin={onLogin}
-                />
+                <ToolbarContainer onUpload={onUpload} title={title} />
                 <Box
                     style={{
                         color: 'gray',

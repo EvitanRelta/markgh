@@ -1,6 +1,5 @@
 import { Box, Menu } from '@mui/material'
 import Button from '@mui/material/Button'
-import { GithubAuthProvider } from 'firebase/auth'
 import { useState } from 'react'
 import ExportFile from './ExportFile'
 import ImportGHRepo from './ImportGHRepo'
@@ -9,11 +8,9 @@ import OpenFile from './OpenFile'
 type Props = {
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     onDownload: () => void
-    ghToken: string | undefined
-    onLogin: (provider: GithubAuthProvider) => Promise<string | void>
 }
 
-const FileOption = ({ onUpload, onDownload, ghToken, onLogin }: Props) => {
+const FileOption = ({ onUpload, onDownload }: Props) => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
 
     const openMenu = (e: React.MouseEvent) => {
@@ -36,12 +33,7 @@ const FileOption = ({ onUpload, onDownload, ghToken, onLogin }: Props) => {
                 onClose={closeMenu}
             >
                 <OpenFile onUpload={onUpload} />
-                <ImportGHRepo
-                    menuOpen={Boolean(anchor)}
-                    setAnchor={setAnchor}
-                    ghToken={ghToken}
-                    onLogin={onLogin}
-                />
+                <ImportGHRepo menuOpen={Boolean(anchor)} setAnchor={setAnchor} />
                 <ExportFile onDownload={onDownload} />
             </Menu>
         </Box>

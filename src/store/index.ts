@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { authReducer } from './authSlice'
 import { editorReducer } from './editorSlice'
 import { mdTextReducer } from './mdTextSlice'
 import { themeReducer } from './themeSlice'
@@ -8,12 +9,14 @@ export const store = configureStore({
         editor: editorReducer,
         mdText: mdTextReducer,
         theme: themeReducer,
+        auth: authReducer,
     },
     // Ignore Redux's non-serializable error.
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
-                ignoredPaths: ['editor.editor'],
+                ignoredActions: ['auth/setUser', 'auth/setGhToken'],
+                ignoredPaths: ['editor.editor', 'auth'],
             },
         }),
 })
