@@ -21,24 +21,52 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     const axios = useAppSelector((state) => state.auth.axios)
     const [showPopover, setShowPopover] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
-    const [branch, setBranch] = useState<string>('master')
     const [showError, setShowError] = useState<boolean>(false)
     const [showLoading, setShowLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
 
-    const isValidLink = (url: string) => /(https?:\/\/)?(www\.)?github.com(\/[\w-]+){2}/.test(url)
+    const isGithubRepoUrl = (url: string) =>
+        /(https?:\/\/)?(www\.)?github.com(\/[\w-]+){2}/i.test(url)
+    const isRawGithubMarkdownUrl = (url: string) =>
+        /(https?:\/\/)?raw\.githubusercontent.com(\/[\w-]+){4,}.md/i.test(url)
+    const isValidLink = (url: string) => isGithubRepoUrl(url) || isRawGithubMarkdownUrl(url)
 
-    const generateRawURL = (url: string) => {
-        const [user, repo] = /github.com\/([\w-]+)\/([\w-]+)/.exec(url)?.slice(1) as [
+    const getDefaultBranch = async (user: string, repo: string) => {
+        interface GetRepoResponseDataType {
+            default_branch: string
+        }
+
+        const { default_branch } = (
+            await axios.get<GetRepoResponseDataType>(`https://api.github.com/repos/${user}/${repo}`)
+        ).data
+        return default_branch
+    }
+
+    const generateRawURL = async (url: string) => {
+        const corsProxyPrefix = 'https://thingproxy.freeboard.io/fetch/'
+
+        if (isRawGithubMarkdownUrl(url)) {
+            const rawGithubUrlPath = /raw\.githubusercontent.com((\/[\w-]+){4,}.md)/.exec(
+                url
+            )?.[1] as string
+            return `${corsProxyPrefix}https://raw.githubusercontent.com${rawGithubUrlPath}`
+        }
+
+        let filePath = '/README.md'
+        const [user, repo] = /github.com\/([\w-]+)\/([\w-]+)/i.exec(url)?.slice(1) as [
             string,
             string
         ]
+        let branch = /github.com(\/([\w-]+)){4}/i.exec(url)?.[2]
+
+        if (branch === undefined) branch = await getDefaultBranch(user, repo)
+        else
+            filePath =
+                /github.com(\/[\w-]+){2}\/blob\/[\w-]+((\/[\w-]+)+.md)/i.exec(url)?.[2] ?? filePath
 
         //to implement branch name input  (default as master)
         //corsproxy needs to be changed
-        const rawLink = `https://thingproxy.freeboard.io/fetch/https://raw.githubusercontent.com/${user}/${repo}/${branch}/README.md`
-        console.log(rawLink)
-        return rawLink
+        return `${corsProxyPrefix}https://raw.githubusercontent.com/${user}/${repo}/${branch}${filePath}`
     }
 
     const openPopover = (e: React.MouseEvent) => {
@@ -64,7 +92,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
 
         try {
             type ResponseDataType = string
-            let response = await axios.get<ResponseDataType>(generateRawURL(link))
+            let response = await axios.get<ResponseDataType>(await generateRawURL(link))
             setAnchor(null)
             editor.commands.setContent(markdownToHtml(response.data), true)
         } catch (e) {
@@ -96,22 +124,6 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
                     InputLabelProps={{ shrink: true }}
                     onChange={(e) => {
                         setLink(e.target.value)
-                        setShowError(false)
-                        setShowLoading(false)
-                    }}
-                />
-                <br />
-                <TextField
-                    error={showError}
-                    type='text'
-                    size='small'
-                    sx={{ minWidth: 300, marginTop: 1.5 }}
-                    label={'Branch name'}
-                    placeholder={'branch'}
-                    defaultValue={branch}
-                    InputLabelProps={{ shrink: true }}
-                    onChange={(e) => {
-                        setBranch(e.target.value)
                         setShowError(false)
                         setShowLoading(false)
                     }}
