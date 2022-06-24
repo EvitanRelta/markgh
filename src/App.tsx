@@ -198,6 +198,7 @@ export default function App(): ReactElement {
             <ThemeProvider theme={selectedTheme}>
                 <CssBaseline />
                 <Helmet>
+                    <title>MarkGH</title>
                     {/* Verification to be indexed in Google Search */}
                     <meta
                         name='google-site-verification'
