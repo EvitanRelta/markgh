@@ -40,7 +40,7 @@ const MenuButton = ({ title, onUpload }: Props) => {
         else dispatch(loginUser())
     }
 
-    const userPhoto = auth.user === null ? '' : (auth.user.photoURL as string)
+    const userPhoto = auth.user && auth.user.photoURL ? auth.user.photoURL : undefined
 
     return (
         <Box>
