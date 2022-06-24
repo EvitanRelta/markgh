@@ -39,6 +39,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     }
 
     const generateRawURL = async (url: string) => {
+        let filePath = '/README.md'
         const [user, repo] = /github.com\/([\w-]+)\/([\w-]+)/.exec(url)?.slice(1) as [
             string,
             string
@@ -46,10 +47,13 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
         let branch = /github.com(\/([\w-]+)){4}/.exec(url)?.[2]
 
         if (branch === undefined) branch = await getDefaultBranch(user, repo)
+        else
+            filePath =
+                /github.com(\/[\w-]+){2}\/blob\/[\w-]+((\/[\w-]+)+.md)/.exec(url)?.[2] ?? filePath
 
         //to implement branch name input  (default as master)
         //corsproxy needs to be changed
-        const rawLink = `https://thingproxy.freeboard.io/fetch/https://raw.githubusercontent.com/${user}/${repo}/${branch}/README.md`
+        const rawLink = `https://thingproxy.freeboard.io/fetch/https://raw.githubusercontent.com/${user}/${repo}/${branch}${filePath}`
         console.log(rawLink)
         return rawLink
     }
