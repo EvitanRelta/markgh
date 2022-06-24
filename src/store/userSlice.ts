@@ -22,22 +22,15 @@ const userSlice = createSlice({
         firebaseApp,
     } as UserStatus,
     reducers: {
-        loginUser(state, action: PayloadAction<User>) {
+        setUser(state, action: PayloadAction<User | null>) {
             return {
                 ...state,
-                loggedIn: true,
+                loggedIn: action.payload !== null,
                 user: action.payload,
-            }
-        },
-        logoutUser(state) {
-            return {
-                ...state,
-                loggedIn: false,
-                user: null,
             }
         },
     },
 })
 
-export const { loginUser, logoutUser } = userSlice.actions
+export const { setUser } = userSlice.actions
 export const userReducer = userSlice.reducer

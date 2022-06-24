@@ -23,7 +23,7 @@ import { removeTipTapArtifacts } from './converterFunctions/helpers/removeTipTap
 import toMarkdown from './converterFunctions/toMarkdown'
 import { useAppDispatch, useAppSelector } from './store/hooks'
 import { setMdText } from './store/mdTextSlice'
-import { loginUser, logoutUser } from './store/userSlice'
+import { setUser } from './store/userSlice'
 
 class EditorDB extends Dexie {
     images!: Table<EditorImage>
@@ -80,13 +80,7 @@ export default function App(): ReactElement {
     const [ghToken, setGhToken] = useState<string | undefined>(localStorage['ghToken'])
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                dispatch(loginUser(user))
-            } else {
-                dispatch(logoutUser())
-            }
-        })
+        onAuthStateChanged(auth, (user) => dispatch(setUser(user)))
     }, [auth])
 
     const loginAuth = (auth: Auth, provider: GithubAuthProvider) => {
@@ -101,7 +95,7 @@ export default function App(): ReactElement {
                 setGhToken(token)
                 localStorage['ghToken'] = token
 
-                dispatch(loginUser(result.user))
+                dispatch(setUser(result.user))
                 // ...
                 return token
             })
