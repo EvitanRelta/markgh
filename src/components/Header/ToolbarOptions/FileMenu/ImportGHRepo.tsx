@@ -26,9 +26,14 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     const [showLoading, setShowLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
 
+    const isValidLink = (url: string) => /(https?:\/\/)?(www\.)?github.com(\/[\w-]+){2}/.test(url)
+
     const generateRawURL = (url: string) => {
-        const urlInfo = url.split('https://github.com/')[1].split('/')
-        const [user, repo] = urlInfo
+        const [user, repo] = /github.com\/([\w-]+)\/([\w-]+)/.exec(url)?.slice(1) as [
+            string,
+            string
+        ]
+
         //to implement branch name input  (default as master)
         //corsproxy needs to be changed
         const rawLink = `https://thingproxy.freeboard.io/fetch/https://raw.githubusercontent.com/${user}/${repo}/${branch}/README.md`
@@ -49,6 +54,14 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
 
     const getRepo = async () => {
         setShowLoading(true)
+
+        if (!isValidLink(link)) {
+            setShowError(true)
+            setErrorMessage('Invalid repo URL.')
+            setShowLoading(false)
+            return
+        }
+
         try {
             type ResponseDataType = string
             let response = await axios.get<ResponseDataType>(generateRawURL(link))
