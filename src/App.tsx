@@ -14,7 +14,6 @@ import {
 } from 'firebase/auth'
 import React, { ReactElement, useEffect, useState } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { useDispatch, useSelector } from 'react-redux'
 import firebaseConfig from './components/Authentication/config/firebaseConfig'
 import Body from './components/Body/Body'
 import Footer from './components/Footer/Footer'
@@ -26,7 +25,7 @@ import {
 } from './converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from './converterFunctions/helpers/removeTipTapArtifacts'
 import toMarkdown from './converterFunctions/toMarkdown'
-import { RootState } from './store'
+import { useAppDispatch, useAppSelector } from './store/hooks'
 import { setMdText } from './store/mdTextSlice'
 
 interface UserStatus {
@@ -58,9 +57,9 @@ interface EditorText {
 export default function App(): ReactElement {
     const db = new EditorDB()
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
-    const editor = useSelector((state: RootState) => state.editor.editor)
+    const editor = useAppSelector((state) => state.editor.editor)
 
     const saveEditorText = async () => {
         const htmlCopy = editor.view.dom.cloneNode(true) as HTMLElement
@@ -138,7 +137,7 @@ export default function App(): ReactElement {
     const [showMarkdown, setShowMarkdown] = useState(false)
 
     //var for theme control
-    const theme = useSelector((state: RootState) => state.theme)
+    const theme = useAppSelector((state) => state.theme)
 
     //var for setting file title
     const [title, setTitle] = useState('')

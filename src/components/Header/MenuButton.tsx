@@ -3,7 +3,7 @@ import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import { GithubAuthProvider, User } from 'firebase/auth'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../../store/hooks'
 import { toggleTheme } from '../../store/themeSlice'
 import { githubProvider } from '.././Authentication/config/authMethod'
 import Login from './MenuOptions/Login'
@@ -25,7 +25,7 @@ type Props = {
 }
 
 const MenuButton = ({ title, onUpload, onLogin, onLogout, user }: Props) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
     //const [selected, setSelected] = useState(-1)

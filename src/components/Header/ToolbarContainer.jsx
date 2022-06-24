@@ -1,11 +1,9 @@
 import Box from '@mui/material/Box'
-import { useSelector } from 'react-redux'
+import { useAppSelector } from '../../store/hooks'
 import FileOption from './ToolbarOptions/FileMenu/FileOption'
-// import { RootState } from '../../store'  // Typescript
 
 const ToolbarContainer = ({ onUpload, title, ghToken, onLogin }) => {
-    // const mdText = useSelector((state: RootState) => state.mdText)  // Typescript
-    const mdText = useSelector((state) => state.mdText)
+    const mdText = useAppSelector((state) => state.mdText)
 
     const onDownload = () => {
         const fileName = `${title || 'NewFile'}.md`

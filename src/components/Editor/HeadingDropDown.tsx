@@ -3,8 +3,7 @@ import { Box, Button, Menu, MenuItem } from '@mui/material'
 import { Editor as CoreEditor } from '@tiptap/core'
 import { Editor } from '@tiptap/react'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store'
+import { useAppSelector } from '../../store/hooks'
 import { heading } from './toolbarFunctions'
 
 type HeadingLevels = 0 | 1 | 2 | 3 | 4 | 5 | 6
@@ -15,7 +14,7 @@ interface Props {
 const HeadingDropDown = ({ editor }: Props) => {
     const [anchor, setAnchor] = useState<Element | null>(null)
     const [headingLevel, setHeadingLevel] = useState<HeadingLevels | null>(null)
-    const theme = useSelector((state: RootState) => state.theme)
+    const theme = useAppSelector((state) => state.theme)
 
     const openMenu: React.MouseEventHandler<HTMLButtonElement> = (e) => {
         setAnchor(e.currentTarget)

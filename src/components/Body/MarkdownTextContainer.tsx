@@ -1,15 +1,14 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store'
+import { useAppSelector } from '../../store/hooks'
 import CopyClipboardButton from './CopyClipboardButton'
 
 type Props = {}
 
 const MarkdownTextContainer = ({}: Props) => {
-    const theme = useSelector((state: RootState) => state.theme)
-    const mdText = useSelector((state: RootState) => state.mdText)
+    const theme = useAppSelector((state) => state.theme)
+    const mdText = useAppSelector((state) => state.mdText)
     const [isHovering, setIsHovering] = useState(false)
 
     const [showCopiedPopup, setShowCopiedPopup] = useState(false)
