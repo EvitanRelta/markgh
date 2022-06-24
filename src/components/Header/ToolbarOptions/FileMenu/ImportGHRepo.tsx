@@ -6,6 +6,7 @@ import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import Popover from '@mui/material/Popover'
 import TextField from '@mui/material/TextField'
+import staticAxios from 'axios'
 import { useEffect, useState } from 'react'
 import { markdownToHtml } from '../../../../converterFunctions'
 import { useAppSelector } from '../../../../store/hooks'
@@ -35,53 +36,6 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
         return rawLink
     }
 
-    const httpErrorHandling = () => {
-        // setShowError(true)
-        // setErrorMessage("Checking if it's a private repo...")
-        // setShowLoading(true)
-        // onLogin(githubProvider).then((token) => {
-        //     try {
-        //         console.log(token)
-        //         let res = httpGet(generateRawURL(link), token as string)
-        //         setAnchor(null)
-        //         editor.commands.setContent(markdownToHtml(res as string), true)
-        //     } catch (e) {
-        //         setShowLoading(false)
-        //         setErrorMessage('Invalid Link!')
-        //     }
-        // })
-    }
-
-    // const httpGet = async (theUrl: string) => {
-    //     console.log(token)
-    //     let xmlHttp: XMLHttpRequest
-
-    //     if (window.XMLHttpRequest) {
-    //         // code for IE7+, Firefox, Chrome, Opera, Safari
-    //         xmlHttp = new XMLHttpRequest()
-    //     } else {
-    //         // code for IE6, IE5
-    //         xmlHttp = new ActiveXObject('Microsoft.XMLHTTP')
-    //     }
-
-    //     xmlHttp.onreadystatechange = () => {
-    //         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-    //             return xmlHttp.responseText
-    //         }
-    //     }
-    //     xmlHttp.open('GET', theUrl, false)
-    //     if (token !== 'undefined') {
-    //         console.log('setting token: ' + token)
-    //         xmlHttp.setRequestHeader('Authorization', 'Bearer ' + token)
-    //     }
-    //     xmlHttp.send()
-    //     if (xmlHttp.status !== 200) {
-    //         throw new Error('Unable to import')
-    //     }
-
-    //     return xmlHttp.response
-    // }
-
     const openPopover = (e: React.MouseEvent) => {
         setShowPopover(true)
     }
@@ -94,15 +48,20 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     }
 
     const getRepo = async () => {
-        setShowLoading(false)
+        setShowLoading(true)
         try {
             type ResponseDataType = string
             let response = await axios.get<ResponseDataType>(generateRawURL(link))
             setAnchor(null)
             editor.commands.setContent(markdownToHtml(response.data), true)
         } catch (e) {
-            // httpErrorHandling()
+            setShowError(true)
+            if (!staticAxios.isAxiosError(e)) return setErrorMessage((e as Error).message)
+            if (e.response?.status === 404)
+                return setErrorMessage("Repo doesn't exists, or you don't have access to it.")
+            return setErrorMessage(e.message)
         }
+        setShowLoading(false)
     }
 
     useEffect(() => {
