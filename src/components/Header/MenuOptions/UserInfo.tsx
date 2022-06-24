@@ -2,11 +2,11 @@ import { Box } from '@mui/material'
 import { useAppSelector } from '../../../store/hooks'
 
 const UserInfo = () => {
-    const user = useAppSelector((state) => state.user)
+    const auth = useAppSelector((state) => state.auth)
 
     return (
         <Box sx={{ padding: 1, fontSize: 15, marginLeft: 3 }}>
-            {user.loggedIn && user.user?.displayName}
+            {auth.loggedIn && auth.user?.displayName}
         </Box>
     )
 }

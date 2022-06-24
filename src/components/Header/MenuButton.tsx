@@ -2,9 +2,9 @@ import { Menu, MenuItem } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import { useState } from 'react'
+import { loginUser, logoutUser } from '../../store/authSlice'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { toggleTheme } from '../../store/themeSlice'
-import { loginUser, logoutUser } from '../../store/userSlice'
 import Login from './MenuOptions/Login'
 import Logout from './MenuOptions/Logout'
 import ThemeOption from './MenuOptions/ThemeOption'
@@ -17,7 +17,7 @@ type Props = {
 
 const MenuButton = ({ title, onUpload }: Props) => {
     const dispatch = useAppDispatch()
-    const user = useAppSelector((state) => state.user)
+    const auth = useAppSelector((state) => state.auth)
 
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
     //const [selected, setSelected] = useState(-1)
@@ -36,11 +36,11 @@ const MenuButton = ({ title, onUpload }: Props) => {
     }
 
     const handleLoginLogout = () => {
-        if (user.loggedIn) dispatch(logoutUser())
+        if (auth.loggedIn) dispatch(logoutUser())
         else dispatch(loginUser())
     }
 
-    const userPhoto = user.user === null ? '' : (user.user.photoURL as string)
+    const userPhoto = auth.user === null ? '' : (auth.user.photoURL as string)
 
     return (
         <Box>
@@ -57,9 +57,9 @@ const MenuButton = ({ title, onUpload }: Props) => {
                 onClick={openMenu}
             />
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
-                {user.loggedIn && <UserInfo />}
+                {auth.loggedIn && <UserInfo />}
                 <MenuItem onClick={handleLoginLogout}>
-                    {user.loggedIn ? <Logout /> : <Login />}
+                    {auth.loggedIn ? <Logout /> : <Login />}
                 </MenuItem>
                 <MenuItem onClick={handleChangeTheme}>
                     <ThemeOption />

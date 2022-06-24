@@ -18,7 +18,7 @@ type Props = {
 
 const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     const editor = useAppSelector((state) => state.editor.editor)
-    const axios = useAppSelector((state) => state.user.axios)
+    const axios = useAppSelector((state) => state.auth.axios)
     const [showPopover, setShowPopover] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
     const [branch, setBranch] = useState<string>('master')

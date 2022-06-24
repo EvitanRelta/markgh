@@ -6,7 +6,7 @@ import { AppDispatch, RootState } from '.'
 import { githubProvider } from '../authentication/config/authMethod'
 import firebaseConfig from '../authentication/config/firebaseConfig'
 
-interface UserState {
+interface AuthState {
     loggedIn: boolean
     user: User | null
     auth: Auth
@@ -25,8 +25,8 @@ const axiosInstance = localStorage['ghToken']
       })
     : axios.create()
 
-const userSlice = createSlice({
-    name: 'user',
+const authSlice = createSlice({
+    name: 'auth',
     initialState: {
         loggedIn: false,
         user: null,
@@ -34,7 +34,7 @@ const userSlice = createSlice({
         firebaseApp,
         githubProvider,
         axios: axiosInstance,
-    } as UserState,
+    } as AuthState,
     reducers: {
         setUser(state, action: PayloadAction<User | null>) {
             return {
@@ -63,15 +63,15 @@ const userSlice = createSlice({
     },
 })
 
-interface UserThunkApiConfig {
+interface AppThunkApiConfig {
     dispatch: AppDispatch
     state: RootState
 }
 
-export const loginUser = createAsyncThunk<void, undefined, UserThunkApiConfig>(
-    'user/loginUser',
+export const loginUser = createAsyncThunk<void, undefined, AppThunkApiConfig>(
+    'auth/loginUser',
     async (_, { getState, dispatch, rejectWithValue }) => {
-        const { axios, auth, githubProvider } = getState().user
+        const { axios, auth, githubProvider } = getState().auth
         try {
             const signInResult = await signInWithPopup(auth, githubProvider)
             const credential = GithubAuthProvider.credentialFromResult(signInResult)
@@ -89,10 +89,10 @@ export const loginUser = createAsyncThunk<void, undefined, UserThunkApiConfig>(
     }
 )
 
-export const logoutUser = createAsyncThunk<void, undefined, UserThunkApiConfig>(
-    'user/logoutUser',
+export const logoutUser = createAsyncThunk<void, undefined, AppThunkApiConfig>(
+    'auth/logoutUser',
     async (_, { getState, dispatch }) => {
-        const { auth } = getState().user
+        const { auth } = getState().auth
         delete localStorage['ghToken']
         dispatch(setGhToken(null))
         await auth.signOut()
@@ -100,5 +100,5 @@ export const logoutUser = createAsyncThunk<void, undefined, UserThunkApiConfig>(
     }
 )
 
-export const { setUser, setGhToken } = userSlice.actions
-export const userReducer = userSlice.reducer
+export const { setUser, setGhToken } = authSlice.actions
+export const authReducer = authSlice.reducer

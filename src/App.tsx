@@ -21,9 +21,9 @@ import {
 } from './converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from './converterFunctions/helpers/removeTipTapArtifacts'
 import toMarkdown from './converterFunctions/toMarkdown'
+import { setUser } from './store/authSlice'
 import { useAppDispatch, useAppSelector } from './store/hooks'
 import { setMdText } from './store/mdTextSlice'
-import { setUser } from './store/userSlice'
 
 class EditorDB extends Dexie {
     images!: Table<EditorImage>
@@ -76,7 +76,7 @@ export default function App(): ReactElement {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const auth = useAppSelector((state) => state.user.auth)
+    const auth = useAppSelector((state) => state.auth.auth)
     const [ghToken, setGhToken] = useState<string | undefined>(localStorage['ghToken'])
 
     useEffect(() => {
