@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { FirebaseApp, initializeApp } from 'firebase/app'
 import { Auth, getAuth, User } from 'firebase/auth'
-import firebaseConfig from '../components/Authentication/config/firebaseConfig'
+import firebaseConfig from '../authentication/config/firebaseConfig'
 
 interface UserStatus {
     loggedIn: boolean
