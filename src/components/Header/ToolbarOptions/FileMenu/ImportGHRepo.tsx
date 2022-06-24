@@ -25,7 +25,11 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     const [showLoading, setShowLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
 
-    const isValidLink = (url: string) => /(https?:\/\/)?(www\.)?github.com(\/[\w-]+){2}/i.test(url)
+    const isGithubRepoUrl = (url: string) =>
+        /(https?:\/\/)?(www\.)?github.com(\/[\w-]+){2}/i.test(url)
+    const isRawGithubMarkdownUrl = (url: string) =>
+        /(https?:\/\/)?raw\.githubusercontent.com(\/[\w-]+){4,}.md/i.test(url)
+    const isValidLink = (url: string) => isGithubRepoUrl(url) || isRawGithubMarkdownUrl(url)
 
     const getDefaultBranch = async (user: string, repo: string) => {
         interface GetRepoResponseDataType {
@@ -39,6 +43,15 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     }
 
     const generateRawURL = async (url: string) => {
+        const corsProxyPrefix = 'https://thingproxy.freeboard.io/fetch/'
+
+        if (isRawGithubMarkdownUrl(url)) {
+            const rawGithubUrlPath = /raw\.githubusercontent.com((\/[\w-]+){4,}.md)/.exec(
+                url
+            )?.[1] as string
+            return `${corsProxyPrefix}https://raw.githubusercontent.com${rawGithubUrlPath}`
+        }
+
         let filePath = '/README.md'
         const [user, repo] = /github.com\/([\w-]+)\/([\w-]+)/i.exec(url)?.slice(1) as [
             string,
@@ -53,9 +66,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
 
         //to implement branch name input  (default as master)
         //corsproxy needs to be changed
-        const rawLink = `https://thingproxy.freeboard.io/fetch/https://raw.githubusercontent.com/${user}/${repo}/${branch}${filePath}`
-        console.log(rawLink)
-        return rawLink
+        return `${corsProxyPrefix}https://raw.githubusercontent.com/${user}/${repo}/${branch}${filePath}`
     }
 
     const openPopover = (e: React.MouseEvent) => {
