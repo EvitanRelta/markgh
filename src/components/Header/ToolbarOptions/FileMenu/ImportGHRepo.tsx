@@ -6,7 +6,6 @@ import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import Popover from '@mui/material/Popover'
 import TextField from '@mui/material/TextField'
-import { GithubAuthProvider } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 import { markdownToHtml } from '../../../../converterFunctions'
 import { useAppSelector } from '../../../../store/hooks'
@@ -14,12 +13,11 @@ import { useAppSelector } from '../../../../store/hooks'
 type Props = {
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
     menuOpen: boolean
-    ghToken: string | undefined
-    onLogin: (provider: GithubAuthProvider) => Promise<string | void>
 }
 
-const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
+const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     const editor = useAppSelector((state) => state.editor.editor)
+    const axios = useAppSelector((state) => state.user.axios)
     const [showPopover, setShowPopover] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
     const [branch, setBranch] = useState<string>('master')
@@ -54,35 +52,35 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
         // })
     }
 
-    const httpGet = (theUrl: string, token?: string) => {
-        console.log(token)
-        let xmlHttp: XMLHttpRequest
+    // const httpGet = async (theUrl: string) => {
+    //     console.log(token)
+    //     let xmlHttp: XMLHttpRequest
 
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlHttp = new XMLHttpRequest()
-        } else {
-            // code for IE6, IE5
-            xmlHttp = new ActiveXObject('Microsoft.XMLHTTP')
-        }
+    //     if (window.XMLHttpRequest) {
+    //         // code for IE7+, Firefox, Chrome, Opera, Safari
+    //         xmlHttp = new XMLHttpRequest()
+    //     } else {
+    //         // code for IE6, IE5
+    //         xmlHttp = new ActiveXObject('Microsoft.XMLHTTP')
+    //     }
 
-        xmlHttp.onreadystatechange = () => {
-            if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-                return xmlHttp.responseText
-            }
-        }
-        xmlHttp.open('GET', theUrl, false)
-        if (token !== 'undefined') {
-            console.log('setting token: ' + token)
-            xmlHttp.setRequestHeader('Authorization', 'Bearer ' + token)
-        }
-        xmlHttp.send()
-        if (xmlHttp.status !== 200) {
-            throw new Error('Unable to import')
-        }
+    //     xmlHttp.onreadystatechange = () => {
+    //         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+    //             return xmlHttp.responseText
+    //         }
+    //     }
+    //     xmlHttp.open('GET', theUrl, false)
+    //     if (token !== 'undefined') {
+    //         console.log('setting token: ' + token)
+    //         xmlHttp.setRequestHeader('Authorization', 'Bearer ' + token)
+    //     }
+    //     xmlHttp.send()
+    //     if (xmlHttp.status !== 200) {
+    //         throw new Error('Unable to import')
+    //     }
 
-        return xmlHttp.response
-    }
+    //     return xmlHttp.response
+    // }
 
     const openPopover = (e: React.MouseEvent) => {
         setShowPopover(true)
@@ -95,12 +93,13 @@ const ImportGHRepo = ({ setAnchor, menuOpen, ghToken, onLogin }: Props) => {
         setAnchor(null)
     }
 
-    const getRepo = () => {
+    const getRepo = async () => {
         setShowLoading(false)
         try {
-            let res = httpGet(generateRawURL(link), ghToken)
+            type ResponseDataType = string
+            let response = await axios.get<ResponseDataType>(generateRawURL(link))
             setAnchor(null)
-            editor.commands.setContent(markdownToHtml(res as string), true)
+            editor.commands.setContent(markdownToHtml(response.data), true)
         } catch (e) {
             // httpErrorHandling()
         }

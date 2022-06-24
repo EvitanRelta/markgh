@@ -1,11 +1,10 @@
 import { Menu, MenuItem } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
-import { GithubAuthProvider } from 'firebase/auth'
 import { useState } from 'react'
-import { githubProvider } from '../../authentication/config/authMethod'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { toggleTheme } from '../../store/themeSlice'
+import { loginUser, logoutUser } from '../../store/userSlice'
 import Login from './MenuOptions/Login'
 import Logout from './MenuOptions/Logout'
 import ThemeOption from './MenuOptions/ThemeOption'
@@ -14,11 +13,9 @@ import UserInfo from './MenuOptions/UserInfo'
 type Props = {
     title: string
     onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
-    onLogin: (provider: GithubAuthProvider) => Promise<string | void>
-    onLogout: () => Promise<void>
 }
 
-const MenuButton = ({ title, onUpload, onLogin, onLogout }: Props) => {
+const MenuButton = ({ title, onUpload }: Props) => {
     const dispatch = useAppDispatch()
     const user = useAppSelector((state) => state.user)
 
@@ -36,6 +33,11 @@ const MenuButton = ({ title, onUpload, onLogin, onLogout }: Props) => {
     const handleChangeTheme = () => {
         dispatch(toggleTheme())
         closeMenu()
+    }
+
+    const handleLoginLogout = () => {
+        if (user.loggedIn) dispatch(logoutUser())
+        else dispatch(loginUser())
     }
 
     const userPhoto = user.user === null ? '' : (user.user.photoURL as string)
@@ -56,7 +58,7 @@ const MenuButton = ({ title, onUpload, onLogin, onLogout }: Props) => {
             />
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 {user.loggedIn && <UserInfo />}
-                <MenuItem onClick={() => (user.loggedIn ? onLogout() : onLogin(githubProvider))}>
+                <MenuItem onClick={handleLoginLogout}>
                     {user.loggedIn ? <Logout /> : <Login />}
                 </MenuItem>
                 <MenuItem onClick={handleChangeTheme}>

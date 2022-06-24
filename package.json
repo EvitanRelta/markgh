@@ -34,6 +34,7 @@
     "@types/react-resizable": "^3.0.1",
     "@types/turndown": "^5.0.1",
     "assert": "^2.0.0",
+    "axios": "^0.27.2",
     "buffer": "^6.0.3",
     "dexie": "^3.2.2",
     "dexie-react-hooks": "^1.1.1",

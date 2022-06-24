@@ -193,18 +193,6 @@ export default function App(): ReactElement {
         localStorage['selectedTheme'] = theme
     }, [theme])
 
-    const onLogin = async (provider: GithubAuthProvider) => {
-        if (auth === null) return
-        const token = await loginAuth(auth, provider)
-        return token
-    }
-
-    const onLogout = async () => {
-        localStorage['ghToken'] = undefined
-        setGhToken(undefined)
-        auth.signOut()
-    }
-
     return (
         <HelmetProvider>
             <ThemeProvider theme={selectedTheme}>
@@ -231,9 +219,6 @@ export default function App(): ReactElement {
                         setTitle={setTitle}
                         onUpload={onUpload}
                         lastEditedOn={lastEditedOn}
-                        onLogin={onLogin}
-                        onLogout={onLogout}
-                        ghToken={ghToken}
                     />
                     <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
                     <Box>
