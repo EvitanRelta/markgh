@@ -6,11 +6,10 @@ import ImportGHRepo from './ImportGHRepo'
 import OpenFile from './OpenFile'
 
 type Props = {
-    onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     onDownload: () => void
 }
 
-const FileOption = ({ onUpload, onDownload }: Props) => {
+const FileOption = ({ onDownload }: Props) => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
 
     const openMenu = (e: React.MouseEvent) => {
@@ -32,7 +31,7 @@ const FileOption = ({ onUpload, onDownload }: Props) => {
                 anchorEl={document.getElementById('file-button')}
                 onClose={closeMenu}
             >
-                <OpenFile onUpload={onUpload} />
+                <OpenFile />
                 <ImportGHRepo menuOpen={Boolean(anchor)} setAnchor={setAnchor} />
                 <ExportFile onDownload={onDownload} />
             </Menu>

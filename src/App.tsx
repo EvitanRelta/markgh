@@ -9,7 +9,7 @@ import {
     onAuthStateChanged,
     signInWithPopup,
 } from 'firebase/auth'
-import React, { ReactElement, useEffect, useState } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import Body from './components/Body/Body'
 import Footer from './components/Footer/Footer'
@@ -139,34 +139,6 @@ export default function App(): ReactElement {
     //Check selectedTheme
     const selectedTheme = theme === 'dark' ? darkTheme : lightTheme
 
-    //Executes when user uploads a .md or .txt file
-    const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-        //Allowed file types
-        const allowedFileTypes = ['txt', 'md']
-
-        //Retrieving file from event
-        const target = e.target as HTMLInputElement
-        let file = target.files![0]
-        const reader = new FileReader()
-
-        //Check file type
-        const getFileType = (fileName: string) => {
-            return fileName.split('.').pop()!.toLowerCase()
-        }
-
-        //Alert for wrong file type
-        if (!allowedFileTypes.includes(getFileType(file.name))) {
-            alert('Invalid file type! (.txt or .md only)')
-            return
-        }
-
-        //Reading file and allocating to state
-        reader.readAsText(file)
-        reader.onload = () => {
-            dispatch(setMdText(reader.result as string))
-        }
-    }
-
     const onTextChange = (editorContainer: Element) => {
         const markdown = toMarkdown(editorContainer)
         saveEditorText()
@@ -215,12 +187,7 @@ export default function App(): ReactElement {
                     />
                 </Helmet>
                 <Box id='app'>
-                    <Header
-                        title={title}
-                        setTitle={setTitle}
-                        onUpload={onUpload}
-                        lastEditedOn={lastEditedOn}
-                    />
+                    <Header title={title} setTitle={setTitle} lastEditedOn={lastEditedOn} />
                     <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
                     <Box>
                         <Footer

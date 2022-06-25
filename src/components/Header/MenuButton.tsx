@@ -12,10 +12,9 @@ import UserInfo from './MenuOptions/UserInfo'
 
 type Props = {
     title: string
-    onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const MenuButton = ({ title, onUpload }: Props) => {
+const MenuButton = ({ title }: Props) => {
     const dispatch = useAppDispatch()
     const auth = useAppSelector((state) => state.auth)
 

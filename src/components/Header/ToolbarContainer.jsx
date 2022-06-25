@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import { useAppSelector } from '../../store/hooks'
 import FileOption from './ToolbarOptions/FileMenu/FileOption'
 
-const ToolbarContainer = ({ onUpload, title }) => {
+const ToolbarContainer = ({ title }) => {
     const mdText = useAppSelector((state) => state.mdText)
 
     const onDownload = () => {
@@ -24,7 +24,7 @@ const ToolbarContainer = ({ onUpload, title }) => {
 
     return (
         <Box>
-            <FileOption onUpload={onUpload} onDownload={onDownload} />
+            <FileOption onDownload={onDownload} />
         </Box>
     )
 }

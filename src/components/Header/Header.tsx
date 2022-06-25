@@ -8,11 +8,10 @@ import ToolbarContainer from './ToolbarContainer'
 type Props = {
     title: string
     setTitle: React.Dispatch<React.SetStateAction<string>>
-    onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
     lastEditedOn: string
 }
 
-const Header = ({ title, setTitle, onUpload, lastEditedOn }: Props) => {
+const Header = ({ title, setTitle, lastEditedOn }: Props) => {
     const theme = useAppSelector((state) => state.theme)
 
     //var for current file name
@@ -70,7 +69,7 @@ const Header = ({ title, setTitle, onUpload, lastEditedOn }: Props) => {
                 />
 
                 <Box>
-                    <MenuButton title={title} onUpload={onUpload} />
+                    <MenuButton title={title} />
                 </Box>
             </Box>
             <Box
@@ -80,7 +79,7 @@ const Header = ({ title, setTitle, onUpload, lastEditedOn }: Props) => {
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer onUpload={onUpload} title={title} />
+                <ToolbarContainer title={title} />
                 <Box
                     style={{
                         color: 'gray',
