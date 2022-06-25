@@ -4,7 +4,11 @@ import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Input from '@mui/material/Input'
 
-const OpenFile = ({ onUpload }) => {
+interface Props {
+    onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+const OpenFile = ({ onUpload }: Props) => {
     return (
         <MenuItem style={{ padding: 0 }}>
             <label style={{ cursor: 'pointer', minWidth: 250 }}>
