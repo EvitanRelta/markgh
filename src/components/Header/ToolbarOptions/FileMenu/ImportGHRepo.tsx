@@ -94,7 +94,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
 
         if (!isValidLink(link)) {
             setShowError(true)
-            setErrorMessage('Invalid repo URL.')
+            setErrorMessage('Invalid Repository URL.')
             setShowLoading(false)
             return
         }
@@ -109,7 +109,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
             setShowError(true)
             if (!staticAxios.isAxiosError(e)) return setErrorMessage((e as Error).message)
             if (e.response?.status === 404)
-                return setErrorMessage("Repo doesn't exists, or you don't have access to it.")
+                return setErrorMessage("Repo doesn't exist, or you don't have access to it.")
             return setErrorMessage(e.message)
         }
         setShowLoading(false)
@@ -137,7 +137,17 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
                         setShowError(false)
                         setShowLoading(false)
                     }}
-                    helperText={showError ? errorMessage : null}
+                    onKeyPress={(ev) => {
+                        if (ev.key === 'Enter') {
+                            ev.preventDefault()
+                            getRepo()
+                        }
+                    }}
+                    helperText={
+                        showError
+                            ? errorMessage
+                            : 'Please login if you are accessing a private repo'
+                    }
                 />
             </Box>
             <Box sx={{}}>
