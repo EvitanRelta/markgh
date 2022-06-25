@@ -43,8 +43,8 @@ interface EditorText {
 export default function App(): ReactElement {
     const db = new EditorDB()
     const dispatch = useAppDispatch()
-
     const editor = useAppSelector((state) => state.editor.editor)
+    const auth = useAppSelector((state) => state.auth.auth)
 
     const saveEditorText = async () => {
         const htmlCopy = editor.view.dom.cloneNode(true) as HTMLElement
@@ -69,8 +69,6 @@ export default function App(): ReactElement {
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-    const auth = useAppSelector((state) => state.auth.auth)
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => dispatch(setUser(user)))
