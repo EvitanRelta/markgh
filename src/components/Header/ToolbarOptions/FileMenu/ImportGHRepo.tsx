@@ -25,7 +25,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     const [showError, setShowError] = useState<boolean>(false)
     const [showLoading, setShowLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
-    const corsProxyPrefix = 'https://thingproxy.freeboard.io/fetch/'
+    const corsProxyPrefix = 'https://cors-header-writer.herokuapp.com/'
 
     const isGithubRepoUrl = (url: string) =>
         /(https?:\/\/)?(www\.)?github.com(\/[\w-]+){2}/i.test(url)
