@@ -137,6 +137,12 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
                         setShowError(false)
                         setShowLoading(false)
                     }}
+                    onKeyPress={(ev) => {
+                        if (ev.key === 'Enter') {
+                            ev.preventDefault()
+                            getRepo()
+                        }
+                    }}
                     helperText={showError ? errorMessage : null}
                 />
             </Box>
