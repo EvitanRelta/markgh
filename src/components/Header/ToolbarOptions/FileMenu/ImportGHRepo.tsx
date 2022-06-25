@@ -148,7 +148,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
             </Box>
             <Box sx={{}}>
                 {showLoading && !showError ? (
-                    <Box sx={{ marginRight: 2.1, marginLeft: 0.5 }}>
+                    <Box sx={{ marginRight: 2.5, marginLeft: 3.3 }}>
                         <CircularProgress size={25} sx={{ marginTop: 0.8 }} />
                     </Box>
                 ) : (
