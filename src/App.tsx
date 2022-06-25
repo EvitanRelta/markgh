@@ -2,13 +2,7 @@ import { CssBaseline } from '@mui/material'
 import Box from '@mui/material/Box'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Dexie, { Table } from 'dexie'
-import {
-    Auth,
-    GithubAuthProvider,
-    OAuthCredential,
-    onAuthStateChanged,
-    signInWithPopup,
-} from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth'
 import { ReactElement, useEffect, useState } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import Body from './components/Body/Body'
@@ -49,8 +43,8 @@ interface EditorText {
 export default function App(): ReactElement {
     const db = new EditorDB()
     const dispatch = useAppDispatch()
-
     const editor = useAppSelector((state) => state.editor.editor)
+    const auth = useAppSelector((state) => state.auth.auth)
 
     const saveEditorText = async () => {
         const htmlCopy = editor.view.dom.cloneNode(true) as HTMLElement
@@ -76,40 +70,9 @@ export default function App(): ReactElement {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const auth = useAppSelector((state) => state.auth.auth)
-    const [ghToken, setGhToken] = useState<string | undefined>(localStorage['ghToken'])
-
     useEffect(() => {
         onAuthStateChanged(auth, (user) => dispatch(setUser(user)))
     }, [auth])
-
-    const loginAuth = (auth: Auth, provider: GithubAuthProvider) => {
-        return signInWithPopup(auth, provider)
-            .then((result) => {
-                // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-                const credential = GithubAuthProvider.credentialFromResult(
-                    result
-                ) as OAuthCredential
-                const token = credential.accessToken as string
-
-                setGhToken(token)
-                localStorage['ghToken'] = token
-
-                dispatch(setUser(result.user))
-                // ...
-                return token
-            })
-            .catch((error) => {
-                // Handle Errors here.
-                const errorCode = error.code
-                const errorMessage = error.message
-                // The email of the user's account used.
-                const email = error.customData.email
-                // The AuthCredential type that was used.
-                const credential = GithubAuthProvider.credentialFromError(error)
-                // ...
-            })
-    }
 
     //var for controlling whether to show markdown
     const [showMarkdown, setShowMarkdown] = useState(false)
