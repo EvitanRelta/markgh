@@ -24,8 +24,11 @@ const SnapshotIcon = ({ db }: Props) => {
     const editor = useAppSelector((state) => state.editor.editor)
 
     const onSnapshot = () => {
-        setSaved(true)
-        saveSnapshot()
+        if (!saved) {
+            setSaved(true)
+            saveSnapshot()
+        }
+        //Disable clicking for icon for 1.5s, to prevent double click = double save
         setTimeout(() => setSaved(false), 1500)
     }
 
