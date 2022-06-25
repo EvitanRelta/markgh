@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField'
 import staticAxios from 'axios'
 import { useEffect, useState } from 'react'
 import { markdownToHtml } from '../../../../converterFunctions'
+import { GithubRepoInfo } from '../../../../converterFunctions/markdownToHtml'
 import { useAppSelector } from '../../../../store/hooks'
 
 type Props = {
@@ -24,6 +25,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     const [showError, setShowError] = useState<boolean>(false)
     const [showLoading, setShowLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
+    const corsProxyPrefix = 'https://thingproxy.freeboard.io/fetch/'
 
     const isGithubRepoUrl = (url: string) =>
         /(https?:\/\/)?(www\.)?github.com(\/[\w-]+){2}/i.test(url)
@@ -42,17 +44,20 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
         return default_branch
     }
 
-    const generateRawURL = async (url: string) => {
-        const corsProxyPrefix = 'https://thingproxy.freeboard.io/fetch/'
-
+    const parseImportUrl = async (url: string): Promise<GithubRepoInfo> => {
         if (isRawGithubMarkdownUrl(url)) {
             const rawGithubUrlPath = /raw\.githubusercontent.com((\/[\w-]+){4,}.md)/.exec(
                 url
             )?.[1] as string
-            return `${corsProxyPrefix}https://raw.githubusercontent.com${rawGithubUrlPath}`
+            const [user, repo, branch, dirPath, fileName] =
+                /^\/([\w-]+)\/([\w-]+)\/([\w-]+)(.*\/)([\w-]+.md)$/
+                    .exec(rawGithubUrlPath)
+                    ?.slice(1) as [string, string, string, string, string]
+            return { user, repo, branch, dirPath, fileName }
         }
 
-        let filePath = '/README.md'
+        let dirPath = '/'
+        let fileName = 'README.md'
         const [user, repo] = /github.com\/([\w-]+)\/([\w-]+)/i.exec(url)?.slice(1) as [
             string,
             string
@@ -61,12 +66,16 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
 
         if (branch === undefined) branch = await getDefaultBranch(user, repo)
         else
-            filePath =
-                /github.com(\/[\w-]+){2}\/blob\/[\w-]+((\/[\w-]+)+.md)/i.exec(url)?.[2] ?? filePath
+            [dirPath, fileName] = /github.com(\/[\w-]+){2}\/blob\/[\w-]+(.*\/)([\w-]+.md)/i
+                .exec(url)
+                ?.slice(2) ?? [dirPath, fileName]
 
-        //to implement branch name input  (default as master)
-        //corsproxy needs to be changed
-        return `${corsProxyPrefix}https://raw.githubusercontent.com/${user}/${repo}/${branch}${filePath}`
+        return { user, repo, branch, dirPath, fileName }
+    }
+
+    const generateRawURL = (githubRepoInfo: GithubRepoInfo) => {
+        const { user, repo, branch, dirPath, fileName } = githubRepoInfo
+        return `${corsProxyPrefix}https://raw.githubusercontent.com/${user}/${repo}/${branch}${dirPath}${fileName}`
     }
 
     const openPopover = (e: React.MouseEvent) => {
@@ -92,9 +101,10 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
 
         try {
             type ResponseDataType = string
-            let response = await axios.get<ResponseDataType>(await generateRawURL(link))
+            const githubRepoInfo = await parseImportUrl(link)
+            let response = await axios.get<ResponseDataType>(generateRawURL(githubRepoInfo))
             setAnchor(null)
-            editor.commands.setContent(markdownToHtml(response.data), true)
+            editor.commands.setContent(markdownToHtml(response.data, githubRepoInfo), true)
         } catch (e) {
             setShowError(true)
             if (!staticAxios.isAxiosError(e)) return setErrorMessage((e as Error).message)
