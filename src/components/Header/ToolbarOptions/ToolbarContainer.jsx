@@ -1,8 +1,9 @@
 import Box from '@mui/material/Box'
-import { useAppSelector } from '../../store/hooks'
-import FileOption from './ToolbarOptions/FileMenu/FileOption'
+import { useAppSelector } from '../../../store/hooks'
+import FileOption from './FileMenu/FileOption'
+import SnapshotOption from './Snapshots/SnapshotOption'
 
-const ToolbarContainer = ({ title }) => {
+const ToolbarContainer = ({ title, db }) => {
     const mdText = useAppSelector((state) => state.mdText)
 
     const onDownload = () => {
@@ -25,6 +26,7 @@ const ToolbarContainer = ({ title }) => {
     return (
         <Box>
             <FileOption onDownload={onDownload} />
+            <SnapshotOption db={db} />
         </Box>
     )
 }

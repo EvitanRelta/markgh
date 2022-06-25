@@ -2,18 +2,20 @@ import Box from '@mui/material/Box'
 import Input from '@mui/material/Input'
 import { useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
+import { EditorDB } from '.././IndexedDB/initDB'
 import LastEdited from './LastEdited'
 import MenuButton from './MenuButton'
-import Snapshot from './Snapshot'
-import ToolbarContainer from './ToolbarContainer'
+import SnapshotIcon from './ToolbarOptions/Snapshots/SnapshotIcon'
+import ToolbarContainer from './ToolbarOptions/ToolbarContainer'
 
 type Props = {
     title: string
     setTitle: React.Dispatch<React.SetStateAction<string>>
     lastEditedOn: string
+    db: EditorDB
 }
 
-const Header = ({ title, setTitle, lastEditedOn }: Props) => {
+const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
     const theme = useAppSelector((state) => state.theme)
 
     //var for current file name
@@ -81,10 +83,10 @@ const Header = ({ title, setTitle, lastEditedOn }: Props) => {
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer title={title} />
+                <ToolbarContainer title={title} db={db} />
                 <Box>
                     <LastEdited lastEditedOn={lastEditedOn} />
-                    <Snapshot />
+                    <SnapshotIcon db={db} />
                 </Box>
             </Box>
         </Box>
