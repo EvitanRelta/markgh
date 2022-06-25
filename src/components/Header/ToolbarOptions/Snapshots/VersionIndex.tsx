@@ -51,14 +51,14 @@ const VersionIndex = ({ anchorEl, onClose }: Props) => {
             open={Boolean(anchorEl)}
             onClose={onClose}
             anchorEl={anchorEl}
-            sx={{ position: 'absolute', top: -8, left: -74 }}
+            sx={{ position: 'absolute', top: -8, left: -170 }}
         >
             <Typography
                 sx={{ pl: 2, mr: 1, ml: 1, mt: 2, borderBottom: '2px solid gray' }}
                 variant='h4'
                 component='div'
             >
-                Version Index
+                Snapshots
             </Typography>
             <List sx={{ minWidth: 400, minHeight: windowDimensions.height }} dense>
                 <MenuItem>

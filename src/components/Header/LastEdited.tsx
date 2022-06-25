@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { useState } from 'react'
-import VersionIndex from './VersionIndex'
+import VersionIndex from './ToolbarOptions/Snapshots/VersionIndex'
 
 type Props = {
     lastEditedOn: string
@@ -11,18 +11,14 @@ const LastEdited = ({ lastEditedOn }: Props) => {
 
     const openVersions = (e: React.MouseEvent) => {
         setShowVersions(e.currentTarget)
-        console.log('click')
     }
 
     const closeVersions = () => {
-        console.log('close')
         setShowVersions(null)
-        console.log(showVersions)
-        console.log(Boolean(null))
     }
 
     return (
-        <Box sx={{ display: 'inline-flex' }}>
+        <Box sx={{ display: 'inline-block' }}>
             <Box
                 onClick={openVersions}
                 sx={{
@@ -31,7 +27,7 @@ const LastEdited = ({ lastEditedOn }: Props) => {
                     textDecoration: 'underline',
                     fontSize: 14.5,
                     display: 'inline-flex',
-                    marginTop: 0.5,
+                    marginTop: 0.8,
                     paddingTop: 0.15,
                     cursor: 'pointer',
                 }}
