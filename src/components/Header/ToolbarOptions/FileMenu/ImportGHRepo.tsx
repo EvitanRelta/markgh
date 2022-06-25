@@ -136,7 +136,7 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
                         <CircularProgress size={25} sx={{ marginTop: 0.8 }} />
                     </Box>
                 ) : (
-                    <Button sx={{ marginTop: 1, marginLeft: 0.9, pt: 3, pb: 3 }} onClick={getRepo}>
+                    <Button sx={{ marginTop: 0.2, marginLeft: 0.9 }} onClick={getRepo}>
                         OK
                     </Button>
                 )}
