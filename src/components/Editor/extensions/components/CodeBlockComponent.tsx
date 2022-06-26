@@ -2,12 +2,11 @@ import { TextField as TextFieldIcon } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { Node } from '@tiptap/core'
 import { CodeBlockLowlightOptions } from '@tiptap/extension-code-block-lowlight'
-import { NodeViewProps, NodeViewWrapper } from '@tiptap/react'
+import { NodeViewContent, NodeViewProps, NodeViewWrapper } from '@tiptap/react'
 import _ from 'lodash'
 import { lowlight } from 'lowlight/lib/all'
 import { useCallback, useState } from 'react'
 import { useAppSelector } from '../../../../store/hooks'
-import { ModifiedNodeViewContent } from './ModifiedNodeViewContent'
 
 interface OptionsFixLowLightType extends CodeBlockLowlightOptions {
     lowlight: typeof lowlight
@@ -89,7 +88,7 @@ export default ({ node, updateAttributes, extension }: Props) => {
                 onChange={handleOnChange}
             />
             <pre>
-                <ModifiedNodeViewContent
+                <NodeViewContent
                     as='code'
                     className={
                         language && !isPlainTextLanguage(language)
