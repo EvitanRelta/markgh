@@ -10,17 +10,11 @@ type Props = {
     snapshotArray: Snapshot[]
     updateSnapshots: () => Promise<void>
     title: string
-    setDocumentName: React.Dispatch<React.SetStateAction<string>>
+    setTitle: React.Dispatch<React.SetStateAction<string>>
+    saveSnapshot: () => void
 }
 
-const LastEdited = ({
-    lastEditedOn,
-    db,
-    snapshotArray,
-    updateSnapshots,
-    title,
-    setDocumentName,
-}: Props) => {
+const LastEdited = ({ lastEditedOn, db, snapshotArray, setTitle, saveSnapshot }: Props) => {
     const [showVersions, setShowVersions] = useState<(EventTarget & Element) | null>(null)
 
     const openVersions = (e: React.MouseEvent) => {
@@ -53,16 +47,11 @@ const LastEdited = ({
                     anchorEl={showVersions}
                     onClose={closeVersions}
                     snapshotArray={snapshotArray}
-                    setDocumentName={setDocumentName}
+                    setTitle={setTitle}
+                    saveSnapshot={saveSnapshot}
                 />
             </Box>
-            <SnapshotIcon
-                db={db}
-                snapshotArray={snapshotArray}
-                updateSnapshots={updateSnapshots}
-                savedOn={lastEditedOn}
-                title={title}
-            />
+            <SnapshotIcon saveSnapshot={saveSnapshot} />
         </Box>
     )
 }

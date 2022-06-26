@@ -2,26 +2,13 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt'
 import CheckIcon from '@mui/icons-material/Check'
 import IconButton from '@mui/material/IconButton'
 import { useState } from 'react'
-import {
-    removeCodeBlockWrapper,
-    removeImageWrapper,
-} from '../../../.././converterFunctions/helpers/preProcessHtml'
-import { removeTipTapArtifacts } from '../../../.././converterFunctions/helpers/removeTipTapArtifacts'
-import { EditorDB } from '../../.././IndexedDB/initDB'
-import { Snapshot } from '../../../IndexedDB/initDB'
-import { useAppSelector } from './../../../../store/hooks'
 
 type Props = {
-    db: EditorDB
-    snapshotArray: Snapshot[]
-    updateSnapshots: () => Promise<void>
-    savedOn: string
-    title: string
+    saveSnapshot: () => void
 }
 
-const SnapshotIcon = ({ db, snapshotArray, updateSnapshots, savedOn, title }: Props) => {
+const SnapshotIcon = ({ saveSnapshot }: Props) => {
     const [saved, setSaved] = useState<boolean>(false)
-    const editor = useAppSelector((state) => state.editor.editor)
 
     const onSnapshot = () => {
         //Disable clicking for icon for 1.5s, to prevent double click = double save
@@ -30,20 +17,6 @@ const SnapshotIcon = ({ db, snapshotArray, updateSnapshots, savedOn, title }: Pr
             saveSnapshot()
             setTimeout(() => setSaved(false), 1500)
         }
-    }
-
-    const saveSnapshot = () => {
-        const htmlCopy = editor.view.dom.cloneNode(true) as HTMLElement
-        removeCodeBlockWrapper(htmlCopy)
-        removeImageWrapper(htmlCopy)
-        removeTipTapArtifacts(htmlCopy)
-        let snapshot = {
-            id: !snapshotArray.length ? 0 : snapshotArray[snapshotArray.length - 1].id! + 1,
-            title: title || 'Untitled Document',
-            savedOn: savedOn,
-            value: htmlCopy.innerHTML,
-        }
-        db.snapshots.add(snapshot).then(() => updateSnapshots())
     }
 
     return (
