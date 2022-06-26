@@ -9,12 +9,14 @@ import {
     Typography,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { EditorDB } from '../../.././IndexedDB/initDB'
 
 type Props = {
     anchorEl: (EventTarget & Element) | null
     onClose: () => void
+    db: EditorDB
 }
-const VersionIndex = ({ anchorEl, onClose }: Props) => {
+const VersionIndex = ({ anchorEl, onClose, db }: Props) => {
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
 
     var body = document.body,
