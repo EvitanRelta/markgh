@@ -165,7 +165,12 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     )
 
     return (
-        <MenuItem divider sx={{ paddingBottom: 1.3 }} onClick={openPopover}>
+        <MenuItem
+            divider
+            sx={{ paddingBottom: 1.3 }}
+            onClick={openPopover}
+            onKeyDown={(e) => e.stopPropagation()}
+        >
             <GitHubIcon sx={{ marginLeft: 0.5 }} />
             <ListItemText sx={{ marginLeft: 1.7 }}>Import from GitHub...</ListItemText>
             <ArrowForwardIosIcon
