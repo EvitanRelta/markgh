@@ -28,9 +28,17 @@ type Props = {
     snapshotArray: Snapshot[]
     setTitle: React.Dispatch<React.SetStateAction<string>>
     saveSnapshot: () => void
+    closeVersions: () => void
 }
 
-const VersionIndex = ({ anchorEl, onClose, snapshotArray, setTitle, saveSnapshot }: Props) => {
+const VersionIndex = ({
+    anchorEl,
+    onClose,
+    snapshotArray,
+    setTitle,
+    saveSnapshot,
+    closeVersions,
+}: Props) => {
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
     const [showDialog, setShowDialog] = useState(false)
     const [workingSnapshot, setWorkingSnapshot] = useState<Snapshot>()
@@ -57,7 +65,6 @@ const VersionIndex = ({ anchorEl, onClose, snapshotArray, setTitle, saveSnapshot
     }
 
     const loadEditorContent = (snapshot: Snapshot) => {
-        console.log(snapshot.title)
         setTitle(snapshot.title)
         editor.commands.clearContent(false)
         editor.commands.setContent(snapshot.value, true)
@@ -71,12 +78,14 @@ const VersionIndex = ({ anchorEl, onClose, snapshotArray, setTitle, saveSnapshot
         loadEditorContent(workingSnapshot as Snapshot)
         setWorkingSnapshot(undefined)
         closeDialog()
+        closeVersions()
     }
     const dialogSnapshot = () => {
         saveSnapshot()
         loadEditorContent(workingSnapshot!)
         setWorkingSnapshot(undefined)
         closeDialog()
+        closeVersions()
     }
 
     const loadSnapshot = (snapshot: Snapshot) => {
@@ -86,7 +95,6 @@ const VersionIndex = ({ anchorEl, onClose, snapshotArray, setTitle, saveSnapshot
         removeTipTapArtifacts(htmlCopy)
 
         if (snapshot.value !== htmlCopy.innerHTML) {
-            console.log('true')
             setWorkingSnapshot(snapshot)
             setShowDialog(true)
             return
