@@ -72,6 +72,7 @@ const VersionIndex = ({
         setTitle(snapshot.title)
         editor.commands.clearContent(false)
         editor.commands.setContent(snapshot.value, true)
+        closeVersions()
     }
 
     const closeDialog = () => {
