@@ -9,15 +9,19 @@ import {
     Typography,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { EditorDB } from '../../.././IndexedDB/initDB'
+import { useAppSelector } from '../../../../store/hooks'
+import { Snapshot } from '../../../IndexedDB/initDB'
 
 type Props = {
     anchorEl: (EventTarget & Element) | null
     onClose: () => void
-    db: EditorDB
+    snapshotArray: Snapshot[]
+    setDocumentName: React.Dispatch<React.SetStateAction<string>>
 }
-const VersionIndex = ({ anchorEl, onClose, db }: Props) => {
+
+const VersionIndex = ({ anchorEl, onClose, snapshotArray, setDocumentName }: Props) => {
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
+    const editor = useAppSelector((state) => state.editor.editor)
 
     var body = document.body,
         html = document.documentElement
@@ -39,6 +43,12 @@ const VersionIndex = ({ anchorEl, onClose, db }: Props) => {
         }
     }
 
+    const loadSnapshot = (snapshot: Snapshot) => {
+        setDocumentName(snapshot.title)
+        editor.commands.clearContent(false)
+        editor.commands.setContent(snapshot.value, true)
+    }
+
     useEffect(() => {
         function handleResize() {
             setWindowDimensions(getWindowDimensions())
@@ -47,6 +57,22 @@ const VersionIndex = ({ anchorEl, onClose, db }: Props) => {
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
     }, [])
+
+    const snapshotArrayMapper = (snapshot: Snapshot, index: number) => {
+        return (
+            <MenuItem key={snapshot.id} onClick={() => loadSnapshot(snapshot)}>
+                <ListItemAvatar>
+                    <Avatar>
+                        <ArticleIcon />
+                    </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                    primary={snapshot.title}
+                    secondary={'Snapshot on ' + snapshot.savedOn}
+                />
+            </MenuItem>
+        )
+    }
 
     return (
         <Menu
@@ -63,14 +89,7 @@ const VersionIndex = ({ anchorEl, onClose, db }: Props) => {
                 Snapshots
             </Typography>
             <List sx={{ minWidth: 400, minHeight: windowDimensions.height }} dense>
-                <MenuItem>
-                    <ListItemAvatar>
-                        <Avatar>
-                            <ArticleIcon />
-                        </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary='File name' secondary='Snapshot on ...' />
-                </MenuItem>
+                {snapshotArray.map(snapshotArrayMapper)}
             </List>
         </Menu>
     )
