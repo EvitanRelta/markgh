@@ -1,9 +1,15 @@
 import Box from '@mui/material/Box'
 import { useAppSelector } from '../../../store/hooks'
+import { EditorDB } from '../../IndexedDB/initDB'
 import FileOption from './FileMenu/FileOption'
 import SnapshotOption from './Snapshots/SnapshotOption'
+type Props = {
+    title: string
+    db: EditorDB
+    openVersions: (e: React.MouseEvent) => void
+}
 
-const ToolbarContainer = ({ title, db }) => {
+const ToolbarContainer = ({ title, db, openVersions }: Props) => {
     const mdText = useAppSelector((state) => state.mdText)
 
     const onDownload = () => {
@@ -12,7 +18,7 @@ const ToolbarContainer = ({ title, db }) => {
         downloadText(mdText, fileName)
     }
 
-    const downloadText = (text, fileName) => {
+    const downloadText = (text: string, fileName: string) => {
         const element = document.createElement('a')
         const file = new Blob([text], { type: 'text/plain;charset=utf-8' })
         element.href = URL.createObjectURL(file)
@@ -26,7 +32,7 @@ const ToolbarContainer = ({ title, db }) => {
     return (
         <Box>
             <FileOption onDownload={onDownload} />
-            <SnapshotOption db={db} />
+            <SnapshotOption openVersions={openVersions} />
         </Box>
     )
 }

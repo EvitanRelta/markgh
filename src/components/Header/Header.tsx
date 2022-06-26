@@ -10,6 +10,7 @@ import { useAppSelector } from '../../store/hooks'
 import { EditorDB, Snapshot } from '.././IndexedDB/initDB'
 import MenuButton from './MenuButton'
 import LastEdited from './ToolbarOptions/Snapshots/LastEdited'
+import VersionIndex from './ToolbarOptions/Snapshots/VersionIndex'
 import ToolbarContainer from './ToolbarOptions/ToolbarContainer'
 
 type Props = {
@@ -23,6 +24,7 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
     const theme = useAppSelector((state) => state.theme)
     const editor = useAppSelector((state) => state.editor.editor)
     const [snapshotArray, setSnapshotArray] = useState<Array<Snapshot>>([])
+    const [showVersions, setShowVersions] = useState<(EventTarget & Element) | null>(null)
 
     //vars for theme control
     const themeColor = theme === 'dark' ? '#181414' : 'white'
@@ -50,6 +52,14 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
     useEffect(() => {
         updateSnapshotsFromDb()
     }, [])
+
+    const openVersions = (e: React.MouseEvent) => {
+        setShowVersions(e.currentTarget)
+    }
+
+    const closeVersions = () => {
+        setShowVersions(null)
+    }
 
     return (
         <Box
@@ -108,19 +118,23 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer title={title} db={db} />
+                <ToolbarContainer title={title} db={db} openVersions={openVersions} />
                 <Box>
                     <LastEdited
                         lastEditedOn={lastEditedOn}
-                        db={db}
-                        snapshotArray={snapshotArray}
-                        updateSnapshots={updateSnapshotsFromDb}
-                        title={title}
-                        setTitle={setTitle}
                         saveSnapshot={saveSnapshot}
+                        openVersions={openVersions}
                     />
                 </Box>
             </Box>
+            <VersionIndex
+                anchorEl={showVersions}
+                onClose={closeVersions}
+                snapshotArray={snapshotArray}
+                setTitle={setTitle}
+                saveSnapshot={saveSnapshot}
+                closeVersions={closeVersions}
+            />
         </Box>
     )
 }
