@@ -49,6 +49,7 @@ const LastEdited = ({ lastEditedOn, db, snapshotArray, setTitle, saveSnapshot }:
                     snapshotArray={snapshotArray}
                     setTitle={setTitle}
                     saveSnapshot={saveSnapshot}
+                    closeVersions={closeVersions}
                 />
             </Box>
             <SnapshotIcon saveSnapshot={saveSnapshot} />
