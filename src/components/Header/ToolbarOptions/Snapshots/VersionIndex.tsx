@@ -105,13 +105,22 @@ const VersionIndex = ({
 
     const discardChangesPrompt = (
         <Dialog open={showDialog} onClose={closeDialog}>
-            <DialogTitle>Discard Current Changes?</DialogTitle>
-            <DialogActions>
-                <Button onClick={dialogSnapshot} autoFocus>
-                    No, take a snapshot
-                </Button>
-                <Button onClick={dialogDiscard}>Discard</Button>
-            </DialogActions>
+            <Box sx={{ mr: 2, ml: 2 }}>
+                <DialogTitle sx={{ textAlign: 'center' }}>Discard Current Changes?</DialogTitle>
+                <DialogActions>
+                    <Box sx={{ alignContent: 'right', alignItems: 'right', textAlign: 'right' }}>
+                        <Button onClick={dialogSnapshot} autoFocus>
+                            No, take a snapshot
+                        </Button>
+                        <Button onClick={dialogDiscard}>Discard</Button>
+                        <br />
+                        <Button onClick={closeDialog} sx={{ mr: 0.5 }}>
+                            {' '}
+                            Cancel{' '}
+                        </Button>
+                    </Box>
+                </DialogActions>
+            </Box>
         </Dialog>
     )
 
@@ -146,7 +155,7 @@ const VersionIndex = ({
             <Menu
                 open={Boolean(anchorEl)}
                 onClose={onClose}
-                anchorEl={anchorEl}
+                anchorEl={document.getElementById('last-edited')}
                 sx={{ position: 'absolute', top: -8, left: -170 }}
             >
                 <Typography

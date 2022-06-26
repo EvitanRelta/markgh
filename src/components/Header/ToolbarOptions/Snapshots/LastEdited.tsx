@@ -1,33 +1,16 @@
 import { Box } from '@mui/material'
-import { useState } from 'react'
-import { EditorDB, Snapshot } from '../../../IndexedDB/initDB'
 import SnapshotIcon from './SnapshotIcon'
-import VersionIndex from './VersionIndex'
 
 type Props = {
     lastEditedOn: string
-    db: EditorDB
-    snapshotArray: Snapshot[]
-    updateSnapshots: () => Promise<void>
-    title: string
-    setTitle: React.Dispatch<React.SetStateAction<string>>
     saveSnapshot: () => void
+    openVersions: (e: React.MouseEvent) => void
 }
 
-const LastEdited = ({ lastEditedOn, db, snapshotArray, setTitle, saveSnapshot }: Props) => {
-    const [showVersions, setShowVersions] = useState<(EventTarget & Element) | null>(null)
-
-    const openVersions = (e: React.MouseEvent) => {
-        setShowVersions(e.currentTarget)
-    }
-
-    const closeVersions = () => {
-        setShowVersions(null)
-    }
-
+const LastEdited = ({ lastEditedOn, saveSnapshot, openVersions }: Props) => {
     return (
         <Box>
-            <Box sx={{ display: 'inline-block' }}>
+            <Box id='last-edited' sx={{ display: 'inline-block' }}>
                 <Box
                     onClick={openVersions}
                     sx={{
@@ -43,14 +26,6 @@ const LastEdited = ({ lastEditedOn, db, snapshotArray, setTitle, saveSnapshot }:
                 >
                     Last Edited on {lastEditedOn}
                 </Box>
-                <VersionIndex
-                    anchorEl={showVersions}
-                    onClose={closeVersions}
-                    snapshotArray={snapshotArray}
-                    setTitle={setTitle}
-                    saveSnapshot={saveSnapshot}
-                    closeVersions={closeVersions}
-                />
             </Box>
             <SnapshotIcon saveSnapshot={saveSnapshot} />
         </Box>
