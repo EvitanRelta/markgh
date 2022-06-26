@@ -61,6 +61,11 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
         setShowVersions(null)
     }
 
+    const deleteSnapshot = async (snapshot: Snapshot) => {
+        db.snapshots.delete(snapshot.id!)
+        updateSnapshotsFromDb()
+    }
+
     return (
         <Box
             style={{
@@ -134,6 +139,7 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
                 setTitle={setTitle}
                 saveSnapshot={saveSnapshot}
                 closeVersions={closeVersions}
+                deleteSnapshot={deleteSnapshot}
             />
         </Box>
     )
