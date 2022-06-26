@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/markgh/static/css/main.b9b5dc61.css",
-    "main.js": "/markgh/static/js/main.bd2efa6c.js",
+    "main.js": "/markgh/static/js/main.b1f2915c.js",
     "index.html": "/markgh/index.html",
     "main.b9b5dc61.css.map": "/markgh/static/css/main.b9b5dc61.css.map",
-    "main.bd2efa6c.js.map": "/markgh/static/js/main.bd2efa6c.js.map"
+    "main.b1f2915c.js.map": "/markgh/static/js/main.b1f2915c.js.map"
   },
   "entrypoints": [
     "static/css/main.b9b5dc61.css",
-    "static/js/main.bd2efa6c.js"
+    "static/js/main.b1f2915c.js"
   ]
 }
