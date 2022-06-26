@@ -8,33 +8,25 @@ import {
 } from '../../../.././converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../../../.././converterFunctions/helpers/removeTipTapArtifacts'
 import { EditorDB } from '../../.././IndexedDB/initDB'
+import { Snapshot } from '../../Header'
 import { useAppSelector } from './../../../../store/hooks'
-
-interface Snapshot {
-    id?: number
-    value: string
-}
 
 type Props = {
     db: EditorDB
+    snapshotArray: Snapshot[]
+    updateSnapshots: () => Promise<void>
 }
-const SnapshotIcon = ({ db }: Props) => {
+const SnapshotIcon = ({ db, snapshotArray, updateSnapshots }: Props) => {
     const [saved, setSaved] = useState<boolean>(false)
-    const [snapshotArray, setSnapshotArray] = useState<Array<Snapshot>>([])
     const editor = useAppSelector((state) => state.editor.editor)
 
     const onSnapshot = () => {
+        //Disable clicking for icon for 1.5s, to prevent double click = double save
         if (!saved) {
             setSaved(true)
             saveSnapshot()
+            setTimeout(() => setSaved(false), 1500)
         }
-        //Disable clicking for icon for 1.5s, to prevent double click = double save
-        setTimeout(() => setSaved(false), 1500)
-    }
-
-    const updateSnapshotsFromDb = async () => {
-        let allSnapshots = await db.snapshots.toArray()
-        setSnapshotArray(allSnapshots)
     }
 
     const saveSnapshot = () => {
@@ -46,7 +38,7 @@ const SnapshotIcon = ({ db }: Props) => {
             id: !snapshotArray.length ? 0 : snapshotArray[snapshotArray.length - 1].id! + 1,
             value: htmlCopy.innerHTML,
         }
-        db.snapshots.add(snapshot).then(() => updateSnapshotsFromDb())
+        db.snapshots.add(snapshot).then(() => updateSnapshots())
     }
 
     return (

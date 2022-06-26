@@ -7,7 +7,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import Body from './components/Body/Body'
 import Footer from './components/Footer/Footer'
 import Version from './components/Footer/Version'
-import Header from './components/Header/Header'
+import { Header } from './components/Header/Header'
 import { EditorDB } from './components/IndexedDB/initDB'
 import {
     removeCodeBlockWrapper,

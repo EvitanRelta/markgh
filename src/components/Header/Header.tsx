@@ -3,10 +3,14 @@ import Input from '@mui/material/Input'
 import { useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
 import { EditorDB } from '.././IndexedDB/initDB'
-import LastEdited from './LastEdited'
 import MenuButton from './MenuButton'
-import SnapshotIcon from './ToolbarOptions/Snapshots/SnapshotIcon'
+import LastEdited from './ToolbarOptions/Snapshots/LastEdited'
 import ToolbarContainer from './ToolbarOptions/ToolbarContainer'
+
+export interface Snapshot {
+    id?: number
+    value: string
+}
 
 type Props = {
     title: string
@@ -15,8 +19,9 @@ type Props = {
     db: EditorDB
 }
 
-const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
+export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
     const theme = useAppSelector((state) => state.theme)
+    const [snapshotArray, setSnapshotArray] = useState<Array<Snapshot>>([])
 
     //var for current file name
     const [text, setText] = useState(title)
@@ -24,6 +29,11 @@ const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
     //vars for theme control
     const themeColor = theme === 'dark' ? '#181414' : 'white'
     const textColor = theme === 'dark' ? 'white' : '#181414'
+
+    const updateSnapshotsFromDb = async () => {
+        let allSnapshots = await db.snapshots.toArray()
+        setSnapshotArray(allSnapshots)
+    }
 
     return (
         <Box
@@ -85,12 +95,14 @@ const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
             >
                 <ToolbarContainer title={title} db={db} />
                 <Box>
-                    <LastEdited lastEditedOn={lastEditedOn} />
-                    <SnapshotIcon db={db} />
+                    <LastEdited
+                        lastEditedOn={lastEditedOn}
+                        db={db}
+                        snapshotArray={snapshotArray}
+                        updateSnapshots={updateSnapshotsFromDb}
+                    />
                 </Box>
             </Box>
         </Box>
     )
 }
-
-export default Header
