@@ -1,6 +1,7 @@
 import ArticleIcon from '@mui/icons-material/Article'
 import {
     Avatar,
+    Box,
     List,
     ListItemAvatar,
     ListItemText,
@@ -8,7 +9,16 @@ import {
     MenuItem,
     Typography,
 } from '@mui/material'
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogTitle from '@mui/material/DialogTitle'
 import { useEffect, useState } from 'react'
+import {
+    removeCodeBlockWrapper,
+    removeImageWrapper,
+} from '../../../../converterFunctions/helpers/preProcessHtml'
+import { removeTipTapArtifacts } from '../../../../converterFunctions/helpers/removeTipTapArtifacts'
 import { useAppSelector } from '../../../../store/hooks'
 import { Snapshot } from '../../../IndexedDB/initDB'
 
@@ -16,11 +26,14 @@ type Props = {
     anchorEl: (EventTarget & Element) | null
     onClose: () => void
     snapshotArray: Snapshot[]
-    setDocumentName: React.Dispatch<React.SetStateAction<string>>
+    setTitle: React.Dispatch<React.SetStateAction<string>>
+    saveSnapshot: () => void
 }
 
-const VersionIndex = ({ anchorEl, onClose, snapshotArray, setDocumentName }: Props) => {
+const VersionIndex = ({ anchorEl, onClose, snapshotArray, setTitle, saveSnapshot }: Props) => {
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
+    const [showDialog, setShowDialog] = useState(false)
+    const [workingSnapshot, setWorkingSnapshot] = useState<Snapshot>()
     const editor = useAppSelector((state) => state.editor.editor)
 
     var body = document.body,
@@ -43,11 +56,56 @@ const VersionIndex = ({ anchorEl, onClose, snapshotArray, setDocumentName }: Pro
         }
     }
 
-    const loadSnapshot = (snapshot: Snapshot) => {
-        setDocumentName(snapshot.title)
+    const loadEditorContent = (snapshot: Snapshot) => {
+        console.log(snapshot.title)
+        setTitle(snapshot.title)
         editor.commands.clearContent(false)
         editor.commands.setContent(snapshot.value, true)
     }
+
+    const closeDialog = () => {
+        setShowDialog(false)
+    }
+
+    const dialogDiscard = () => {
+        loadEditorContent(workingSnapshot as Snapshot)
+        setWorkingSnapshot(undefined)
+        closeDialog()
+    }
+    const dialogSnapshot = () => {
+        saveSnapshot()
+        loadEditorContent(workingSnapshot!)
+        setWorkingSnapshot(undefined)
+        closeDialog()
+    }
+
+    const loadSnapshot = (snapshot: Snapshot) => {
+        const htmlCopy = editor.view.dom.cloneNode(true) as HTMLElement
+        removeCodeBlockWrapper(htmlCopy)
+        removeImageWrapper(htmlCopy)
+        removeTipTapArtifacts(htmlCopy)
+
+        if (snapshot.value !== htmlCopy.innerHTML) {
+            console.log('true')
+            setWorkingSnapshot(snapshot)
+            setShowDialog(true)
+            return
+        }
+
+        loadEditorContent(snapshot)
+    }
+
+    const discardChangesPrompt = (
+        <Dialog open={showDialog} onClose={closeDialog}>
+            <DialogTitle>Discard Current Changes?</DialogTitle>
+            <DialogActions>
+                <Button onClick={dialogSnapshot} autoFocus>
+                    No, take a snapshot
+                </Button>
+                <Button onClick={dialogDiscard}>Discard</Button>
+            </DialogActions>
+        </Dialog>
+    )
 
     useEffect(() => {
         function handleResize() {
@@ -58,7 +116,7 @@ const VersionIndex = ({ anchorEl, onClose, snapshotArray, setDocumentName }: Pro
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
-    const snapshotArrayMapper = (snapshot: Snapshot, index: number) => {
+    const snapshotArrayMapper = (snapshot: Snapshot) => {
         return (
             <MenuItem key={snapshot.id} onClick={() => loadSnapshot(snapshot)}>
                 <ListItemAvatar>
@@ -75,23 +133,26 @@ const VersionIndex = ({ anchorEl, onClose, snapshotArray, setDocumentName }: Pro
     }
 
     return (
-        <Menu
-            open={Boolean(anchorEl)}
-            onClose={onClose}
-            anchorEl={anchorEl}
-            sx={{ position: 'absolute', top: -8, left: -170 }}
-        >
-            <Typography
-                sx={{ pl: 2, mr: 1, ml: 1, mt: 2, borderBottom: '2px solid gray' }}
-                variant='h4'
-                component='div'
+        <Box>
+            {showDialog && discardChangesPrompt}
+            <Menu
+                open={Boolean(anchorEl)}
+                onClose={onClose}
+                anchorEl={anchorEl}
+                sx={{ position: 'absolute', top: -8, left: -170 }}
             >
-                Snapshots
-            </Typography>
-            <List sx={{ minWidth: 400, minHeight: windowDimensions.height }} dense>
-                {snapshotArray.map(snapshotArrayMapper)}
-            </List>
-        </Menu>
+                <Typography
+                    sx={{ pl: 2, mr: 1, ml: 1, mt: 2, borderBottom: '2px solid gray' }}
+                    variant='h4'
+                    component='div'
+                >
+                    Snapshots
+                </Typography>
+                <List sx={{ minWidth: 400, minHeight: windowDimensions.height }} dense>
+                    {snapshotArray.map(snapshotArrayMapper)}
+                </List>
+            </Menu>
+        </Box>
     )
 }
 

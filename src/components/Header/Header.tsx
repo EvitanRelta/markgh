@@ -1,6 +1,11 @@
 import Box from '@mui/material/Box'
 import Input from '@mui/material/Input'
 import { useEffect, useState } from 'react'
+import {
+    removeCodeBlockWrapper,
+    removeImageWrapper,
+} from '../.././converterFunctions/helpers/preProcessHtml'
+import { removeTipTapArtifacts } from '../.././converterFunctions/helpers/removeTipTapArtifacts'
 import { useAppSelector } from '../../store/hooks'
 import { EditorDB, Snapshot } from '.././IndexedDB/initDB'
 import MenuButton from './MenuButton'
@@ -16,10 +21,8 @@ type Props = {
 
 export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
     const theme = useAppSelector((state) => state.theme)
+    const editor = useAppSelector((state) => state.editor.editor)
     const [snapshotArray, setSnapshotArray] = useState<Array<Snapshot>>([])
-
-    //var for current file name
-    const [documentName, setDocumentName] = useState(title)
 
     //vars for theme control
     const themeColor = theme === 'dark' ? '#181414' : 'white'
@@ -28,6 +31,20 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
     const updateSnapshotsFromDb = async () => {
         let allSnapshots = await db.snapshots.toArray()
         setSnapshotArray(allSnapshots)
+    }
+
+    const saveSnapshot = () => {
+        const htmlCopy = editor.view.dom.cloneNode(true) as HTMLElement
+        removeCodeBlockWrapper(htmlCopy)
+        removeImageWrapper(htmlCopy)
+        removeTipTapArtifacts(htmlCopy)
+        let snapshot = {
+            id: !snapshotArray.length ? 0 : snapshotArray[snapshotArray.length - 1].id! + 1,
+            title: title || 'Untitled Document',
+            savedOn: lastEditedOn,
+            value: htmlCopy.innerHTML,
+        }
+        db.snapshots.add(snapshot).then(() => updateSnapshotsFromDb())
     }
 
     useEffect(() => {
@@ -66,9 +83,8 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
                     }}
                     type='text'
                     placeholder='Untitled Document'
-                    value={documentName}
+                    value={title}
                     onChange={(e) => {
-                        setDocumentName(e.target.value)
                         setTitle(e.target.value)
                     }}
                     style={{
@@ -100,7 +116,8 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
                         snapshotArray={snapshotArray}
                         updateSnapshots={updateSnapshotsFromDb}
                         title={title}
-                        setDocumentName={setDocumentName}
+                        setTitle={setTitle}
+                        saveSnapshot={saveSnapshot}
                     />
                 </Box>
             </Box>
