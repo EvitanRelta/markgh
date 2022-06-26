@@ -1,7 +1,9 @@
 import ArticleIcon from '@mui/icons-material/Article'
+import DeleteIcon from '@mui/icons-material/Delete'
 import {
     Avatar,
     Box,
+    IconButton,
     List,
     ListItemAvatar,
     ListItemText,
@@ -29,6 +31,7 @@ type Props = {
     setTitle: React.Dispatch<React.SetStateAction<string>>
     saveSnapshot: () => void
     closeVersions: () => void
+    deleteSnapshot: (snapshot: Snapshot) => Promise<void>
 }
 
 const VersionIndex = ({
@@ -38,6 +41,7 @@ const VersionIndex = ({
     setTitle,
     saveSnapshot,
     closeVersions,
+    deleteSnapshot,
 }: Props) => {
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
     const [showDialog, setShowDialog] = useState(false)
@@ -135,16 +139,28 @@ const VersionIndex = ({
 
     const snapshotArrayMapper = (snapshot: Snapshot) => {
         return (
-            <MenuItem key={snapshot.id} onClick={() => loadSnapshot(snapshot)}>
-                <ListItemAvatar>
-                    <Avatar>
-                        <ArticleIcon />
-                    </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                    primary={snapshot.title}
-                    secondary={'Snapshot on ' + snapshot.savedOn}
-                />
+            <MenuItem key={snapshot.id}>
+                <Box
+                    sx={{ display: 'flex', justifyContent: 'space-between', paddingRight: 12 }}
+                    onClick={() => loadSnapshot(snapshot)}
+                >
+                    <ListItemAvatar>
+                        <Avatar>
+                            <ArticleIcon />
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                        primary={snapshot.title}
+                        secondary={'Snapshot on ' + snapshot.savedOn}
+                    />
+                </Box>
+                <IconButton
+                    sx={{ display: 'inline' }}
+                    onClick={() => deleteSnapshot(snapshot)}
+                    key={snapshot.id}
+                >
+                    <DeleteIcon />
+                </IconButton>
             </MenuItem>
         )
     }
