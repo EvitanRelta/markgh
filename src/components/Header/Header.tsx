@@ -1,16 +1,11 @@
 import Box from '@mui/material/Box'
 import Input from '@mui/material/Input'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
-import { EditorDB } from '.././IndexedDB/initDB'
+import { EditorDB, Snapshot } from '.././IndexedDB/initDB'
 import MenuButton from './MenuButton'
 import LastEdited from './ToolbarOptions/Snapshots/LastEdited'
 import ToolbarContainer from './ToolbarOptions/ToolbarContainer'
-
-export interface Snapshot {
-    id?: number
-    value: string
-}
 
 type Props = {
     title: string
@@ -24,7 +19,7 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
     const [snapshotArray, setSnapshotArray] = useState<Array<Snapshot>>([])
 
     //var for current file name
-    const [text, setText] = useState(title)
+    const [documentName, setDocumentName] = useState(title)
 
     //vars for theme control
     const themeColor = theme === 'dark' ? '#181414' : 'white'
@@ -34,6 +29,10 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
         let allSnapshots = await db.snapshots.toArray()
         setSnapshotArray(allSnapshots)
     }
+
+    useEffect(() => {
+        updateSnapshotsFromDb()
+    }, [])
 
     return (
         <Box
@@ -67,9 +66,9 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
                     }}
                     type='text'
                     placeholder='Untitled Document'
-                    value={text}
+                    value={documentName}
                     onChange={(e) => {
-                        setText(e.target.value)
+                        setDocumentName(e.target.value)
                         setTitle(e.target.value)
                     }}
                     style={{
@@ -100,6 +99,8 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
                         db={db}
                         snapshotArray={snapshotArray}
                         updateSnapshots={updateSnapshotsFromDb}
+                        title={title}
+                        setDocumentName={setDocumentName}
                     />
                 </Box>
             </Box>

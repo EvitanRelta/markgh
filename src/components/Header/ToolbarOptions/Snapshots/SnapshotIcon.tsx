@@ -8,15 +8,18 @@ import {
 } from '../../../.././converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../../../.././converterFunctions/helpers/removeTipTapArtifacts'
 import { EditorDB } from '../../.././IndexedDB/initDB'
-import { Snapshot } from '../../Header'
+import { Snapshot } from '../../../IndexedDB/initDB'
 import { useAppSelector } from './../../../../store/hooks'
 
 type Props = {
     db: EditorDB
     snapshotArray: Snapshot[]
     updateSnapshots: () => Promise<void>
+    savedOn: string
+    title: string
 }
-const SnapshotIcon = ({ db, snapshotArray, updateSnapshots }: Props) => {
+
+const SnapshotIcon = ({ db, snapshotArray, updateSnapshots, savedOn, title }: Props) => {
     const [saved, setSaved] = useState<boolean>(false)
     const editor = useAppSelector((state) => state.editor.editor)
 
@@ -36,6 +39,8 @@ const SnapshotIcon = ({ db, snapshotArray, updateSnapshots }: Props) => {
         removeTipTapArtifacts(htmlCopy)
         let snapshot = {
             id: !snapshotArray.length ? 0 : snapshotArray[snapshotArray.length - 1].id! + 1,
+            title: title || 'Untitled Document',
+            savedOn: savedOn,
             value: htmlCopy.innerHTML,
         }
         db.snapshots.add(snapshot).then(() => updateSnapshots())

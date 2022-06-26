@@ -25,5 +25,7 @@ export interface EditorText {
 
 export interface Snapshot {
     id?: number
+    savedOn: string
+    title: string
     value: string
 }
