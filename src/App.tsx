@@ -1,14 +1,14 @@
 import { CssBaseline } from '@mui/material'
 import Box from '@mui/material/Box'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import Dexie, { Table } from 'dexie'
 import { onAuthStateChanged } from 'firebase/auth'
 import { ReactElement, useEffect, useState } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import Body from './components/Body/Body'
 import Footer from './components/Footer/Footer'
 import Version from './components/Footer/Version'
-import Header from './components/Header/Header'
+import { Header } from './components/Header/Header'
+import { EditorDB } from './components/IndexedDB/initDB'
 import {
     removeCodeBlockWrapper,
     removeImageWrapper,
@@ -18,27 +18,6 @@ import toMarkdown from './converterFunctions/toMarkdown'
 import { setUser } from './store/authSlice'
 import { useAppDispatch, useAppSelector } from './store/hooks'
 import { setMdText } from './store/mdTextSlice'
-
-class EditorDB extends Dexie {
-    images!: Table<EditorImage>
-    text!: Table<EditorText, number>
-    constructor() {
-        super('EditorDB')
-        this.version(1).stores({
-            images: 'id',
-            text: 'id',
-        })
-    }
-}
-
-interface EditorImage {
-    id?: number
-    value: string
-}
-interface EditorText {
-    id?: number
-    value: string
-}
 
 export default function App(): ReactElement {
     const db = new EditorDB()
@@ -150,7 +129,7 @@ export default function App(): ReactElement {
                     />
                 </Helmet>
                 <Box id='app'>
-                    <Header title={title} setTitle={setTitle} lastEditedOn={lastEditedOn} />
+                    <Header title={title} setTitle={setTitle} lastEditedOn={lastEditedOn} db={db} />
                     <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
                     <Box>
                         <Footer

@@ -19,7 +19,6 @@ const MenuButton = ({ title }: Props) => {
     const auth = useAppSelector((state) => state.auth)
 
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
-    //const [selected, setSelected] = useState(-1)
 
     const openMenu = (e: React.MouseEvent) => {
         setAnchor(e.currentTarget)
