@@ -71,7 +71,7 @@ const VersionIndex = ({
     const loadEditorContent = (snapshot: Snapshot) => {
         setTitle(snapshot.title)
         editor.commands.clearContent(false)
-        editor.commands.setContent(snapshot.value, true)
+        editor.commands.setContent(snapshot.value, true, { preserveWhitespace: 'full' })
         closeVersions()
     }
 
