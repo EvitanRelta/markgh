@@ -27,7 +27,9 @@ const OpenFile = () => {
 
         reader.readAsText(file)
         reader.onload = () => {
-            editor.commands.setContent(markdownToHtml(reader.result as string), true)
+            editor.commands.setContent(markdownToHtml(reader.result as string), true, {
+                preserveWhitespace: 'full',
+            })
         }
     }
 

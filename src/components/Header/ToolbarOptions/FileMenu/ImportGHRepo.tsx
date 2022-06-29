@@ -104,7 +104,9 @@ const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
             const githubRepoInfo = await parseImportUrl(link)
             let response = await axios.get<ResponseDataType>(generateRawURL(githubRepoInfo))
             setAnchor(null)
-            editor.commands.setContent(markdownToHtml(response.data, githubRepoInfo), true)
+            editor.commands.setContent(markdownToHtml(response.data, githubRepoInfo), true, {
+                preserveWhitespace: 'full',
+            })
         } catch (e) {
             setShowError(true)
             if (!staticAxios.isAxiosError(e)) return setErrorMessage((e as Error).message)

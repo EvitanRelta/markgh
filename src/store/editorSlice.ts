@@ -9,6 +9,7 @@ const editorSlice = createSlice({
         editor: new Editor({
             extensions,
             content: placeholderEditorHtml,
+            parseOptions: { preserveWhitespace: 'full' },
         }),
     },
     reducers: {},
