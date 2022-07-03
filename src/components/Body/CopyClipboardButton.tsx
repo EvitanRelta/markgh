@@ -1,7 +1,11 @@
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import { IconButton } from '@mui/material'
 
-const CopyClipboardButton = ({ onClick }) => {
+interface Props {
+    onClick: React.MouseEventHandler<HTMLButtonElement>
+}
+
+const CopyClipboardButton = ({ onClick }: Props) => {
     return (
         <div
             style={{
