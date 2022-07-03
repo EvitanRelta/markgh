@@ -13,7 +13,7 @@ const Footer = ({ onClick, showMarkdown, db }: Props) => {
     const theme = useAppSelector((state) => state.theme)
 
     return (
-        <Box className='footer'>
+        <>
             <ImageContainer db={db} />
             <Box
                 style={{
@@ -40,7 +40,7 @@ const Footer = ({ onClick, showMarkdown, db }: Props) => {
                     </Button>
                 )}
             </Box>
-        </Box>
+        </>
     )
 }
 

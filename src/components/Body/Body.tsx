@@ -14,7 +14,7 @@ const Body = ({ showMarkdown, onTextChange }: Props) => {
     const editor = useAppSelector((state) => state.editor.editor)
 
     return (
-        <Box>
+        <>
             <EditorToolbar editor={editor} />
             <Box
                 style={{
@@ -34,7 +34,7 @@ const Body = ({ showMarkdown, onTextChange }: Props) => {
                 </Box>
                 {showMarkdown && <MarkdownTextContainer />}
             </Box>
-        </Box>
+        </>
     )
 }
 

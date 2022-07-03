@@ -1,6 +1,5 @@
 import { Menu, MenuItem } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
-import Box from '@mui/material/Box'
 import { useState } from 'react'
 import { loginUser, logoutUser } from '../../../store/authSlice'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
@@ -41,7 +40,7 @@ const UserMenuContainer = ({ title }: Props) => {
     const userPhoto = auth.user && auth.user.photoURL ? auth.user.photoURL : undefined
 
     return (
-        <Box>
+        <>
             <Avatar
                 src={userPhoto}
                 sx={{
@@ -63,7 +62,7 @@ const UserMenuContainer = ({ title }: Props) => {
                     <ThemeOption />
                 </MenuItem>
             </Menu>
-        </Box>
+        </>
     )
 }
 

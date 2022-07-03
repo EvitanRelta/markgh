@@ -60,7 +60,7 @@ const ImageConatiner = ({ db }: Props) => {
     }
 
     return (
-        <Box>
+        <>
             <Input inputProps={{ accept: 'image/' }} type='file' onChange={uploadImage} />
             {images.map((image) => (
                 <Box key={image.id}>
@@ -74,7 +74,7 @@ const ImageConatiner = ({ db }: Props) => {
                 </Box>
             ))}
             <Button onClick={() => deleteAllImages()}>Delete all images</Button>
-        </Box>
+        </>
     )
 }
 
