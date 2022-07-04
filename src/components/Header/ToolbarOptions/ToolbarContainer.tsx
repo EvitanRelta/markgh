@@ -10,12 +10,11 @@ type Props = {
 }
 
 const ToolbarContainer = ({ title, db, openVersions }: Props) => {
-    const mdText = useAppSelector((state) => state.mdText)
+    const markdownText = useAppSelector((state) => state.mdText)
 
     const onDownload = () => {
         const fileName = `${title || 'NewFile'}.md`
-        //const markdownText = toMarkdown(mdText)
-        downloadText(mdText, fileName)
+        downloadText(markdownText, fileName)
     }
 
     const downloadText = (text: string, fileName: string) => {
