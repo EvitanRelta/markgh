@@ -21,7 +21,6 @@ interface Props {
 }
 
 export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
-    const theme = useAppSelector((state) => state.theme)
     const editor = useAppSelector((state) => state.editor.editor)
     const [snapshotArray, setSnapshotArray] = useState<Array<Snapshot>>([])
     const [showVersions, setShowVersions] = useState<(EventTarget & Element) | null>(null)
