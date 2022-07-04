@@ -27,7 +27,7 @@ const StyledText = styled(Box)({
 })
 
 export const OpenFile = () => {
-    const editor = useAppSelector((state) => state.editor.editor)
+    const editor = useAppSelector((state) => state.data.editor)
 
     const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const allowedFileTypes = ['txt', 'md']

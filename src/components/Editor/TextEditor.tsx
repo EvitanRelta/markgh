@@ -15,7 +15,7 @@ interface Props {
 
 export const TextEditor = ({ onTextChange }: Props) => {
     const [editorContainer, setEditorContainer] = useState<Element | null>(null)
-    const editor = useAppSelector((state) => state.editor.editor)
+    const editor = useAppSelector((state) => state.data.editor)
     const theme = useAppSelector((state) => state.theme)
 
     useEffect(() => {

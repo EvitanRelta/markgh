@@ -22,7 +22,7 @@ const StyledEditorContianer = styled(Box)({
 
 export const Body = ({ showMarkdown, onTextChange }: Props) => {
     const editorWidth = showMarkdown ? '50%' : '100%'
-    const editor = useAppSelector((state) => state.editor.editor)
+    const editor = useAppSelector((state) => state.data.editor)
 
     return (
         <>

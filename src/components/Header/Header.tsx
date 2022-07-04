@@ -40,7 +40,7 @@ const StyledBottomRow = styled(Box)({
 })
 
 export const Header = ({ fileTitle, setFileTitle, lastEditedOn, db }: Props) => {
-    const editor = useAppSelector((state) => state.editor.editor)
+    const editor = useAppSelector((state) => state.data.editor)
     const [snapshotArray, setSnapshotArray] = useState<Array<Snapshot>>([])
     const [showVersions, setShowVersions] = useState<(EventTarget & Element) | null>(null)
 

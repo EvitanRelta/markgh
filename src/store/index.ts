@@ -1,13 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { authReducer } from './authSlice'
-import { editorReducer } from './editorSlice'
-import { markdownTextReducer } from './markdownTextSlice'
+import { dataReducer } from './dataSlice'
 import { themeReducer } from './themeSlice'
 
 export const store = configureStore({
     reducer: {
-        editor: editorReducer,
-        markdownText: markdownTextReducer,
+        data: dataReducer,
         theme: themeReducer,
         auth: authReducer,
     },
@@ -16,7 +14,7 @@ export const store = configureStore({
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: ['auth/setUser', 'auth/setGhToken'],
-                ignoredPaths: ['editor.editor', 'auth'],
+                ignoredPaths: ['data.editor', 'auth'],
             },
         }),
 })

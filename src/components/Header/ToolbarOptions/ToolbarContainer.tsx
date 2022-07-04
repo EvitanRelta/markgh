@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const ToolbarContainer = ({ fileTitle, openVersions }: Props) => {
-    const markdownText = useAppSelector((state) => state.markdownText)
+    const markdownText = useAppSelector((state) => state.data.markdownText)
 
     const onDownload = () => {
         const fileName = `${fileTitle || 'NewFile'}.md`

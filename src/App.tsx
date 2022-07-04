@@ -14,14 +14,14 @@ import {
 import { removeTipTapArtifacts } from './converterFunctions/helpers/removeTipTapArtifacts'
 import { toMarkdown } from './converterFunctions/toMarkdown'
 import { setUser } from './store/authSlice'
+import { setMarkdownText } from './store/dataSlice'
 import { formatDateTime } from './store/helpers/formatDateTime'
 import { useAppDispatch, useAppSelector } from './store/hooks'
-import { setMarkdownText } from './store/markdownTextSlice'
 
 export const App = () => {
     const db = new EditorDB()
     const dispatch = useAppDispatch()
-    const editor = useAppSelector((state) => state.editor.editor)
+    const editor = useAppSelector((state) => state.data.editor)
     const auth = useAppSelector((state) => state.auth.auth)
     const theme = useAppSelector((state) => state.theme)
 

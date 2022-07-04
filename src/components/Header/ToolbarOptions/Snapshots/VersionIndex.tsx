@@ -64,7 +64,7 @@ export const VersionIndex = ({
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
     const [showDialog, setShowDialog] = useState(false)
     const [workingSnapshot, setWorkingSnapshot] = useState<Snapshot>()
-    const editor = useAppSelector((state) => state.editor.editor)
+    const editor = useAppSelector((state) => state.data.editor)
 
     var body = document.body,
         html = document.documentElement

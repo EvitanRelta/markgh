@@ -34,7 +34,7 @@ const StyledOKButton = styled(Button)({
     marginLeft: 0.9,
 })
 export const RepoLinkInput = ({ setAnchor }: Props) => {
-    const editor = useAppSelector((state) => state.editor.editor)
+    const editor = useAppSelector((state) => state.data.editor)
     const axios = useAppSelector((state) => state.auth.axios)
     const [link, setLink] = useState<string>('')
     const [errorMessage, setErrorMessage] = useState<string>('')
