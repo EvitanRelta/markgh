@@ -6,7 +6,7 @@ import {
 } from '../.././converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../.././converterFunctions/helpers/removeTipTapArtifacts'
 import { useAppSelector } from '../../store/hooks'
-import { EditorDB, Snapshot } from '.././IndexedDB/initDB'
+import { Snapshot } from '.././IndexedDB/initDB'
 import { TitleInput } from './TitleInput'
 import { LastEdited } from './ToolbarOptions/Snapshots/LastEdited'
 import { VersionIndex } from './ToolbarOptions/Snapshots/VersionIndex'
@@ -16,7 +16,6 @@ import { UserMenuContainer } from './UserMenu/UserMenuContainer'
 interface Props {
     fileTitle: string
     setFileTitle: React.Dispatch<React.SetStateAction<string>>
-    db: EditorDB
 }
 
 const StyledHeaderBox = styled(Box)({
@@ -38,8 +37,9 @@ const StyledBottomRow = styled(Box)({
     paddingBottom: 5,
 })
 
-export const Header = ({ fileTitle, setFileTitle, db }: Props) => {
+export const Header = ({ fileTitle, setFileTitle }: Props) => {
     const editor = useAppSelector((state) => state.data.editor)
+    const db = useAppSelector((state) => state.data.database)
     const lastEditedOn = useAppSelector((state) => state.data.lastEditedOn)
     const [snapshotArray, setSnapshotArray] = useState<Array<Snapshot>>([])
     const [showVersions, setShowVersions] = useState<(EventTarget & Element) | null>(null)

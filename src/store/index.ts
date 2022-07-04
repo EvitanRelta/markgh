@@ -14,7 +14,7 @@ export const store = configureStore({
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: ['auth/setUser', 'auth/setGhToken'],
-                ignoredPaths: ['data.editor', 'auth'],
+                ignoredPaths: ['data.editor', 'data.database', 'auth'],
             },
         }),
 })

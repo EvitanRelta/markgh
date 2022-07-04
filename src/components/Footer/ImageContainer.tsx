@@ -1,12 +1,10 @@
 import { Box, Button, Input } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { EditorDB, EditorImage } from '../IndexedDB/initDB'
+import { useAppSelector } from '../../store/hooks'
+import { EditorImage } from '../IndexedDB/initDB'
 
-interface Props {
-    db: EditorDB
-}
-
-export const ImageContainer = ({ db }: Props) => {
+export const ImageContainer = () => {
+    const db = useAppSelector((state) => state.data.database)
     const [images, setImages] = useState<EditorImage[]>([])
 
     //Retrieves images from db, and updates them in state

@@ -6,7 +6,6 @@ import { Body } from './components/Body/Body'
 import { Footer } from './components/Footer/Footer'
 import { Version } from './components/Footer/Version'
 import { Header } from './components/Header/Header'
-import { EditorDB } from './components/IndexedDB/initDB'
 import {
     removeCodeBlockWrapper,
     removeImageWrapper,
@@ -19,9 +18,9 @@ import { formatDateTime } from './store/helpers/formatDateTime'
 import { useAppDispatch, useAppSelector } from './store/hooks'
 
 export const App = () => {
-    const db = new EditorDB()
     const dispatch = useAppDispatch()
     const editor = useAppSelector((state) => state.data.editor)
+    const db = useAppSelector((state) => state.data.database)
     const auth = useAppSelector((state) => state.auth.auth)
     const theme = useAppSelector((state) => state.theme)
 
@@ -88,13 +87,12 @@ export const App = () => {
         <ThemeProvider theme={selectedTheme}>
             <CssBaseline />
             <Box id='app'>
-                <Header fileTitle={fileTitle} setFileTitle={setFileTitle} db={db} />
+                <Header fileTitle={fileTitle} setFileTitle={setFileTitle} />
                 <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
                 <Box>
                     <Footer
                         onClick={() => setShowMarkdown(!showMarkdown)}
                         showMarkdown={showMarkdown}
-                        db={db}
                     />
                 </Box>
                 <Version />

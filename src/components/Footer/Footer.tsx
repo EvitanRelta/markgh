@@ -1,12 +1,10 @@
 import { Button, styled } from '@mui/material'
 import { useAppSelector } from '../../store/hooks'
-import { EditorDB } from '../IndexedDB/initDB'
 import { ImageContainer } from './ImageContainer'
 
 interface Props {
     onClick: React.MouseEventHandler<HTMLButtonElement>
     showMarkdown: boolean
-    db: EditorDB
 }
 
 const StyledShowMdButton = styled(Button)({
@@ -17,14 +15,14 @@ const StyledShowMdButton = styled(Button)({
     position: 'fixed',
 })
 
-export const Footer = ({ onClick, showMarkdown, db }: Props) => {
+export const Footer = ({ onClick, showMarkdown }: Props) => {
     const theme = useAppSelector((state) => state.theme)
 
     const buttonColor = !showMarkdown ? undefined : theme === 'light' ? 'white' : 'black'
 
     return (
         <>
-            <ImageContainer db={db} />
+            <ImageContainer />
             <StyledShowMdButton
                 sx={{
                     backgroundColor: buttonColor,

@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Editor } from '@tiptap/react'
 import type { AppStore } from '.'
 import { extensions } from '../components/Editor/extensions/extensions'
+import { EditorDB } from '../components/IndexedDB/initDB'
 import { placeholderEditorHtml } from '../placeholderEditorHtml'
 
 let store!: AppStore
@@ -14,6 +15,7 @@ export const injectStore = (_store: AppStore) => {
 
 interface DataState {
     editor: Editor
+    database: EditorDB
     markdownText: string
     lastEditedOn: string
 }
@@ -28,6 +30,7 @@ const dataSlice = createSlice({
     name: 'data',
     initialState: {
         editor,
+        database: new EditorDB(),
         markdownText: '',
         lastEditedOn: localStorage['lastEditedOn'],
     } as DataState,
