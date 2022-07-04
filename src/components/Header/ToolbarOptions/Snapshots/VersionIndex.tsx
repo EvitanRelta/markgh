@@ -1,8 +1,11 @@
-import ArticleIcon from '@mui/icons-material/Article'
-import DeleteIcon from '@mui/icons-material/Delete'
+import { Article as ArticleIcon, Delete as DeleteIcon } from '@mui/icons-material'
 import {
     Avatar,
     Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogTitle,
     IconButton,
     List,
     ListItemAvatar,
@@ -11,10 +14,6 @@ import {
     MenuItem,
     Typography,
 } from '@mui/material'
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogTitle from '@mui/material/DialogTitle'
 import { useEffect, useState } from 'react'
 import {
     removeCodeBlockWrapper,
@@ -24,7 +23,7 @@ import { removeTipTapArtifacts } from '../../../../converterFunctions/helpers/re
 import { useAppSelector } from '../../../../store/hooks'
 import { Snapshot } from '../../../IndexedDB/initDB'
 
-type Props = {
+interface Props {
     anchorEl: (EventTarget & Element) | null
     onClose: () => void
     snapshotArray: Snapshot[]

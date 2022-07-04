@@ -1,18 +1,20 @@
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import GitHubIcon from '@mui/icons-material/GitHub'
-import { ListItemText, MenuItem } from '@mui/material'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress'
-import Popover from '@mui/material/Popover'
-import TextField from '@mui/material/TextField'
+import { ArrowForwardIos as ArrowForwardIosIcon, GitHub as GitHubIcon } from '@mui/icons-material'
+import {
+    Box,
+    Button,
+    CircularProgress,
+    ListItemText,
+    MenuItem,
+    Popover,
+    TextField,
+} from '@mui/material'
 import staticAxios from 'axios'
 import { useEffect, useState } from 'react'
 import { markdownToHtml } from '../../../../converterFunctions'
 import { GithubRepoInfo } from '../../../../converterFunctions/markdownToHtml'
 import { useAppSelector } from '../../../../store/hooks'
 
-type Props = {
+interface Props {
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
     menuOpen: boolean
 }

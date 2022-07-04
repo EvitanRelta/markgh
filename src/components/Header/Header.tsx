@@ -1,5 +1,4 @@
-import Box from '@mui/material/Box'
-import Input from '@mui/material/Input'
+import { Box, Input } from '@mui/material'
 import { useEffect, useState } from 'react'
 import {
     removeCodeBlockWrapper,
@@ -8,12 +7,12 @@ import {
 import { removeTipTapArtifacts } from '../.././converterFunctions/helpers/removeTipTapArtifacts'
 import { useAppSelector } from '../../store/hooks'
 import { EditorDB, Snapshot } from '.././IndexedDB/initDB'
-import MenuButton from './MenuButton'
 import LastEdited from './ToolbarOptions/Snapshots/LastEdited'
 import VersionIndex from './ToolbarOptions/Snapshots/VersionIndex'
 import ToolbarContainer from './ToolbarOptions/ToolbarContainer'
+import UserMenuContainer from './UserMenu/UserMenuContainer'
 
-type Props = {
+interface Props {
     title: string
     setTitle: React.Dispatch<React.SetStateAction<string>>
     lastEditedOn: string
@@ -113,7 +112,7 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
                 />
 
                 <Box>
-                    <MenuButton title={title} />
+                    <UserMenuContainer />
                 </Box>
             </Box>
             <Box
@@ -123,7 +122,7 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer title={title} db={db} openVersions={openVersions} />
+                <ToolbarContainer title={title} openVersions={openVersions} />
                 <Box>
                     <LastEdited
                         lastEditedOn={lastEditedOn}

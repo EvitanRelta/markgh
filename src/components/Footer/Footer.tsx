@@ -1,19 +1,19 @@
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
+import { Box, Button } from '@mui/material'
 import { useAppSelector } from '../../store/hooks'
 import { EditorDB } from '../IndexedDB/initDB'
 import ImageContainer from './ImageContainer'
 
-type Props = {
+interface Props {
     onClick: React.MouseEventHandler<HTMLButtonElement>
     showMarkdown: boolean
     db: EditorDB
 }
+
 const Footer = ({ onClick, showMarkdown, db }: Props) => {
     const theme = useAppSelector((state) => state.theme)
 
     return (
-        <Box className='footer'>
+        <>
             <ImageContainer db={db} />
             <Box
                 style={{
@@ -40,7 +40,7 @@ const Footer = ({ onClick, showMarkdown, db }: Props) => {
                     </Button>
                 )}
             </Box>
-        </Box>
+        </>
     )
 }
 

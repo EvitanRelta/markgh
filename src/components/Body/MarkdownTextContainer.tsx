@@ -1,20 +1,17 @@
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
+import { Box, Button } from '@mui/material'
 import { useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
 import CopyClipboardButton from './CopyClipboardButton'
 
-type Props = {}
-
-const MarkdownTextContainer = ({}: Props) => {
+const MarkdownTextContainer = () => {
     const theme = useAppSelector((state) => state.theme)
-    const mdText = useAppSelector((state) => state.mdText)
+    const markdownText = useAppSelector((state) => state.mdText)
     const [isHovering, setIsHovering] = useState(false)
 
     const [showCopiedPopup, setShowCopiedPopup] = useState(false)
 
     const onCopy = () => {
-        navigator.clipboard.writeText(mdText)
+        navigator.clipboard.writeText(markdownText)
         popUpCopied()
     }
 
@@ -67,7 +64,7 @@ const MarkdownTextContainer = ({}: Props) => {
                     )}
                 </Box>
             )}
-            <pre style={{ marginTop: 15, display: 'inline' }}>{mdText}</pre>
+            <pre style={{ marginTop: 15, display: 'inline' }}>{markdownText}</pre>
         </Box>
     )
 }

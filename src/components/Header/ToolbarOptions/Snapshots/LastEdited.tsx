@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import SnapshotIcon from './SnapshotIcon'
 
-type Props = {
+interface Props {
     lastEditedOn: string
     saveSnapshot: () => void
     openVersions: (e: React.MouseEvent) => void

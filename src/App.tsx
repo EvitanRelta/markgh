@@ -1,5 +1,4 @@
-import { CssBaseline } from '@mui/material'
-import Box from '@mui/material/Box'
+import { Box, CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { onAuthStateChanged } from 'firebase/auth'
 import { ReactElement, useEffect, useState } from 'react'
@@ -24,17 +23,25 @@ export default function App(): ReactElement {
     const dispatch = useAppDispatch()
     const editor = useAppSelector((state) => state.editor.editor)
     const auth = useAppSelector((state) => state.auth.auth)
+    const theme = useAppSelector((state) => state.theme)
 
-    const saveEditorText = async () => {
-        const htmlCopy = editor.view.dom.cloneNode(true) as HTMLElement
-        removeCodeBlockWrapper(htmlCopy)
-        removeImageWrapper(htmlCopy)
-        removeTipTapArtifacts(htmlCopy)
+    //var for controlling whether to show markdown
+    const [showMarkdown, setShowMarkdown] = useState(false)
 
-        await db.transaction('rw', db.text, async function () {
-            db.text.put({ id: 0, value: htmlCopy.innerHTML })
-        })
-    }
+    //var for setting file title
+    const [title, setTitle] = useState('')
+
+    //var for 'Last edited on'
+    const [lastEditedOn, setLastEditedOn] = useState(localStorage['lastEditedOn'])
+
+    //Defining theme colors
+    const darkTheme = createTheme({
+        palette: { mode: 'dark' },
+    })
+    const lightTheme = createTheme({
+        palette: { mode: 'light' },
+    })
+    const selectedTheme = theme === 'dark' ? darkTheme : lightTheme
 
     useEffect(() => {
         const getPersistedText = async () => {
@@ -53,33 +60,21 @@ export default function App(): ReactElement {
         onAuthStateChanged(auth, (user) => dispatch(setUser(user)))
     }, [auth])
 
-    //var for controlling whether to show markdown
-    const [showMarkdown, setShowMarkdown] = useState(false)
+    //Updates preferred theme in localStorage
+    useEffect(() => {
+        localStorage['selectedTheme'] = theme
+    }, [theme])
 
-    //var for theme control
-    const theme = useAppSelector((state) => state.theme)
+    const saveEditorText = async () => {
+        const htmlCopy = editor.view.dom.cloneNode(true) as HTMLElement
+        removeCodeBlockWrapper(htmlCopy)
+        removeImageWrapper(htmlCopy)
+        removeTipTapArtifacts(htmlCopy)
 
-    //var for setting file title
-    const [title, setTitle] = useState('')
-
-    //var for 'Last edited on'
-    const [lastEditedOn, setLastEditedOn] = useState(localStorage['lastEditedOn'])
-
-    //Defining theme colors
-    const darkTheme = createTheme({
-        palette: {
-            mode: 'dark',
-        },
-    })
-
-    const lightTheme = createTheme({
-        palette: {
-            mode: 'light',
-        },
-    })
-
-    //Check selectedTheme
-    const selectedTheme = theme === 'dark' ? darkTheme : lightTheme
+        await db.transaction('rw', db.text, async function () {
+            db.text.put({ id: 0, value: htmlCopy.innerHTML })
+        })
+    }
 
     const onTextChange = (editorContainer: Element) => {
         const markdown = toMarkdown(editorContainer)
@@ -101,11 +96,6 @@ export default function App(): ReactElement {
         setLastEditedOn(dateTime)
         localStorage['lastEditedOn'] = dateTime
     }
-
-    //Updates preferred theme in localStorage
-    useEffect(() => {
-        localStorage['selectedTheme'] = theme
-    }, [theme])
 
     return (
         <HelmetProvider>

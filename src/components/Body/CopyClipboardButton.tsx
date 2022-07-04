@@ -1,4 +1,4 @@
-import ContentCopyIcon from '@mui/icons-material/ContentCopy'
+import { ContentCopy as ContentCopyIcon } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 
 interface Props {

@@ -1,6 +1,4 @@
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Input from '@mui/material/Input'
+import { Box, Button, Input } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { EditorDB, EditorImage } from '../IndexedDB/initDB'
 
@@ -60,7 +58,7 @@ const ImageConatiner = ({ db }: Props) => {
     }
 
     return (
-        <Box>
+        <>
             <Input inputProps={{ accept: 'image/' }} type='file' onChange={uploadImage} />
             {images.map((image) => (
                 <Box key={image.id}>
@@ -74,7 +72,7 @@ const ImageConatiner = ({ db }: Props) => {
                 </Box>
             ))}
             <Button onClick={() => deleteAllImages()}>Delete all images</Button>
-        </Box>
+        </>
     )
 }
 
