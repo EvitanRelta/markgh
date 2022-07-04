@@ -3,9 +3,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7'
 import { ListItemIcon } from '@mui/material'
 import { useAppSelector } from '../../../store/hooks'
 
-type Props = {}
-
-const ThemeOption = ({}: Props) => {
+const ThemeOption = () => {
     const theme = useAppSelector((state) => state.theme)
 
     return (

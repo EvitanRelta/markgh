@@ -1,15 +1,14 @@
 import Box from '@mui/material/Box'
 import { useAppSelector } from '../../../store/hooks'
-import { EditorDB } from '../../IndexedDB/initDB'
 import FileOption from './FileMenu/FileOption'
 import SnapshotOption from './Snapshots/SnapshotOption'
+
 type Props = {
     title: string
-    db: EditorDB
     openVersions: (e: React.MouseEvent) => void
 }
 
-const ToolbarContainer = ({ title, db, openVersions }: Props) => {
+const ToolbarContainer = ({ title, openVersions }: Props) => {
     const markdownText = useAppSelector((state) => state.mdText)
 
     const onDownload = () => {

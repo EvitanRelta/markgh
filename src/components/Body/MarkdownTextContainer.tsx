@@ -4,9 +4,7 @@ import { useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
 import CopyClipboardButton from './CopyClipboardButton'
 
-type Props = {}
-
-const MarkdownTextContainer = ({}: Props) => {
+const MarkdownTextContainer = () => {
     const theme = useAppSelector((state) => state.theme)
     const markdownText = useAppSelector((state) => state.mdText)
     const [isHovering, setIsHovering] = useState(false)

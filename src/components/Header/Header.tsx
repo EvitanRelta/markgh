@@ -113,7 +113,7 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
                 />
 
                 <Box>
-                    <UserMenuContainer title={title} />
+                    <UserMenuContainer />
                 </Box>
             </Box>
             <Box
@@ -123,7 +123,7 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
                     paddingBottom: 5,
                 }}
             >
-                <ToolbarContainer title={title} db={db} openVersions={openVersions} />
+                <ToolbarContainer title={title} openVersions={openVersions} />
                 <Box>
                     <LastEdited
                         lastEditedOn={lastEditedOn}

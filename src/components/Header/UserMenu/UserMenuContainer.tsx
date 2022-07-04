@@ -8,11 +8,7 @@ import LogoutOption from './LogoutOption'
 import ThemeOption from './ThemeOption'
 import UserInfo from './UserInfo'
 
-type Props = {
-    title: string
-}
-
-const UserMenuContainer = ({ title }: Props) => {
+const UserMenuContainer = () => {
     const dispatch = useAppDispatch()
     const auth = useAppSelector((state) => state.auth)
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)

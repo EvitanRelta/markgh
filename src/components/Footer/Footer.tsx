@@ -9,6 +9,7 @@ type Props = {
     showMarkdown: boolean
     db: EditorDB
 }
+
 const Footer = ({ onClick, showMarkdown, db }: Props) => {
     const theme = useAppSelector((state) => state.theme)
 
