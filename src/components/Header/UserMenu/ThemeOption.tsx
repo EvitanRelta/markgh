@@ -10,7 +10,7 @@ const ThemeOption = ({}: Props) => {
     const theme = useAppSelector((state) => state.theme)
 
     return (
-        <Box style={{ cursor: 'pointer', minWidth: 140, marginLeft: -2 }}>
+        <Box>
             <IconButton color='inherit'>
                 {theme === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
