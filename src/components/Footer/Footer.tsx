@@ -4,7 +4,7 @@ import { useAppSelector } from '../../store/hooks'
 import { EditorDB } from '../IndexedDB/initDB'
 import ImageContainer from './ImageContainer'
 
-type Props = {
+interface Props {
     onClick: React.MouseEventHandler<HTMLButtonElement>
     showMarkdown: boolean
     db: EditorDB

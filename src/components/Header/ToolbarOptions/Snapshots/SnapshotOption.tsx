@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import Button from '@mui/material/Button'
 
-type Props = {
+interface Props {
     openVersions: (e: React.MouseEvent) => void
 }
 

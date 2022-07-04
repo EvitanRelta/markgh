@@ -12,7 +12,7 @@ import { markdownToHtml } from '../../../../converterFunctions'
 import { GithubRepoInfo } from '../../../../converterFunctions/markdownToHtml'
 import { useAppSelector } from '../../../../store/hooks'
 
-type Props = {
+interface Props {
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
     menuOpen: boolean
 }

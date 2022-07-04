@@ -4,7 +4,7 @@ import EditorToolbar from '../Editor/EditorToolbar'
 import TextEditor from '../Editor/TextEditor'
 import MarkdownTextContainer from './MarkdownTextContainer'
 
-type Props = {
+interface Props {
     showMarkdown: boolean
     onTextChange: (editorContainer: Element) => void | null
 }

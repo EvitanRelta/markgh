@@ -13,7 +13,7 @@ import VersionIndex from './ToolbarOptions/Snapshots/VersionIndex'
 import ToolbarContainer from './ToolbarOptions/ToolbarContainer'
 import UserMenuContainer from './UserMenu/UserMenuContainer'
 
-type Props = {
+interface Props {
     title: string
     setTitle: React.Dispatch<React.SetStateAction<string>>
     lastEditedOn: string

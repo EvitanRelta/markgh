@@ -3,7 +3,7 @@ import { useAppSelector } from '../../../store/hooks'
 import FileOption from './FileMenu/FileOption'
 import SnapshotOption from './Snapshots/SnapshotOption'
 
-type Props = {
+interface Props {
     title: string
     openVersions: (e: React.MouseEvent) => void
 }

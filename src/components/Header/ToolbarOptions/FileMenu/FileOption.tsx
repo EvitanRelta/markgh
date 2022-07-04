@@ -5,7 +5,7 @@ import ExportFile from './ExportFile'
 import ImportGHRepo from './ImportGHRepo'
 import OpenFile from './OpenFile'
 
-type Props = {
+interface Props {
     onDownload: () => void
 }
 

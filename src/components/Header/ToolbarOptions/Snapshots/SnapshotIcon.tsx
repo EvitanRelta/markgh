@@ -3,7 +3,7 @@ import CheckIcon from '@mui/icons-material/Check'
 import IconButton from '@mui/material/IconButton'
 import { useState } from 'react'
 
-type Props = {
+interface Props {
     saveSnapshot: () => void
 }
 

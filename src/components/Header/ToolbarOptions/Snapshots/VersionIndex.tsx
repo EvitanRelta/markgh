@@ -24,7 +24,7 @@ import { removeTipTapArtifacts } from '../../../../converterFunctions/helpers/re
 import { useAppSelector } from '../../../../store/hooks'
 import { Snapshot } from '../../../IndexedDB/initDB'
 
-type Props = {
+interface Props {
     anchorEl: (EventTarget & Element) | null
     onClose: () => void
     snapshotArray: Snapshot[]
