@@ -1,15 +1,20 @@
 import { ContentCopy as ContentCopyIcon } from '@mui/icons-material'
 import { Box, Button, IconButton, styled } from '@mui/material'
-import { useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
 
 interface Props {
-    isHovering: boolean
+    setIsHovering: React.Dispatch<React.SetStateAction<boolean>>
     markdownText: string
+    showCopiedPopup: boolean
+    setShowCopiedPopup: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const CopyClipboardButton = ({ isHovering, markdownText }: Props) => {
-    const [showCopiedPopup, setShowCopiedPopup] = useState(false)
+export const CopyClipboardButton = ({
+    setIsHovering,
+    markdownText,
+    showCopiedPopup,
+    setShowCopiedPopup,
+}: Props) => {
     const theme = useAppSelector((state) => state.theme)
 
     const copyButtonColor = theme === 'dark' ? '#2a2a2a' : '#F5F5F5'
@@ -48,6 +53,8 @@ export const CopyClipboardButton = ({ isHovering, markdownText }: Props) => {
 
     const popUpCopied = () => {
         setShowCopiedPopup(true)
+        setIsHovering(true)
+        setTimeout(() => setIsHovering(false), 1000)
         setTimeout(() => setShowCopiedPopup(false), 1000)
     }
 

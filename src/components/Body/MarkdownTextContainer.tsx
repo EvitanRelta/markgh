@@ -6,6 +6,7 @@ import { CopyClipboardButton } from './CopyClipboardButton'
 export const MarkdownTextContainer = () => {
     const markdownText = useAppSelector((state) => state.mdText)
     const [isHovering, setIsHovering] = useState(false)
+    const [showCopiedPopup, setShowCopiedPopup] = useState(false)
 
     const StyledMdTextContainer = styled(Box)({
         width: '50%',
@@ -21,11 +22,16 @@ export const MarkdownTextContainer = () => {
 
     return (
         <StyledMdTextContainer
-            onMouseLeave={() => setIsHovering(false)}
+            onMouseLeave={() => !showCopiedPopup && setIsHovering(false)}
             onMouseEnter={() => setIsHovering(true)}
         >
             {isHovering && (
-                <CopyClipboardButton isHovering={isHovering} markdownText={markdownText} />
+                <CopyClipboardButton
+                    setIsHovering={setIsHovering}
+                    markdownText={markdownText}
+                    showCopiedPopup={showCopiedPopup}
+                    setShowCopiedPopup={setShowCopiedPopup}
+                />
             )}
             <pre style={{ marginTop: 15, display: 'inline' }}>{markdownText}</pre>
         </StyledMdTextContainer>
