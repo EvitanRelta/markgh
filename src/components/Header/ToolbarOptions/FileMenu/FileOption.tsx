@@ -16,16 +16,11 @@ const FileOption = ({ onDownload }: Props) => {
     const closeMenu = () => setAnchor(null)
 
     return (
-        <Box id='file-button' style={{ display: 'inline-block' }}>
+        <Box style={{ display: 'inline-block' }}>
             <Button style={{ padding: 0 }} onClick={openMenu}>
                 File
             </Button>
-            <Menu
-                open={Boolean(anchor)}
-                keepMounted
-                anchorEl={document.getElementById('file-button')}
-                onClose={closeMenu}
-            >
+            <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 <OpenFile />
                 <ImportGHRepo menuOpen={Boolean(anchor)} setAnchor={setAnchor} />
                 <ExportFile onDownload={onDownload} />
