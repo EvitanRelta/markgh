@@ -20,6 +20,11 @@ export const MarkdownTextContainer = () => {
         borderRadius: 6.5,
     })
 
+    const StyledMdText = styled('pre')({
+        marginTop: 15,
+        display: 'inline',
+    })
+
     return (
         <StyledMdTextContainer
             onMouseLeave={() => !showCopiedPopup && setIsHovering(false)}
@@ -33,7 +38,7 @@ export const MarkdownTextContainer = () => {
                     setShowCopiedPopup={setShowCopiedPopup}
                 />
             )}
-            <pre style={{ marginTop: 15, display: 'inline' }}>{markdownText}</pre>
+            <StyledMdText>{markdownText}</StyledMdText>
         </StyledMdTextContainer>
     )
 }
