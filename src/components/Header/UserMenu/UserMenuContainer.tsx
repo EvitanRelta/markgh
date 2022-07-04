@@ -15,23 +15,15 @@ type Props = {
 const UserMenuContainer = ({ title }: Props) => {
     const dispatch = useAppDispatch()
     const auth = useAppSelector((state) => state.auth)
-
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
+    const userPhoto = auth.user && auth.user.photoURL ? auth.user.photoURL : undefined
 
-    const openMenu = (e: React.MouseEvent) => {
-        setAnchor(e.currentTarget)
-    }
-
-    const closeMenu = () => {
-        setAnchor(null)
-    }
-
+    const openMenu = (e: React.MouseEvent) => setAnchor(e.currentTarget)
+    const closeMenu = () => setAnchor(null)
     const handleChangeTheme = () => {
         dispatch(toggleTheme())
         closeMenu()
     }
-
-    const userPhoto = auth.user && auth.user.photoURL ? auth.user.photoURL : undefined
 
     return (
         <>

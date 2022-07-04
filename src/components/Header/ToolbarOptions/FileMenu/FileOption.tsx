@@ -12,13 +12,8 @@ type Props = {
 const FileOption = ({ onDownload }: Props) => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
 
-    const openMenu = (e: React.MouseEvent) => {
-        setAnchor(e.currentTarget)
-    }
-
-    const closeMenu = () => {
-        setAnchor(null)
-    }
+    const openMenu = (e: React.MouseEvent) => setAnchor(e.currentTarget)
+    const closeMenu = () => setAnchor(null)
 
     return (
         <Box id='file-button' style={{ display: 'inline-block' }}>
