@@ -1,7 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Editor } from '@tiptap/react'
+import type { AppStore } from '.'
 import { extensions } from '../components/Editor/extensions/extensions'
 import { placeholderEditorHtml } from '../placeholderEditorHtml'
+
+let store!: AppStore
+
+// 'injectStore' code source:
+// https://redux.js.org/faq/code-structure#how-can-i-use-the-redux-store-in-non-component-files
+export const injectStore = (_store: AppStore) => {
+    store = _store
+}
 
 interface DataState {
     editor: Editor
