@@ -15,16 +15,16 @@ export class EditorDB extends Dexie {
 }
 
 export interface EditorImage {
-    id?: number
+    id: number
     base64: string
 }
 export interface EditorText {
-    id?: number
+    id: number
     value: string
 }
 
 export interface Snapshot {
-    id?: number
+    id: number
     savedOn: string
     title: string
     value: string
