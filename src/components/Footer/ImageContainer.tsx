@@ -1,6 +1,4 @@
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Input from '@mui/material/Input'
+import { Box, Button, Input } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { EditorDB, EditorImage } from '../IndexedDB/initDB'
 

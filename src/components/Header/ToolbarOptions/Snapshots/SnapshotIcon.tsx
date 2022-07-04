@@ -1,6 +1,6 @@
 import CameraAltIcon from '@mui/icons-material/CameraAlt'
 import CheckIcon from '@mui/icons-material/Check'
-import IconButton from '@mui/material/IconButton'
+import { IconButton } from '@mui/material'
 import { useState } from 'react'
 
 interface Props {

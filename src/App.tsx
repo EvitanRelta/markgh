@@ -1,5 +1,4 @@
-import { CssBaseline } from '@mui/material'
-import Box from '@mui/material/Box'
+import { Box, CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { onAuthStateChanged } from 'firebase/auth'
 import { ReactElement, useEffect, useState } from 'react'

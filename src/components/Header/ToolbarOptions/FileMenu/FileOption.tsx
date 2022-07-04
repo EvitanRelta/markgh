@@ -1,5 +1,4 @@
-import { Box, Menu } from '@mui/material'
-import Button from '@mui/material/Button'
+import { Box, Button, Menu } from '@mui/material'
 import { useState } from 'react'
 import ExportFile from './ExportFile'
 import ImportGHRepo from './ImportGHRepo'

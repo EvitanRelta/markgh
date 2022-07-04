@@ -3,6 +3,10 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import {
     Avatar,
     Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogTitle,
     IconButton,
     List,
     ListItemAvatar,
@@ -11,10 +15,6 @@ import {
     MenuItem,
     Typography,
 } from '@mui/material'
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogTitle from '@mui/material/DialogTitle'
 import { useEffect, useState } from 'react'
 import {
     removeCodeBlockWrapper,

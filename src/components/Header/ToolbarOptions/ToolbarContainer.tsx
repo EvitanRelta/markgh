@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box'
+import { Box } from '@mui/material'
 import { useAppSelector } from '../../../store/hooks'
 import FileOption from './FileMenu/FileOption'
 import SnapshotOption from './Snapshots/SnapshotOption'

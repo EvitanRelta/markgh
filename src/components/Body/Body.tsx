@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box'
+import { Box } from '@mui/material'
 import { useAppSelector } from '../../store/hooks'
 import EditorToolbar from '../Editor/EditorToolbar'
 import TextEditor from '../Editor/TextEditor'

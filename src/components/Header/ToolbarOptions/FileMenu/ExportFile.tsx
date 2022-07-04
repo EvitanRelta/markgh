@@ -1,7 +1,5 @@
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
-import { MenuItem } from '@mui/material'
-import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
+import { Box, IconButton, MenuItem } from '@mui/material'
 
 interface Props {
     onDownload: () => void

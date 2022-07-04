@@ -1,5 +1,4 @@
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
+import { Box, Button } from '@mui/material'
 import { useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
 import CopyClipboardButton from './CopyClipboardButton'

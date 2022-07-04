@@ -1,5 +1,4 @@
-import { Menu, MenuItem } from '@mui/material'
-import Avatar from '@mui/material/Avatar'
+import { Avatar, Menu, MenuItem } from '@mui/material'
 import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import { toggleTheme } from '../../../store/themeSlice'

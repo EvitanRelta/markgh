@@ -1,5 +1,4 @@
-import Box from '@mui/material/Box'
-import Input from '@mui/material/Input'
+import { Box, Input } from '@mui/material'
 import { useEffect, useState } from 'react'
 import {
     removeCodeBlockWrapper,

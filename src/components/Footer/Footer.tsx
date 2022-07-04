@@ -1,5 +1,4 @@
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
+import { Box, Button } from '@mui/material'
 import { useAppSelector } from '../../store/hooks'
 import { EditorDB } from '../IndexedDB/initDB'
 import ImageContainer from './ImageContainer'
