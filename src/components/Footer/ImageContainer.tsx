@@ -2,9 +2,14 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Input from '@mui/material/Input'
 import { useEffect, useState } from 'react'
+import { EditorDB, EditorImage } from '../IndexedDB/initDB'
 
-const ImageConatiner = ({ db }) => {
-    const [images, setImages] = useState([])
+interface Props {
+    db: EditorDB
+}
+
+const ImageConatiner = ({ db }: Props) => {
+    const [images, setImages] = useState<EditorImage[]>([])
 
     //Retrieves images from db, and updates them in state
     const updateImagesFromDb = async () => {
@@ -19,19 +24,21 @@ const ImageConatiner = ({ db }) => {
     }, [])
 
     //Upload an image
-    const uploadImage = (e) => {
-        var input = e.target
-        var reader = new FileReader()
-        reader.onload = function () {}
-        reader.readAsDataURL(input.files[0])
+    const uploadImage: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+        const input = e.target
+        if (!input.files) return
+
+        const reader = new FileReader()
         reader.onload = async () => {
-            let imageBase64 = reader.result
-            let image = {
-                id: !images.length ? 0 : images[images.length - 1].id + 1,
+            const imageBase64 = reader.result as string
+            const image = {
+                id: images.length === 0 ? 0 : images[images.length - 1].id + 1,
                 base64: imageBase64,
             }
-            db.images.add(image).then(updateImagesFromDb())
+            await db.images.add(image)
+            updateImagesFromDb()
         }
+        reader.readAsDataURL(input.files[0])
 
         //Refreshes element value to allow a same image to be uploaded again
         //(Otherwise onChange can't detect if the same image is uploaded again)
@@ -47,21 +54,21 @@ const ImageConatiner = ({ db }) => {
     }
 
     //Clears single image by id
-    const deleteImage = async (id) => {
-        db.images.delete(id)
+    const deleteImage = async (id: number) => {
+        await db.images.delete(id)
         updateImagesFromDb()
     }
 
     return (
         <Box>
-            <Input accept='image/' type='file' onChange={uploadImage} />
+            <Input inputProps={{ accept: 'image/' }} type='file' onChange={uploadImage} />
             {images.map((image) => (
                 <Box key={image.id}>
                     id:{image.id}
                     <img
                         style={{ maxWidth: 320, maxHeight: 180 }}
                         src={image.base64}
-                        alt={image.id}
+                        alt={image.id.toString()}
                     />
                     <button onClick={() => deleteImage(image.id)}>Delete</button>
                 </Box>

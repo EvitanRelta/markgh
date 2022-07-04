@@ -1,13 +1,13 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import Dexie from 'dexie'
 import { useAppSelector } from '../../store/hooks'
+import { EditorDB } from '../IndexedDB/initDB'
 import ImageContainer from './ImageContainer'
 
 type Props = {
     onClick: React.MouseEventHandler<HTMLButtonElement>
     showMarkdown: boolean
-    db: Dexie
+    db: EditorDB
 }
 const Footer = ({ onClick, showMarkdown, db }: Props) => {
     const theme = useAppSelector((state) => state.theme)
