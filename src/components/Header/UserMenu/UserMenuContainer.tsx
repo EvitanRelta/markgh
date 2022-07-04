@@ -2,19 +2,19 @@ import { Menu, MenuItem } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import { useState } from 'react'
-import { loginUser, logoutUser } from '../../store/authSlice'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { toggleTheme } from '../../store/themeSlice'
-import Login from './UserMenu/Login'
-import Logout from './UserMenu/Logout'
-import ThemeOption from './UserMenu/ThemeOption'
-import UserInfo from './UserMenu/UserInfo'
+import { loginUser, logoutUser } from '../../../store/authSlice'
+import { useAppDispatch, useAppSelector } from '../../../store/hooks'
+import { toggleTheme } from '../../../store/themeSlice'
+import Login from './Login'
+import Logout from './Logout'
+import ThemeOption from './ThemeOption'
+import UserInfo from './UserInfo'
 
 type Props = {
     title: string
 }
 
-const MenuButton = ({ title }: Props) => {
+const UserMenuContainer = ({ title }: Props) => {
     const dispatch = useAppDispatch()
     const auth = useAppSelector((state) => state.auth)
 
@@ -67,4 +67,4 @@ const MenuButton = ({ title }: Props) => {
     )
 }
 
-export default MenuButton
+export default UserMenuContainer

@@ -8,10 +8,10 @@ import {
 import { removeTipTapArtifacts } from '../.././converterFunctions/helpers/removeTipTapArtifacts'
 import { useAppSelector } from '../../store/hooks'
 import { EditorDB, Snapshot } from '.././IndexedDB/initDB'
-import MenuButton from './MenuButton'
 import LastEdited from './ToolbarOptions/Snapshots/LastEdited'
 import VersionIndex from './ToolbarOptions/Snapshots/VersionIndex'
 import ToolbarContainer from './ToolbarOptions/ToolbarContainer'
+import UserMenuContainer from './UserMenu/UserMenuContainer'
 
 type Props = {
     title: string
@@ -113,7 +113,7 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
                 />
 
                 <Box>
-                    <MenuButton title={title} />
+                    <UserMenuContainer title={title} />
                 </Box>
             </Box>
             <Box
