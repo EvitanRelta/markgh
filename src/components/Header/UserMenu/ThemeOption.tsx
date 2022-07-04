@@ -10,9 +10,7 @@ const ThemeOption = ({}: Props) => {
 
     return (
         <>
-            <IconButton color='inherit'>
-                {theme === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-            </IconButton>
+            <IconButton>{theme === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}</IconButton>
             {theme === 'light' ? 'Dark' : 'Light'} mode
         </>
     )
