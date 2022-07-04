@@ -5,10 +5,10 @@ import { useState } from 'react'
 import { loginUser, logoutUser } from '../../store/authSlice'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { toggleTheme } from '../../store/themeSlice'
-import Login from './MenuOptions/Login'
-import Logout from './MenuOptions/Logout'
-import ThemeOption from './MenuOptions/ThemeOption'
-import UserInfo from './MenuOptions/UserInfo'
+import Login from './UserMenu/Login'
+import Logout from './UserMenu/Logout'
+import ThemeOption from './UserMenu/ThemeOption'
+import UserInfo from './UserMenu/UserInfo'
 
 type Props = {
     title: string
