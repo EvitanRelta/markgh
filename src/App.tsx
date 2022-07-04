@@ -80,20 +80,16 @@ export const App = () => {
         saveEditorText()
         dispatch(setMdText(markdown))
 
-        //Updates 'Last Edited On' in local storage when text is changed in editor
-        //Formatting time as text
-        const date = new Date()
-        const n = date.toDateString()
-        var t = date.toLocaleTimeString()
-        var timeShort =
-            (t.length == 11 ? t.substring(0, 5) : t.substring(0, 4)) +
-            ' ' +
-            t.substring(t.length - 2, t.length)
-        var dateShort = n.substring(4, n.length - 5)
-        var dateTime = dateShort + ' ' + timeShort
+        const now = new Date()
+        const formatedNow = now.toLocaleString('en-US', {
+            month: 'short',
+            day: '2-digit',
+            hour: 'numeric',
+            minute: 'numeric',
+        })
 
-        setLastEditedOn(dateTime)
-        localStorage['lastEditedOn'] = dateTime
+        setLastEditedOn(formatedNow)
+        localStorage['lastEditedOn'] = formatedNow
     }
 
     return (
