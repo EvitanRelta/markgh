@@ -44,8 +44,6 @@ export const CopyClipboardButton = ({
         display: 'inline-flex',
     })
 
-    const copiedPopup = <StyledCopiedPrompt> COPIED </StyledCopiedPrompt>
-
     const onCopy = () => {
         navigator.clipboard.writeText(markdownText)
         popUpCopied()
@@ -58,16 +56,18 @@ export const CopyClipboardButton = ({
         setTimeout(() => setShowCopiedPopup(false), 1000)
     }
 
+    const copiedPopup = <StyledCopiedPrompt> COPIED </StyledCopiedPrompt>
+
+    const clipboardIconButton = (
+        <StyledIconButton onClick={onCopy} size='small'>
+            <ContentCopyIcon />
+        </StyledIconButton>
+    )
+
     return (
         <StyledHoverContainer>
             <StyledClipboardIconContainer>
-                {showCopiedPopup ? (
-                    copiedPopup
-                ) : (
-                    <StyledIconButton onClick={onCopy} size='small'>
-                        <ContentCopyIcon />
-                    </StyledIconButton>
-                )}
+                {showCopiedPopup ? copiedPopup : clipboardIconButton}
             </StyledClipboardIconContainer>
         </StyledHoverContainer>
     )
