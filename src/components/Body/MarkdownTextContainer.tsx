@@ -1,13 +1,11 @@
-import { Box, Button, styled } from '@mui/material'
+import { Box, styled } from '@mui/material'
 import { useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
 import { CopyClipboardButton } from './CopyClipboardButton'
 
 export const MarkdownTextContainer = () => {
-    const theme = useAppSelector((state) => state.theme)
     const markdownText = useAppSelector((state) => state.mdText)
     const [isHovering, setIsHovering] = useState(false)
-    const [showCopiedPopup, setShowCopiedPopup] = useState(false)
 
     const StyledMdTextContainer = styled(Box)({
         width: '50%',
@@ -21,48 +19,13 @@ export const MarkdownTextContainer = () => {
         borderRadius: 6.5,
     })
 
-    const onCopy = () => {
-        navigator.clipboard.writeText(markdownText)
-        popUpCopied()
-    }
-
-    const popUpCopied = () => {
-        setShowCopiedPopup(true)
-        setTimeout(() => setShowCopiedPopup(false), 1000)
-    }
-
-    const copyButtonColor = theme === 'dark' ? '#2a2a2a' : '#F5F5F5'
-
     return (
         <StyledMdTextContainer
             onMouseLeave={() => setIsHovering(false)}
             onMouseEnter={() => setIsHovering(true)}
         >
             {isHovering && (
-                <Box
-                    style={{
-                        margin: 0,
-                        right: 23,
-                        top: 151,
-                        position: 'absolute',
-                        backgroundColor: copyButtonColor,
-                        borderRadius: 7,
-                        paddingBottom: 1,
-                        zIndex: 1000,
-                    }}
-                >
-                    {showCopiedPopup ? (
-                        <Button
-                            sx={{
-                                display: 'inline',
-                            }}
-                        >
-                            Copied
-                        </Button>
-                    ) : (
-                        <CopyClipboardButton onClick={onCopy} isHovering={isHovering} />
-                    )}
-                </Box>
+                <CopyClipboardButton isHovering={isHovering} markdownText={markdownText} />
             )}
             <pre style={{ marginTop: 15, display: 'inline' }}>{markdownText}</pre>
         </StyledMdTextContainer>
