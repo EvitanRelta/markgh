@@ -16,7 +16,7 @@ const replaceOnlyNonCodeOrCodeBlock = (
     return markdown.replace(separateCodeBlocksRegex, processOnlyNonCodeOrCodeBlock)
 }
 
-export default (markdown: string) => {
+export const postProcessMarkdown = (markdown: string) => {
     type StrReplacement = (str: string) => string
 
     // Assumes that there's no more than 2 '&nbsp;' in a row.

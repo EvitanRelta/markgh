@@ -1,14 +1,14 @@
 import { Box } from '@mui/material'
 import { useAppSelector } from '../../../store/hooks'
-import FileOption from './FileMenu/FileOption'
-import SnapshotOption from './Snapshots/SnapshotOption'
+import { FileOption } from './FileMenu/FileOption'
+import { SnapshotOption } from './Snapshots/SnapshotOption'
 
 interface Props {
     title: string
     openVersions: (e: React.MouseEvent) => void
 }
 
-const ToolbarContainer = ({ title, openVersions }: Props) => {
+export const ToolbarContainer = ({ title, openVersions }: Props) => {
     const markdownText = useAppSelector((state) => state.mdText)
 
     const onDownload = () => {
@@ -34,5 +34,3 @@ const ToolbarContainer = ({ title, openVersions }: Props) => {
         </Box>
     )
 }
-
-export default ToolbarContainer

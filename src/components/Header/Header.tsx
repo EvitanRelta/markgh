@@ -7,10 +7,10 @@ import {
 import { removeTipTapArtifacts } from '../.././converterFunctions/helpers/removeTipTapArtifacts'
 import { useAppSelector } from '../../store/hooks'
 import { EditorDB, Snapshot } from '.././IndexedDB/initDB'
-import LastEdited from './ToolbarOptions/Snapshots/LastEdited'
-import VersionIndex from './ToolbarOptions/Snapshots/VersionIndex'
-import ToolbarContainer from './ToolbarOptions/ToolbarContainer'
-import UserMenuContainer from './UserMenu/UserMenuContainer'
+import { LastEdited } from './ToolbarOptions/Snapshots/LastEdited'
+import { VersionIndex } from './ToolbarOptions/Snapshots/VersionIndex'
+import { ToolbarContainer } from './ToolbarOptions/ToolbarContainer'
+import { UserMenuContainer } from './UserMenu/UserMenuContainer'
 
 interface Props {
     title: string

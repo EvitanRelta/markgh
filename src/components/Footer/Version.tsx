@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import packageInfo from '../../../package.json'
 
-export default () => (
+export const Version = () => (
     <Box
         style={{
             margin: 0,

@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import SnapshotIcon from './SnapshotIcon'
+import { SnapshotIcon } from './SnapshotIcon'
 
 interface Props {
     lastEditedOn: string
@@ -7,7 +7,7 @@ interface Props {
     openVersions: (e: React.MouseEvent) => void
 }
 
-const LastEdited = ({ lastEditedOn, saveSnapshot, openVersions }: Props) => {
+export const LastEdited = ({ lastEditedOn, saveSnapshot, openVersions }: Props) => {
     return (
         <Box>
             <Box id='last-edited' sx={{ display: 'inline-block' }}>
@@ -31,5 +31,3 @@ const LastEdited = ({ lastEditedOn, saveSnapshot, openVersions }: Props) => {
         </Box>
     )
 }
-
-export default LastEdited

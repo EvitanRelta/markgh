@@ -1,4 +1,4 @@
-export default interface TurndownAugmentedNode extends HTMLElement {
+export interface TurndownAugmentedNode extends HTMLElement {
     flankingWhitespace: {
         leading: string
         trailing: string

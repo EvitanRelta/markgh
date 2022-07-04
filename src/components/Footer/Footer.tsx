@@ -1,7 +1,7 @@
 import { Box, Button } from '@mui/material'
 import { useAppSelector } from '../../store/hooks'
 import { EditorDB } from '../IndexedDB/initDB'
-import ImageContainer from './ImageContainer'
+import { ImageContainer } from './ImageContainer'
 
 interface Props {
     onClick: React.MouseEventHandler<HTMLButtonElement>
@@ -9,7 +9,7 @@ interface Props {
     db: EditorDB
 }
 
-const Footer = ({ onClick, showMarkdown, db }: Props) => {
+export const Footer = ({ onClick, showMarkdown, db }: Props) => {
     const theme = useAppSelector((state) => state.theme)
 
     return (
@@ -43,5 +43,3 @@ const Footer = ({ onClick, showMarkdown, db }: Props) => {
         </>
     )
 }
-
-export default Footer

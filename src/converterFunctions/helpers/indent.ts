@@ -1,1 +1,1 @@
-export default (str: string) => str.replaceAll(/(?<=^|\n)/g, '  ')
+export const indent = (str: string) => str.replaceAll(/(?<=^|\n)/g, '  ')

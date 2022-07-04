@@ -1,4 +1,4 @@
-import tipTapArtifactClassNames from './tipTapArtifactClassNames'
+import { tipTapArtifactClassNames } from './tipTapArtifactClassNames'
 
 export const removeTipTapArtifacts = (htmlElement: Element) => {
     const selector = tipTapArtifactClassNames.map((className) => '.' + className).join(',')

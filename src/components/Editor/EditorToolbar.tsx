@@ -17,8 +17,8 @@ import { Box, IconButton, styled, SvgIconTypeMap } from '@mui/material'
 import { OverridableComponent } from '@mui/material/OverridableComponent'
 import { Editor } from '@tiptap/react'
 import React from 'react'
-import AlignDropDown from './AlignDropDown'
-import HeadingDropDown from './HeadingDropDown'
+import { AlignDropDown } from './AlignDropDown'
+import { HeadingDropDown } from './HeadingDropDown'
 import {
     addUrlImage,
     blockQuote,
@@ -95,4 +95,6 @@ const EditorToolbar = ({ editor }: Props) => {
     )
 }
 
-export default React.memo(EditorToolbar)
+const MemorisedEditorToolbar = React.memo(EditorToolbar)
+
+export { MemorisedEditorToolbar as EditorToolbar }

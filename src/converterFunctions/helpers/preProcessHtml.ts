@@ -67,7 +67,7 @@ export const removeWrapperParagraphs = (htmlElement: Element) => {
     })
 }
 
-export default (htmlElement: Element) => {
+export const preProcessHtml = (htmlElement: Element) => {
     recursivelyEscape(htmlElement)
     removeCodeBlockWrapper(htmlElement)
     removeImageWrapper(htmlElement)

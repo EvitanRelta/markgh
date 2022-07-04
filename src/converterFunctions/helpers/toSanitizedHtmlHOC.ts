@@ -1,7 +1,7 @@
-import TurndownAugmentedNode from '../sharedTypes/TurndownAugmentedNode'
-import indent from './indent'
+import type { TurndownAugmentedNode } from '../sharedTypes/TurndownAugmentedNode'
+import { indent } from './indent'
 
-export default (
+export const toSanitizedHtmlHOC = (
     node: TurndownAugmentedNode,
     allowedAttributes: string[],
     addIndent: boolean = true

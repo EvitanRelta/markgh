@@ -11,7 +11,7 @@ interface Props {
     editor: Editor | null
 }
 
-const HeadingDropDown = ({ editor }: Props) => {
+export const HeadingDropDown = ({ editor }: Props) => {
     const [anchor, setAnchor] = useState<Element | null>(null)
     const [headingLevel, setHeadingLevel] = useState<HeadingLevels | null>(null)
     const theme = useAppSelector((state) => state.theme)
@@ -96,5 +96,3 @@ const HeadingDropDown = ({ editor }: Props) => {
         </Box>
     )
 }
-
-export default HeadingDropDown

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { useAppSelector } from '../../../store/hooks'
 
-const UserInfo = () => {
+export const UserInfo = () => {
     const auth = useAppSelector((state) => state.auth)
 
     return (
@@ -10,5 +10,3 @@ const UserInfo = () => {
         </Box>
     )
 }
-
-export default UserInfo

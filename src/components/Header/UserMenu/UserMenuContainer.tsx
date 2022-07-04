@@ -2,12 +2,12 @@ import { Avatar, Menu, MenuItem } from '@mui/material'
 import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import { toggleTheme } from '../../../store/themeSlice'
-import LoginOption from './LoginOption'
-import LogoutOption from './LogoutOption'
-import ThemeOption from './ThemeOption'
-import UserInfo from './UserInfo'
+import { LoginOption } from './LoginOption'
+import { LogoutOption } from './LogoutOption'
+import { ThemeOption } from './ThemeOption'
+import { UserInfo } from './UserInfo'
 
-const UserMenuContainer = () => {
+export const UserMenuContainer = () => {
     const dispatch = useAppDispatch()
     const auth = useAppSelector((state) => state.auth)
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
@@ -50,5 +50,3 @@ const UserMenuContainer = () => {
         </>
     )
 }
-
-export default UserMenuContainer

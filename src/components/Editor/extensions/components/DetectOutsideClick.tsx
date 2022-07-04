@@ -25,7 +25,7 @@ interface Props {
 
 // Detects clicks outside of child node
 // Based on https://stackoverflow.com/a/42234988
-export default ({ onOutsideClick, children }: Props) => {
+export const DetectOutsideClick = ({ onOutsideClick, children }: Props) => {
     const wrapperRef = useRef(null)
     useOutsideDetector(wrapperRef, onOutsideClick)
 

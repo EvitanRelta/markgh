@@ -43,7 +43,7 @@ const SyntaxLanguageTextField = styled(TextField)({
     width: '100px',
 })
 
-export default ({ node, updateAttributes, extension }: Props) => {
+export const CodeBlockComponent = ({ node, updateAttributes, extension }: Props) => {
     const language = node.attrs.language
     const lowlight = extension.options.lowlight
     const theme = useAppSelector((state) => state.theme)

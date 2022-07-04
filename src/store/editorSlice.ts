@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Editor } from '@tiptap/react'
-import extensions from '../components/Editor/extensions/extensions'
-import placeholderEditorHtml from '../placeholderEditorHtml'
+import { extensions } from '../components/Editor/extensions/extensions'
+import { placeholderEditorHtml } from '../placeholderEditorHtml'
 
 const editorSlice = createSlice({
     name: 'editor',

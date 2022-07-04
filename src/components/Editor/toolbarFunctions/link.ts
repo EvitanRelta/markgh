@@ -1,6 +1,6 @@
 import { Editor } from '@tiptap/react'
 
-export default (editor: Editor | null) => () => {
+export const link = (editor: Editor | null) => () => {
     if (!editor) return
 
     const hasLink = editor.getAttributes('link').href !== undefined

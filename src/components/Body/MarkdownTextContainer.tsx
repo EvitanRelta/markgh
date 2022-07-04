@@ -1,9 +1,9 @@
 import { Box, Button } from '@mui/material'
 import { useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
-import CopyClipboardButton from './CopyClipboardButton'
+import { CopyClipboardButton } from './CopyClipboardButton'
 
-const MarkdownTextContainer = () => {
+export const MarkdownTextContainer = () => {
     const theme = useAppSelector((state) => state.theme)
     const markdownText = useAppSelector((state) => state.mdText)
     const [isHovering, setIsHovering] = useState(false)
@@ -68,5 +68,3 @@ const MarkdownTextContainer = () => {
         </Box>
     )
 }
-
-export default MarkdownTextContainer

@@ -6,7 +6,7 @@ interface Props {
     saveSnapshot: () => void
 }
 
-const SnapshotIcon = ({ saveSnapshot }: Props) => {
+export const SnapshotIcon = ({ saveSnapshot }: Props) => {
     const [saved, setSaved] = useState<boolean>(false)
 
     const onSnapshot = () => {
@@ -36,5 +36,3 @@ const SnapshotIcon = ({ saveSnapshot }: Props) => {
         </IconButton>
     )
 }
-
-export default SnapshotIcon
