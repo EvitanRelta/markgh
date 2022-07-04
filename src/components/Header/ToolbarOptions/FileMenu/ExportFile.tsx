@@ -1,4 +1,4 @@
-import FileDownloadIcon from '@mui/icons-material/FileDownload'
+import { FileDownload as FileDownloadIcon } from '@mui/icons-material'
 import { Box, IconButton, MenuItem } from '@mui/material'
 
 interface Props {

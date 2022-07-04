@@ -1,4 +1,4 @@
-import LogoutIcon from '@mui/icons-material/Logout'
+import { Logout as LogoutIcon } from '@mui/icons-material'
 import { ListItemIcon, MenuItem } from '@mui/material'
 import { logoutUser } from '../../../store/authSlice'
 import { useAppDispatch } from '../../../store/hooks'

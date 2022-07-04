@@ -1,5 +1,4 @@
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import GitHubIcon from '@mui/icons-material/GitHub'
+import { ArrowForwardIos as ArrowForwardIosIcon, GitHub as GitHubIcon } from '@mui/icons-material'
 import {
     Box,
     Button,

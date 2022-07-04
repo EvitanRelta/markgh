@@ -1,5 +1,4 @@
-import CameraAltIcon from '@mui/icons-material/CameraAlt'
-import CheckIcon from '@mui/icons-material/Check'
+import { CameraAlt as CameraAltIcon, Check as CheckIcon } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 import { useState } from 'react'
 

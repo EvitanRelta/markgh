@@ -1,5 +1,4 @@
-import Brightness4Icon from '@mui/icons-material/Brightness4'
-import Brightness7Icon from '@mui/icons-material/Brightness7'
+import { Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon } from '@mui/icons-material'
 import { ListItemIcon } from '@mui/material'
 import { useAppSelector } from '../../../store/hooks'
 

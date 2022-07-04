@@ -1,4 +1,4 @@
-import FolderOpenIcon from '@mui/icons-material/FolderOpen'
+import { FolderOpen as FolderOpenIcon } from '@mui/icons-material'
 import { Box, IconButton, Input, MenuItem } from '@mui/material'
 import React from 'react'
 import { markdownToHtml } from '../../../../converterFunctions'

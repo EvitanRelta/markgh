@@ -1,5 +1,4 @@
-import ArticleIcon from '@mui/icons-material/Article'
-import DeleteIcon from '@mui/icons-material/Delete'
+import { Article as ArticleIcon, Delete as DeleteIcon } from '@mui/icons-material'
 import {
     Avatar,
     Box,
