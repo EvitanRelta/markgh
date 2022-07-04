@@ -5,8 +5,8 @@ import { useState } from 'react'
 import { loginUser, logoutUser } from '../../../store/authSlice'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import { toggleTheme } from '../../../store/themeSlice'
-import Login from './Login'
-import Logout from './Logout'
+import LoginOption from './LoginOption'
+import LogoutOption from './LogoutOption'
 import ThemeOption from './ThemeOption'
 import UserInfo from './UserInfo'
 
@@ -57,7 +57,7 @@ const UserMenuContainer = ({ title }: Props) => {
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 {auth.loggedIn && <UserInfo />}
                 <MenuItem onClick={handleLoginLogout}>
-                    {auth.loggedIn ? <Logout /> : <Login />}
+                    {auth.loggedIn ? <LogoutOption /> : <LoginOption />}
                 </MenuItem>
                 <MenuItem onClick={handleChangeTheme}>
                     <ThemeOption />
