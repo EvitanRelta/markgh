@@ -38,7 +38,6 @@ export const MarkdownTextContainer = () => {
     const theme = useAppSelector((state) => state.theme)
     const markdownText = useAppSelector((state) => state.mdText)
     const [isHovering, setIsHovering] = useState(false)
-
     const [showCopiedPopup, setShowCopiedPopup] = useState(false)
 
     const onCopy = () => {
@@ -60,7 +59,7 @@ export const MarkdownTextContainer = () => {
 
     return (
         <StyledMdTextContainer
-            onMouseLeave={() => setIsHovering(false)}
+            onMouseLeave={() => !showCopiedPopup && setIsHovering(false)}
             onMouseEnter={() => setIsHovering(true)}
         >
             {isHovering && (
