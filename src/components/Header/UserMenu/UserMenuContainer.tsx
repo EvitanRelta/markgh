@@ -1,7 +1,6 @@
 import { Menu, MenuItem } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import { useState } from 'react'
-import { loginUser, logoutUser } from '../../../store/authSlice'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import { toggleTheme } from '../../../store/themeSlice'
 import LoginOption from './LoginOption'
@@ -32,11 +31,6 @@ const UserMenuContainer = ({ title }: Props) => {
         closeMenu()
     }
 
-    const handleLoginLogout = () => {
-        if (auth.loggedIn) dispatch(logoutUser())
-        else dispatch(loginUser())
-    }
-
     const userPhoto = auth.user && auth.user.photoURL ? auth.user.photoURL : undefined
 
     return (
@@ -54,10 +48,14 @@ const UserMenuContainer = ({ title }: Props) => {
                 onClick={openMenu}
             />
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
-                {auth.loggedIn && <UserInfo />}
-                <MenuItem onClick={handleLoginLogout}>
-                    {auth.loggedIn ? <LogoutOption /> : <LoginOption />}
-                </MenuItem>
+                {auth.loggedIn ? (
+                    <>
+                        <UserInfo />
+                        <LogoutOption />
+                    </>
+                ) : (
+                    <LoginOption />
+                )}
                 <MenuItem onClick={handleChangeTheme}>
                     <ThemeOption />
                 </MenuItem>
