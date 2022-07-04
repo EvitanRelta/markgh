@@ -3,7 +3,11 @@ import { MenuItem } from '@mui/material'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 
-const ExportFile = ({ onDownload }) => {
+interface Props {
+    onDownload: () => void
+}
+
+const ExportFile = ({ onDownload }: Props) => {
     return (
         <MenuItem style={{ padding: 0, marginTop: 2 }} onClick={onDownload}>
             <Box style={{ cursor: 'pointer' }}>
