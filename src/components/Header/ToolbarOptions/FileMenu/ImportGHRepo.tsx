@@ -113,7 +113,7 @@ export const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
             setShowError(true)
             if (!staticAxios.isAxiosError(e)) return setErrorMessage((e as Error).message)
             if (e.response?.status === 404)
-                return setErrorMessage("Repo doesn't exist, or you don't have access to it.")
+                return setErrorMessage("README.md doesn't exist, or you don't have access to it.")
             return setErrorMessage(e.message)
         }
         setShowLoading(false)
