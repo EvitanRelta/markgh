@@ -30,8 +30,16 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
     const textColor = theme === 'dark' ? 'white' : '#181414'
 
     const updateSnapshotsFromDb = async () => {
-        let allSnapshots = await db.snapshots.toArray()
-        setSnapshotArray(allSnapshots)
+        try {
+            let allSnapshots = await db.snapshots.toArray()
+            setSnapshotArray(allSnapshots)
+        } catch (e) {
+            //if 'snapshots' field is not initialised in db, it will be undefined, and 'toArray' causes a TypeError'
+            if (db.snapshots === undefined) {
+                await db.delete()
+                window.location.reload()
+            }
+        }
     }
 
     const saveSnapshot = () => {
