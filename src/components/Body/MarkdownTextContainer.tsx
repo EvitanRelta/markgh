@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material'
+import { Box, Button, styled } from '@mui/material'
 import { useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
 import { CopyClipboardButton } from './CopyClipboardButton'
@@ -7,8 +7,19 @@ export const MarkdownTextContainer = () => {
     const theme = useAppSelector((state) => state.theme)
     const markdownText = useAppSelector((state) => state.mdText)
     const [isHovering, setIsHovering] = useState(false)
-
     const [showCopiedPopup, setShowCopiedPopup] = useState(false)
+
+    const StyledMdTextContainer = styled(Box)({
+        width: '50%',
+        border: '1px solid #d0cccc',
+        padding: '20px',
+        paddingTop: 15,
+        paddingRight: 8,
+        margin: '10px',
+        overflowX: 'auto',
+        marginTop: 9.5,
+        borderRadius: 6.5,
+    })
 
     const onCopy = () => {
         navigator.clipboard.writeText(markdownText)
@@ -23,18 +34,7 @@ export const MarkdownTextContainer = () => {
     const copyButtonColor = theme === 'dark' ? '#2a2a2a' : '#F5F5F5'
 
     return (
-        <Box
-            style={{
-                width: '50%',
-                border: '1px solid #d0cccc',
-                padding: '20px',
-                paddingTop: 15,
-                paddingRight: 8,
-                margin: '10px',
-                overflowX: 'auto',
-                marginTop: 9.5,
-                borderRadius: 6.5,
-            }}
+        <StyledMdTextContainer
             onMouseLeave={() => setIsHovering(false)}
             onMouseEnter={() => setIsHovering(true)}
         >
@@ -60,11 +60,11 @@ export const MarkdownTextContainer = () => {
                             Copied
                         </Button>
                     ) : (
-                        <CopyClipboardButton onClick={onCopy} />
+                        <CopyClipboardButton onClick={onCopy} isHovering={isHovering} />
                     )}
                 </Box>
             )}
             <pre style={{ marginTop: 15, display: 'inline' }}>{markdownText}</pre>
-        </Box>
+        </StyledMdTextContainer>
     )
 }
