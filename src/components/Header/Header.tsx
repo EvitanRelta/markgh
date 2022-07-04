@@ -16,7 +16,6 @@ import { UserMenuContainer } from './UserMenu/UserMenuContainer'
 interface Props {
     fileTitle: string
     setFileTitle: React.Dispatch<React.SetStateAction<string>>
-    lastEditedOn: string
     db: EditorDB
 }
 
@@ -39,8 +38,9 @@ const StyledBottomRow = styled(Box)({
     paddingBottom: 5,
 })
 
-export const Header = ({ fileTitle, setFileTitle, lastEditedOn, db }: Props) => {
+export const Header = ({ fileTitle, setFileTitle, db }: Props) => {
     const editor = useAppSelector((state) => state.data.editor)
+    const lastEditedOn = useAppSelector((state) => state.data.lastEditedOn)
     const [snapshotArray, setSnapshotArray] = useState<Array<Snapshot>>([])
     const [showVersions, setShowVersions] = useState<(EventTarget & Element) | null>(null)
 
@@ -96,11 +96,7 @@ export const Header = ({ fileTitle, setFileTitle, lastEditedOn, db }: Props) => 
             </StyledTopRow>
             <StyledBottomRow>
                 <ToolbarContainer fileTitle={fileTitle} openVersions={openVersions} />
-                <LastEdited
-                    lastEditedOn={lastEditedOn}
-                    saveSnapshot={saveSnapshot}
-                    openVersions={openVersions}
-                />
+                <LastEdited saveSnapshot={saveSnapshot} openVersions={openVersions} />
             </StyledBottomRow>
             <VersionIndex
                 anchorEl={showVersions}

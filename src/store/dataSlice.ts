@@ -15,6 +15,7 @@ export const injectStore = (_store: AppStore) => {
 interface DataState {
     editor: Editor
     markdownText: string
+    lastEditedOn: string
 }
 
 const editor = new Editor({
@@ -28,6 +29,7 @@ const dataSlice = createSlice({
     initialState: {
         editor,
         markdownText: '',
+        lastEditedOn: localStorage['lastEditedOn'],
     } as DataState,
     reducers: {
         setMarkdownText(state, actions: PayloadAction<string>) {
@@ -36,8 +38,15 @@ const dataSlice = createSlice({
                 markdownText: actions.payload,
             }
         },
+        setLastEditedOn(state, actions: PayloadAction<string>) {
+            localStorage['lastEditedOn'] = actions.payload
+            return {
+                ...state,
+                lastEditedOn: actions.payload,
+            }
+        },
     },
 })
 
-export const { setMarkdownText } = dataSlice.actions
+export const { setMarkdownText, setLastEditedOn } = dataSlice.actions
 export const dataReducer = dataSlice.reducer

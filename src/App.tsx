@@ -14,7 +14,7 @@ import {
 import { removeTipTapArtifacts } from './converterFunctions/helpers/removeTipTapArtifacts'
 import { toMarkdown } from './converterFunctions/toMarkdown'
 import { setUser } from './store/authSlice'
-import { setMarkdownText } from './store/dataSlice'
+import { setLastEditedOn, setMarkdownText } from './store/dataSlice'
 import { formatDateTime } from './store/helpers/formatDateTime'
 import { useAppDispatch, useAppSelector } from './store/hooks'
 
@@ -30,9 +30,6 @@ export const App = () => {
 
     //var for setting file title
     const [fileTitle, setFileTitle] = useState('')
-
-    //var for 'Last edited on'
-    const [lastEditedOn, setLastEditedOn] = useState(localStorage['lastEditedOn'])
 
     //Defining theme colors
     const darkTheme = createTheme({
@@ -84,20 +81,14 @@ export const App = () => {
         const now = new Date()
         const formatedNow = formatDateTime(now)
 
-        setLastEditedOn(formatedNow)
-        localStorage['lastEditedOn'] = formatedNow
+        dispatch(setLastEditedOn(formatedNow))
     }
 
     return (
         <ThemeProvider theme={selectedTheme}>
             <CssBaseline />
             <Box id='app'>
-                <Header
-                    fileTitle={fileTitle}
-                    setFileTitle={setFileTitle}
-                    lastEditedOn={lastEditedOn}
-                    db={db}
-                />
+                <Header fileTitle={fileTitle} setFileTitle={setFileTitle} db={db} />
                 <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
                 <Box>
                     <Footer

@@ -1,8 +1,8 @@
 import { Box, styled } from '@mui/material'
+import { useAppSelector } from '../../../../store/hooks'
 import { SnapshotIcon } from './SnapshotIcon'
 
 interface Props {
-    lastEditedOn: string
     saveSnapshot: () => void
     openVersions: (e: React.MouseEvent) => void
 }
@@ -18,7 +18,9 @@ const StyledText = styled(Box)({
     cursor: 'pointer',
 })
 
-export const LastEdited = ({ lastEditedOn, saveSnapshot, openVersions }: Props) => {
+export const LastEdited = ({ saveSnapshot, openVersions }: Props) => {
+    const lastEditedOn = useAppSelector((state) => state.data.lastEditedOn)
+
     return (
         <>
             <StyledText onClick={openVersions} id='last-edited'>
