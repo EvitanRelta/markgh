@@ -4,7 +4,7 @@ interface Props {
     openVersions: (e: React.MouseEvent) => void
 }
 
-const FileOption = ({ openVersions }: Props) => {
+const SnapshotOption = ({ openVersions }: Props) => {
     return (
         <Box sx={{ display: 'inline-block' }}>
             <Button style={{ padding: 3 }} onClick={openVersions}>
@@ -14,4 +14,4 @@ const FileOption = ({ openVersions }: Props) => {
     )
 }
 
-export default FileOption
+export default SnapshotOption

@@ -3,7 +3,7 @@ import { ListItemIcon, MenuItem } from '@mui/material'
 import { loginUser } from '../../../store/authSlice'
 import { useAppDispatch } from '../../../store/hooks'
 
-const Login = () => {
+const LoginOption = () => {
     const dispatch = useAppDispatch()
 
     return (
@@ -16,4 +16,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default LoginOption
