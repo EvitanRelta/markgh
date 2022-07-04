@@ -1,6 +1,6 @@
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
-import IconButton from '@mui/material/IconButton'
+import { ListItemIcon } from '@mui/material'
 import { useAppSelector } from '../../../store/hooks'
 
 type Props = {}
@@ -10,7 +10,9 @@ const ThemeOption = ({}: Props) => {
 
     return (
         <>
-            <IconButton>{theme === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}</IconButton>
+            <ListItemIcon>
+                {theme === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+            </ListItemIcon>
             {theme === 'light' ? 'Dark' : 'Light'} mode
         </>
     )

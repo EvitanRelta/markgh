@@ -1,12 +1,12 @@
 import LogoutIcon from '@mui/icons-material/Logout'
-import IconButton from '@mui/material/IconButton'
+import { ListItemIcon } from '@mui/material'
 
 const Logout = () => {
     return (
         <>
-            <IconButton>
+            <ListItemIcon>
                 <LogoutIcon />
-            </IconButton>
+            </ListItemIcon>
             Logout
         </>
     )

@@ -1,12 +1,12 @@
 import GitHubIcon from '@mui/icons-material/GitHub'
-import IconButton from '@mui/material/IconButton'
+import { ListItemIcon } from '@mui/material'
 
 const Login = () => {
     return (
         <>
-            <IconButton>
+            <ListItemIcon>
                 <GitHubIcon />
-            </IconButton>
+            </ListItemIcon>
             Login with GitHub
         </>
     )
