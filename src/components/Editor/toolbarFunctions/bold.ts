@@ -1,6 +1,6 @@
 import { Editor } from '@tiptap/react'
 
-export default (editor: Editor | null) => () => {
+export const bold = (editor: Editor | null) => () => {
     if (!editor) return
 
     editor.chain().focus().toggleBold().run()

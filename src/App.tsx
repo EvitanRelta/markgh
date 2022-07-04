@@ -1,11 +1,11 @@
 import { Box, CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { onAuthStateChanged } from 'firebase/auth'
-import { ReactElement, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import Body from './components/Body/Body'
-import Footer from './components/Footer/Footer'
-import Version from './components/Footer/Version'
+import { Body } from './components/Body/Body'
+import { Footer } from './components/Footer/Footer'
+import { Version } from './components/Footer/Version'
 import { Header } from './components/Header/Header'
 import { EditorDB } from './components/IndexedDB/initDB'
 import {
@@ -13,12 +13,12 @@ import {
     removeImageWrapper,
 } from './converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from './converterFunctions/helpers/removeTipTapArtifacts'
-import toMarkdown from './converterFunctions/toMarkdown'
+import { toMarkdown } from './converterFunctions/toMarkdown'
 import { setUser } from './store/authSlice'
 import { useAppDispatch, useAppSelector } from './store/hooks'
 import { setMdText } from './store/mdTextSlice'
 
-export default function App(): ReactElement {
+export const App = () => {
     const db = new EditorDB()
     const dispatch = useAppDispatch()
     const editor = useAppSelector((state) => state.editor.editor)

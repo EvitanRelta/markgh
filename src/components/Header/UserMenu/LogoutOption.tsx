@@ -3,7 +3,7 @@ import { ListItemIcon, MenuItem } from '@mui/material'
 import { logoutUser } from '../../../store/authSlice'
 import { useAppDispatch } from '../../../store/hooks'
 
-const LogoutOption = () => {
+export const LogoutOption = () => {
     const dispatch = useAppDispatch()
 
     return (
@@ -15,5 +15,3 @@ const LogoutOption = () => {
         </MenuItem>
     )
 }
-
-export default LogoutOption

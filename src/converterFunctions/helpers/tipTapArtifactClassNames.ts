@@ -1,1 +1,1 @@
-export default ['ProseMirror-separator', 'ProseMirror-trailingBreak']
+export const tipTapArtifactClassNames = ['ProseMirror-separator', 'ProseMirror-trailingBreak']

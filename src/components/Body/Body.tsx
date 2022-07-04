@@ -1,15 +1,15 @@
 import { Box } from '@mui/material'
 import { useAppSelector } from '../../store/hooks'
-import EditorToolbar from '../Editor/EditorToolbar'
-import TextEditor from '../Editor/TextEditor'
-import MarkdownTextContainer from './MarkdownTextContainer'
+import { EditorToolbar } from '../Editor/EditorToolbar'
+import { TextEditor } from '../Editor/TextEditor'
+import { MarkdownTextContainer } from './MarkdownTextContainer'
 
 interface Props {
     showMarkdown: boolean
     onTextChange: (editorContainer: Element) => void | null
 }
 
-const Body = ({ showMarkdown, onTextChange }: Props) => {
+export const Body = ({ showMarkdown, onTextChange }: Props) => {
     const editorWidth = showMarkdown ? '50%' : '100%'
     const editor = useAppSelector((state) => state.editor.editor)
 
@@ -37,5 +37,3 @@ const Body = ({ showMarkdown, onTextChange }: Props) => {
         </>
     )
 }
-
-export default Body

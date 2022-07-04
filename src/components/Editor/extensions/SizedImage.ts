@@ -1,9 +1,9 @@
 import Image from '@tiptap/extension-image'
 import { ReactNodeViewRenderer } from '@tiptap/react'
-import ImageResizeComponent from './components/ImageResizeComponent'
+import { ImageResizeComponent } from './components/ImageResizeComponent'
 
 // Based on https://github.com/ueberdosis/tiptap/issues/1365#issuecomment-853799239
-export default Image.extend({
+export const SizedImage = Image.extend({
     addAttributes() {
         return {
             ...this.parent?.(),

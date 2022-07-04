@@ -5,7 +5,7 @@ import { NodeViewContent, NodeViewProps, NodeViewWrapper } from '@tiptap/react'
 import { useState } from 'react'
 import { ResizableBox } from 'react-resizable'
 import 'react-resizable/css/styles.css'
-import DetectOutsideClick from './DetectOutsideClick'
+import { DetectOutsideClick } from './DetectOutsideClick'
 
 interface Props extends NodeViewProps {
     node: NodeViewProps['node'] & {
@@ -79,7 +79,7 @@ const StyledResizableBox = styled(ResizableBox)({
     },
 })
 
-export default ({ node, updateAttributes, extension }: Props) => {
+export const ImageResizeComponent = ({ node, updateAttributes, extension }: Props) => {
     const [startingWidth, setStartingWidth] = useState(-1)
     const [startingHeight, setStartingHeight] = useState(-1)
     const [isResizing, setIsResizing] = useState(false)

@@ -1,6 +1,6 @@
 import { Plugin } from 'turndown'
 
-const lineBreak: Plugin = (service) => {
+export const lineBreak: Plugin = (service) => {
     service.addRule('align', {
         filter: 'br',
         replacement: (content, node, options) => {
@@ -8,5 +8,3 @@ const lineBreak: Plugin = (service) => {
         },
     })
 }
-
-export default lineBreak

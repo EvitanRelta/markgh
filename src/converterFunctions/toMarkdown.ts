@@ -1,9 +1,9 @@
 import TurndownService from 'turndown'
-import postProcessMarkdown from './helpers/postProcessMarkdown'
-import preProcessHtml from './helpers/preProcessHtml'
+import { postProcessMarkdown } from './helpers/postProcessMarkdown'
+import { preProcessHtml } from './helpers/preProcessHtml'
 import { plugins } from './turndownPlugins/plugins'
 
-export default (html: Element) => {
+export const toMarkdown = (html: Element) => {
     const htmlCopy = html.cloneNode(true) as HTMLElement
     preProcessHtml(htmlCopy)
 

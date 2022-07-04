@@ -1,11 +1,11 @@
 import TurndownService from 'turndown'
-import TurndownAugmentedNode from '../sharedTypes/TurndownAugmentedNode'
-import toSanitizedHtmlHOC from './toSanitizedHtmlHOC'
+import type { TurndownAugmentedNode } from '../sharedTypes/TurndownAugmentedNode'
+import { toSanitizedHtmlHOC } from './toSanitizedHtmlHOC'
 // Cannot import from './turndownPlugins/index.ts' like:
 // import { ignoreTipTapArtifacts, underline } from './turndownPlugins'
 // as 'align.ts' imports this file, which causes circular importing.
-import ignoreTipTapArtifacts from '../turndownPlugins/ignoreTipTapArtifacts'
-import underline from '../turndownPlugins/underline'
+import { ignoreTipTapArtifacts } from '../turndownPlugins/ignoreTipTapArtifacts'
+import { underline } from '../turndownPlugins/underline'
 
 interface AllowedAttr {
     filter: TurndownService.Filter
@@ -52,4 +52,4 @@ turndownHtmlOnly.addRule('htmlCodeblock', {
 
 turndownHtmlOnly.use([underline, ignoreTipTapArtifacts])
 
-export default turndownHtmlOnly
+export { turndownHtmlOnly }

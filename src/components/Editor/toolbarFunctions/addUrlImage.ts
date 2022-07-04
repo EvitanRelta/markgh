@@ -1,6 +1,6 @@
 import { Editor } from '@tiptap/react'
 
-export default (editor: Editor | null) => () => {
+export const addUrlImage = (editor: Editor | null) => () => {
     if (!editor) return
 
     const url = window.prompt('URL')

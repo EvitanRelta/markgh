@@ -33,7 +33,7 @@ const convertRelativeImageSrc = (
         .forEach(({ img, src }) => img.setAttribute('src', getAbsolutePath(src as string)))
 }
 
-export default (markdown: string, githubRepoInfo?: GithubRepoInfo) => {
+export const markdownToHtml = (markdown: string, githubRepoInfo?: GithubRepoInfo) => {
     const markdownit = new MarkdownIt({ html: true, linkify: true })
     const htmlString = markdownit.render(markdown).replaceAll(/\n(?=<\/code><\/pre>)/g, '')
 

@@ -2,7 +2,7 @@ import { Editor } from '@tiptap/react'
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6
 
-export default (editor: Editor | null) => (level: 0 | HeadingLevel) => {
+export const heading = (editor: Editor | null) => (level: 0 | HeadingLevel) => {
     if (!editor) return
 
     if (level === 0) {

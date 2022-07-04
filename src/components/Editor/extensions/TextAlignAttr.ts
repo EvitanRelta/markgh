@@ -1,7 +1,7 @@
 import TextAlign from '@tiptap/extension-text-align'
 
 // Replaces inline 'text-align' styles with 'align' attribute
-export default TextAlign.extend({
+export const TextAlignAttr = TextAlign.extend({
     addGlobalAttributes() {
         return [
             {

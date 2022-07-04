@@ -5,7 +5,7 @@ interface Props {
     onDownload: () => void
 }
 
-const ExportFile = ({ onDownload }: Props) => {
+export const ExportFile = ({ onDownload }: Props) => {
     return (
         <MenuItem style={{ padding: 0, marginTop: 2 }} onClick={onDownload}>
             <Box style={{ cursor: 'pointer' }}>
@@ -25,5 +25,3 @@ const ExportFile = ({ onDownload }: Props) => {
         </MenuItem>
     )
 }
-
-export default ExportFile

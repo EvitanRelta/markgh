@@ -4,7 +4,7 @@ import { FirebaseApp, initializeApp } from 'firebase/app'
 import { Auth, getAuth, GithubAuthProvider, signInWithPopup, User } from 'firebase/auth'
 import { AppDispatch, RootState } from '.'
 import { githubProvider } from '../authentication/config/authMethod'
-import firebaseConfig from '../authentication/config/firebaseConfig'
+import { firebaseConfig } from '../authentication/config/firebaseConfig'
 
 interface AuthState {
     loggedIn: boolean

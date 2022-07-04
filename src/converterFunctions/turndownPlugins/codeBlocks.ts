@@ -1,8 +1,8 @@
 import { Plugin, Rule } from 'turndown'
-import tipTapArtifactClassNames from '../helpers/tipTapArtifactClassNames'
-import turndownHtmlOnly from '../helpers/turndownHtmlOnly'
+import { tipTapArtifactClassNames } from '../helpers/tipTapArtifactClassNames'
+import { turndownHtmlOnly } from '../helpers/turndownHtmlOnly'
 
-const codeBlocks: Plugin = (service) => {
+export const codeBlocks: Plugin = (service) => {
     //@ts-expect-error
     const defaultRule: Required<Rule> = service.options.rules.fencedCodeBlock
 
@@ -24,5 +24,3 @@ const codeBlocks: Plugin = (service) => {
         },
     })
 }
-
-export default codeBlocks

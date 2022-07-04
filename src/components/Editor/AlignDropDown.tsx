@@ -13,7 +13,7 @@ interface Props {
     editor: Editor | null
 }
 
-export default ({ editor }: Props) => {
+export const AlignDropDown = ({ editor }: Props) => {
     const onChange = (alignment: Alignment) => {
         textAlign(editor)(alignment)
         closeMenu()

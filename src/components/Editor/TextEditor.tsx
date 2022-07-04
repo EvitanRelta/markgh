@@ -13,7 +13,7 @@ interface Props {
     onTextChange: (editorContainer: Element) => void | null
 }
 
-export default ({ onTextChange }: Props) => {
+export const TextEditor = ({ onTextChange }: Props) => {
     const [editorContainer, setEditorContainer] = useState<Element | null>(null)
     const editor = useAppSelector((state) => state.editor.editor)
     const theme = useAppSelector((state) => state.theme)

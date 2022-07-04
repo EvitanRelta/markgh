@@ -4,7 +4,7 @@ import React from 'react'
 import { markdownToHtml } from '../../../../converterFunctions'
 import { useAppSelector } from '../../../../store/hooks'
 
-const OpenFile = () => {
+export const OpenFile = () => {
     const editor = useAppSelector((state) => state.editor.editor)
 
     const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,5 +52,3 @@ const OpenFile = () => {
         </MenuItem>
     )
 }
-
-export default OpenFile

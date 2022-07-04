@@ -2,7 +2,7 @@ import { Brightness4 as Brightness4Icon, Brightness7 as Brightness7Icon } from '
 import { ListItemIcon } from '@mui/material'
 import { useAppSelector } from '../../../store/hooks'
 
-const ThemeOption = () => {
+export const ThemeOption = () => {
     const theme = useAppSelector((state) => state.theme)
 
     return (
@@ -14,5 +14,3 @@ const ThemeOption = () => {
         </>
     )
 }
-
-export default ThemeOption

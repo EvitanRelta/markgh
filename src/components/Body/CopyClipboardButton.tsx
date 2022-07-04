@@ -5,7 +5,7 @@ interface Props {
     onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const CopyClipboardButton = ({ onClick }: Props) => {
+export const CopyClipboardButton = ({ onClick }: Props) => {
     return (
         <div
             style={{
@@ -27,5 +27,3 @@ const CopyClipboardButton = ({ onClick }: Props) => {
         </div>
     )
 }
-
-export default CopyClipboardButton

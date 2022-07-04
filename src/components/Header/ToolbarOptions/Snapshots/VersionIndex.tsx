@@ -33,7 +33,7 @@ interface Props {
     deleteSnapshot: (snapshot: Snapshot) => Promise<void>
 }
 
-const VersionIndex = ({
+export const VersionIndex = ({
     anchorEl,
     onClose,
     snapshotArray,
@@ -188,5 +188,3 @@ const VersionIndex = ({
         </Box>
     )
 }
-
-export default VersionIndex

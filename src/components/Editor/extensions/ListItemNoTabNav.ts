@@ -1,7 +1,7 @@
 import ListItem from '@tiptap/extension-list-item'
 
 // Prevent navigation to other elements when pressing Tab.
-export default ListItem.extend({
+export const ListItemNoTabNav = ListItem.extend({
     addKeyboardShortcuts() {
         return {
             ...this.parent?.(),

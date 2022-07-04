@@ -1,14 +1,14 @@
 import { Box, Button, Menu } from '@mui/material'
 import { useState } from 'react'
-import ExportFile from './ExportFile'
-import ImportGHRepo from './ImportGHRepo'
-import OpenFile from './OpenFile'
+import { ExportFile } from './ExportFile'
+import { ImportGHRepo } from './ImportGHRepo'
+import { OpenFile } from './OpenFile'
 
 interface Props {
     onDownload: () => void
 }
 
-const FileOption = ({ onDownload }: Props) => {
+export const FileOption = ({ onDownload }: Props) => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
 
     const openMenu = (e: React.MouseEvent) => setAnchor(e.currentTarget)
@@ -27,5 +27,3 @@ const FileOption = ({ onDownload }: Props) => {
         </Box>
     )
 }
-
-export default FileOption

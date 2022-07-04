@@ -6,7 +6,7 @@ interface Props {
     db: EditorDB
 }
 
-const ImageConatiner = ({ db }: Props) => {
+export const ImageContainer = ({ db }: Props) => {
     const [images, setImages] = useState<EditorImage[]>([])
 
     //Retrieves images from db, and updates them in state
@@ -75,5 +75,3 @@ const ImageConatiner = ({ db }: Props) => {
         </>
     )
 }
-
-export default ImageConatiner
