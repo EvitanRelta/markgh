@@ -36,10 +36,7 @@ export const UserMenuContainer = () => {
             />
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 {auth.loggedIn ? (
-                    <>
-                        <UserInfo />
-                        <LogoutOption />
-                    </>
+                    [<UserInfo key='userInfo' />, <LogoutOption key='logout' />]
                 ) : (
                     <LoginOption />
                 )}
