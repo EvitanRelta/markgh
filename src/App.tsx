@@ -62,7 +62,7 @@ export const App = () => {
 
     //Updates preferred theme in localStorage
     useEffect(() => {
-        localStorage['selectedTheme'] = theme
+        localStorage['theme'] = theme
     }, [theme])
 
     const saveEditorText = async () => {

@@ -4,7 +4,7 @@ type State = 'light' | 'dark'
 
 const themeSlice = createSlice({
     name: 'theme',
-    initialState: (localStorage['selectedTheme'] || 'light') as State,
+    initialState: (localStorage['theme'] || 'light') as State,
     reducers: {
         toggleTheme(state) {
             switch (state) {
