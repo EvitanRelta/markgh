@@ -1,24 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Editor } from '@tiptap/react'
-import _ from 'lodash'
-import type { AppStore, AppThunkApiConfig } from '.'
-import { extensions } from '../components/Editor/extensions/extensions'
+import type { AppThunkApiConfig } from '.'
 import { EditorDB } from '../components/IndexedDB/initDB'
-import { toMarkdown } from '../converterFunctions'
 import {
     removeCodeBlockWrapper,
     removeImageWrapper,
 } from '../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../converterFunctions/helpers/removeTipTapArtifacts'
-import { placeholderEditorHtml } from '../placeholderEditorHtml'
-
-let store!: AppStore
-
-// 'injectStore' code source:
-// https://redux.js.org/faq/code-structure#how-can-i-use-the-redux-store-in-non-component-files
-export const injectStore = (_store: AppStore) => {
-    store = _store
-}
+import { editor } from './helpers/initEditor'
 
 interface DataState {
     editor: Editor
@@ -26,12 +15,6 @@ interface DataState {
     markdownText: string
     lastEditedOn: string
 }
-
-const editor = new Editor({
-    extensions,
-    content: placeholderEditorHtml,
-    parseOptions: { preserveWhitespace: 'full' },
-})
 
 const dataSlice = createSlice({
     name: 'data',
@@ -58,7 +41,7 @@ const dataSlice = createSlice({
     },
 })
 
-const saveEditorContent = createAsyncThunk<void, undefined, AppThunkApiConfig>(
+export const saveEditorContent = createAsyncThunk<void, undefined, AppThunkApiConfig>(
     'data/saveEditorContent',
     async (_, { getState, rejectWithValue }) => {
         const { editor, database } = getState().data
@@ -75,34 +58,6 @@ const saveEditorContent = createAsyncThunk<void, undefined, AppThunkApiConfig>(
             return rejectWithValue(e as Error)
         }
     }
-)
-
-const onTextChange = (editorContainer: Element) => {
-    const { dispatch } = store
-    const markdown = toMarkdown(editorContainer)
-    dispatch(saveEditorContent())
-    dispatch(setMarkdownText(markdown))
-
-    const now = new Date()
-    const formatedNow = now.toLocaleString('en-US', {
-        month: 'short',
-        day: '2-digit',
-        hour: 'numeric',
-        minute: 'numeric',
-    })
-
-    dispatch(setLastEditedOn(formatedNow))
-}
-
-editor.on('create', ({ editor }) => {
-    onTextChange(editor.view.dom)
-})
-
-editor.on(
-    'update',
-    _.debounce(({ editor }) => {
-        onTextChange(editor.view.dom)
-    }, 50)
 )
 
 export const { setMarkdownText, setLastEditedOn } = dataSlice.actions
