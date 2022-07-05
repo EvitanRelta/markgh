@@ -44,11 +44,11 @@ export const App = () => {
     const selectedTheme = theme === 'dark' ? darkTheme : lightTheme
 
     useEffect(() => {
-        const getPersistedText = async () => {
+        const getPersistentContent = async () => {
             const data = await db.text.get(0)
             return data
         }
-        getPersistedText().then((data) => {
+        getPersistentContent().then((data) => {
             if (data === undefined) return
             editor.commands.clearContent(false)
             editor.commands.setContent(data.value, true, { preserveWhitespace: 'full' })
