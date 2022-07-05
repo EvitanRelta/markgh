@@ -27,11 +27,6 @@ export const App = () => {
         onAuthStateChanged(auth, (user) => dispatch(setUser(user)))
     }, [auth])
 
-    //Updates preferred theme in localStorage
-    useEffect(() => {
-        localStorage['theme'] = theme
-    }, [theme])
-
     return (
         <ThemeProvider theme={selectedTheme}>
             <CssBaseline />
