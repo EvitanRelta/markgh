@@ -4,11 +4,11 @@ import { FileOption } from './FileMenu/FileOption'
 import { SnapshotOption } from './Snapshots/SnapshotOption'
 
 interface Props {
-    fileTitle: string
     openVersions: (e: React.MouseEvent) => void
 }
 
-export const ToolbarContainer = ({ fileTitle, openVersions }: Props) => {
+export const ToolbarContainer = ({ openVersions }: Props) => {
+    const fileTitle = useAppSelector((state) => state.data.fileTitle)
     const markdownText = useAppSelector((state) => state.data.markdownText)
 
     const onDownload = () => {

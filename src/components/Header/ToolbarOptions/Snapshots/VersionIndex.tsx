@@ -21,7 +21,7 @@ import {
     removeImageWrapper,
 } from '../../../../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../../../../converterFunctions/helpers/removeTipTapArtifacts'
-import { setEditorContent } from '../../../../store/dataSlice'
+import { setEditorContent, setFileTitle } from '../../../../store/dataSlice'
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
 import { Snapshot } from '../../../IndexedDB/initDB'
 
@@ -29,7 +29,6 @@ interface Props {
     anchorEl: (EventTarget & Element) | null
     onClose: () => void
     snapshotArray: Snapshot[]
-    setFileTitle: React.Dispatch<React.SetStateAction<string>>
     saveSnapshot: () => void
     closeVersions: () => void
     deleteSnapshot: (snapshot: Snapshot) => Promise<void>
@@ -57,7 +56,6 @@ export const VersionIndex = ({
     anchorEl,
     onClose,
     snapshotArray,
-    setFileTitle,
     saveSnapshot,
     closeVersions,
     deleteSnapshot,
@@ -89,7 +87,7 @@ export const VersionIndex = ({
     }
 
     const loadEditorContent = (snapshot: Snapshot) => {
-        setFileTitle(snapshot.title)
+        dispatch(setFileTitle(snapshot.title))
         dispatch(setEditorContent(snapshot.value))
         closeVersions()
     }

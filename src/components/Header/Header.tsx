@@ -13,11 +13,6 @@ import { VersionIndex } from './ToolbarOptions/Snapshots/VersionIndex'
 import { ToolbarContainer } from './ToolbarOptions/ToolbarContainer'
 import { UserMenuContainer } from './UserMenu/UserMenuContainer'
 
-interface Props {
-    fileTitle: string
-    setFileTitle: React.Dispatch<React.SetStateAction<string>>
-}
-
 const StyledHeaderBox = styled(Box)({
     borderBottom: '1px solid gray',
     marginBottom: '0px',
@@ -37,8 +32,9 @@ const StyledBottomRow = styled(Box)({
     paddingBottom: 5,
 })
 
-export const Header = ({ fileTitle, setFileTitle }: Props) => {
+export const Header = () => {
     const editor = useAppSelector((state) => state.data.editor)
+    const fileTitle = useAppSelector((state) => state.data.fileTitle)
     const db = useAppSelector((state) => state.data.database)
     const lastEditedOn = useAppSelector((state) => state.data.lastEditedOn)
     const [snapshotArray, setSnapshotArray] = useState<Array<Snapshot>>([])
@@ -91,18 +87,17 @@ export const Header = ({ fileTitle, setFileTitle }: Props) => {
     return (
         <StyledHeaderBox>
             <StyledTopRow>
-                <TitleInput fileTitle={fileTitle} setFileTitle={setFileTitle} />
+                <TitleInput />
                 <UserMenuContainer />
             </StyledTopRow>
             <StyledBottomRow>
-                <ToolbarContainer fileTitle={fileTitle} openVersions={openVersions} />
+                <ToolbarContainer openVersions={openVersions} />
                 <LastEdited saveSnapshot={saveSnapshot} openVersions={openVersions} />
             </StyledBottomRow>
             <VersionIndex
                 anchorEl={showVersions}
                 onClose={closeVersions}
                 snapshotArray={snapshotArray}
-                setFileTitle={setFileTitle}
                 saveSnapshot={saveSnapshot}
                 closeVersions={closeVersions}
                 deleteSnapshot={deleteSnapshot}

@@ -1,10 +1,6 @@
 import { Input, styled } from '@mui/material'
-import { useAppSelector } from '../../store/hooks'
-
-interface Props {
-    fileTitle: string
-    setFileTitle: React.Dispatch<React.SetStateAction<string>>
-}
+import { setFileTitle } from '../../store/dataSlice'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 
 const StyledInput = styled(Input)({
     border: '0px',
@@ -24,7 +20,9 @@ const StyledInput = styled(Input)({
     },
 })
 
-export const TitleInput = ({ fileTitle, setFileTitle }: Props) => {
+export const TitleInput = () => {
+    const dispatch = useAppDispatch()
+    const fileTitle = useAppSelector((state) => state.data.fileTitle)
     const theme = useAppSelector((state) => state.theme)
 
     //vars for theme control
@@ -36,9 +34,7 @@ export const TitleInput = ({ fileTitle, setFileTitle }: Props) => {
             type='text'
             placeholder='Untitled Document'
             value={fileTitle}
-            onChange={(e) => {
-                setFileTitle(e.target.value)
-            }}
+            onChange={(e) => dispatch(setFileTitle(e.target.value))}
             sx={{ backgroundColor: themeColor, color: textColor }}
         />
     )

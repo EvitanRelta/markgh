@@ -17,9 +17,6 @@ export const App = () => {
     //var for controlling whether to show markdown
     const [showMarkdown, setShowMarkdown] = useState(false)
 
-    //var for setting file title
-    const [fileTitle, setFileTitle] = useState('')
-
     //Defining theme colors
     const darkTheme = createTheme({
         palette: { mode: 'dark' },
@@ -42,7 +39,7 @@ export const App = () => {
         <ThemeProvider theme={selectedTheme}>
             <CssBaseline />
             <Box id='app'>
-                <Header fileTitle={fileTitle} setFileTitle={setFileTitle} />
+                <Header />
                 <Body showMarkdown={showMarkdown} />
                 <Box>
                     <Footer
