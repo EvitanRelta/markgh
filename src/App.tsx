@@ -1,7 +1,7 @@
 import { Box, CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { onAuthStateChanged } from 'firebase/auth'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Body } from './components/Body/Body'
 import { Footer } from './components/Footer/Footer'
 import { Version } from './components/Footer/Version'
@@ -13,9 +13,6 @@ export const App = () => {
     const dispatch = useAppDispatch()
     const auth = useAppSelector((state) => state.auth.auth)
     const theme = useAppSelector((state) => state.theme)
-
-    //var for controlling whether to show markdown
-    const [showMarkdown, setShowMarkdown] = useState(false)
 
     //Defining theme colors
     const darkTheme = createTheme({
@@ -40,12 +37,9 @@ export const App = () => {
             <CssBaseline />
             <Box id='app'>
                 <Header />
-                <Body showMarkdown={showMarkdown} />
+                <Body />
                 <Box>
-                    <Footer
-                        onClick={() => setShowMarkdown(!showMarkdown)}
-                        showMarkdown={showMarkdown}
-                    />
+                    <Footer />
                 </Box>
                 <Version />
             </Box>

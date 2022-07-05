@@ -16,6 +16,7 @@ interface DataState {
     markdownText: string
     lastEditedOn: string
     fileTitle: string
+    showMarkdown: boolean
 }
 
 const dataSlice = createSlice({
@@ -26,6 +27,7 @@ const dataSlice = createSlice({
         markdownText: '',
         lastEditedOn: localStorage['lastEditedOn'] ?? formatDateTime(new Date()),
         fileTitle: '',
+        showMarkdown: false,
     } as DataState,
     reducers: {
         setMarkdownText(state, actions: PayloadAction<string>) {
@@ -45,6 +47,12 @@ const dataSlice = createSlice({
             return {
                 ...state,
                 fileTitle: actions.payload,
+            }
+        },
+        setShowMarkdown(state, actions: PayloadAction<boolean>) {
+            return {
+                ...state,
+                showMarkdown: actions.payload,
             }
         },
         setEditorContent(state, actions: PayloadAction<string>) {
@@ -86,6 +94,6 @@ export const loadPersistentContent = createAsyncThunk<void, undefined, AppThunkA
     }
 )
 
-export const { setMarkdownText, setLastEditedOn, setFileTitle, setEditorContent } =
+export const { setMarkdownText, setLastEditedOn, setFileTitle, setShowMarkdown, setEditorContent } =
     dataSlice.actions
 export const dataReducer = dataSlice.reducer
