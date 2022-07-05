@@ -7,6 +7,7 @@ import {
     removeImageWrapper,
 } from '../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../converterFunctions/helpers/removeTipTapArtifacts'
+import { formatDateTime } from './helpers/formatDateTime'
 import { editor } from './helpers/initEditor'
 
 interface DataState {
@@ -23,7 +24,7 @@ const dataSlice = createSlice({
         editor,
         database: new EditorDB(),
         markdownText: '',
-        lastEditedOn: localStorage['lastEditedOn'],
+        lastEditedOn: localStorage['lastEditedOn'] ?? formatDateTime(new Date()),
         fileTitle: '',
     } as DataState,
     reducers: {
