@@ -29,7 +29,7 @@ const dataSlice = createSlice({
         markdownText: '',
         lastEditedOn: localStorage['lastEditedOn'] ?? formatDateTime(new Date()),
         fileTitle: '',
-        showMarkdown: false,
+        showMarkdown: localStorage['showMarkdown'] === 'true', // localStorage cannot store boolean
         isEditorLoading: true,
     } as DataState,
     reducers: {
@@ -53,6 +53,7 @@ const dataSlice = createSlice({
             }
         },
         setShowMarkdown(state, actions: PayloadAction<boolean>) {
+            localStorage['showMarkdown'] = String(actions.payload)
             return {
                 ...state,
                 showMarkdown: actions.payload,
