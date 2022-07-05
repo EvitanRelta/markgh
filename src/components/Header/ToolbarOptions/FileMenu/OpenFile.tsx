@@ -2,7 +2,8 @@ import { FolderOpen } from '@mui/icons-material'
 import { Box, Input, MenuItem, styled } from '@mui/material'
 import React from 'react'
 import { markdownToHtml } from '../../../../converterFunctions'
-import { useAppSelector } from '../../../../store/hooks'
+import { setEditorContent } from '../../../../store/dataSlice'
+import { useAppDispatch } from '../../../../store/hooks'
 
 const StyledMenuItem = styled(MenuItem)({
     padding: 10,
@@ -27,7 +28,7 @@ const StyledText = styled(Box)({
 })
 
 export const OpenFile = () => {
-    const editor = useAppSelector((state) => state.data.editor)
+    const dispatch = useAppDispatch()
 
     const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const allowedFileTypes = ['txt', 'md']
@@ -46,9 +47,8 @@ export const OpenFile = () => {
 
         reader.readAsText(file)
         reader.onload = () => {
-            editor.commands.setContent(markdownToHtml(reader.result as string), true, {
-                preserveWhitespace: 'full',
-            })
+            const htmlContent = markdownToHtml(reader.result as string)
+            dispatch(setEditorContent(htmlContent))
         }
     }
 

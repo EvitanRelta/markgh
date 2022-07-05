@@ -7,11 +7,11 @@ import { Footer } from './components/Footer/Footer'
 import { Version } from './components/Footer/Version'
 import { Header } from './components/Header/Header'
 import { setUser } from './store/authSlice'
+import { setEditorContent } from './store/dataSlice'
 import { useAppDispatch, useAppSelector } from './store/hooks'
 
 export const App = () => {
     const dispatch = useAppDispatch()
-    const editor = useAppSelector((state) => state.data.editor)
     const db = useAppSelector((state) => state.data.database)
     const auth = useAppSelector((state) => state.auth.auth)
     const theme = useAppSelector((state) => state.theme)
@@ -38,8 +38,7 @@ export const App = () => {
         }
         getPersistentContent().then((data) => {
             if (data === undefined) return
-            editor.commands.clearContent(false)
-            editor.commands.setContent(data.value, true, { preserveWhitespace: 'full' })
+            dispatch(setEditorContent(data.value))
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

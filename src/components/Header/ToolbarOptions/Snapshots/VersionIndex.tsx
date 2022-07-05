@@ -21,7 +21,8 @@ import {
     removeImageWrapper,
 } from '../../../../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../../../../converterFunctions/helpers/removeTipTapArtifacts'
-import { useAppSelector } from '../../../../store/hooks'
+import { setEditorContent } from '../../../../store/dataSlice'
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
 import { Snapshot } from '../../../IndexedDB/initDB'
 
 interface Props {
@@ -61,6 +62,7 @@ export const VersionIndex = ({
     closeVersions,
     deleteSnapshot,
 }: Props) => {
+    const dispatch = useAppDispatch()
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
     const [showDialog, setShowDialog] = useState(false)
     const [workingSnapshot, setWorkingSnapshot] = useState<Snapshot>()
@@ -88,8 +90,7 @@ export const VersionIndex = ({
 
     const loadEditorContent = (snapshot: Snapshot) => {
         setFileTitle(snapshot.title)
-        editor.commands.clearContent(false)
-        editor.commands.setContent(snapshot.value, true, { preserveWhitespace: 'full' })
+        dispatch(setEditorContent(snapshot.value))
         closeVersions()
     }
 

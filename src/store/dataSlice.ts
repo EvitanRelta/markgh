@@ -38,6 +38,12 @@ const dataSlice = createSlice({
                 lastEditedOn: actions.payload,
             }
         },
+        setEditorContent(state, actions: PayloadAction<string>) {
+            const { editor } = state
+            editor.commands.clearContent(false)
+            editor.commands.setContent(actions.payload, true, { preserveWhitespace: 'full' })
+            return state
+        },
     },
 })
 
@@ -60,5 +66,5 @@ export const saveEditorContent = createAsyncThunk<void, undefined, AppThunkApiCo
     }
 )
 
-export const { setMarkdownText, setLastEditedOn } = dataSlice.actions
+export const { setMarkdownText, setLastEditedOn, setEditorContent } = dataSlice.actions
 export const dataReducer = dataSlice.reducer
