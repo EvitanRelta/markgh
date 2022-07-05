@@ -4,15 +4,15 @@ import { FileOption } from './FileMenu/FileOption'
 import { SnapshotOption } from './Snapshots/SnapshotOption'
 
 interface Props {
-    title: string
+    fileTitle: string
     openVersions: (e: React.MouseEvent) => void
 }
 
-export const ToolbarContainer = ({ title, openVersions }: Props) => {
+export const ToolbarContainer = ({ fileTitle, openVersions }: Props) => {
     const markdownText = useAppSelector((state) => state.markdownText)
 
     const onDownload = () => {
-        const fileName = `${title || 'NewFile'}.md`
+        const fileName = `${fileTitle || 'NewFile'}.md`
         downloadText(markdownText, fileName)
     }
 

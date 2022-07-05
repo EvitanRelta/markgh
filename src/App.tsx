@@ -29,7 +29,7 @@ export const App = () => {
     const [showMarkdown, setShowMarkdown] = useState(false)
 
     //var for setting file title
-    const [title, setTitle] = useState('')
+    const [fileTitle, setFileTitle] = useState('')
 
     //var for 'Last edited on'
     const [lastEditedOn, setLastEditedOn] = useState(localStorage['lastEditedOn'])
@@ -92,7 +92,12 @@ export const App = () => {
         <ThemeProvider theme={selectedTheme}>
             <CssBaseline />
             <Box id='app'>
-                <Header title={title} setTitle={setTitle} lastEditedOn={lastEditedOn} db={db} />
+                <Header
+                    fileTitle={fileTitle}
+                    setFileTitle={setFileTitle}
+                    lastEditedOn={lastEditedOn}
+                    db={db}
+                />
                 <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
                 <Box>
                     <Footer
