@@ -6,7 +6,6 @@ import { MarkdownTextContainer } from './MarkdownTextContainer'
 
 interface Props {
     showMarkdown: boolean
-    onTextChange: (editorContainer: Element) => void | null
 }
 
 const StyledContentContainer = styled(Box)({
@@ -20,7 +19,7 @@ const StyledEditorContianer = styled(Box)({
     height: 'stretch',
 })
 
-export const Body = ({ showMarkdown, onTextChange }: Props) => {
+export const Body = ({ showMarkdown }: Props) => {
     const editorWidth = showMarkdown ? '50%' : '100%'
     const editor = useAppSelector((state) => state.data.editor)
 
@@ -29,7 +28,7 @@ export const Body = ({ showMarkdown, onTextChange }: Props) => {
             <EditorToolbar editor={editor} />
             <StyledContentContainer>
                 <StyledEditorContianer sx={{ width: editorWidth }}>
-                    <TextEditor onTextChange={onTextChange} />
+                    <TextEditor />
                 </StyledEditorContianer>
                 {showMarkdown && <MarkdownTextContainer />}
             </StyledContentContainer>

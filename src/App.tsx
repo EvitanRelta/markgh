@@ -6,15 +6,7 @@ import { Body } from './components/Body/Body'
 import { Footer } from './components/Footer/Footer'
 import { Version } from './components/Footer/Version'
 import { Header } from './components/Header/Header'
-import {
-    removeCodeBlockWrapper,
-    removeImageWrapper,
-} from './converterFunctions/helpers/preProcessHtml'
-import { removeTipTapArtifacts } from './converterFunctions/helpers/removeTipTapArtifacts'
-import { toMarkdown } from './converterFunctions/toMarkdown'
 import { setUser } from './store/authSlice'
-import { setLastEditedOn, setMarkdownText } from './store/dataSlice'
-import { formatDateTime } from './store/helpers/formatDateTime'
 import { useAppDispatch, useAppSelector } from './store/hooks'
 
 export const App = () => {
@@ -61,34 +53,12 @@ export const App = () => {
         localStorage['theme'] = theme
     }, [theme])
 
-    const saveEditorText = async () => {
-        const htmlCopy = editor.view.dom.cloneNode(true) as HTMLElement
-        removeCodeBlockWrapper(htmlCopy)
-        removeImageWrapper(htmlCopy)
-        removeTipTapArtifacts(htmlCopy)
-
-        await db.transaction('rw', db.text, async function () {
-            db.text.put({ id: 0, value: htmlCopy.innerHTML })
-        })
-    }
-
-    const onTextChange = (editorContainer: Element) => {
-        const markdown = toMarkdown(editorContainer)
-        saveEditorText()
-        dispatch(setMarkdownText(markdown))
-
-        const now = new Date()
-        const formatedNow = formatDateTime(now)
-
-        dispatch(setLastEditedOn(formatedNow))
-    }
-
     return (
         <ThemeProvider theme={selectedTheme}>
             <CssBaseline />
             <Box id='app'>
                 <Header fileTitle={fileTitle} setFileTitle={setFileTitle} />
-                <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
+                <Body showMarkdown={showMarkdown} />
                 <Box>
                     <Footer
                         onClick={() => setShowMarkdown(!showMarkdown)}
