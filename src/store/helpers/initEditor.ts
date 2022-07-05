@@ -4,7 +4,12 @@ import { AppStore } from '..'
 import { extensions } from '../../components/Editor/extensions/extensions'
 import { toMarkdown } from '../../converterFunctions'
 import { placeholderEditorHtml } from '../../placeholderEditorHtml'
-import { saveEditorContent, setLastEditedOn, setMarkdownText } from '../dataSlice'
+import {
+    loadPersistentContent,
+    saveEditorContent,
+    setLastEditedOn,
+    setMarkdownText,
+} from '../dataSlice'
 import { formatDateTime } from './formatDateTime'
 
 let store!: AppStore
@@ -34,7 +39,9 @@ const editor = new Editor({
 })
 
 editor.on('create', ({ editor }) => {
+    const { dispatch } = store
     onTextChange(editor.view.dom)
+    dispatch(loadPersistentContent())
 })
 
 editor.on(

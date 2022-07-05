@@ -66,5 +66,16 @@ export const saveEditorContent = createAsyncThunk<void, undefined, AppThunkApiCo
     }
 )
 
+export const loadPersistentContent = createAsyncThunk<void, undefined, AppThunkApiConfig>(
+    'data/loadPersistentContent',
+    async (_, { getState, dispatch }) => {
+        const { database } = getState().data
+        const persistentContent = await database.text.get(0)
+
+        if (!persistentContent) return
+        dispatch(setEditorContent(persistentContent.value))
+    }
+)
+
 export const { setMarkdownText, setLastEditedOn, setEditorContent } = dataSlice.actions
 export const dataReducer = dataSlice.reducer
