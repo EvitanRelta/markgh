@@ -7,6 +7,7 @@ import {
     removeImageWrapper,
 } from '../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../converterFunctions/helpers/removeTipTapArtifacts'
+import { placeholderEditorHtml } from '../placeholderEditorHtml'
 import { formatDateTime } from './helpers/formatDateTime'
 import { editor } from './helpers/initEditor'
 
@@ -83,14 +84,14 @@ export const saveEditorContent = createAsyncThunk<void, undefined, AppThunkApiCo
     }
 )
 
-export const loadPersistentContent = createAsyncThunk<void, undefined, AppThunkApiConfig>(
-    'data/loadPersistentContent',
+export const loadInitialContent = createAsyncThunk<void, undefined, AppThunkApiConfig>(
+    'data/loadInitialContent',
     async (_, { getState, dispatch }) => {
         const { database } = getState().data
         const persistentContent = await database.text.get(0)
+        const initialContent = persistentContent?.value ?? placeholderEditorHtml
 
-        if (!persistentContent) return
-        dispatch(setEditorContent(persistentContent.value))
+        dispatch(setEditorContent(initialContent))
     }
 )
 
