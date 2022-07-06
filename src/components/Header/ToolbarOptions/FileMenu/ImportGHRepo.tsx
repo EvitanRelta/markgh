@@ -9,7 +9,8 @@ interface Props {
 }
 
 const StyledMenuItem = styled(MenuItem)({
-    paddingBottom: 1.3,
+    paddingBottom: 13,
+    marginLeft: 3,
 })
 
 const StyledGitHubIcon = styled(GitHubIcon)({
@@ -50,18 +51,13 @@ export const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
 
     return (
         <StyledMenuItem
-            sx={{ paddingBottom: 1.3 }}
             divider
             onClick={openPopover}
             onKeyDown={(e: React.KeyboardEvent) => e.stopPropagation()}
         >
-            <StyledGitHubIcon sx={{ marginLeft: 0.5 }} />
+            <StyledGitHubIcon />
             <StyledText>Import from GitHub...</StyledText>
-            <StyledArrowForwardIosIcon
-                sx={{ fontSize: 'small', marginLeft: 3 }}
-                onMouseEnter={openPopover}
-                id='popover'
-            />
+            <StyledArrowForwardIosIcon onMouseEnter={openPopover} id='popover' />
             <StyledPopover
                 open={showPopover}
                 onClose={closePopover}
