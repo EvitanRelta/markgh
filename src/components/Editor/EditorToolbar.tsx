@@ -64,18 +64,18 @@ interface Props {
     editor: Editor | null
 }
 
-const EditorToolbar = ({ editor }: Props) => {
-    const StyledIconButton = styled(IconButton)({
-        transition: 'none',
-        '&:hover': {
-            borderRadius: 1,
-        },
-        marginTop: -1,
-    })
-    const StyledToolbarContainer = styled(Box)({
-        borderBottom: '1px solid gray',
-    })
+const StyledIconButton = styled(IconButton)({
+    transition: 'none',
+    '&:hover': {
+        borderRadius: 1,
+    },
+    marginTop: -1,
+})
+const StyledToolbarContainer = styled(Box)({
+    borderBottom: '1px solid gray',
+})
 
+const EditorToolbar = ({ editor }: Props) => {
     const optionMapping = (option: FormatOption, index: number) => {
         if (!Array.isArray(option)) {
             const FormatOptionComponent = option

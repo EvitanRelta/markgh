@@ -20,29 +20,29 @@ interface Props {
     db: EditorDB
 }
 
+const StyledHeaderBox = styled(Box)({
+    borderBottom: '1px solid gray',
+    marginBottom: '0px',
+    padding: '10px',
+    paddingBottom: '0px',
+    lineHeight: '12px',
+})
+
+const StyledTopRow = styled(Box)({
+    justifyContent: 'space-between',
+    display: 'flex',
+})
+
+const StyledBottomRow = styled(Box)({
+    display: 'inline-flex',
+    paddingTop: 5,
+    paddingBottom: 5,
+})
+
 export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
     const editor = useAppSelector((state) => state.editor.editor)
     const [snapshotArray, setSnapshotArray] = useState<Array<Snapshot>>([])
     const [showVersions, setShowVersions] = useState<(EventTarget & Element) | null>(null)
-
-    const StyledHeaderBox = styled(Box)({
-        borderBottom: '1px solid gray',
-        marginBottom: '0px',
-        padding: '10px',
-        paddingBottom: '0px',
-        lineHeight: '12px',
-    })
-
-    const StyledTopRow = styled(Box)({
-        justifyContent: 'space-between',
-        display: 'flex',
-    })
-
-    const StyledBottomRow = styled(Box)({
-        display: 'inline-flex',
-        paddingTop: 5,
-        paddingBottom: 5,
-    })
 
     const updateSnapshotsFromDb = async () => {
         try {
