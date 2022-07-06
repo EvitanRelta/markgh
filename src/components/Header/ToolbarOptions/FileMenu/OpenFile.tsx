@@ -1,8 +1,30 @@
-import { FolderOpen as FolderOpenIcon } from '@mui/icons-material'
-import { Box, IconButton, Input, MenuItem } from '@mui/material'
+import { FolderOpen } from '@mui/icons-material'
+import { Box, Input, MenuItem, styled } from '@mui/material'
 import React from 'react'
 import { markdownToHtml } from '../../../../converterFunctions'
 import { useAppSelector } from '../../../../store/hooks'
+
+const StyledMenuItem = styled(MenuItem)({
+    padding: 10,
+})
+
+const StyledLabel = styled('label')({
+    cursor: 'pointer',
+    minWidth: '100%',
+})
+const StyledFileInput = styled(Input)({
+    display: 'none',
+})
+
+const StyledFolderOpenIcon = styled(FolderOpen)({
+    marginLeft: 10,
+    marginRight: 10,
+})
+
+const StyledText = styled(Box)({
+    marginTop: -30,
+    marginLeft: 42,
+})
 
 export const OpenFile = () => {
     const editor = useAppSelector((state) => state.editor.editor)
@@ -31,24 +53,14 @@ export const OpenFile = () => {
     }
 
     return (
-        <MenuItem style={{ padding: 0 }}>
-            <label style={{ cursor: 'pointer', minWidth: 250 }}>
-                <Box style={{ display: 'none' }}>
-                    <Input type='file' onChange={handleUpload} />
+        <StyledMenuItem>
+            <StyledLabel>
+                <StyledFileInput type='file' onChange={handleUpload} />
+                <Box style={{ display: 'inline' }}>
+                    <StyledFolderOpenIcon />
                 </Box>
-                <Box
-                    style={{
-                        display: 'inline-block',
-                        marginRight: 6,
-                        paddingLeft: 11,
-                    }}
-                >
-                    <IconButton component='span'>
-                        <FolderOpenIcon />
-                    </IconButton>
-                </Box>
-                <Box sx={{ display: 'inline' }}>Open...</Box>
-            </label>
-        </MenuItem>
+                <StyledText>Open...</StyledText>
+            </StyledLabel>
+        </StyledMenuItem>
     )
 }

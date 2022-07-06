@@ -6,6 +6,7 @@ import {
     ListItemText,
     MenuItem,
     Popover,
+    styled,
     TextField,
 } from '@mui/material'
 import staticAxios from 'axios'
@@ -18,6 +19,53 @@ interface Props {
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
     menuOpen: boolean
 }
+
+const StyledMenuItem = styled(MenuItem)({
+    paddingBottom: 1.3,
+})
+
+const StyledGitHubIcon = styled(GitHubIcon)({
+    marginLeft: 0.5,
+})
+
+const StyledText = styled(ListItemText)({
+    marginLeft: 1.7,
+})
+
+const StyledPopover = styled(Popover)({
+    marginLeft: 30.5,
+    marginTop: -8,
+})
+
+const StyledArrowForwardIosIcon = styled(ArrowForwardIosIcon)({
+    fontSize: 'small',
+    marginLeft: 3,
+})
+
+const StyledLinkInputContainer = styled(Box)({
+    padding: 1,
+    paddingLeft: 8,
+    paddingTop: 15,
+    justifyContent: 'space-between',
+    display: 'flex',
+})
+
+const StyledTextField = styled(TextField)({
+    minWidth: 300,
+})
+
+const StyledCircularProgressContainer = styled(Box)({
+    marginRight: 2.1,
+    marginLeft: 0.5,
+})
+const StyledCircularProgress = styled(CircularProgress)({
+    marginTop: 0.8,
+})
+
+const StyledOKButton = styled(Button)({
+    marginTop: 0.2,
+    marginLeft: 0.9,
+})
 
 export const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     const editor = useAppSelector((state) => state.editor.editor)
@@ -126,13 +174,12 @@ export const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     }, [menuOpen])
 
     const linkInput = (
-        <Box sx={{ padding: 1, paddingTop: 1.5, justifyContent: 'space-between', display: 'flex' }}>
+        <StyledLinkInputContainer>
             <Box>
-                <TextField
+                <StyledTextField
                     error={showError}
                     type='text'
                     size='small'
-                    sx={{ minWidth: 300 }}
                     label={'Repository Link'}
                     placeholder={'https://github.com/user/project'}
                     InputLabelProps={{ shrink: true }}
@@ -154,43 +201,40 @@ export const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
                     }
                 />
             </Box>
-            <Box sx={{}}>
+            <Box>
                 {showLoading && !showError ? (
-                    <Box sx={{ marginRight: 2.1, marginLeft: 0.5 }}>
-                        <CircularProgress size={25} sx={{ marginTop: 0.8 }} />
-                    </Box>
+                    <StyledCircularProgressContainer>
+                        <StyledCircularProgress size={25} />
+                    </StyledCircularProgressContainer>
                 ) : (
-                    <Button sx={{ marginTop: 0.2, marginLeft: 0.9 }} onClick={getRepo}>
-                        OK
-                    </Button>
+                    <StyledOKButton onClick={getRepo}>OK</StyledOKButton>
                 )}
             </Box>
-        </Box>
+        </StyledLinkInputContainer>
     )
 
     return (
-        <MenuItem
-            divider
+        <StyledMenuItem
             sx={{ paddingBottom: 1.3 }}
+            divider
             onClick={openPopover}
-            onKeyDown={(e) => e.stopPropagation()}
+            onKeyDown={(e: React.KeyboardEvent) => e.stopPropagation()}
         >
-            <GitHubIcon sx={{ marginLeft: 0.5 }} />
-            <ListItemText sx={{ marginLeft: 1.7 }}>Import from GitHub...</ListItemText>
-            <ArrowForwardIosIcon
+            <StyledGitHubIcon sx={{ marginLeft: 0.5 }} />
+            <StyledText>Import from GitHub...</StyledText>
+            <StyledArrowForwardIosIcon
                 sx={{ fontSize: 'small', marginLeft: 3 }}
                 onMouseEnter={openPopover}
                 id='popover'
             />
-            <Popover
-                sx={{ marginLeft: 3.8, marginTop: -1.8 }}
+            <StyledPopover
                 open={showPopover}
                 onClose={closePopover}
                 anchorEl={document.getElementById('popover')}
                 disableRestoreFocus
             >
                 {linkInput}
-            </Popover>
-        </MenuItem>
+            </StyledPopover>
+        </StyledMenuItem>
     )
 }
