@@ -2,7 +2,6 @@ import { Box, CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect, useState } from 'react'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { Body } from './components/Body/Body'
 import { Footer } from './components/Footer/Footer'
 import { Version } from './components/Footer/Version'
@@ -98,39 +97,20 @@ export const App = () => {
     }
 
     return (
-        <HelmetProvider>
-            <ThemeProvider theme={selectedTheme}>
-                <CssBaseline />
-                <Helmet>
-                    <title>MarkGH</title>
-                    {/* Verification to be indexed in Google Search */}
-                    <meta
-                        name='google-site-verification'
-                        content='k_CidVKA4Ha_6LYDQrDAZTR7StqP1zaM93hHP6FSB-Q' //this will change for when we actually deploy it.
-                        //go to https://search.google.com/search-console/welcome to get a verification key
+        <ThemeProvider theme={selectedTheme}>
+            <CssBaseline />
+            <Box id='app'>
+                <Header title={title} setTitle={setTitle} lastEditedOn={lastEditedOn} db={db} />
+                <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
+                <Box>
+                    <Footer
+                        onClick={() => setShowMarkdown(!showMarkdown)}
+                        showMarkdown={showMarkdown}
+                        db={db}
                     />
-                    {/* Keywords for Google search terms */}
-                    <meta name='keywords' content='Markdown, Editor, Edit, HTML, Convert, Github' />
-
-                    {/* Brief description of website when it appears in Google search */}
-                    <meta
-                        name='description'
-                        content='Write in Rich Text and export it as Markdown for GitHub!'
-                    />
-                </Helmet>
-                <Box id='app'>
-                    <Header title={title} setTitle={setTitle} lastEditedOn={lastEditedOn} db={db} />
-                    <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
-                    <Box>
-                        <Footer
-                            onClick={() => setShowMarkdown(!showMarkdown)}
-                            showMarkdown={showMarkdown}
-                            db={db}
-                        />
-                    </Box>
-                    <Version />
                 </Box>
-            </ThemeProvider>
-        </HelmetProvider>
+                <Version />
+            </Box>
+        </ThemeProvider>
     )
 }
