@@ -17,7 +17,7 @@ const StyledGitHubIcon = styled(GitHubIcon)({
 })
 
 const StyledText = styled(ListItemText)({
-    marginLeft: 1.7,
+    marginLeft: 10,
 })
 
 const StyledPopover = styled(Popover)({
