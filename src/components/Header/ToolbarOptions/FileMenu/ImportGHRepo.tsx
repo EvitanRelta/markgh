@@ -10,6 +10,7 @@ interface Props {
 
 const StyledMenuItem = styled(MenuItem)({
     paddingBottom: 13,
+    paddingRight: 5,
     marginLeft: 3,
 })
 
@@ -28,7 +29,8 @@ const StyledPopover = styled(Popover)({
 
 const StyledArrowForwardIosIcon = styled(ArrowForwardIosIcon)({
     fontSize: 'small',
-    marginLeft: 3,
+    marginLeft: 15,
+    marginRight: 10,
 })
 
 export const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
