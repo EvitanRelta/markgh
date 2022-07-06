@@ -21,8 +21,9 @@ const StyledTextField = styled(TextField)({
 })
 
 const StyledCircularProgressContainer = styled(Box)({
-    marginRight: 2.1,
-    marginLeft: 0.5,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 5,
 })
 const StyledCircularProgress = styled(CircularProgress)({
     marginTop: 0.8,
