@@ -3,8 +3,9 @@
 
 import sh from 'shelljs'
 import { askBooleanQuestion } from './helpers/askBooleanQuestion'
+import { repoName, repoOwner } from './helpers/config.json'
 
-const githubRepo = 'EvitanRelta/markgh'
+const githubRepo = `${repoOwner}/${repoName}`
 sh.config.silent = true
 sh.config.fatal = true
 
