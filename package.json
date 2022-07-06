@@ -87,10 +87,12 @@
   "devDependencies": {
     "@types/quill": "^2.0.9",
     "@types/react-helmet": "^6.1.5",
+    "@types/readline-sync": "^1.4.4",
     "@types/shelljs": "^0.8.11",
     "gh-pages": "^4.0.0",
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.0.0",
+    "readline-sync": "^1.4.10",
     "shelljs": "^0.8.5",
     "ts-node": "^10.8.2"
   }

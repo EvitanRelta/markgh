@@ -2,6 +2,7 @@
 // npx ts-node PATH/publish.ts
 
 import sh from 'shelljs'
+import { askBooleanQuestion } from './helpers/askBooleanQuestion'
 
 const githubRepo = 'EvitanRelta/markgh'
 sh.config.silent = true
@@ -99,7 +100,13 @@ function ensureBranchIsUpToDate() {
         `git for-each-ref --format="%(upstream:short)" "${headRef}"`
     )
     const hasNoTrackingBranch = trackingBranch === ''
-    if (hasNoTrackingBranch) return
+    if (hasNoTrackingBranch) {
+        const toContinue = askBooleanQuestion(
+            `Warning: Branch "${selectedBranch}" is not tracking any remote branch. Continue? (y/n): `
+        )
+        if (!toContinue) sh.exit(1)
+        return
+    }
 
     logMsg(`Fetching "${trackingBranch}"...`)
     sh.exec('git fetch')
