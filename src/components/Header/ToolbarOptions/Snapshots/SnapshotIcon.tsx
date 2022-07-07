@@ -1,10 +1,17 @@
 import { CameraAlt as CameraAltIcon, Check as CheckIcon } from '@mui/icons-material'
-import { IconButton } from '@mui/material'
+import { IconButton, styled } from '@mui/material'
 import { useState } from 'react'
 
 interface Props {
     saveSnapshot: () => void
 }
+
+const StyledIconButton = styled(IconButton)({
+    padding: 0,
+    marginLeft: 7,
+    marginTop: -0.15,
+    display: 'inline-flex',
+})
 
 export const SnapshotIcon = ({ saveSnapshot }: Props) => {
     const [saved, setSaved] = useState<boolean>(false)
@@ -19,20 +26,12 @@ export const SnapshotIcon = ({ saveSnapshot }: Props) => {
     }
 
     return (
-        <IconButton
-            sx={{
-                padding: 0,
-                marginLeft: 1,
-                marginTop: -0.15,
-                display: 'inline-flex',
-            }}
-            onClick={onSnapshot}
-        >
+        <StyledIconButton onClick={onSnapshot}>
             {!saved ? (
                 <CameraAltIcon sx={{ fontSize: 17 }} />
             ) : (
                 <CheckIcon sx={{ fontSize: 17, marginTop: 0 }} />
             )}
-        </IconButton>
+        </StyledIconButton>
     )
 }

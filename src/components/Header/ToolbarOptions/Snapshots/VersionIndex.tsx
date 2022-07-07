@@ -12,6 +12,7 @@ import {
     ListItemText,
     Menu,
     MenuItem,
+    styled,
     Typography,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
@@ -32,6 +33,23 @@ interface Props {
     closeVersions: () => void
     deleteSnapshot: (snapshot: Snapshot) => Promise<void>
 }
+
+const SnapshotMenuContainer = styled(Menu)({
+    position: 'absolute',
+    top: -8,
+    left: -170,
+})
+
+const StyledTitleText = styled(Typography)({
+    paddingLeft: 20,
+    marginLeft: 3,
+    marginTop: 10,
+    borderBottom: '2px solid gray',
+})
+
+const StyledSnapshotList = styled(List)({
+    minWidth: 400,
+})
 
 export const VersionIndex = ({
     anchorEl,
@@ -119,8 +137,7 @@ export const VersionIndex = ({
                         <Button onClick={dialogDiscard}>Discard</Button>
                         <br />
                         <Button onClick={closeDialog} sx={{ mr: 0.5 }}>
-                            {' '}
-                            Cancel{' '}
+                            Cancel
                         </Button>
                     </Box>
                 </DialogActions>
@@ -168,23 +185,16 @@ export const VersionIndex = ({
     return (
         <Box>
             {showDialog && discardChangesPrompt}
-            <Menu
+            <SnapshotMenuContainer
                 open={Boolean(anchorEl)}
                 onClose={onClose}
                 anchorEl={document.getElementById('last-edited')}
-                sx={{ position: 'absolute', top: -8, left: -170 }}
             >
-                <Typography
-                    sx={{ pl: 2, mr: 1, ml: 1, mt: 2, borderBottom: '2px solid gray' }}
-                    variant='h4'
-                    component='div'
-                >
-                    Snapshots
-                </Typography>
-                <List sx={{ minWidth: 400, minHeight: windowDimensions.height }} dense>
+                <StyledTitleText variant='h4'>Snapshots</StyledTitleText>
+                <StyledSnapshotList sx={{ minHeight: windowDimensions.height }} dense>
                     {snapshotArray.map(snapshotArrayMapper)}
-                </List>
-            </Menu>
+                </StyledSnapshotList>
+            </SnapshotMenuContainer>
         </Box>
     )
 }
