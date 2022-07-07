@@ -1,5 +1,5 @@
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material'
-import { Box, Button, Menu, MenuItem } from '@mui/material'
+import { Box, Button, Menu, MenuItem, styled } from '@mui/material'
 import { Editor as CoreEditor } from '@tiptap/core'
 import { Editor } from '@tiptap/react'
 import { useEffect, useState } from 'react'
@@ -15,6 +15,36 @@ export const HeadingDropDown = ({ editor }: Props) => {
     const [anchor, setAnchor] = useState<Element | null>(null)
     const [headingLevel, setHeadingLevel] = useState<HeadingLevels | null>(null)
     const theme = useAppSelector((state) => state.theme)
+
+    const StyledHeadingDropdownContainer = styled(Box)({
+        display: 'inline',
+    })
+
+    const StyledHeadingMenuContainer = styled(Button)({
+        textTransform: 'none',
+        color: theme === 'dark' ? 'white' : 'black',
+        borderLeft: '1px solid #d0cccc',
+        borderRight: '1px solid #d0cccc',
+        minWidth: 117.43,
+        maxHeight: 25,
+        paddingRight: 0.5,
+        paddingLeft: 1.5,
+        borderRadius: 0,
+        display: 'flex inline',
+        justifyContent: 'space-between',
+    })
+
+    const StyledHeadingText = styled(Box)({
+        display: 'inline',
+    })
+
+    const StyledExpandMoreIcon = styled(ExpandMoreIcon)({
+        fontSize: 'medium',
+        padding: 0,
+        position: 'relative',
+        display: 'inline',
+        marginLeft: 2,
+    })
 
     const openMenu: React.MouseEventHandler<HTMLButtonElement> = (e) => {
         setAnchor(e.currentTarget)
@@ -52,40 +82,17 @@ export const HeadingDropDown = ({ editor }: Props) => {
     const headingOptions: HeadingLevels[] = [1, 2, 3, 4, 5, 6, 0]
 
     return (
-        <Box style={{ display: 'inline' }}>
-            <Button
-                onClick={openMenu}
-                sx={{
-                    textTransform: 'none',
-                    color: theme === 'dark' ? 'white' : 'black',
-                    borderLeft: '1px solid #d0cccc',
-                    borderRight: '1px solid #d0cccc',
-                    minWidth: 117.43,
-                    maxHeight: 25,
-                    paddingRight: 0.5,
-                    paddingLeft: 1.5,
-                    borderRadius: 0,
-                    display: 'flex inline',
-                    justifyContent: 'space-between',
-                }}
-            >
-                <Box style={{ display: 'inline' }}>
+        <StyledHeadingDropdownContainer>
+            <StyledHeadingMenuContainer onClick={openMenu}>
+                <StyledHeadingText>
                     {headingLevel === 0
                         ? 'Normal'
                         : headingLevel === null
                         ? ''
                         : 'Heading ' + headingLevel}
-                </Box>
-                <ExpandMoreIcon
-                    sx={{
-                        fontSize: 'medium',
-                        padding: 0,
-                        position: 'relative',
-                        display: 'inline',
-                        marginLeft: 2,
-                    }}
-                />
-            </Button>
+                </StyledHeadingText>
+                <StyledExpandMoreIcon />
+            </StyledHeadingMenuContainer>
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 {headingOptions.map((value, index) => (
                     <MenuItem key={index} onClick={() => onChange(value)}>
@@ -93,6 +100,6 @@ export const HeadingDropDown = ({ editor }: Props) => {
                     </MenuItem>
                 ))}
             </Menu>
-        </Box>
+        </StyledHeadingDropdownContainer>
     )
 }
