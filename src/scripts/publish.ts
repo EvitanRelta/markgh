@@ -1,13 +1,11 @@
 // Run via 'ts-node' npm package:
 // npx ts-node PATH/publish.ts
 
-import sh from 'shelljs'
 import { askBooleanQuestion } from './helpers/askBooleanQuestion'
 import { repoName, repoOwner } from './helpers/config.json'
+import { sh } from './helpers/initShellJs'
 
 const githubRepo = `${repoOwner}/${repoName}`
-sh.config.silent = true
-sh.config.fatal = true
 
 interceptHelpFlag()
 
