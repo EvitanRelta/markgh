@@ -4,6 +4,7 @@
 import { askBooleanQuestion } from './helpers/askBooleanQuestion'
 import { repoName, repoOwner } from './helpers/config.json'
 import { sh } from './helpers/initShellJs'
+import { exitWithErrorMsg, getCommandOutput, logMsg } from './helpers/shellHelperFunctions'
 
 const githubRepo = `${repoOwner}/${repoName}`
 
@@ -37,16 +38,6 @@ Usage: npx ts-node PATH/publish.ts
     sh.exit(0)
 }
 
-function logMsg(msg: string) {
-    sh.echo('-e', msg)
-}
-
-function exitWithErrorMsg(msg: string): never {
-    const paddedMsg = msg.replaceAll(/(?<=\n)/g, ' '.repeat('Error: '.length))
-    sh.echo('-e', `Error: ${paddedMsg}`)
-    sh.exit(1)
-}
-
 function getSelectedRemote() {
     const remoteName = process.argv[2] || 'origin'
     logMsg(`Selected remote: "${remoteName}"`)
@@ -57,10 +48,6 @@ function getSelectedBranch() {
     const branchName = process.argv[3] || 'master'
     logMsg(`Selected branch: "${branchName}"`)
     return branchName
-}
-
-function getCommandOutput(command: string) {
-    return sh.exec(command).stdout.trim()
 }
 
 function validate() {
