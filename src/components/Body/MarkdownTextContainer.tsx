@@ -72,7 +72,7 @@ export const MarkdownTextContainer = () => {
                     )}
                 </StyledCopyClipboardContainer>
             )}
-            <pre style={{ marginTop: 15, display: 'inline' }}>{markdownText}</pre>
+            <StyledMdText>{markdownText}</StyledMdText>
         </StyledMdTextContainer>
     )
 }

@@ -9,27 +9,32 @@ interface Props {
     db: EditorDB
 }
 
+const StyledShowMdButton = styled(Button)({
+    minWidth: 169.42,
+    margin: 0,
+    right: 40,
+    bottom: 40,
+    position: 'fixed',
+})
+
 export const Footer = ({ onClick, showMarkdown, db }: Props) => {
     const theme = useAppSelector((state) => state.theme)
 
     const buttonColor = !showMarkdown ? undefined : theme === 'light' ? 'white' : 'black'
 
-    const StyledShowMdButton = styled(Button)({
-        minWidth: 169.42,
-        margin: 0,
-        right: 40,
-        bottom: 40,
-        position: 'fixed',
-        backgroundColor: buttonColor,
-        '&:hover': {
-            backgroundColor: buttonColor,
-        },
-    })
-
     return (
         <>
             <ImageContainer db={db} />
-            <StyledShowMdButton onClick={onClick} variant={showMarkdown ? 'outlined' : 'contained'}>
+            <StyledShowMdButton
+                sx={{
+                    backgroundColor: buttonColor,
+                    '&:hover': {
+                        backgroundColor: buttonColor,
+                    },
+                }}
+                onClick={onClick}
+                variant={showMarkdown ? 'outlined' : 'contained'}
+            >
                 {showMarkdown ? 'Hide Markdown' : 'Show Markdown'}
             </StyledShowMdButton>
         </>

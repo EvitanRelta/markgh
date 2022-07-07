@@ -11,40 +11,39 @@ interface Props {
     editor: Editor | null
 }
 
+const StyledHeadingDropdownContainer = styled(Box)({
+    display: 'inline',
+})
+
+const StyledHeadingMenuContainer = styled(Button)({
+    textTransform: 'none',
+    borderLeft: '1px solid #d0cccc',
+    borderRight: '1px solid #d0cccc',
+    minWidth: 117.43,
+    maxHeight: 25,
+    paddingRight: 0.5,
+    paddingLeft: 1.5,
+    borderRadius: 0,
+    display: 'flex inline',
+    justifyContent: 'space-between',
+})
+
+const StyledHeadingText = styled(Box)({
+    display: 'inline',
+})
+
+const StyledExpandMoreIcon = styled(ExpandMoreIcon)({
+    fontSize: 'medium',
+    padding: 0,
+    position: 'relative',
+    display: 'inline',
+    marginLeft: 2,
+})
+
 export const HeadingDropDown = ({ editor }: Props) => {
     const [anchor, setAnchor] = useState<Element | null>(null)
     const [headingLevel, setHeadingLevel] = useState<HeadingLevels | null>(null)
     const theme = useAppSelector((state) => state.theme)
-
-    const StyledHeadingDropdownContainer = styled(Box)({
-        display: 'inline',
-    })
-
-    const StyledHeadingMenuContainer = styled(Button)({
-        textTransform: 'none',
-        color: theme === 'dark' ? 'white' : 'black',
-        borderLeft: '1px solid #d0cccc',
-        borderRight: '1px solid #d0cccc',
-        minWidth: 117.43,
-        maxHeight: 25,
-        paddingRight: 0.5,
-        paddingLeft: 1.5,
-        borderRadius: 0,
-        display: 'flex inline',
-        justifyContent: 'space-between',
-    })
-
-    const StyledHeadingText = styled(Box)({
-        display: 'inline',
-    })
-
-    const StyledExpandMoreIcon = styled(ExpandMoreIcon)({
-        fontSize: 'medium',
-        padding: 0,
-        position: 'relative',
-        display: 'inline',
-        marginLeft: 2,
-    })
 
     const openMenu: React.MouseEventHandler<HTMLButtonElement> = (e) => {
         setAnchor(e.currentTarget)
@@ -83,7 +82,10 @@ export const HeadingDropDown = ({ editor }: Props) => {
 
     return (
         <StyledHeadingDropdownContainer>
-            <StyledHeadingMenuContainer onClick={openMenu}>
+            <StyledHeadingMenuContainer
+                sx={{ color: theme === 'dark' ? 'white' : 'black' }}
+                onClick={openMenu}
+            >
                 <StyledHeadingText>
                     {headingLevel === 0
                         ? 'Normal'

@@ -13,23 +13,23 @@ interface Props {
     editor: Editor | null
 }
 
+const StyledAlignDropdownContainer = styled(Box)({
+    display: 'inline',
+})
+
+const StyledAlignIconButton = styled(IconButton)({
+    transition: 'none',
+    '&:hover': {
+        borderRadius: 1,
+    },
+})
+
+const StyledExpandMoreIcon = styled(ExpandMoreIcon)({
+    fontSize: 'medium',
+})
+
 export const AlignDropDown = ({ editor }: Props) => {
     const [anchor, setAnchor] = useState<Element | null>(null)
-
-    const StyledAlignDropdownContainer = styled(Box)({
-        display: 'inline',
-    })
-
-    const StyledAlignIconButton = styled(IconButton)({
-        transition: 'none',
-        '&:hover': {
-            borderRadius: 1,
-        },
-    })
-
-    const StyledExpandMoreIcon = styled(ExpandMoreIcon)({
-        fontSize: 'medium',
-    })
 
     const onChange = (alignment: Alignment) => {
         textAlign(editor)(alignment)
