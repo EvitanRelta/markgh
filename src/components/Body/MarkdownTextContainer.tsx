@@ -52,11 +52,6 @@ export const MarkdownTextContainer = () => {
 
     const copyButtonColor = theme === 'dark' ? '#2a2a2a' : '#F5F5F5'
 
-    const StyledMdText = styled('pre')({
-        marginTop: 15,
-        display: 'inline',
-    })
-
     return (
         <StyledMdTextContainer
             onMouseLeave={() => !showCopiedPopup && setIsHovering(false)}
