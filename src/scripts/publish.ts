@@ -99,28 +99,12 @@ function ensureBranchIsUpToDate() {
 
     const localCommitHash = getCommandOutput('git rev-parse @')
     const remoteCommitHash = getCommandOutput(`git rev-parse @{u}`)
-    const mergeBaseCommitHash = getCommandOutput(`git merge-base @ @{u}`)
 
     const isUpToDate = localCommitHash === remoteCommitHash
-    const isAhead = remoteCommitHash === mergeBaseCommitHash
-    const isBehind = localCommitHash === mergeBaseCommitHash
+    if (isUpToDate)
+        return logMsg(`Branch "${selectedBranch}" is up-to-date with "${trackingBranch}".`)
 
-    if (isUpToDate || isAhead) {
-        logMsg(
-            `Branch "${selectedBranch}" is ${
-                isUpToDate ? 'up-to-date with' : 'ahead of'
-            } "${trackingBranch}". No need to pull.`
-        )
-        return
-    }
-    if (isBehind) {
-        logMsg(`Branch "${selectedBranch}" is behind "${trackingBranch}". Fast-forwarding...`)
-        sh.exec('git pull --ff-only')
-        return
-    }
-
-    // Else, branch is divergent.
-    exitWithErrorMsg(`Branch "${selectedBranch}" diverges from "${trackingBranch}".`)
+    exitWithErrorMsg(`Branch "${selectedBranch}" is not up-to-date with "${trackingBranch}".`)
 }
 
 function bumpVersion() {
