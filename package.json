@@ -9,6 +9,7 @@
     "@isomorphic-git/lightning-fs": "^4.6.0",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.6",
+    "@octokit/rest": "^18.12.0",
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
