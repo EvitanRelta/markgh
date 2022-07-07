@@ -42,8 +42,9 @@ const SnapshotMenuContainer = styled(Menu)({
 
 const StyledTitleText = styled(Typography)({
     paddingLeft: 20,
-    marginLeft: 3,
-    marginTop: 10,
+    marginLeft: 5,
+    marginRight: 10,
+    marginTop: 17,
     borderBottom: '2px solid gray',
 })
 
