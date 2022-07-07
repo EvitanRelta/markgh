@@ -1,27 +1,29 @@
 import { FileDownload as FileDownloadIcon } from '@mui/icons-material'
-import { Box, IconButton, MenuItem } from '@mui/material'
+import { Box, MenuItem, styled } from '@mui/material'
 
 interface Props {
     onDownload: () => void
 }
 
+const StyledMenuItem = styled(MenuItem)({
+    padding: 10,
+    marginTop: 2,
+})
+
+const StyledDownloadIcon = styled(FileDownloadIcon)({
+    marginLeft: 10,
+    marginRight: 10,
+})
+
+const StyledText = styled(Box)({
+    display: 'inline',
+})
+
 export const ExportFile = ({ onDownload }: Props) => {
     return (
-        <MenuItem style={{ padding: 0, marginTop: 2 }} onClick={onDownload}>
-            <Box style={{ cursor: 'pointer' }}>
-                <Box
-                    style={{
-                        display: 'inline',
-                        marginRight: 6,
-                        paddingLeft: 11,
-                    }}
-                >
-                    <IconButton>
-                        <FileDownloadIcon />
-                    </IconButton>
-                </Box>
-                <Box sx={{ display: 'inline' }}>Export Markdown</Box>
-            </Box>
-        </MenuItem>
+        <StyledMenuItem onClick={onDownload}>
+            <StyledDownloadIcon />
+            <StyledText>Export Markdown</StyledText>
+        </StyledMenuItem>
     )
 }

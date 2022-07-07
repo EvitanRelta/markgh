@@ -1,4 +1,4 @@
-import { Box, Button, Menu } from '@mui/material'
+import { Box, Button, Menu, styled } from '@mui/material'
 import { useState } from 'react'
 import { ExportFile } from './ExportFile'
 import { ImportGHRepo } from './ImportGHRepo'
@@ -8,6 +8,10 @@ interface Props {
     onDownload: () => void
 }
 
+const StyledFileOptionContainer = styled(Box)({
+    display: 'inline-block',
+})
+
 export const FileOption = ({ onDownload }: Props) => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
 
@@ -15,7 +19,7 @@ export const FileOption = ({ onDownload }: Props) => {
     const closeMenu = () => setAnchor(null)
 
     return (
-        <Box style={{ display: 'inline-block' }}>
+        <StyledFileOptionContainer>
             <Button style={{ padding: 0 }} onClick={openMenu}>
                 File
             </Button>
@@ -24,6 +28,6 @@ export const FileOption = ({ onDownload }: Props) => {
                 <ImportGHRepo menuOpen={Boolean(anchor)} setAnchor={setAnchor} />
                 <ExportFile onDownload={onDownload} />
             </Menu>
-        </Box>
+        </StyledFileOptionContainer>
     )
 }

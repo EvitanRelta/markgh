@@ -60,6 +60,10 @@ const editorOptions: FormatOption[] = [
     AlignDropDown,
 ]
 
+interface Props {
+    editor: Editor | null
+}
+
 const StyledIconButton = styled(IconButton)({
     transition: 'none',
     '&:hover': {
@@ -67,10 +71,9 @@ const StyledIconButton = styled(IconButton)({
     },
     marginTop: -1,
 })
-
-interface Props {
-    editor: Editor | null
-}
+const StyledToolbarContainer = styled(Box)({
+    borderBottom: '1px solid gray',
+})
 
 const EditorToolbar = ({ editor }: Props) => {
     const optionMapping = (option: FormatOption, index: number) => {
@@ -89,9 +92,9 @@ const EditorToolbar = ({ editor }: Props) => {
     }
 
     return (
-        <Box sx={{ borderBottom: '1px solid gray' }}>
+        <StyledToolbarContainer>
             <Box>{editorOptions.map(optionMapping)}</Box>
-        </Box>
+        </StyledToolbarContainer>
     )
 }
 

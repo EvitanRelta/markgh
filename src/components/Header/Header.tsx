@@ -1,4 +1,4 @@
-import { Box, Input } from '@mui/material'
+import { Box, styled } from '@mui/material'
 import { useEffect, useState } from 'react'
 import {
     removeCodeBlockWrapper,
@@ -7,6 +7,7 @@ import {
 import { removeTipTapArtifacts } from '../.././converterFunctions/helpers/removeTipTapArtifacts'
 import { useAppSelector } from '../../store/hooks'
 import { EditorDB, Snapshot } from '.././IndexedDB/initDB'
+import { TitleInput } from './TitleInput'
 import { LastEdited } from './ToolbarOptions/Snapshots/LastEdited'
 import { VersionIndex } from './ToolbarOptions/Snapshots/VersionIndex'
 import { ToolbarContainer } from './ToolbarOptions/ToolbarContainer'
@@ -19,15 +20,29 @@ interface Props {
     db: EditorDB
 }
 
+const StyledHeaderBox = styled(Box)({
+    borderBottom: '1px solid gray',
+    marginBottom: '0px',
+    padding: '10px',
+    paddingBottom: '0px',
+    lineHeight: '12px',
+})
+
+const StyledTopRow = styled(Box)({
+    justifyContent: 'space-between',
+    display: 'flex',
+})
+
+const StyledBottomRow = styled(Box)({
+    display: 'inline-flex',
+    paddingTop: 5,
+    paddingBottom: 5,
+})
+
 export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
-    const theme = useAppSelector((state) => state.theme)
     const editor = useAppSelector((state) => state.editor.editor)
     const [snapshotArray, setSnapshotArray] = useState<Array<Snapshot>>([])
     const [showVersions, setShowVersions] = useState<(EventTarget & Element) | null>(null)
-
-    //vars for theme control
-    const themeColor = theme === 'dark' ? '#181414' : 'white'
-    const textColor = theme === 'dark' ? 'white' : '#181414'
 
     const updateSnapshotsFromDb = async () => {
         try {
@@ -74,71 +89,19 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
     }
 
     return (
-        <Box
-            style={{
-                borderBottom: '1px solid gray',
-                marginBottom: '0px',
-                padding: '10px',
-                paddingBottom: '0px',
-                lineHeight: '12px',
-            }}
-        >
-            <Box
-                style={{
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                }}
-            >
-                <Input
-                    sx={{
-                        '&:before': {
-                            borderBottom: '0px',
-                            transform: 'scaleX(0)',
-                            transition: 'transform 150ms ease-in-out',
-                        },
-                        '&:hover': {
-                            '&&:before': {
-                                transform: 'scaleX(1)',
-                                borderBottom: '2px solid gray',
-                            },
-                        },
-                    }}
-                    type='text'
-                    placeholder='Untitled Document'
-                    value={title}
-                    onChange={(e) => {
-                        setTitle(e.target.value)
-                    }}
-                    style={{
-                        border: '0px',
-                        fontSize: '25px',
-                        width: '30%',
-                        backgroundColor: themeColor,
-                        color: textColor,
-                        marginLeft: 12,
-                    }}
-                />
-
-                <Box>
-                    <UserMenuContainer />
-                </Box>
-            </Box>
-            <Box
-                style={{
-                    display: 'inline-flex',
-                    paddingTop: 5,
-                    paddingBottom: 5,
-                }}
-            >
+        <StyledHeaderBox>
+            <StyledTopRow>
+                <TitleInput title={title} setTitle={setTitle} />
+                <UserMenuContainer />
+            </StyledTopRow>
+            <StyledBottomRow>
                 <ToolbarContainer title={title} openVersions={openVersions} />
-                <Box>
-                    <LastEdited
-                        lastEditedOn={lastEditedOn}
-                        saveSnapshot={saveSnapshot}
-                        openVersions={openVersions}
-                    />
-                </Box>
-            </Box>
+                <LastEdited
+                    lastEditedOn={lastEditedOn}
+                    saveSnapshot={saveSnapshot}
+                    openVersions={openVersions}
+                />
+            </StyledBottomRow>
             <VersionIndex
                 anchorEl={showVersions}
                 onClose={closeVersions}
@@ -148,6 +111,6 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
                 closeVersions={closeVersions}
                 deleteSnapshot={deleteSnapshot}
             />
-        </Box>
+        </StyledHeaderBox>
     )
 }
