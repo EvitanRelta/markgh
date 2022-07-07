@@ -21,7 +21,9 @@ interface Props {
 }
 
 const StyledMenuItem = styled(MenuItem)({
-    paddingBottom: 1.3,
+    paddingBottom: 13,
+    paddingRight: 5,
+    marginLeft: 3,
 })
 
 const StyledGitHubIcon = styled(GitHubIcon)({
@@ -39,7 +41,8 @@ const StyledPopover = styled(Popover)({
 
 const StyledArrowForwardIosIcon = styled(ArrowForwardIosIcon)({
     fontSize: 'small',
-    marginLeft: 3,
+    marginLeft: 15,
+    marginRight: 10,
 })
 
 const StyledLinkInputContainer = styled(Box)({
