@@ -20,6 +20,7 @@ interceptHelpFlag()
 
 const selectedRemote = getSelectedRemote()
 const selectedBranch = getSelectedBranch()
+const bumpType = getBumpType()
 
 ;(async () => {
     validate()
@@ -47,25 +48,43 @@ function interceptHelpFlag() {
     if (!hasHelpFlag) return
 
     const helpMessage = `
-Usage: npx ts-node PATH/publish.ts
-   or: npx ts-node PATH/publish.ts [REMOTE]
-   or: npx ts-node PATH/publish.ts [REMOTE] [BRANCH]
+Usage: npx ts-node PATH/publish.ts [patch|minor|major]
+   or: npx ts-node PATH/publish.ts [patch|minor|major] [REMOTE]
+   or: npx ts-node PATH/publish.ts [patch|minor|major] [REMOTE] [BRANCH]
 
-(optional 1st arg. is the remote name to the GitHub repo: "${githubRepo}", default: "origin")
-(optional 2nd arg. is the branch to publish", default: "master")
+(required 1st arg. is the version-bump type)
+(optional 2nd arg. is the remote name to the GitHub repo: "${githubRepo}", default: "origin")
+(optional 3rd arg. is the branch to publish", default: "master")
 `.trim()
     sh.echo('-e', helpMessage)
     sh.exit(0)
 }
 
+function getBumpType() {
+    const bumpType = process.argv[2]
+    if (!bumpType)
+        exitWithErrorMsg('Required 1st argument (ie. version-bump type) is not specified.')
+
+    const validBumpTypes = ['patch', 'minor', 'major']
+    const isValidBumpTypes = validBumpTypes.includes(bumpType)
+    if (!isValidBumpTypes)
+        exitWithErrorMsg(
+            `Invalid 1st argument (ie. version-bump type). Valid types: ${validBumpTypes.join(
+                ', '
+            )}`
+        )
+    logMsg(`Selected bump type: "${bumpType}"`)
+    return bumpType
+}
+
 function getSelectedRemote() {
-    const remoteName = process.argv[2] || 'origin'
+    const remoteName = process.argv[3] || 'origin'
     logMsg(`Selected remote: "${remoteName}"`)
     return remoteName
 }
 
 function getSelectedBranch() {
-    const branchName = process.argv[3] || 'master'
+    const branchName = process.argv[4] || 'master'
     logMsg(`Selected branch: "${branchName}"`)
     return branchName
 }
@@ -130,7 +149,7 @@ function ensureBranchIsUpToDate() {
 function bumpVersion() {
     logMsg('Bumping version...')
     const versionBumpMsg = 'Bump version to v%s' // '%s' will be the package.json version
-    const newVersion = getCommandOutput(`npm version patch -m "${versionBumpMsg}"`)
+    const newVersion = getCommandOutput(`npm version ${bumpType} -m "${versionBumpMsg}"`)
     logMsg(`Version bumped to ${newVersion}.`)
 }
 
