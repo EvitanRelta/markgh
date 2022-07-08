@@ -16,10 +16,11 @@ const toListItems = ({ issue, closedBy: { commits, pullRequests } }: ClosedIssue
     const closedByPrStr = getClosedByPRStr(pullRequests)
     const closedByCommitStr = getClosedByCommitStr(commits)
     return (
-        `- [${issue.title.trim()}](${issue.html_url}) at ` +
+        `- [${issue.title.trim()}](${issue.html_url}) _(at ` +
         closedByPrStr +
         (closedByPrStr && closedByCommitStr ? ', ' : '') +
-        closedByCommitStr
+        closedByCommitStr +
+        ')_'
     )
 }
 const getSection = (sectionTitle: string, data: ClosedIssueData[]) =>
