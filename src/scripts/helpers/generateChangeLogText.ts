@@ -56,6 +56,6 @@ export const generateChangeLogText = (tagChanges: TagChanges): string => {
     return (
         "## What's Changed\n\n" +
         body +
-        `**Full Changelog**: https://github.com/${repoOwner}/${repoName}/compare/${tagChanges.previousTag}...${tagChanges.tag}`
+        `<br>\n\n**Full Changelog**: https://github.com/${repoOwner}/${repoName}/compare/${tagChanges.previousTag}...${tagChanges.tag}`
     )
 }
