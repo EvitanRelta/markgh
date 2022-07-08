@@ -1,3 +1,4 @@
+import { SetOptional } from 'type-fest'
 import { getClosedIssuesFromBodyText, hasIssueClosingKeywords } from './getClosedIssuesFromBodyText'
 import { getIssueData, getPullRequestData, IssueData, PullRequestData } from './getGithubData'
 import { memoGetUserName } from './getUserName'
@@ -9,14 +10,14 @@ export interface ScrappedCommitDataWUserName extends ScrappedCommitData {
     authorUserName: string
 }
 export interface ClosedIssueData {
-    issue?: IssueData
+    issue: IssueData
     closedBy: {
         commits: ScrappedCommitDataWUserName[]
         pullRequests: PullRequestData[]
     }
 }
-type ClosedIssues = Record<IssueNumber, ClosedIssueData>
-
+type PartialClosedIssues = Record<IssueNumber, SetOptional<ClosedIssueData, 'issue'>>
+export type ClosedIssues = Record<IssueNumber, ClosedIssueData>
 export interface LatestTagChanges {
     latestTag: string
     previousTag: string
@@ -56,7 +57,7 @@ export const getLatestTagChanges = async (): Promise<LatestTagChanges> => {
         hasIssueClosingKeywords(commit.body)
     )
 
-    const closedIssues: ClosedIssues = {}
+    const closedIssues: PartialClosedIssues = {}
 
     logMsg('Getting PRs...')
     const mergedPullRequests = await Promise.all(
@@ -101,5 +102,5 @@ export const getLatestTagChanges = async (): Promise<LatestTagChanges> => {
         previousTag,
         closedIssues: closedIssues,
         mergedPullRequests,
-    }
+    } as LatestTagChanges
 }
