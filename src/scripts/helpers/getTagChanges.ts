@@ -16,8 +16,8 @@ export interface ClosedIssueData {
         pullRequests: PullRequestData[]
     }
 }
-type PartialClosedIssues = Record<IssueNumber, SetOptional<ClosedIssueData, 'issue'>>
-export type ClosedIssues = Record<IssueNumber, ClosedIssueData>
+type IntermediateClosedIssues = Record<IssueNumber, SetOptional<ClosedIssueData, 'issue'>>
+export type ClosedIssues = ClosedIssueData[]
 export interface TagChanges {
     tag: string
     previousTag: string
@@ -56,7 +56,7 @@ export const getTagChanges = async (tag: string): Promise<TagChanges> => {
         hasIssueClosingKeywords(commit.body)
     )
 
-    const closedIssues: PartialClosedIssues = {}
+    const closedIssues: IntermediateClosedIssues = {}
 
     logMsg('Getting PRs...')
     const mergedPullRequests = await Promise.all(
@@ -99,7 +99,7 @@ export const getTagChanges = async (tag: string): Promise<TagChanges> => {
     return {
         tag,
         previousTag,
-        closedIssues: closedIssues,
+        closedIssues: Object.values(closedIssues) as ClosedIssueData[],
         mergedPullRequests,
-    } as TagChanges
+    }
 }
