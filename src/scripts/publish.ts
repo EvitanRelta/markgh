@@ -5,6 +5,7 @@
 // stored token, or fail to authenticate.
 import './helpers/initOctokit'
 
+import { version } from '../../package.json'
 import { askBooleanQuestion } from './helpers/askBooleanQuestion'
 import { repoName, repoOwner } from './helpers/config.json'
 import { generateChangeLogText } from './helpers/generateChangeLogText'
@@ -14,6 +15,7 @@ import { publishGithubRelease } from './helpers/publishGithubRelease'
 import { exitWithErrorMsg, getCommandOutput, logMsg } from './helpers/shellHelperFunctions'
 import { writeToFile } from './helpers/writeToFile'
 
+const currentVersion = version
 const githubRepo = `${repoOwner}/${repoName}`
 
 interceptHelpFlag()
@@ -148,7 +150,7 @@ function ensureBranchIsUpToDate() {
 
 function bumpVersion() {
     logMsg('Bumping version...')
-    const versionBumpMsg = 'Bump version to v%s' // '%s' will be the package.json version
+    const versionBumpMsg = `Bump version from v${currentVersion} -> v%s` // '%s' will be the package.json version
     const newVersion = getCommandOutput(`npm version ${bumpType} -m "${versionBumpMsg}"`)
     logMsg(`Version bumped to ${newVersion}.`)
 }
