@@ -7,8 +7,12 @@ import './helpers/initOctokit'
 
 import { askBooleanQuestion } from './helpers/askBooleanQuestion'
 import { repoName, repoOwner } from './helpers/config.json'
+import { generateChangeLogText } from './helpers/generateChangeLogText'
+import { getLatestTag, getTagChanges } from './helpers/getTagChanges'
 import { sh } from './helpers/initShellJs'
+import { publishGithubRelease } from './helpers/publishGithubRelease'
 import { exitWithErrorMsg, getCommandOutput, logMsg } from './helpers/shellHelperFunctions'
+import { writeToFile } from './helpers/writeToFile'
 
 const githubRepo = `${repoOwner}/${repoName}`
 
@@ -17,13 +21,24 @@ interceptHelpFlag()
 const selectedRemote = getSelectedRemote()
 const selectedBranch = getSelectedBranch()
 
-validate()
-ensureBranchIsUpToDate()
+;(async () => {
+    validate()
+    ensureBranchIsUpToDate()
 
-bumpVersion()
-forcePushToPublishedBranch()
+    bumpVersion()
+    forcePushToPublishedBranch()
 
-logMsg('Done.')
+    const latestTag = getLatestTag()
+    const changeLog = await getChangeLogText(latestTag)
+
+    // Saves it temporarily, incase it fails to publish.
+    await writeToFile('./latestChangeLog.temp.md', changeLog)
+
+    logMsg('Publishing Github release...')
+    await publishGithubRelease(latestTag, changeLog)
+
+    logMsg('Done.')
+})()
 
 // ===== Functions =====
 function interceptHelpFlag() {
@@ -133,4 +148,10 @@ function forcePushToPublishedBranch() {
     sh.exec(`git push -uf ${selectedRemote} published`)
 
     sh.exec('git checkout -') // return to previous checkout
+}
+
+async function getChangeLogText(tag: string) {
+    logMsg('Generating changelog...')
+    const tagChanges = await getTagChanges(tag)
+    return generateChangeLogText(tagChanges)
 }
