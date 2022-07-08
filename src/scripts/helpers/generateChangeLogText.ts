@@ -33,8 +33,20 @@ const getPullRequestSection = (pull_requests: PullRequestData[]) =>
         ? ''
         : `## Merged Pull Requests\n` + pull_requests.map(prToListItem).join('\n') + '\n\n'
 
+const getDateDiff = (dateStr1: string, dateStr2: string) =>
+    new Date(dateStr1).getTime() - new Date(dateStr2).getTime()
+const sortIssuesByOldestClosedDates = (issueData1: ClosedIssueData, issueData2: ClosedIssueData) =>
+    getDateDiff(issueData1.issue.closed_at!, issueData2.issue.closed_at!)
+const sortPRsByOldestMergedDates = (pr1: PullRequestData, pr2: PullRequestData) =>
+    getDateDiff(pr1.merged_at!, pr2.merged_at!)
+
 export const generateChangeLogText = (tagChanges: TagChanges): string => {
-    const closedIssues = tagChanges.closedIssues
+    const closedIssues = tagChanges.closedIssues.slice()
+    const mergedPullRequests = tagChanges.mergedPullRequests.slice()
+
+    closedIssues.sort(sortIssuesByOldestClosedDates)
+    mergedPullRequests.sort(sortPRsByOldestMergedDates)
+
     const features = closedIssues.filter(hasLabel('feature'))
     const improvements = closedIssues.filter(hasLabel('improvement'))
     const bugs = closedIssues.filter(hasLabel('bug'))
@@ -44,7 +56,7 @@ export const generateChangeLogText = (tagChanges: TagChanges): string => {
     const improvementsSection = getSection('Improvements', improvements)
     const bugsFixesSection = getSection('Bug Fixes', bugs)
     const refactoringsSection = getSection('Refactorings', refactorings)
-    const pullRequestSection = getPullRequestSection(tagChanges.mergedPullRequests)
+    const pullRequestSection = getPullRequestSection(mergedPullRequests)
 
     const body =
         featuresSection +
