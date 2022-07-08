@@ -18,14 +18,14 @@ export interface ClosedIssueData {
 }
 type PartialClosedIssues = Record<IssueNumber, SetOptional<ClosedIssueData, 'issue'>>
 export type ClosedIssues = Record<IssueNumber, ClosedIssueData>
-export interface LatestTagChanges {
-    latestTag: string
+export interface TagChanges {
+    tag: string
     previousTag: string
     closedIssues: ClosedIssues
     mergedPullRequests: PullRequestData[]
 }
 
-const getLatestTag = () => getCommandOutput('git describe --abbrev=0')
+export const getLatestTag = () => getCommandOutput('git describe --abbrev=0')
 const getPreviousTag = (tag: string) => getCommandOutput(`git describe --abbrev=0 "${tag}^"`)
 const getCommitHashFromTag = (tag: string) => getCommandOutput(`git rev-list -n 1 "tags/${tag}"`)
 
@@ -43,14 +43,13 @@ const getIssuesClosedByPR = (pr: PullRequestData) => {
     return getClosedIssuesFromBodyText(pr.body!)
 }
 
-export const getLatestTagChanges = async (): Promise<LatestTagChanges> => {
+export const getTagChanges = async (tag: string): Promise<TagChanges> => {
     logMsg('Scrapping local commits from Git...')
-    const latestTag = getLatestTag()
-    const previousTag = getPreviousTag(latestTag)
+    const previousTag = getPreviousTag(tag)
 
-    const latestTaggedCommit = getCommitHashFromTag(latestTag)
+    const taggedCommit = getCommitHashFromTag(tag)
     const previousTaggedCommit = getCommitHashFromTag(previousTag)
-    const scrappedCommits = scrapeCommitData(previousTaggedCommit, latestTaggedCommit)
+    const scrappedCommits = scrapeCommitData(previousTaggedCommit, taggedCommit)
 
     const prMerges = scrappedCommits.filter((commit) => isPullRequestMerge(commit.title))
     const issueClosingCommits = scrappedCommits.filter((commit) =>
@@ -98,9 +97,9 @@ export const getLatestTagChanges = async (): Promise<LatestTagChanges> => {
     entries.forEach(([_, data], i) => (data.issue = issues[i]))
 
     return {
-        latestTag,
+        tag,
         previousTag,
         closedIssues: closedIssues,
         mergedPullRequests,
-    } as LatestTagChanges
+    } as TagChanges
 }
