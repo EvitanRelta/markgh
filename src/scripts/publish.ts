@@ -36,7 +36,7 @@ const selectedBranch = getSelectedBranch()
     await writeToFile('./latestChangeLog.temp.md', changeLog)
 
     logMsg('Publishing Github release...')
-    await publishGithubRelease(latestTag, changeLog)
+    await publishGithubRelease(latestTag, latestTag, changeLog)
 
     logMsg('Done.')
 })()
