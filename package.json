@@ -91,6 +91,7 @@
     "@types/react-helmet": "^6.1.5",
     "@types/readline-sync": "^1.4.4",
     "@types/shelljs": "^0.8.11",
+    "dotenv": "^16.0.1",
     "gh-pages": "^4.0.0",
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.0.0",

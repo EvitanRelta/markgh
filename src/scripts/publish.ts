@@ -1,6 +1,10 @@
 // Run via 'ts-node' npm package:
 // npx ts-node PATH/publish.ts
 
+// Attempt to init 'Octokit' Github API, as it might fail to get the
+// stored token, or fail to authenticate.
+import './helpers/initOctokit'
+
 import { askBooleanQuestion } from './helpers/askBooleanQuestion'
 import { repoName, repoOwner } from './helpers/config.json'
 import { sh } from './helpers/initShellJs'
