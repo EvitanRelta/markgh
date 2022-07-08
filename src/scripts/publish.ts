@@ -26,6 +26,7 @@ const selectedBranch = getSelectedBranch()
     ensureBranchIsUpToDate()
 
     bumpVersion()
+    pushSelectedBranch()
     forcePushToPublishedBranch()
 
     const latestTag = getLatestTag()
@@ -131,6 +132,11 @@ function bumpVersion() {
     const versionBumpMsg = 'Bump version to v%s' // '%s' will be the package.json version
     const newVersion = getCommandOutput(`npm version patch -m "${versionBumpMsg}"`)
     logMsg(`Version bumped to ${newVersion}.`)
+}
+
+function pushSelectedBranch() {
+    logMsg(`Pushing "${selectedBranch}" branch to "${selectedRemote}"...`)
+    sh.exec('git push')
 }
 
 // Push commits to 'published' branch, to be auto-deployed to Github Pages via
