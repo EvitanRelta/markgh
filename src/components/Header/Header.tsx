@@ -14,8 +14,8 @@ import { ToolbarContainer } from './ToolbarOptions/ToolbarContainer'
 import { UserMenuContainer } from './UserMenu/UserMenuContainer'
 
 interface Props {
-    title: string
-    setTitle: React.Dispatch<React.SetStateAction<string>>
+    fileTitle: string
+    setFileTitle: React.Dispatch<React.SetStateAction<string>>
     lastEditedOn: string
     db: EditorDB
 }
@@ -39,7 +39,7 @@ const StyledBottomRow = styled(Box)({
     paddingBottom: 5,
 })
 
-export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
+export const Header = ({ fileTitle, setFileTitle, lastEditedOn, db }: Props) => {
     const editor = useAppSelector((state) => state.editor.editor)
     const [snapshotArray, setSnapshotArray] = useState<Array<Snapshot>>([])
     const [showVersions, setShowVersions] = useState<(EventTarget & Element) | null>(null)
@@ -64,7 +64,7 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
         removeTipTapArtifacts(htmlCopy)
         let snapshot = {
             id: !snapshotArray.length ? 0 : snapshotArray[snapshotArray.length - 1].id! + 1,
-            title: title || 'Untitled Document',
+            title: fileTitle || 'Untitled Document',
             savedOn: lastEditedOn,
             value: htmlCopy.innerHTML,
         }
@@ -91,11 +91,11 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
     return (
         <StyledHeaderBox>
             <StyledTopRow>
-                <TitleInput title={title} setTitle={setTitle} />
+                <TitleInput fileTitle={fileTitle} setFileTitle={setFileTitle} />
                 <UserMenuContainer />
             </StyledTopRow>
             <StyledBottomRow>
-                <ToolbarContainer title={title} openVersions={openVersions} />
+                <ToolbarContainer fileTitle={fileTitle} openVersions={openVersions} />
                 <LastEdited
                     lastEditedOn={lastEditedOn}
                     saveSnapshot={saveSnapshot}
@@ -106,7 +106,7 @@ export const Header = ({ title, setTitle, lastEditedOn, db }: Props) => {
                 anchorEl={showVersions}
                 onClose={closeVersions}
                 snapshotArray={snapshotArray}
-                setTitle={setTitle}
+                setFileTitle={setFileTitle}
                 saveSnapshot={saveSnapshot}
                 closeVersions={closeVersions}
                 deleteSnapshot={deleteSnapshot}

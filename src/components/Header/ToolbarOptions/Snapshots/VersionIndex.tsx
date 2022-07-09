@@ -28,7 +28,7 @@ interface Props {
     anchorEl: (EventTarget & Element) | null
     onClose: () => void
     snapshotArray: Snapshot[]
-    setTitle: React.Dispatch<React.SetStateAction<string>>
+    setFileTitle: React.Dispatch<React.SetStateAction<string>>
     saveSnapshot: () => void
     closeVersions: () => void
     deleteSnapshot: (snapshot: Snapshot) => Promise<void>
@@ -56,7 +56,7 @@ export const VersionIndex = ({
     anchorEl,
     onClose,
     snapshotArray,
-    setTitle,
+    setFileTitle,
     saveSnapshot,
     closeVersions,
     deleteSnapshot,
@@ -87,7 +87,7 @@ export const VersionIndex = ({
     }
 
     const loadEditorContent = (snapshot: Snapshot) => {
-        setTitle(snapshot.title)
+        setFileTitle(snapshot.title)
         editor.commands.clearContent(false)
         editor.commands.setContent(snapshot.value, true, { preserveWhitespace: 'full' })
         closeVersions()

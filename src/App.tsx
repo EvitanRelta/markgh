@@ -16,7 +16,7 @@ import { toMarkdown } from './converterFunctions/toMarkdown'
 import { setUser } from './store/authSlice'
 import { formatDateTime } from './store/helpers/formatDateTime'
 import { useAppDispatch, useAppSelector } from './store/hooks'
-import { setMdText } from './store/mdTextSlice'
+import { setMarkdownText } from './store/markdownTextSlice'
 
 export const App = () => {
     const db = new EditorDB()
@@ -29,7 +29,7 @@ export const App = () => {
     const [showMarkdown, setShowMarkdown] = useState(false)
 
     //var for setting file title
-    const [title, setTitle] = useState('')
+    const [fileTitle, setFileTitle] = useState('')
 
     //var for 'Last edited on'
     const [lastEditedOn, setLastEditedOn] = useState(localStorage['lastEditedOn'])
@@ -44,11 +44,11 @@ export const App = () => {
     const selectedTheme = theme === 'dark' ? darkTheme : lightTheme
 
     useEffect(() => {
-        const getPersistedText = async () => {
+        const getPersistentContent = async () => {
             const data = await db.text.get(0)
             return data
         }
-        getPersistedText().then((data) => {
+        getPersistentContent().then((data) => {
             if (data === undefined) return
             editor.commands.clearContent(false)
             editor.commands.setContent(data.value, true, { preserveWhitespace: 'full' })
@@ -62,7 +62,7 @@ export const App = () => {
 
     //Updates preferred theme in localStorage
     useEffect(() => {
-        localStorage['selectedTheme'] = theme
+        localStorage['theme'] = theme
     }, [theme])
 
     const saveEditorText = async () => {
@@ -79,7 +79,7 @@ export const App = () => {
     const onTextChange = (editorContainer: Element) => {
         const markdown = toMarkdown(editorContainer)
         saveEditorText()
-        dispatch(setMdText(markdown))
+        dispatch(setMarkdownText(markdown))
 
         const now = new Date()
         const formatedNow = formatDateTime(now)
@@ -92,7 +92,12 @@ export const App = () => {
         <ThemeProvider theme={selectedTheme}>
             <CssBaseline />
             <Box id='app'>
-                <Header title={title} setTitle={setTitle} lastEditedOn={lastEditedOn} db={db} />
+                <Header
+                    fileTitle={fileTitle}
+                    setFileTitle={setFileTitle}
+                    lastEditedOn={lastEditedOn}
+                    db={db}
+                />
                 <Body showMarkdown={showMarkdown} onTextChange={onTextChange} />
                 <Box>
                     <Footer

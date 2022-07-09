@@ -2,8 +2,8 @@ import { Input, styled } from '@mui/material'
 import { useAppSelector } from '../../store/hooks'
 
 interface Props {
-    title: string
-    setTitle: React.Dispatch<React.SetStateAction<string>>
+    fileTitle: string
+    setFileTitle: React.Dispatch<React.SetStateAction<string>>
 }
 
 const StyledInput = styled(Input)({
@@ -24,7 +24,7 @@ const StyledInput = styled(Input)({
     },
 })
 
-export const TitleInput = ({ title, setTitle }: Props) => {
+export const TitleInput = ({ fileTitle, setFileTitle }: Props) => {
     const theme = useAppSelector((state) => state.theme)
 
     //vars for theme control
@@ -35,9 +35,9 @@ export const TitleInput = ({ title, setTitle }: Props) => {
         <StyledInput
             type='text'
             placeholder='Untitled Document'
-            value={title}
+            value={fileTitle}
             onChange={(e) => {
-                setTitle(e.target.value)
+                setFileTitle(e.target.value)
             }}
             sx={{ backgroundColor: themeColor, color: textColor }}
         />
