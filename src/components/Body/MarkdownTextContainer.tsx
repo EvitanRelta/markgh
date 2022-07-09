@@ -36,7 +36,7 @@ const StyledMdText = styled('pre')({
 
 export const MarkdownTextContainer = () => {
     const theme = useAppSelector((state) => state.theme)
-    const markdownText = useAppSelector((state) => state.mdText)
+    const markdownText = useAppSelector((state) => state.markdownText)
     const [isHovering, setIsHovering] = useState(false)
     const [showCopiedPopup, setShowCopiedPopup] = useState(false)
 

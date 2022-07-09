@@ -16,7 +16,7 @@ import { toMarkdown } from './converterFunctions/toMarkdown'
 import { setUser } from './store/authSlice'
 import { formatDateTime } from './store/helpers/formatDateTime'
 import { useAppDispatch, useAppSelector } from './store/hooks'
-import { setMdText } from './store/mdTextSlice'
+import { setMarkdownText } from './store/markdownTextSlice'
 
 export const App = () => {
     const db = new EditorDB()
@@ -79,7 +79,7 @@ export const App = () => {
     const onTextChange = (editorContainer: Element) => {
         const markdown = toMarkdown(editorContainer)
         saveEditorText()
-        dispatch(setMdText(markdown))
+        dispatch(setMarkdownText(markdown))
 
         const now = new Date()
         const formatedNow = formatDateTime(now)

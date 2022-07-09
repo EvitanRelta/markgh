@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { authReducer } from './authSlice'
 import { editorReducer } from './editorSlice'
-import { mdTextReducer } from './mdTextSlice'
+import { markdownTextReducer } from './markdownTextSlice'
 import { themeReducer } from './themeSlice'
 
 export const store = configureStore({
     reducer: {
         editor: editorReducer,
-        mdText: mdTextReducer,
+        markdownText: markdownTextReducer,
         theme: themeReducer,
         auth: authReducer,
     },
