@@ -1,13 +1,7 @@
 import { Button, styled } from '@mui/material'
-import { useAppSelector } from '../../store/hooks'
-import { EditorDB } from '../IndexedDB/initDB'
+import { setShowMarkdown } from '../../store/dataSlice'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { ImageContainer } from './ImageContainer'
-
-interface Props {
-    onClick: React.MouseEventHandler<HTMLButtonElement>
-    showMarkdown: boolean
-    db: EditorDB
-}
 
 const StyledShowMdButton = styled(Button)({
     minWidth: 169.42,
@@ -17,14 +11,16 @@ const StyledShowMdButton = styled(Button)({
     position: 'fixed',
 })
 
-export const Footer = ({ onClick, showMarkdown, db }: Props) => {
+export const Footer = () => {
+    const dispatch = useAppDispatch()
+    const showMarkdown = useAppSelector((state) => state.data.showMarkdown)
     const theme = useAppSelector((state) => state.theme)
 
     const buttonColor = !showMarkdown ? undefined : theme === 'light' ? 'white' : 'black'
 
     return (
         <>
-            <ImageContainer db={db} />
+            <ImageContainer />
             <StyledShowMdButton
                 sx={{
                     backgroundColor: buttonColor,
@@ -32,7 +28,7 @@ export const Footer = ({ onClick, showMarkdown, db }: Props) => {
                         backgroundColor: buttonColor,
                     },
                 }}
-                onClick={onClick}
+                onClick={() => dispatch(setShowMarkdown(!showMarkdown))}
                 variant={showMarkdown ? 'outlined' : 'contained'}
             >
                 {showMarkdown ? 'Hide Markdown' : 'Show Markdown'}

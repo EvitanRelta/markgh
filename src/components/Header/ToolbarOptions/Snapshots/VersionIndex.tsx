@@ -21,14 +21,14 @@ import {
     removeImageWrapper,
 } from '../../../../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../../../../converterFunctions/helpers/removeTipTapArtifacts'
-import { useAppSelector } from '../../../../store/hooks'
+import { setEditorContent, setFileTitle } from '../../../../store/dataSlice'
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
 import { Snapshot } from '../../../IndexedDB/initDB'
 
 interface Props {
     anchorEl: (EventTarget & Element) | null
     onClose: () => void
     snapshotArray: Snapshot[]
-    setFileTitle: React.Dispatch<React.SetStateAction<string>>
     saveSnapshot: () => void
     closeVersions: () => void
     deleteSnapshot: (snapshot: Snapshot) => Promise<void>
@@ -56,15 +56,15 @@ export const VersionIndex = ({
     anchorEl,
     onClose,
     snapshotArray,
-    setFileTitle,
     saveSnapshot,
     closeVersions,
     deleteSnapshot,
 }: Props) => {
+    const dispatch = useAppDispatch()
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
     const [showDialog, setShowDialog] = useState(false)
     const [workingSnapshot, setWorkingSnapshot] = useState<Snapshot>()
-    const editor = useAppSelector((state) => state.editor.editor)
+    const editor = useAppSelector((state) => state.data.editor)
 
     var body = document.body,
         html = document.documentElement
@@ -87,9 +87,8 @@ export const VersionIndex = ({
     }
 
     const loadEditorContent = (snapshot: Snapshot) => {
-        setFileTitle(snapshot.title)
-        editor.commands.clearContent(false)
-        editor.commands.setContent(snapshot.value, true, { preserveWhitespace: 'full' })
+        dispatch(setFileTitle(snapshot.title))
+        dispatch(setEditorContent(snapshot.value))
         closeVersions()
     }
 

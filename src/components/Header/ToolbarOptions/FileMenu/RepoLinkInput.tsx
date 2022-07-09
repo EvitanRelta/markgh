@@ -3,7 +3,8 @@ import staticAxios from 'axios'
 import { useState } from 'react'
 import { markdownToHtml } from '../../../../converterFunctions'
 import { GithubRepoInfo } from '../../../../converterFunctions/markdownToHtml'
-import { useAppSelector } from '../../../../store/hooks'
+import { setEditorContent } from '../../../../store/dataSlice'
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
 
 interface Props {
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
@@ -34,7 +35,7 @@ const StyledOKButton = styled(Button)({
     marginLeft: 0.9,
 })
 export const RepoLinkInput = ({ setAnchor }: Props) => {
-    const editor = useAppSelector((state) => state.editor.editor)
+    const dispatch = useAppDispatch()
     const axios = useAppSelector((state) => state.auth.axios)
     const [link, setLink] = useState<string>('')
     const [errorMessage, setErrorMessage] = useState<string>('')
@@ -109,9 +110,8 @@ export const RepoLinkInput = ({ setAnchor }: Props) => {
             const githubRepoInfo = await parseImportUrl(link)
             let response = await axios.get<ResponseDataType>(generateRawURL(githubRepoInfo))
             setAnchor(null)
-            editor.commands.setContent(markdownToHtml(response.data, githubRepoInfo), true, {
-                preserveWhitespace: 'full',
-            })
+            const htmlContent = markdownToHtml(response.data, githubRepoInfo)
+            dispatch(setEditorContent(htmlContent))
         } catch (e) {
             setShowError(true)
             if (!staticAxios.isAxiosError(e)) return setErrorMessage((e as Error).message)

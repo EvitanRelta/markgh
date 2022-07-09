@@ -9,8 +9,10 @@ const themeSlice = createSlice({
         toggleTheme(state) {
             switch (state) {
                 case 'light':
+                    localStorage['theme'] = 'dark'
                     return 'dark'
                 case 'dark':
+                    localStorage['theme'] = 'light'
                     return 'light'
             }
         },

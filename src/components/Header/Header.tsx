@@ -6,19 +6,12 @@ import {
 } from '../.././converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../.././converterFunctions/helpers/removeTipTapArtifacts'
 import { useAppSelector } from '../../store/hooks'
-import { EditorDB, Snapshot } from '.././IndexedDB/initDB'
+import { Snapshot } from '.././IndexedDB/initDB'
 import { TitleInput } from './TitleInput'
 import { LastEdited } from './ToolbarOptions/Snapshots/LastEdited'
 import { VersionIndex } from './ToolbarOptions/Snapshots/VersionIndex'
 import { ToolbarContainer } from './ToolbarOptions/ToolbarContainer'
 import { UserMenuContainer } from './UserMenu/UserMenuContainer'
-
-interface Props {
-    fileTitle: string
-    setFileTitle: React.Dispatch<React.SetStateAction<string>>
-    lastEditedOn: string
-    db: EditorDB
-}
 
 const StyledHeaderBox = styled(Box)({
     borderBottom: '1px solid gray',
@@ -39,8 +32,11 @@ const StyledBottomRow = styled(Box)({
     paddingBottom: 5,
 })
 
-export const Header = ({ fileTitle, setFileTitle, lastEditedOn, db }: Props) => {
-    const editor = useAppSelector((state) => state.editor.editor)
+export const Header = () => {
+    const editor = useAppSelector((state) => state.data.editor)
+    const fileTitle = useAppSelector((state) => state.data.fileTitle)
+    const db = useAppSelector((state) => state.data.database)
+    const lastEditedOn = useAppSelector((state) => state.data.lastEditedOn)
     const [snapshotArray, setSnapshotArray] = useState<Array<Snapshot>>([])
     const [showVersions, setShowVersions] = useState<(EventTarget & Element) | null>(null)
 
@@ -91,22 +87,17 @@ export const Header = ({ fileTitle, setFileTitle, lastEditedOn, db }: Props) => 
     return (
         <StyledHeaderBox>
             <StyledTopRow>
-                <TitleInput fileTitle={fileTitle} setFileTitle={setFileTitle} />
+                <TitleInput />
                 <UserMenuContainer />
             </StyledTopRow>
             <StyledBottomRow>
-                <ToolbarContainer fileTitle={fileTitle} openVersions={openVersions} />
-                <LastEdited
-                    lastEditedOn={lastEditedOn}
-                    saveSnapshot={saveSnapshot}
-                    openVersions={openVersions}
-                />
+                <ToolbarContainer openVersions={openVersions} />
+                <LastEdited saveSnapshot={saveSnapshot} openVersions={openVersions} />
             </StyledBottomRow>
             <VersionIndex
                 anchorEl={showVersions}
                 onClose={closeVersions}
                 snapshotArray={snapshotArray}
-                setFileTitle={setFileTitle}
                 saveSnapshot={saveSnapshot}
                 closeVersions={closeVersions}
                 deleteSnapshot={deleteSnapshot}
