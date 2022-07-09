@@ -155,6 +155,8 @@ export const VersionIndex = ({
     }, [])
 
     const snapshotArrayMapper = (snapshot: Snapshot) => {
+        const snapshotTitleColor = snapshot.title ? 'black' : 'gray'
+
         return (
             <MenuItem key={snapshot.id}>
                 <Box
@@ -167,7 +169,8 @@ export const VersionIndex = ({
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                        primary={snapshot.title}
+                        sx={{ color: snapshotTitleColor }}
+                        primary={snapshot.title || 'Untitled Document'}
                         secondary={'Snapshot on ' + snapshot.savedOn}
                     />
                 </Box>
