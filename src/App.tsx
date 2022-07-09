@@ -6,6 +6,7 @@ import { Body } from './components/Body/Body'
 import { Footer } from './components/Footer/Footer'
 import { Version } from './components/Footer/Version'
 import { Header } from './components/Header/Header'
+import { LoadingAnimation } from './components/LoadingAnimation'
 import { setUser } from './store/authSlice'
 import { useAppDispatch, useAppSelector } from './store/hooks'
 
@@ -37,6 +38,7 @@ export const App = () => {
                     <Footer />
                 </Box>
                 <Version />
+                <LoadingAnimation />
             </Box>
         </ThemeProvider>
     )

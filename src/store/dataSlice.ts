@@ -7,6 +7,7 @@ import {
     removeImageWrapper,
 } from '../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../converterFunctions/helpers/removeTipTapArtifacts'
+import { placeholderEditorHtml } from '../placeholderEditorHtml'
 import { formatDateTime } from './helpers/formatDateTime'
 import { editor } from './helpers/initEditor'
 
@@ -17,6 +18,7 @@ interface DataState {
     lastEditedOn: string
     fileTitle: string
     showMarkdown: boolean
+    isEditorLoading: boolean
 }
 
 const dataSlice = createSlice({
@@ -28,6 +30,7 @@ const dataSlice = createSlice({
         lastEditedOn: localStorage['lastEditedOn'] ?? formatDateTime(new Date()),
         fileTitle: '',
         showMarkdown: false,
+        isEditorLoading: true,
     } as DataState,
     reducers: {
         setMarkdownText(state, actions: PayloadAction<string>) {
@@ -53,6 +56,12 @@ const dataSlice = createSlice({
             return {
                 ...state,
                 showMarkdown: actions.payload,
+            }
+        },
+        setIsEditorLoading(state, actions: PayloadAction<boolean>) {
+            return {
+                ...state,
+                isEditorLoading: actions.payload,
             }
         },
         setEditorContent(state, actions: PayloadAction<string>) {
@@ -83,17 +92,24 @@ export const saveEditorContent = createAsyncThunk<void, undefined, AppThunkApiCo
     }
 )
 
-export const loadPersistentContent = createAsyncThunk<void, undefined, AppThunkApiConfig>(
-    'data/loadPersistentContent',
+export const loadInitialContent = createAsyncThunk<void, undefined, AppThunkApiConfig>(
+    'data/loadInitialContent',
     async (_, { getState, dispatch }) => {
         const { database } = getState().data
         const persistentContent = await database.text.get(0)
+        const initialContent = persistentContent?.value ?? placeholderEditorHtml
 
-        if (!persistentContent) return
-        dispatch(setEditorContent(persistentContent.value))
+        dispatch(setEditorContent(initialContent))
+        dispatch(setIsEditorLoading(false))
     }
 )
 
-export const { setMarkdownText, setLastEditedOn, setFileTitle, setShowMarkdown, setEditorContent } =
-    dataSlice.actions
+export const {
+    setMarkdownText,
+    setLastEditedOn,
+    setFileTitle,
+    setShowMarkdown,
+    setIsEditorLoading,
+    setEditorContent,
+} = dataSlice.actions
 export const dataReducer = dataSlice.reducer

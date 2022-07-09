@@ -3,9 +3,8 @@ import _ from 'lodash'
 import { AppStore } from '..'
 import { extensions } from '../../components/Editor/extensions/extensions'
 import { toMarkdown } from '../../converterFunctions'
-import { placeholderEditorHtml } from '../../placeholderEditorHtml'
 import {
-    loadPersistentContent,
+    loadInitialContent,
     saveEditorContent,
     setLastEditedOn,
     setMarkdownText,
@@ -34,14 +33,12 @@ const onTextChange = (editorContainer: Element) => {
 
 const editor = new Editor({
     extensions,
-    content: placeholderEditorHtml,
     parseOptions: { preserveWhitespace: 'full' },
 })
 
 editor.on('create', ({ editor }) => {
     const { dispatch } = store
-    onTextChange(editor.view.dom)
-    dispatch(loadPersistentContent())
+    dispatch(loadInitialContent())
 })
 
 editor.on(
