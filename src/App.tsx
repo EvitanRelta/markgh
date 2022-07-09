@@ -14,6 +14,7 @@ import {
 import { removeTipTapArtifacts } from './converterFunctions/helpers/removeTipTapArtifacts'
 import { toMarkdown } from './converterFunctions/toMarkdown'
 import { setUser } from './store/authSlice'
+import { formatDateTime } from './store/helpers/formatDateTime'
 import { useAppDispatch, useAppSelector } from './store/hooks'
 import { setMdText } from './store/mdTextSlice'
 
@@ -81,12 +82,7 @@ export const App = () => {
         dispatch(setMdText(markdown))
 
         const now = new Date()
-        const formatedNow = now.toLocaleString('en-US', {
-            month: 'short',
-            day: '2-digit',
-            hour: 'numeric',
-            minute: 'numeric',
-        })
+        const formatedNow = formatDateTime(now)
 
         setLastEditedOn(formatedNow)
         localStorage['lastEditedOn'] = formatedNow
