@@ -6,25 +6,25 @@ class EditorDB extends Dexie {
     snapshots!: Table<Snapshot, number>
     constructor() {
         super('EditorDB')
-        this.version(2).stores({
-            images: 'id,base64',
-            text: 'id,value',
-            snapshots: 'id,savedOn,title,value',
+        this.version(1).stores({
+            images: '++id,base64',
+            text: '++id,value',
+            snapshots: '++id,savedOn,title,value',
         })
     }
 }
 
 export interface EditorImage {
-    id: number
+    id?: number
     base64: string
 }
 export interface EditorText {
-    id: number
+    id?: number
     value: string
 }
 
 export interface Snapshot {
-    id: number
+    id?: number
     savedOn: string
     title: string
     value: string
