@@ -6,10 +6,10 @@ export class EditorDB extends Dexie {
     snapshots!: Table<Snapshot, number>
     constructor() {
         super('EditorDB')
-        this.version(1).stores({
-            images: 'id',
-            text: 'id',
-            snapshots: 'id',
+        this.version(2).stores({
+            images: 'id,base64',
+            text: 'id,value',
+            snapshots: 'id,savedOn,title,value',
         })
     }
 }
