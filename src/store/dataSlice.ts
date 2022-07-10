@@ -34,42 +34,26 @@ const dataSlice = createSlice({
     } as DataState,
     reducers: {
         setMarkdownText(state, actions: PayloadAction<string>) {
-            return {
-                ...state,
-                markdownText: actions.payload,
-            }
+            state.markdownText = actions.payload
         },
         setLastEditedOn(state, actions: PayloadAction<string>) {
             localStorage['lastEditedOn'] = actions.payload
-            return {
-                ...state,
-                lastEditedOn: actions.payload,
-            }
+            state.lastEditedOn = actions.payload
         },
         setFileTitle(state, actions: PayloadAction<string>) {
-            return {
-                ...state,
-                fileTitle: actions.payload,
-            }
+            state.fileTitle = actions.payload
         },
         setShowMarkdown(state, actions: PayloadAction<boolean>) {
             localStorage['showMarkdown'] = String(actions.payload)
-            return {
-                ...state,
-                showMarkdown: actions.payload,
-            }
+            state.showMarkdown = actions.payload
         },
         setIsEditorLoading(state, actions: PayloadAction<boolean>) {
-            return {
-                ...state,
-                isEditorLoading: actions.payload,
-            }
+            state.isEditorLoading = actions.payload
         },
         setEditorContent(state, actions: PayloadAction<string>) {
             const { editor } = state
             editor.commands.clearContent(false)
             editor.commands.setContent(actions.payload, true, { preserveWhitespace: 'full' })
-            return state
         },
     },
 })
