@@ -51,18 +51,6 @@ export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
     const [showDialog, setShowDialog] = useState(false)
     const [workingSnapshot, setWorkingSnapshot] = useState<Snapshot>()
 
-    var body = document.body,
-        html = document.documentElement
-
-    var height =
-        Math.max(
-            body.scrollHeight,
-            body.offsetHeight,
-            html.clientHeight,
-            html.scrollHeight,
-            html.offsetHeight
-        ) - 100
-
     function getWindowDimensions() {
         const { innerWidth: width, innerHeight: height } = window
         return {
