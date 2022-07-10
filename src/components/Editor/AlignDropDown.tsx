@@ -15,6 +15,7 @@ interface Props {
 
 const StyledAlignDropdownContainer = styled(Box)({
     display: 'inline',
+    paddingBottom: 12,
 })
 
 const StyledAlignIconButton = styled(IconButton)({
