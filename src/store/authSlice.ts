@@ -37,11 +37,8 @@ const authSlice = createSlice({
     } as AuthState,
     reducers: {
         setUser(state, action: PayloadAction<User | null>) {
-            return {
-                ...state,
-                loggedIn: action.payload !== null,
-                user: action.payload,
-            }
+            state.loggedIn = action.payload !== null
+            state.user = action.payload
         },
         setGhToken(state, action: PayloadAction<string | null>) {
             const headers = state.axios.defaults.headers
@@ -51,7 +48,6 @@ const authSlice = createSlice({
                     ...headers.common,
                     authorization: 'Bearer ' + action.payload,
                 }
-            return state
         },
     },
     extraReducers: (builder) => {
