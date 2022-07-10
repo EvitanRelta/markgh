@@ -1,1 +1,2 @@
-src/githubMarkdownCss/**/*.css linguist-vendored
+src/githubMarkdownCss/**/*.css linguist-generated=true
+src/githubMarkdownCss/container.css linguist-generated=false
