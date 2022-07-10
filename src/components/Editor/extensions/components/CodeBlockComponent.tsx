@@ -5,7 +5,7 @@ import { CodeBlockLowlightOptions } from '@tiptap/extension-code-block-lowlight'
 import { NodeViewContent, NodeViewProps, NodeViewWrapper } from '@tiptap/react'
 import _ from 'lodash'
 import { lowlight } from 'lowlight/lib/all'
-import { useCallback, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useAppSelector } from '../../../../store/hooks'
 
 interface OptionsFixLowLightType extends CodeBlockLowlightOptions {
@@ -63,9 +63,10 @@ export const CodeBlockComponent = ({ node, updateAttributes, extension }: Props)
     const isPlainTextLanguage = (language: string) =>
         ['plaintext', 'txt', 'text'].includes(language)
 
-    const debouncedUpdateLanguage = useCallback(
-        _.debounce((language) => updateAttributes({ language: language || 'plaintext' }), 300),
-        []
+    const debouncedUpdateLanguage = useMemo(
+        () =>
+            _.debounce((language) => updateAttributes({ language: language || 'plaintext' }), 300),
+        [updateAttributes]
     )
 
     return (
