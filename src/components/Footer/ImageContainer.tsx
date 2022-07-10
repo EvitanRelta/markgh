@@ -1,7 +1,7 @@
 import { Box, Button, Input } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { EditorImage } from '../../store/helpers/initDatabase'
 import { useAppSelector } from '../../store/hooks'
-import { EditorImage } from '../IndexedDB/initDB'
 
 export const ImageContainer = () => {
     const db = useAppSelector((state) => state.data.database)

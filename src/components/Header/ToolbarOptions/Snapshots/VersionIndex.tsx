@@ -22,8 +22,8 @@ import {
 } from '../../../../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../../../../converterFunctions/helpers/removeTipTapArtifacts'
 import { setEditorContent, setFileTitle } from '../../../../store/dataSlice'
+import { Snapshot } from '../../../../store/helpers/initDatabase'
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
-import { Snapshot } from '../../../IndexedDB/initDB'
 
 interface Props {
     anchorEl: (EventTarget & Element) | null

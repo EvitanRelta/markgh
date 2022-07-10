@@ -5,8 +5,8 @@ import {
     removeImageWrapper,
 } from '../.././converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../.././converterFunctions/helpers/removeTipTapArtifacts'
+import { Snapshot } from '../../store/helpers/initDatabase'
 import { useAppSelector } from '../../store/hooks'
-import { Snapshot } from '.././IndexedDB/initDB'
 import { TitleInput } from './TitleInput'
 import { LastEdited } from './ToolbarOptions/Snapshots/LastEdited'
 import { VersionIndex } from './ToolbarOptions/Snapshots/VersionIndex'

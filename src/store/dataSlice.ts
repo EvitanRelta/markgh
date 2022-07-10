@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Editor } from '@tiptap/react'
 import type { AppThunkApiConfig } from '.'
-import { EditorDB } from '../components/IndexedDB/initDB'
 import {
     removeCodeBlockWrapper,
     removeImageWrapper,
@@ -9,6 +8,7 @@ import {
 import { removeTipTapArtifacts } from '../converterFunctions/helpers/removeTipTapArtifacts'
 import { placeholderEditorHtml } from '../placeholderEditorHtml'
 import { formatDateTime } from './helpers/formatDateTime'
+import { EditorDB } from './helpers/initDatabase'
 import { editor } from './helpers/initEditor'
 
 interface DataState {
