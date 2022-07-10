@@ -1,7 +1,7 @@
 import Dexie, { Table } from 'dexie'
 
 export class EditorDB extends Dexie {
-    images!: Table<EditorImage>
+    images!: Table<EditorImage, number>
     text!: Table<EditorText, number>
     snapshots!: Table<Snapshot, number>
     constructor() {
