@@ -13,7 +13,7 @@ import {
     Subscript as SubscriptIcon,
     Superscript as SuperscriptIcon,
 } from '@mui/icons-material'
-import { Box, IconButton, styled, SvgIconTypeMap } from '@mui/material'
+import { Box, IconButton, styled, SvgIconTypeMap, Tooltip } from '@mui/material'
 import { OverridableComponent } from '@mui/material/OverridableComponent'
 import { Editor } from '@tiptap/react'
 import React from 'react'
@@ -40,23 +40,28 @@ interface FormatOptionIcon extends OverridableComponent<SvgIconTypeMap<{}, 'svg'
 }
 type FormatOptionComponent = (props: { editor: Editor | null }) => JSX.Element
 type ToolbarFunction = (editor: Editor | null) => () => void
-type FormatOption = [ToolbarFunction, FormatOptionIcon] | FormatOptionComponent
+interface BasicFormatOption {
+    name: string
+    toolbarFunction: ToolbarFunction
+    icon: FormatOptionIcon
+}
+type FormatOption = BasicFormatOption | FormatOptionComponent
 
 const editorOptions: FormatOption[] = [
-    [bold, FormatBoldIcon],
-    [italic, FormatItalicIcon],
-    [underline, FormatUnderlinedIcon],
-    [strikethrough, FormatStrikethroughTwoToneIcon],
-    [superscript, SuperscriptIcon],
-    [subscript, SubscriptIcon],
-    [code, CodeIcon],
-    [blockQuote, FormatQuoteIcon],
-    [codeBlock, DataObjectIcon],
-    [link, LinkIcon],
+    { name: 'Bold', toolbarFunction: bold, icon: FormatBoldIcon },
+    { name: 'Italic', toolbarFunction: italic, icon: FormatItalicIcon },
+    { name: 'Underline', toolbarFunction: underline, icon: FormatUnderlinedIcon },
+    { name: 'Strikethrough', toolbarFunction: strikethrough, icon: FormatStrikethroughTwoToneIcon },
+    { name: 'Superscript', toolbarFunction: superscript, icon: SuperscriptIcon },
+    { name: 'Subscript', toolbarFunction: subscript, icon: SubscriptIcon },
+    { name: 'Code', toolbarFunction: code, icon: CodeIcon },
+    { name: 'Block Quote', toolbarFunction: blockQuote, icon: FormatQuoteIcon },
+    { name: 'Code Block', toolbarFunction: codeBlock, icon: DataObjectIcon },
+    { name: 'Link', toolbarFunction: link, icon: LinkIcon },
     HeadingDropDown,
-    [addUrlImage, ImageIcon],
-    [orderedList, FormatListNumberedIcon],
-    [unorderedList, FormatListBulletedIcon],
+    { name: 'Add Url Image', toolbarFunction: addUrlImage, icon: ImageIcon },
+    { name: 'Ordered List', toolbarFunction: orderedList, icon: FormatListNumberedIcon },
+    { name: 'Unordered List', toolbarFunction: unorderedList, icon: FormatListBulletedIcon },
     AlignDropDown,
 ]
 
@@ -77,17 +82,18 @@ const StyledToolbarContainer = styled(Box)({
 
 const EditorToolbar = ({ editor }: Props) => {
     const optionMapping = (option: FormatOption, index: number) => {
-        if (!Array.isArray(option)) {
+        if (typeof option !== 'object') {
             const FormatOptionComponent = option
             return <FormatOptionComponent key={index} editor={editor} />
         }
 
-        const [toolbarFunction, FormatOptionIcon] = option
-
+        const { name, toolbarFunction, icon: FormatOptionIcon } = option
         return (
-            <StyledIconButton key={index} onClick={toolbarFunction(editor)}>
-                <FormatOptionIcon />
-            </StyledIconButton>
+            <Tooltip title={name} key={index}>
+                <StyledIconButton onClick={toolbarFunction(editor)}>
+                    <FormatOptionIcon />
+                </StyledIconButton>
+            </Tooltip>
         )
     }
 

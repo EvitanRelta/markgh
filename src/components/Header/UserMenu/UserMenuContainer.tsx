@@ -1,4 +1,4 @@
-import { Avatar, Menu, MenuItem } from '@mui/material'
+import { Avatar, Menu, MenuItem, Tooltip } from '@mui/material'
 import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import { toggleTheme } from '../../../store/themeSlice'
@@ -22,18 +22,20 @@ export const UserMenuContainer = () => {
 
     return (
         <>
-            <Avatar
-                src={userPhoto}
-                sx={{
-                    width: 35,
-                    height: 35,
-                    marginRight: 1,
-                    marginTop: 1,
-                    cursor: 'pointer',
-                    border: '2px solid #1976d2',
-                }}
-                onClick={openMenu}
-            />
+            <Tooltip title='Account'>
+                <Avatar
+                    src={userPhoto}
+                    sx={{
+                        width: 35,
+                        height: 35,
+                        marginRight: 1,
+                        marginTop: 1,
+                        cursor: 'pointer',
+                        border: '2px solid #1976d2',
+                    }}
+                    onClick={openMenu}
+                />
+            </Tooltip>
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 {auth.loggedIn ? (
                     [<UserInfo key='userInfo' />, <LogoutOption key='logout' />]

@@ -1,4 +1,4 @@
-import { Button, styled } from '@mui/material'
+import { Button, styled, Tooltip } from '@mui/material'
 
 interface Props {
     openVersions: (e: React.MouseEvent) => void
@@ -10,5 +10,9 @@ const StyledSnapshotButton = styled(Button)({
 })
 
 export const SnapshotOption = ({ openVersions }: Props) => {
-    return <StyledSnapshotButton onClick={openVersions}>Snapshots</StyledSnapshotButton>
+    return (
+        <Tooltip title='View Snapshots'>
+            <StyledSnapshotButton onClick={openVersions}>Snapshots</StyledSnapshotButton>
+        </Tooltip>
+    )
 }
