@@ -50,13 +50,6 @@ const authSlice = createSlice({
                 }
         },
     },
-    extraReducers: (builder) => {
-        // // Add reducers for additional action types here, and handle loading state as needed
-        // builder.addCase(loginUser.fulfilled, (state, action) => {
-        //     // Add user to the state array
-        //     state.entities.push(action.payload)
-        // })
-    },
 })
 
 export const loginUser = createAsyncThunk<void, undefined, AppThunkApiConfig>(
