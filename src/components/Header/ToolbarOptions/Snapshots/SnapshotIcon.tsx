@@ -1,5 +1,5 @@
 import { CameraAlt as CameraAltIcon, Check as CheckIcon } from '@mui/icons-material'
-import { IconButton, styled } from '@mui/material'
+import { IconButton, styled, Tooltip } from '@mui/material'
 import { useState } from 'react'
 import { useAppDispatch } from '../../../../store/hooks'
 import { saveSnapshot } from '../../../../store/snapshotThunks'
@@ -25,12 +25,14 @@ export const SnapshotIcon = () => {
     }
 
     return (
-        <StyledIconButton onClick={onSnapshot}>
-            {!saved ? (
-                <CameraAltIcon sx={{ fontSize: 17 }} />
-            ) : (
-                <CheckIcon sx={{ fontSize: 17, marginTop: 0 }} />
-            )}
-        </StyledIconButton>
+        <Tooltip title='Snapshot this document' disableInteractive arrow>
+            <StyledIconButton onClick={onSnapshot}>
+                {!saved ? (
+                    <CameraAltIcon sx={{ fontSize: 17 }} />
+                ) : (
+                    <CheckIcon sx={{ fontSize: 17, marginTop: 0 }} />
+                )}
+            </StyledIconButton>
+        </Tooltip>
     )
 }

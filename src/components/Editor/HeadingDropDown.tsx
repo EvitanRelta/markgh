@@ -1,8 +1,8 @@
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material'
-import { Box, Button, Menu, MenuItem, styled } from '@mui/material'
+import { Box, Button, Menu, MenuItem, styled, Tooltip } from '@mui/material'
 import { Editor as CoreEditor } from '@tiptap/core'
 import { Editor } from '@tiptap/react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
 import { heading } from './toolbarFunctions'
 
@@ -22,7 +22,9 @@ const StyledHeadingMenuContainer = styled(Button)({
     minWidth: 117.43,
     maxHeight: 25,
     paddingRight: 0.5,
-    paddingLeft: 1.5,
+    paddingLeft: 12,
+    paddingTop: 20,
+    paddingBottom: 18,
     borderRadius: 0,
     display: 'flex inline',
     justifyContent: 'space-between',
@@ -82,19 +84,21 @@ export const HeadingDropDown = ({ editor }: Props) => {
 
     return (
         <StyledHeadingDropdownContainer>
-            <StyledHeadingMenuContainer
-                sx={{ color: theme === 'dark' ? 'white' : 'black' }}
-                onClick={openMenu}
-            >
-                <StyledHeadingText>
-                    {headingLevel === 0
-                        ? 'Normal'
-                        : headingLevel === null
-                        ? ''
-                        : 'Heading ' + headingLevel}
-                </StyledHeadingText>
-                <StyledExpandMoreIcon />
-            </StyledHeadingMenuContainer>
+            <Tooltip title='Heading' disableInteractive arrow>
+                <StyledHeadingMenuContainer
+                    sx={{ color: theme === 'dark' ? 'white' : 'black' }}
+                    onClick={openMenu}
+                >
+                    <StyledHeadingText>
+                        {headingLevel === 0
+                            ? 'Normal'
+                            : headingLevel === null
+                            ? ''
+                            : 'Heading ' + headingLevel}
+                    </StyledHeadingText>
+                    <StyledExpandMoreIcon />
+                </StyledHeadingMenuContainer>
+            </Tooltip>
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 {headingOptions.map((value, index) => (
                     <MenuItem key={index} onClick={() => onChange(value)}>

@@ -1,4 +1,4 @@
-import { Box, Button, Menu, styled } from '@mui/material'
+import { Box, Button, Menu, styled, Tooltip } from '@mui/material'
 import { useState } from 'react'
 import { ExportFile } from './ExportFile'
 import { ImportGHRepo } from './ImportGHRepo'
@@ -20,9 +20,11 @@ export const FileOption = ({ onDownload }: Props) => {
 
     return (
         <StyledFileOptionContainer>
-            <Button style={{ padding: 0 }} onClick={openMenu}>
-                File
-            </Button>
+            <Tooltip title='File Options' disableInteractive arrow>
+                <Button style={{ padding: 0 }} onClick={openMenu}>
+                    File
+                </Button>
+            </Tooltip>
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 <OpenFile />
                 <ImportGHRepo menuOpen={Boolean(anchor)} setAnchor={setAnchor} />

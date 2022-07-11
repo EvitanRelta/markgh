@@ -2,9 +2,9 @@ import {
     ExpandMore as ExpandMoreIcon,
     FormatAlignLeft as FormatAlignLeftIcon,
 } from '@mui/icons-material'
-import { Box, IconButton, Menu, MenuItem, styled } from '@mui/material'
+import { Box, IconButton, Menu, MenuItem, styled, Tooltip } from '@mui/material'
 import { Editor } from '@tiptap/react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { textAlign } from './toolbarFunctions'
 
 type Alignment = 'left' | 'center' | 'right' | 'justify'
@@ -15,6 +15,7 @@ interface Props {
 
 const StyledAlignDropdownContainer = styled(Box)({
     display: 'inline',
+    paddingBottom: 12,
 })
 
 const StyledAlignIconButton = styled(IconButton)({
@@ -52,10 +53,12 @@ export const AlignDropDown = ({ editor }: Props) => {
 
     return (
         <StyledAlignDropdownContainer>
-            <StyledAlignIconButton onClick={openMenu}>
-                <FormatAlignLeftIcon />
-                <StyledExpandMoreIcon />
-            </StyledAlignIconButton>
+            <Tooltip title='Alignment' disableInteractive arrow>
+                <StyledAlignIconButton onClick={openMenu}>
+                    <FormatAlignLeftIcon />
+                    <StyledExpandMoreIcon />
+                </StyledAlignIconButton>
+            </Tooltip>
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 {alignOptions.map((option, index) => (
                     <MenuItem key={index} onClick={() => onChange(option)}>
