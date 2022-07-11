@@ -6,7 +6,7 @@ export const align: Plugin = (service) => {
         filter: (node, options) => node.getAttribute('align') !== null,
         replacement: (content, node, options) => {
             const element = node as HTMLElement
-            return turndownHtmlOnly.turndown(element.outerHTML)
+            return turndownHtmlOnly.turndown(element.outerHTML) + '\n\n'
         },
     })
 }
