@@ -158,7 +158,7 @@ export const VersionIndex = ({
         const snapshotTitleColor = snapshot.title ? 'black' : 'gray'
 
         return (
-            <MenuItem key={snapshot.id}>
+            <MenuItem key={snapshot.id!}>
                 <Box
                     sx={{ display: 'flex', justifyContent: 'space-between', paddingRight: 12 }}
                     onClick={() => loadSnapshot(snapshot)}
@@ -177,7 +177,7 @@ export const VersionIndex = ({
                 <IconButton
                     sx={{ display: 'inline' }}
                     onClick={() => deleteSnapshot(snapshot)}
-                    key={snapshot.id}
+                    key={snapshot.id!}
                 >
                     <DeleteIcon />
                 </IconButton>

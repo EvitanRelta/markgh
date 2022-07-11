@@ -51,7 +51,6 @@ export const Header = () => {
         removeImageWrapper(htmlCopy)
         removeTipTapArtifacts(htmlCopy)
         let snapshot = {
-            id: !snapshotArray.length ? 0 : snapshotArray[snapshotArray.length - 1].id! + 1,
             title: fileTitle,
             savedOn: lastEditedOn,
             value: htmlCopy.innerHTML,

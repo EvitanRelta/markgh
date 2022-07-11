@@ -27,10 +27,7 @@ export const ImageContainer = () => {
         const reader = new FileReader()
         reader.onload = async () => {
             const imageBase64 = reader.result as string
-            const image = {
-                id: images.length === 0 ? 0 : images[images.length - 1].id + 1,
-                base64: imageBase64,
-            }
+            const image = { base64: imageBase64 }
             await db.images.add(image)
             updateImagesFromDb()
         }
@@ -43,7 +40,7 @@ export const ImageContainer = () => {
 
     //Clears db
     const deleteAllImages = async () => {
-        for (let i = 0; i <= images[images.length - 1].id; i++) {
+        for (let i = 0; i <= images[images.length - 1].id!; i++) {
             db.images.delete(i)
         }
         updateImagesFromDb()
@@ -59,14 +56,14 @@ export const ImageContainer = () => {
         <>
             <Input inputProps={{ accept: 'image/' }} type='file' onChange={uploadImage} />
             {images.map((image) => (
-                <Box key={image.id}>
-                    id:{image.id}
+                <Box key={image.id!}>
+                    id:{image.id!}
                     <img
                         style={{ maxWidth: 320, maxHeight: 180 }}
                         src={image.base64}
-                        alt={image.id.toString()}
+                        alt={image.id!.toString()}
                     />
-                    <button onClick={() => deleteImage(image.id)}>Delete</button>
+                    <button onClick={() => deleteImage(image.id!)}>Delete</button>
                 </Box>
             ))}
             <Button onClick={() => deleteAllImages()}>Delete all images</Button>
