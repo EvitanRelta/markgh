@@ -12,10 +12,7 @@ import {
 import { formatDateTime } from './formatDateTime'
 
 let store!: AppStore
-
-// 'injectStore' code source:
-// https://redux.js.org/faq/code-structure#how-can-i-use-the-redux-store-in-non-component-files
-export const injectStore = (_store: AppStore) => {
+export const _injectStore = (_store: AppStore) => {
     store = _store
 }
 
