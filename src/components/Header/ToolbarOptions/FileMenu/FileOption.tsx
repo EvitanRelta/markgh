@@ -20,7 +20,7 @@ export const FileOption = ({ onDownload }: Props) => {
 
     return (
         <StyledFileOptionContainer>
-            <Tooltip title='File Options' disableInteractive>
+            <Tooltip title='File Options' disableInteractive arrow>
                 <Button style={{ padding: 0 }} onClick={openMenu}>
                     File
                 </Button>

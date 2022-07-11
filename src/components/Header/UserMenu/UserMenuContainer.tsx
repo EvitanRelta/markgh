@@ -22,7 +22,7 @@ export const UserMenuContainer = () => {
 
     return (
         <>
-            <Tooltip title='Account' disableInteractive>
+            <Tooltip title='Account' disableInteractive arrow>
                 <Avatar
                     src={userPhoto}
                     sx={{

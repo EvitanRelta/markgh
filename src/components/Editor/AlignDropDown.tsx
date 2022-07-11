@@ -53,7 +53,7 @@ export const AlignDropDown = ({ editor }: Props) => {
 
     return (
         <StyledAlignDropdownContainer>
-            <Tooltip title='Alignment' disableInteractive>
+            <Tooltip title='Alignment' disableInteractive arrow>
                 <StyledAlignIconButton onClick={openMenu}>
                     <FormatAlignLeftIcon />
                     <StyledExpandMoreIcon />

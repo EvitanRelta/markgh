@@ -25,7 +25,7 @@ export const SnapshotIcon = () => {
     }
 
     return (
-        <Tooltip title='Snapshot this document' disableInteractive>
+        <Tooltip title='Snapshot this document' disableInteractive arrow>
             <StyledIconButton onClick={onSnapshot}>
                 {!saved ? (
                     <CameraAltIcon sx={{ fontSize: 17 }} />
