@@ -1,21 +1,18 @@
 import { useEffect, useRef } from 'react'
 
 function useOutsideDetector(
-    ref: React.MutableRefObject<null>,
+    ref: React.MutableRefObject<HTMLDivElement | null>,
     onOutsideClick: (event: MouseEvent) => void
 ) {
     useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
-            // @ts-ignore
-            if (ref.current && !ref.current.contains(event.target)) {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (ref.current && !ref.current.contains(event.target as Node | null))
                 onOutsideClick(event)
-            }
         }
+
         document.addEventListener('mousedown', handleClickOutside)
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
-    }, [ref])
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [ref, onOutsideClick])
 }
 
 interface Props {
@@ -26,7 +23,7 @@ interface Props {
 // Detects clicks outside of child node
 // Based on https://stackoverflow.com/a/42234988
 export const DetectOutsideClick = ({ onOutsideClick, children }: Props) => {
-    const wrapperRef = useRef(null)
+    const wrapperRef = useRef<HTMLDivElement | null>(null)
     useOutsideDetector(wrapperRef, onOutsideClick)
 
     return (

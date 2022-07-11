@@ -55,7 +55,7 @@ const authSlice = createSlice({
 export const loginUser = createAsyncThunk<void, undefined, AppThunkApiConfig>(
     'auth/loginUser',
     async (_, { getState, dispatch, rejectWithValue }) => {
-        const { axios, auth, githubProvider } = getState().auth
+        const { auth, githubProvider } = getState().auth
         try {
             const signInResult = await signInWithPopup(auth, githubProvider)
             const credential = GithubAuthProvider.credentialFromResult(signInResult)

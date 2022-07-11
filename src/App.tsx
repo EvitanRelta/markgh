@@ -26,7 +26,7 @@ export const App = () => {
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => dispatch(setUser(user)))
-    }, [auth])
+    }, [auth, dispatch])
 
     return (
         <ThemeProvider theme={selectedTheme}>
