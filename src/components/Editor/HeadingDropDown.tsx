@@ -84,7 +84,7 @@ export const HeadingDropDown = ({ editor }: Props) => {
 
     return (
         <StyledHeadingDropdownContainer>
-            <Tooltip title='Heading'>
+            <Tooltip title='Heading' disableInteractive>
                 <StyledHeadingMenuContainer
                     sx={{ color: theme === 'dark' ? 'white' : 'black' }}
                     onClick={openMenu}

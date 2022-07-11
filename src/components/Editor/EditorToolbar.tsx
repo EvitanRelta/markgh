@@ -89,7 +89,7 @@ const EditorToolbar = ({ editor }: Props) => {
 
         const { name, toolbarFunction, icon: FormatOptionIcon } = option
         return (
-            <Tooltip title={name} key={index}>
+            <Tooltip title={name} key={index} disableInteractive>
                 <StyledIconButton onClick={toolbarFunction(editor)}>
                     <FormatOptionIcon />
                 </StyledIconButton>

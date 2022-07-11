@@ -11,7 +11,7 @@ const StyledSnapshotButton = styled(Button)({
 
 export const SnapshotOption = ({ openVersions }: Props) => {
     return (
-        <Tooltip title='View Snapshots'>
+        <Tooltip title='View Snapshots' disableInteractive>
             <StyledSnapshotButton onClick={openVersions}>Snapshots</StyledSnapshotButton>
         </Tooltip>
     )
