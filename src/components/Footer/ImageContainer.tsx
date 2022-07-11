@@ -40,9 +40,8 @@ export const ImageContainer = () => {
 
     //Clears db
     const deleteAllImages = async () => {
-        for (let i = 0; i <= images[images.length - 1].id!; i++) {
-            db.images.delete(i)
-        }
+        const imageIds = images.map((image) => image.id!)
+        await db.images.bulkDelete(imageIds)
         updateImagesFromDb()
     }
 

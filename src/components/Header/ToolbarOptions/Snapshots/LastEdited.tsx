@@ -3,7 +3,6 @@ import { useAppSelector } from '../../../../store/hooks'
 import { SnapshotIcon } from './SnapshotIcon'
 
 interface Props {
-    saveSnapshot: () => void
     openVersions: (e: React.MouseEvent) => void
 }
 
@@ -18,7 +17,7 @@ const StyledText = styled(Box)({
     cursor: 'pointer',
 })
 
-export const LastEdited = ({ saveSnapshot, openVersions }: Props) => {
+export const LastEdited = ({ openVersions }: Props) => {
     const lastEditedOn = useAppSelector((state) => state.data.lastEditedOn)
 
     return (
@@ -26,7 +25,7 @@ export const LastEdited = ({ saveSnapshot, openVersions }: Props) => {
             <StyledText onClick={openVersions} id='last-edited'>
                 Last Edited on {lastEditedOn}
             </StyledText>
-            <SnapshotIcon saveSnapshot={saveSnapshot} />
+            <SnapshotIcon />
         </>
     )
 }
