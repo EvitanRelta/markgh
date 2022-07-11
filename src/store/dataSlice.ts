@@ -8,8 +8,9 @@ import {
 import { removeTipTapArtifacts } from '../converterFunctions/helpers/removeTipTapArtifacts'
 import { placeholderEditorHtml } from '../placeholderEditorHtml'
 import { formatDateTime } from './helpers/formatDateTime'
-import { database, EditorDBInstance } from './helpers/initDatabase'
+import { database, EditorDBInstance, Snapshot } from './helpers/initDatabase'
 import { editor } from './helpers/initEditor'
+import { addSnapshot, deleteSnapshot, initSnapshots } from './snapshotThunks'
 
 interface DataState {
     editor: Editor
@@ -19,6 +20,7 @@ interface DataState {
     fileTitle: string
     showMarkdown: boolean
     isEditorLoading: boolean
+    snapshots: Snapshot[]
 }
 
 const dataSlice = createSlice({
@@ -31,6 +33,7 @@ const dataSlice = createSlice({
         fileTitle: '',
         showMarkdown: localStorage['showMarkdown'] === 'true', // localStorage cannot store boolean
         isEditorLoading: true,
+        snapshots: [],
     } as DataState,
     reducers: {
         setMarkdownText(state, actions: PayloadAction<string>) {
@@ -55,6 +58,18 @@ const dataSlice = createSlice({
             editor.commands.clearContent(false)
             editor.commands.setContent(actions.payload, true, { preserveWhitespace: 'full' })
         },
+    },
+    extraReducers(builder) {
+        builder.addCase(initSnapshots.fulfilled, (state, actions) => {
+            state.snapshots = actions.payload
+        })
+        builder.addCase(addSnapshot.fulfilled, (state, actions) => {
+            state.snapshots.push(actions.payload)
+        })
+        builder.addCase(deleteSnapshot.fulfilled, (state, actions) => {
+            const snapshotId = actions.meta.arg
+            state.snapshots = state.snapshots.filter((snapshot) => snapshot.id !== snapshotId)
+        })
     },
 })
 
@@ -85,6 +100,7 @@ export const loadInitialContent = createAsyncThunk<void, undefined, AppThunkApiC
         const initialContent = persistentContent?.value ?? placeholderEditorHtml
 
         dispatch(setEditorContent(initialContent))
+        await dispatch(initSnapshots())
         dispatch(setIsEditorLoading(false))
     }
 )

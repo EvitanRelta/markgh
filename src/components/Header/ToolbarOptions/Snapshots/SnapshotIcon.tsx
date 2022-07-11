@@ -1,10 +1,8 @@
 import { CameraAlt as CameraAltIcon, Check as CheckIcon } from '@mui/icons-material'
 import { IconButton, styled } from '@mui/material'
 import { useState } from 'react'
-
-interface Props {
-    saveSnapshot: () => void
-}
+import { useAppDispatch } from '../../../../store/hooks'
+import { saveSnapshot } from '../../../../store/snapshotThunks'
 
 const StyledIconButton = styled(IconButton)({
     padding: 0,
@@ -13,14 +11,15 @@ const StyledIconButton = styled(IconButton)({
     display: 'inline-flex',
 })
 
-export const SnapshotIcon = ({ saveSnapshot }: Props) => {
+export const SnapshotIcon = () => {
+    const dispatch = useAppDispatch()
     const [saved, setSaved] = useState<boolean>(false)
 
     const onSnapshot = () => {
         //Disable clicking for icon for 1.5s, to prevent double click = double save
         if (!saved) {
             setSaved(true)
-            saveSnapshot()
+            dispatch(saveSnapshot())
             setTimeout(() => setSaved(false), 1500)
         }
     }

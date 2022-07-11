@@ -16,22 +16,14 @@ import {
     Typography,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
-import {
-    removeCodeBlockWrapper,
-    removeImageWrapper,
-} from '../../../../converterFunctions/helpers/preProcessHtml'
-import { removeTipTapArtifacts } from '../../../../converterFunctions/helpers/removeTipTapArtifacts'
-import { setEditorContent, setFileTitle } from '../../../../store/dataSlice'
 import { Snapshot } from '../../../../store/helpers/initDatabase'
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
+import { deleteSnapshot, loadSnapshot, saveSnapshot } from '../../../../store/snapshotThunks'
 
 interface Props {
     anchorEl: (EventTarget & Element) | null
     onClose: () => void
-    snapshotArray: Snapshot[]
-    saveSnapshot: () => void
     closeVersions: () => void
-    deleteSnapshot: (snapshot: Snapshot) => Promise<void>
 }
 
 const SnapshotMenuContainer = styled(Menu)({
@@ -52,19 +44,12 @@ const StyledSnapshotList = styled(List)({
     minWidth: 400,
 })
 
-export const VersionIndex = ({
-    anchorEl,
-    onClose,
-    snapshotArray,
-    saveSnapshot,
-    closeVersions,
-    deleteSnapshot,
-}: Props) => {
+export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
     const dispatch = useAppDispatch()
+    const snapshots = useAppSelector((state) => state.data.snapshots)
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
     const [showDialog, setShowDialog] = useState(false)
     const [workingSnapshot, setWorkingSnapshot] = useState<Snapshot>()
-    const editor = useAppSelector((state) => state.data.editor)
 
     var body = document.body,
         html = document.documentElement
@@ -86,9 +71,8 @@ export const VersionIndex = ({
         }
     }
 
-    const loadEditorContent = (snapshot: Snapshot) => {
-        dispatch(setFileTitle(snapshot.title))
-        dispatch(setEditorContent(snapshot.value))
+    const handleLoadSnapshot = (snapshot: Snapshot) => {
+        dispatch(loadSnapshot(snapshot))
         closeVersions()
     }
 
@@ -97,32 +81,17 @@ export const VersionIndex = ({
     }
 
     const dialogDiscard = () => {
-        loadEditorContent(workingSnapshot as Snapshot)
+        dispatch(loadSnapshot(workingSnapshot!))
         setWorkingSnapshot(undefined)
         closeDialog()
         closeVersions()
     }
     const dialogSnapshot = () => {
-        saveSnapshot()
-        loadEditorContent(workingSnapshot!)
+        dispatch(saveSnapshot())
+        dispatch(loadSnapshot(workingSnapshot!))
         setWorkingSnapshot(undefined)
         closeDialog()
         closeVersions()
-    }
-
-    const loadSnapshot = (snapshot: Snapshot) => {
-        const htmlCopy = editor.view.dom.cloneNode(true) as HTMLElement
-        removeCodeBlockWrapper(htmlCopy)
-        removeImageWrapper(htmlCopy)
-        removeTipTapArtifacts(htmlCopy)
-
-        if (snapshot.value !== htmlCopy.innerHTML) {
-            setWorkingSnapshot(snapshot)
-            setShowDialog(true)
-            return
-        }
-
-        loadEditorContent(snapshot)
     }
 
     const discardChangesPrompt = (
@@ -161,7 +130,7 @@ export const VersionIndex = ({
             <MenuItem key={snapshot.id!}>
                 <Box
                     sx={{ display: 'flex', justifyContent: 'space-between', paddingRight: 12 }}
-                    onClick={() => loadSnapshot(snapshot)}
+                    onClick={() => handleLoadSnapshot(snapshot)}
                 >
                     <ListItemAvatar>
                         <Avatar>
@@ -176,7 +145,7 @@ export const VersionIndex = ({
                 </Box>
                 <IconButton
                     sx={{ display: 'inline' }}
-                    onClick={() => deleteSnapshot(snapshot)}
+                    onClick={() => dispatch(deleteSnapshot(snapshot.id!))}
                     key={snapshot.id!}
                 >
                     <DeleteIcon />
@@ -195,7 +164,7 @@ export const VersionIndex = ({
             >
                 <StyledTitleText variant='h4'>Snapshots</StyledTitleText>
                 <StyledSnapshotList sx={{ minHeight: windowDimensions.height }} dense>
-                    {snapshotArray.map(snapshotArrayMapper)}
+                    {snapshots.map(snapshotArrayMapper)}
                 </StyledSnapshotList>
             </SnapshotMenuContainer>
         </Box>
