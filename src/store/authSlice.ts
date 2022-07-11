@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios, { AxiosInstance } from 'axios'
-import { FirebaseApp, initializeApp } from 'firebase/app'
-import { Auth, getAuth, GithubAuthProvider, signInWithPopup, User } from 'firebase/auth'
+import { FirebaseApp } from 'firebase/app'
+import { Auth, GithubAuthProvider, signInWithPopup, User } from 'firebase/auth'
 import { AppThunkApiConfig } from '.'
 import { githubProvider } from '../authentication/config/authMethod'
-import { firebaseConfig } from '../authentication/config/firebaseConfig'
+import { auth, firebaseApp } from './helpers/initAuth'
 
 interface AuthState {
     loggedIn: boolean
@@ -16,7 +16,6 @@ interface AuthState {
 }
 
 //Initialises firebase for authentication
-const firebaseApp = initializeApp(firebaseConfig)
 const axiosInstance = localStorage['ghToken']
     ? axios.create({
           headers: {
@@ -30,7 +29,7 @@ const authSlice = createSlice({
     initialState: {
         loggedIn: false,
         user: null,
-        auth: getAuth(firebaseApp),
+        auth,
         firebaseApp,
         githubProvider,
         axios: axiosInstance,
