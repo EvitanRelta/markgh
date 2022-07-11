@@ -8,12 +8,12 @@ import {
 import { removeTipTapArtifacts } from '../converterFunctions/helpers/removeTipTapArtifacts'
 import { placeholderEditorHtml } from '../placeholderEditorHtml'
 import { formatDateTime } from './helpers/formatDateTime'
-import { EditorDB } from './helpers/initDatabase'
+import { database, EditorDBInstance } from './helpers/initDatabase'
 import { editor } from './helpers/initEditor'
 
 interface DataState {
     editor: Editor
-    database: EditorDB
+    database: EditorDBInstance
     markdownText: string
     lastEditedOn: string
     fileTitle: string
@@ -25,7 +25,7 @@ const dataSlice = createSlice({
     name: 'data',
     initialState: {
         editor,
-        database: new EditorDB(),
+        database,
         markdownText: '',
         lastEditedOn: localStorage['lastEditedOn'] ?? formatDateTime(new Date()),
         fileTitle: '',

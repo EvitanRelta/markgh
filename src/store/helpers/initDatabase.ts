@@ -1,6 +1,6 @@
 import Dexie, { Table } from 'dexie'
 
-export class EditorDB extends Dexie {
+class EditorDB extends Dexie {
     images!: Table<EditorImage, number>
     text!: Table<EditorText, number>
     snapshots!: Table<Snapshot, number>
@@ -29,3 +29,9 @@ export interface Snapshot {
     title: string
     value: string
 }
+
+export type EditorDBInstance = InstanceType<typeof EditorDB>
+
+const database: EditorDBInstance = new EditorDB()
+
+export { database }
