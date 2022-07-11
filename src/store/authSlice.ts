@@ -7,6 +7,7 @@ import { githubProvider } from '../authentication/config/authMethod'
 import { auth, firebaseApp } from './helpers/initAuth'
 
 interface AuthState {
+    hasUserInit: boolean
     loggedIn: boolean
     user: User | null
     auth: Auth
@@ -27,6 +28,7 @@ const axiosInstance = localStorage['ghToken']
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
+        hasUserInit: false,
         loggedIn: false,
         user: null,
         auth,
@@ -35,6 +37,9 @@ const authSlice = createSlice({
         axios: axiosInstance,
     } as AuthState,
     reducers: {
+        setHasUserInit(state, action: PayloadAction<boolean>) {
+            state.hasUserInit = action.payload
+        },
         setUser(state, action: PayloadAction<User | null>) {
             state.loggedIn = action.payload !== null
             state.user = action.payload
@@ -83,5 +88,5 @@ export const logoutUser = createAsyncThunk<void, undefined, AppThunkApiConfig>(
     }
 )
 
-export const { setUser, setGhToken } = authSlice.actions
+export const { setHasUserInit, setUser, setGhToken } = authSlice.actions
 export const authReducer = authSlice.reducer
