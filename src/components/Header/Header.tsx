@@ -5,8 +5,8 @@ import {
     removeImageWrapper,
 } from '../.././converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../.././converterFunctions/helpers/removeTipTapArtifacts'
+import { Snapshot } from '../../store/helpers/initDatabase'
 import { useAppSelector } from '../../store/hooks'
-import { Snapshot } from '.././IndexedDB/initDB'
 import { TitleInput } from './TitleInput'
 import { LastEdited } from './ToolbarOptions/Snapshots/LastEdited'
 import { VersionIndex } from './ToolbarOptions/Snapshots/VersionIndex'
@@ -41,16 +41,8 @@ export const Header = () => {
     const [showVersions, setShowVersions] = useState<(EventTarget & Element) | null>(null)
 
     const updateSnapshotsFromDb = async () => {
-        try {
-            let allSnapshots = await db.snapshots.toArray()
-            setSnapshotArray(allSnapshots)
-        } catch (e) {
-            //if 'snapshots' field is not initialised in db, it will be undefined, and 'toArray' causes a TypeError'
-            if (db.snapshots === undefined) {
-                await db.delete()
-                window.location.reload()
-            }
-        }
+        let allSnapshots = await db.snapshots.toArray()
+        setSnapshotArray(allSnapshots)
     }
 
     const saveSnapshot = () => {
