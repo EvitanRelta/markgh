@@ -34,9 +34,9 @@ export type EditorDBInstance = InstanceType<typeof EditorDB>
 
 const database: EditorDBInstance = new EditorDB()
 
-const resetDatabase = async () => {
+const resetDatabase = () => {
     console.error('Resetting database...')
-    await database.delete()
+    database.delete()
     window.location.reload()
 }
 
@@ -54,7 +54,7 @@ database.on('ready', async () => {
             Object.keys(record).length === properties.length
 
         for (const record of records) {
-            if (!hasAllProperties(record)) await resetDatabase()
+            if (!hasAllProperties(record)) return resetDatabase()
         }
     }
 })
