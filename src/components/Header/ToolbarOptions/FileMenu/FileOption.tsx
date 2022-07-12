@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { ExportFile } from './ExportFile'
 import { ImportGHRepo } from './ImportGHRepo'
 import { OpenFile } from './OpenFile'
+import { PushGH } from './PushGH'
 
 interface Props {
     onDownload: () => void
@@ -28,6 +29,7 @@ export const FileOption = ({ onDownload }: Props) => {
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 <OpenFile />
                 <ImportGHRepo menuOpen={Boolean(anchor)} setAnchor={setAnchor} />
+                <PushGH />
                 <ExportFile onDownload={onDownload} />
             </Menu>
         </StyledFileOptionContainer>

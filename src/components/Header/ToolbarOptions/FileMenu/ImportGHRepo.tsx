@@ -54,7 +54,6 @@ export const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
     return (
         <StyledMenuItem
             sx={{ paddingBottom: 1.3 }}
-            divider
             onClick={openPopover}
             onKeyDown={(e: React.KeyboardEvent) => e.stopPropagation()}
         >
