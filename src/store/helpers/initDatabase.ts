@@ -17,14 +17,14 @@ export interface EditorImage {
 }
 export interface EditorText {
     id?: number
-    value: string
+    content: string
 }
 
 export interface Snapshot {
     id?: number
-    savedOn: string
-    title: string
-    value: string
+    lastEditedOn: string
+    fileTitle: string
+    content: string
 }
 
 export type EditorDBInstance = InstanceType<typeof EditorDB>

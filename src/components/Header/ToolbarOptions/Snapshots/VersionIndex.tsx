@@ -112,7 +112,7 @@ export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
     }, [])
 
     const snapshotArrayMapper = (snapshot: Snapshot) => {
-        const snapshotTitleColor = snapshot.title ? 'black' : 'gray'
+        const snapshotTitleColor = snapshot.fileTitle ? 'black' : 'gray'
 
         return (
             <MenuItem key={snapshot.id!}>
@@ -127,8 +127,8 @@ export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
                     </ListItemAvatar>
                     <ListItemText
                         sx={{ color: snapshotTitleColor }}
-                        primary={snapshot.title || 'Untitled Document'}
-                        secondary={'Snapshot on ' + snapshot.savedOn}
+                        primary={snapshot.fileTitle || 'Untitled Document'}
+                        secondary={'Snapshot on ' + snapshot.lastEditedOn}
                     />
                 </Box>
                 <IconButton

@@ -40,8 +40,8 @@ export const deleteSnapshot = createAsyncThunk<void, Required<Snapshot>['id'], A
 export const loadSnapshot = createAsyncThunk<void, Snapshot, AppThunkApiConfig>(
     'data/loadSnapShot',
     async (snapshot, { dispatch }) => {
-        dispatch(setFileTitle(snapshot.title))
-        dispatch(setEditorContent(snapshot.value))
+        dispatch(setFileTitle(snapshot.fileTitle))
+        dispatch(setEditorContent(snapshot.content))
     }
 )
 
@@ -55,9 +55,9 @@ export const saveSnapshot = createAsyncThunk<void, undefined, AppThunkApiConfig>
         removeTipTapArtifacts(htmlCopy)
 
         const snapshot: Snapshot = {
-            title: fileTitle,
-            savedOn: lastEditedOn,
-            value: htmlCopy.innerHTML,
+            fileTitle,
+            lastEditedOn,
+            content: htmlCopy.innerHTML,
         }
         await dispatch(addSnapshot(snapshot))
     }

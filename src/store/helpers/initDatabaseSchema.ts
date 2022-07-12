@@ -11,6 +11,19 @@ const renameTable =
         await trans.table(newTableName).bulkAdd(records)
     }
 
+// Renames a field in a table.
+const renameField =
+    (tableName: string, oldFieldName: string, newFieldName: string): UpgradeFunc =>
+    async (trans) => {
+        await trans
+            .table(tableName)
+            .toCollection()
+            .modify((table) => {
+                table[newFieldName] = table[oldFieldName]
+                delete table[oldFieldName]
+            })
+    }
+
 export const initDatabaseSchema = (db: EditorDBInstance) => {
     db.version(1).stores({
         images: '++id,base64',
@@ -23,4 +36,13 @@ export const initDatabaseSchema = (db: EditorDBInstance) => {
             currentContent: '++id,value',
         })
         .upgrade(renameTable('text', 'currentContent'))
+    db.version(3)
+        .stores({
+            currentContent: '++id,content',
+            snapshots: '++id,lastEditedOn,fileTitle,content',
+        })
+        .upgrade(renameField('currentContent', 'value', 'content'))
+        .upgrade(renameField('snapshots', 'value', 'content'))
+        .upgrade(renameField('snapshots', 'savedOn', 'lastEditedOn'))
+        .upgrade(renameField('snapshots', 'title', 'fileTitle'))
 }
