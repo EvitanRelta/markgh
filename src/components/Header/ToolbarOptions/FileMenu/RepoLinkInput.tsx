@@ -2,6 +2,7 @@ import { Box, Button, CircularProgress, styled, TextField } from '@mui/material'
 import staticAxios from 'axios'
 import { useState } from 'react'
 import { GithubRepoInfo } from '../../../../converterFunctions/markdownToHtml'
+import { getUserRepoPairFromUrl } from '../../../../scripts/helpers/getUserRepoPairFromUrl'
 import { importMarkdown } from '../../../../store/dataSlice'
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
 
@@ -74,10 +75,8 @@ export const RepoLinkInput = ({ setAnchor }: Props) => {
 
         let dirPath = '/'
         let fileName = 'README.md'
-        const [user, repo] = /github.com\/([\w-]+)\/([\w-]+)/i.exec(url)?.slice(1) as [
-            string,
-            string
-        ]
+        const [user, repo] = getUserRepoPairFromUrl(url)
+
         let branch = /github.com(\/([\w-]+)){4}/i.exec(url)?.[2]
 
         if (branch === undefined) branch = await getDefaultBranch(user, repo)
