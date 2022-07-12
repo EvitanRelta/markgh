@@ -4,6 +4,7 @@ import { bold } from './bold'
 import { code } from './code'
 import { codeBlock } from './codeBlock'
 import { heading } from './heading'
+import { horizontalRule } from './horizontalRule'
 import { italic } from './italic'
 import { link } from './link'
 import { orderedList } from './orderedList'
@@ -21,6 +22,7 @@ export {
     code,
     codeBlock,
     heading,
+    horizontalRule,
     italic,
     link,
     orderedList,

@@ -8,6 +8,7 @@ import {
     FormatQuote as FormatQuoteIcon,
     FormatStrikethroughTwoTone as FormatStrikethroughTwoToneIcon,
     FormatUnderlined as FormatUnderlinedIcon,
+    HorizontalRule as HorizontalRuleIcon,
     Image as ImageIcon,
     Link as LinkIcon,
     Subscript as SubscriptIcon,
@@ -25,6 +26,7 @@ import {
     bold,
     code,
     codeBlock,
+    horizontalRule,
     italic,
     link,
     orderedList,
@@ -63,6 +65,7 @@ const editorOptions: FormatOption[] = [
     { name: 'Ordered List', toolbarFunction: orderedList, icon: FormatListNumberedIcon },
     { name: 'Unordered List', toolbarFunction: unorderedList, icon: FormatListBulletedIcon },
     AlignDropDown,
+    { name: 'Horizontal Line', toolbarFunction: horizontalRule, icon: HorizontalRuleIcon },
 ]
 
 interface Props {
