@@ -5,7 +5,7 @@ export const removeTipTapArtifacts = (htmlElement: Element) => {
 
     htmlElement.querySelectorAll(selector).forEach((element) => {
         const parentElement = element.parentElement
-        if (!parentElement) throw new Error('Error parsing codeblock.')
+        if (!parentElement) throw new Error('Error parsing during TipTap artifact removal.')
 
         parentElement.removeChild(element)
     })
