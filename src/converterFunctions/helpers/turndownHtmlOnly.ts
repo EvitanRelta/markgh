@@ -4,7 +4,6 @@ import { toSanitizedHtmlHOC } from './toSanitizedHtmlHOC'
 // Cannot import from './turndownPlugins/index.ts' like:
 // import { ignoreTipTapArtifacts, underline } from './turndownPlugins'
 // as 'align.ts' imports this file, which causes circular importing.
-import { ignoreTipTapArtifacts } from '../turndownPlugins/ignoreTipTapArtifacts'
 import { underline } from '../turndownPlugins/underline'
 
 interface AllowedAttr {
@@ -50,6 +49,6 @@ turndownHtmlOnly.addRule('htmlCodeblock', {
         toSanitizedHtmlHOC(node as TurndownAugmentedNode, [], false)(content),
 })
 
-turndownHtmlOnly.use([underline, ignoreTipTapArtifacts])
+turndownHtmlOnly.use([underline])
 
 export { turndownHtmlOnly }

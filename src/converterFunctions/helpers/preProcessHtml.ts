@@ -1,3 +1,5 @@
+import { removeTipTapArtifacts } from './removeTipTapArtifacts'
+
 const isCodeOrCodeBlock = (element: Element) => ['CODE', 'PRE'].includes(element.tagName)
 const isEditorContainer = (element: Element) => element.classList.contains('markdown-body')
 const isInsideCodeOrCodeBlock = (element: Element): boolean => {
@@ -75,4 +77,5 @@ export const preProcessHtml = (htmlElement: Element) => {
     removeCodeBlockWrapper(htmlElement)
     removeImageWrapper(htmlElement)
     removeWrapperParagraphs(htmlElement)
+    removeTipTapArtifacts(htmlElement)
 }

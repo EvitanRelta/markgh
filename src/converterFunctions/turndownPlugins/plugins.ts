@@ -1,6 +1,6 @@
 import { align } from './align'
 import { codeBlocks } from './codeBlocks'
-import { ignoreTipTapArtifacts } from './ignoreTipTapArtifacts'
+import { emptyParagraph } from './emptyParagraph'
 import { lineBreak } from './lineBreak'
 import { resizedImage } from './resizedImage'
 import { strikethrough } from './strikethrough'
@@ -11,13 +11,11 @@ import { underline } from './underline'
 export const plugins = [
     align,
     codeBlocks,
+    emptyParagraph,
     lineBreak,
     resizedImage,
     strikethrough,
     underline,
     subscript,
     superscript,
-
-    // Must be last
-    ignoreTipTapArtifacts,
 ]
