@@ -1,6 +1,5 @@
 import { align } from './align'
 import { codeBlocks } from './codeBlocks'
-import { ignoreTipTapArtifacts } from './ignoreTipTapArtifacts'
 import { lineBreak } from './lineBreak'
 import { resizedImage } from './resizedImage'
 import { strikethrough } from './strikethrough'
@@ -17,7 +16,4 @@ export const plugins = [
     underline,
     subscript,
     superscript,
-
-    // Must be last
-    ignoreTipTapArtifacts,
 ]
