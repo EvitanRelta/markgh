@@ -10,6 +10,8 @@ export const toMarkdown = (html: Element) => {
     const turndownService = new TurndownService({
         headingStyle: 'atx',
         codeBlockStyle: 'fenced',
+        bulletListMarker: '-',
+        hr: '---',
     }).use(plugins)
 
     const markdown = turndownService.turndown(htmlCopy)
