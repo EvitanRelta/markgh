@@ -54,7 +54,7 @@ export const saveSnapshot = createAsyncThunk<void, undefined, AppThunkApiConfig>
         removeImageWrapper(htmlCopy)
         removeTipTapArtifacts(htmlCopy)
 
-        let snapshot = {
+        const snapshot: Snapshot = {
             title: fileTitle,
             savedOn: lastEditedOn,
             value: htmlCopy.innerHTML,
