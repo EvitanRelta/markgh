@@ -31,7 +31,7 @@ const allowedAttr: AllowedAttr[] = [
         allowedAttributes: ['href'],
     },
     {
-        filter: ['br', 'hr', 'em', 'i', 'strong', 'b', 's', 'code'],
+        filter: ['br', 'hr', 'em', 'i', 'strong', 'b', 's', 'code', 'hr'],
         allowedAttributes: [],
     },
 ]
