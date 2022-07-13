@@ -10,7 +10,6 @@ window.Buffer = window.Buffer || require('buffer').Buffer
 export const PushGH = () => {
     return (
         <MenuItem
-            divider
             onClick={(e) =>
                 gitPR(fs, 'https://github.com/swxk19/markgh.git', localStorage['ghToken'])
             }

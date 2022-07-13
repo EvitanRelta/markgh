@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import { useAppSelector } from '../../../store/hooks'
+import { ExportOption } from './ExportMenu/ExportOption'
 import { FileOption } from './FileMenu/FileOption'
 import { SnapshotOption } from './Snapshots/SnapshotOption'
 
@@ -30,6 +31,7 @@ export const ToolbarContainer = ({ openVersions }: Props) => {
     return (
         <Box>
             <FileOption onDownload={onDownload} />
+            <ExportOption />
             <SnapshotOption openVersions={openVersions} />
         </Box>
     )
