@@ -109,6 +109,7 @@ export const gitPR = async (fs: FS, url: string, token: string) => {
             head,
             base,
             title,
+            body,
         })
     }
 
@@ -117,7 +118,6 @@ export const gitPR = async (fs: FS, url: string, token: string) => {
             owner,
             repo,
         })
-        console.log(res.data)
         const PRArray = res.data as PullRequest[]
 
         for (let i = 0; i < PRArray.length; i++) {
