@@ -1,4 +1,5 @@
 import { Version } from 'dexie'
+import { getFormatedNow } from './getFormatedNow'
 import { EditorDBInstance } from './initDatabase'
 
 type UpgradeFunc = Parameters<Version['upgrade']>[0]
@@ -24,6 +25,18 @@ const renameField =
             })
     }
 
+// Adds a new field, with the value obtained via 'getValue'.
+const addField =
+    (tableName: string, fieldName: string, getValue: (table: any) => any): UpgradeFunc =>
+    async (trans) => {
+        await trans
+            .table(tableName)
+            .toCollection()
+            .modify((table) => {
+                table[fieldName] = getValue(table)
+            })
+    }
+
 export const initDatabaseSchema = (db: EditorDBInstance) => {
     db.version(1).stores({
         images: '++id,base64',
@@ -45,4 +58,10 @@ export const initDatabaseSchema = (db: EditorDBInstance) => {
         .upgrade(renameField('snapshots', 'value', 'content'))
         .upgrade(renameField('snapshots', 'savedOn', 'lastEditedOn'))
         .upgrade(renameField('snapshots', 'title', 'fileTitle'))
+    db.version(4)
+        .stores({
+            currentContent: '++id,lastEditedOn,fileTitle,content',
+        })
+        .upgrade(addField('currentContent', 'lastEditedOn', getFormatedNow))
+        .upgrade(addField('currentContent', 'fileTitle', () => ''))
 }

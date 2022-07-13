@@ -7,10 +7,10 @@ import {
 } from '../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../converterFunctions/helpers/removeTipTapArtifacts'
 import { placeholderEditorHtml } from '../placeholderEditorHtml'
-import { formatDateTime } from './helpers/formatDateTime'
+import { getFormatedNow } from './helpers/getFormatedNow'
 import { database, EditorDBInstance, Snapshot } from './helpers/initDatabase'
 import { editor } from './helpers/initEditor'
-import { addSnapshot, deleteSnapshot, initSnapshots } from './snapshotThunks'
+import { addSnapshot, deleteSnapshot, initSnapshots, loadSnapshot } from './snapshotThunks'
 
 interface DataState {
     editor: Editor
@@ -29,7 +29,7 @@ const dataSlice = createSlice({
         editor,
         database,
         markdownText: '',
-        lastEditedOn: localStorage['lastEditedOn'] ?? formatDateTime(new Date()),
+        lastEditedOn: '',
         fileTitle: '',
         showMarkdown: localStorage['showMarkdown'] === 'true', // localStorage cannot store boolean
         isEditorLoading: true,
@@ -39,11 +39,14 @@ const dataSlice = createSlice({
         setMarkdownText(state, actions: PayloadAction<string>) {
             state.markdownText = actions.payload
         },
-        setLastEditedOn(state, actions: PayloadAction<string>) {
-            localStorage['lastEditedOn'] = actions.payload
+
+        // Set 'lastEditedOn' without side effects.
+        _setLastEditedOn(state, actions: PayloadAction<string>) {
             state.lastEditedOn = actions.payload
         },
-        setFileTitle(state, actions: PayloadAction<string>) {
+
+        // Set 'fileTitle' without side effects.
+        _setFileTitle(state, actions: PayloadAction<string>) {
             state.fileTitle = actions.payload
         },
         setShowMarkdown(state, actions: PayloadAction<boolean>) {
@@ -73,10 +76,29 @@ const dataSlice = createSlice({
     },
 })
 
+// Set 'lastEditedOn' and save the change.
+export const setLastEditedOn = createAsyncThunk<void, string, AppThunkApiConfig>(
+    'data/setLastEditedOn',
+    async (newLastEditedOn, { dispatch }) => {
+        dispatch(_setLastEditedOn(newLastEditedOn))
+        dispatch(saveEditorContent())
+    }
+)
+
+// Set 'fileTitle' and save the change.
+export const setFileTitle = createAsyncThunk<void, string, AppThunkApiConfig>(
+    'data/setFileTitle',
+    async (newFileTitle, { dispatch }) => {
+        dispatch(_setFileTitle(newFileTitle))
+        dispatch(_setLastEditedOn(getFormatedNow()))
+        dispatch(saveEditorContent())
+    }
+)
+
 export const saveEditorContent = createAsyncThunk<void, undefined, AppThunkApiConfig>(
     'data/saveEditorContent',
     async (_, { getState, rejectWithValue }) => {
-        const { editor, database } = getState().data
+        const { editor, database, fileTitle, lastEditedOn } = getState().data
         try {
             const htmlCopy = editor.view.dom.cloneNode(true) as HTMLElement
             removeCodeBlockWrapper(htmlCopy)
@@ -87,7 +109,12 @@ export const saveEditorContent = createAsyncThunk<void, undefined, AppThunkApiCo
 
             await database.transaction('rw', database.currentContent, (trans) => {
                 const currentContentTable: CurrentContentTable = trans.table('currentContent')
-                currentContentTable.put({ id: 0, content: htmlCopy.innerHTML })
+                currentContentTable.put({
+                    id: 0,
+                    fileTitle,
+                    lastEditedOn,
+                    content: htmlCopy.innerHTML,
+                })
             })
         } catch (e) {
             return rejectWithValue(e as Error)
@@ -99,10 +126,15 @@ export const loadInitialContent = createAsyncThunk<void, undefined, AppThunkApiC
     'data/loadInitialContent',
     async (_, { getState, dispatch }) => {
         const { database } = getState().data
-        const persistentContent = await database.currentContent.get(0)
-        const initialContent = persistentContent?.content ?? placeholderEditorHtml
+        const currentContent = await database.currentContent.get(0)
 
-        dispatch(setEditorContent(initialContent))
+        const initialData = currentContent ?? {
+            fileTitle: '',
+            lastEditedOn: getFormatedNow(),
+            content: placeholderEditorHtml,
+        }
+
+        await dispatch(loadSnapshot(initialData))
         await dispatch(initSnapshots())
         dispatch(setIsEditorLoading(false))
     }
@@ -110,8 +142,8 @@ export const loadInitialContent = createAsyncThunk<void, undefined, AppThunkApiC
 
 export const {
     setMarkdownText,
-    setLastEditedOn,
-    setFileTitle,
+    _setLastEditedOn,
+    _setFileTitle,
     setShowMarkdown,
     setIsEditorLoading,
     setEditorContent,

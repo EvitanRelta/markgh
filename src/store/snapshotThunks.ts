@@ -5,7 +5,7 @@ import {
     removeImageWrapper,
 } from '../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../converterFunctions/helpers/removeTipTapArtifacts'
-import { setEditorContent, setFileTitle } from './dataSlice'
+import { setEditorContent, _setFileTitle, _setLastEditedOn } from './dataSlice'
 import { Snapshot } from './helpers/initDatabase'
 
 export const initSnapshots = createAsyncThunk<Snapshot[], undefined, AppThunkApiConfig>(
@@ -40,7 +40,8 @@ export const deleteSnapshot = createAsyncThunk<void, Required<Snapshot>['id'], A
 export const loadSnapshot = createAsyncThunk<void, Snapshot, AppThunkApiConfig>(
     'data/loadSnapShot',
     async (snapshot, { dispatch }) => {
-        dispatch(setFileTitle(snapshot.fileTitle))
+        dispatch(_setFileTitle(snapshot.fileTitle))
+        dispatch(_setLastEditedOn(snapshot.lastEditedOn))
         dispatch(setEditorContent(snapshot.content))
     }
 )

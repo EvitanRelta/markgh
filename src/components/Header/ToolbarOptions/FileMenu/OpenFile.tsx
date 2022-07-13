@@ -2,8 +2,9 @@ import { FolderOpen } from '@mui/icons-material'
 import { Box, Input, MenuItem, styled } from '@mui/material'
 import React from 'react'
 import { markdownToHtml } from '../../../../converterFunctions'
-import { setEditorContent } from '../../../../store/dataSlice'
+import { getFormatedNow } from '../../../../store/helpers/getFormatedNow'
 import { useAppDispatch } from '../../../../store/hooks'
+import { loadSnapshot } from '../../../../store/snapshotThunks'
 
 const StyledMenuItem = styled(MenuItem)({
     padding: 10,
@@ -48,7 +49,13 @@ export const OpenFile = () => {
         reader.readAsText(file)
         reader.onload = () => {
             const htmlContent = markdownToHtml(reader.result as string)
-            dispatch(setEditorContent(htmlContent))
+            dispatch(
+                loadSnapshot({
+                    fileTitle: file.name,
+                    lastEditedOn: getFormatedNow(),
+                    content: htmlContent,
+                })
+            )
         }
     }
 

@@ -3,7 +3,7 @@ import { initDatabaseSchema } from './initDatabaseSchema'
 
 class EditorDB extends Dexie {
     images!: Table<EditorImage, number>
-    currentContent!: Table<EditorText, number>
+    currentContent!: Table<Snapshot, number>
     snapshots!: Table<Snapshot, number>
     constructor() {
         super('EditorDB')
@@ -14,10 +14,6 @@ class EditorDB extends Dexie {
 export interface EditorImage {
     id?: number
     base64: string
-}
-export interface EditorText {
-    id?: number
-    content: string
 }
 
 export interface Snapshot {
