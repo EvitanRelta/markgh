@@ -76,7 +76,7 @@ const dataSlice = createSlice({
 export const saveEditorContent = createAsyncThunk<void, undefined, AppThunkApiConfig>(
     'data/saveEditorContent',
     async (_, { getState, rejectWithValue }) => {
-        const { editor, database } = getState().data
+        const { editor, database, fileTitle, lastEditedOn } = getState().data
         try {
             const htmlCopy = editor.view.dom.cloneNode(true) as HTMLElement
             removeCodeBlockWrapper(htmlCopy)
@@ -87,7 +87,12 @@ export const saveEditorContent = createAsyncThunk<void, undefined, AppThunkApiCo
 
             await database.transaction('rw', database.currentContent, (trans) => {
                 const currentContentTable: CurrentContentTable = trans.table('currentContent')
-                currentContentTable.put({ id: 0, content: htmlCopy.innerHTML })
+                currentContentTable.put({
+                    id: 0,
+                    fileTitle,
+                    lastEditedOn,
+                    content: htmlCopy.innerHTML,
+                })
             })
         } catch (e) {
             return rejectWithValue(e as Error)
