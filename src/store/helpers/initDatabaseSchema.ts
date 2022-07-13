@@ -1,5 +1,5 @@
 import { Version } from 'dexie'
-import { formatDateTime } from './formatDateTime'
+import { getFormatedNow } from './getFormatedNow'
 import { EditorDBInstance } from './initDatabase'
 
 type UpgradeFunc = Parameters<Version['upgrade']>[0]
@@ -62,6 +62,6 @@ export const initDatabaseSchema = (db: EditorDBInstance) => {
         .stores({
             currentContent: '++id,lastEditedOn,fileTitle,content',
         })
-        .upgrade(addField('currentContent', 'lastEditedOn', () => formatDateTime(new Date())))
+        .upgrade(addField('currentContent', 'lastEditedOn', getFormatedNow))
         .upgrade(addField('currentContent', 'fileTitle', () => ''))
 }

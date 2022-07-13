@@ -9,7 +9,7 @@ import {
     setLastEditedOn,
     setMarkdownText,
 } from '../dataSlice'
-import { formatDateTime } from './formatDateTime'
+import { getFormatedNow } from './getFormatedNow'
 
 let store!: AppStore
 export const _injectStore = (_store: AppStore) => {
@@ -21,11 +21,7 @@ const onTextChange = (editorContainer: Element) => {
     const markdown = toMarkdown(editorContainer)
     dispatch(saveEditorContent())
     dispatch(setMarkdownText(markdown))
-
-    const now = new Date()
-    const formatedNow = formatDateTime(now)
-
-    dispatch(setLastEditedOn(formatedNow))
+    dispatch(setLastEditedOn(getFormatedNow()))
 }
 
 const editor = new Editor({

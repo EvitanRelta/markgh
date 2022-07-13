@@ -7,7 +7,7 @@ import {
 } from '../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../converterFunctions/helpers/removeTipTapArtifacts'
 import { placeholderEditorHtml } from '../placeholderEditorHtml'
-import { formatDateTime } from './helpers/formatDateTime'
+import { getFormatedNow } from './helpers/getFormatedNow'
 import { database, EditorDBInstance, Snapshot } from './helpers/initDatabase'
 import { editor } from './helpers/initEditor'
 import { addSnapshot, deleteSnapshot, initSnapshots } from './snapshotThunks'
@@ -29,7 +29,7 @@ const dataSlice = createSlice({
         editor,
         database,
         markdownText: '',
-        lastEditedOn: localStorage['lastEditedOn'] ?? formatDateTime(new Date()),
+        lastEditedOn: localStorage['lastEditedOn'] ?? getFormatedNow(),
         fileTitle: '',
         showMarkdown: localStorage['showMarkdown'] === 'true', // localStorage cannot store boolean
         isEditorLoading: true,
