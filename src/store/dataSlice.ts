@@ -83,9 +83,12 @@ export const saveEditorContent = createAsyncThunk<void, undefined, AppThunkApiCo
             removeImageWrapper(htmlCopy)
             removeTipTapArtifacts(htmlCopy)
 
-            await database.transaction('rw', database.currentContent, () =>
-                database.currentContent.put({ id: 0, content: htmlCopy.innerHTML })
-            )
+            type CurrentContentTable = typeof database.currentContent
+
+            await database.transaction('rw', database.currentContent, (trans) => {
+                const currentContentTable: CurrentContentTable = trans.table('currentContent')
+                currentContentTable.put({ id: 0, content: htmlCopy.innerHTML })
+            })
         } catch (e) {
             return rejectWithValue(e as Error)
         }
