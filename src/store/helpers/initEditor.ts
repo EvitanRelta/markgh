@@ -3,7 +3,13 @@ import _ from 'lodash'
 import { AppStore } from '..'
 import { extensions } from '../../components/Editor/extensions/extensions'
 import { toMarkdown } from '../../converterFunctions'
-import { loadInitialContent, setLastEditedOn, setMarkdownText } from '../dataSlice'
+import {
+    loadInitialContent,
+    saveEditorContent,
+    setIsLoadingSnapshot,
+    setMarkdownText,
+    _setLastEditedOn,
+} from '../dataSlice'
 import { getFormatedNow } from './getFormatedNow'
 
 let store!: AppStore
@@ -12,10 +18,17 @@ export const _injectStore = (_store: AppStore) => {
 }
 
 const onTextChange = (editorContainer: Element) => {
-    const { dispatch } = store
+    const { getState, dispatch } = store
+    const { isLoadingSnapshot } = getState().data
     const markdown = toMarkdown(editorContainer)
     dispatch(setMarkdownText(markdown))
-    dispatch(setLastEditedOn(getFormatedNow()))
+
+    // If the change is due to loading of a snapshot, then
+    // don't update 'lastEditedOn'.
+    if (!isLoadingSnapshot) dispatch(_setLastEditedOn(getFormatedNow()))
+    else dispatch(setIsLoadingSnapshot(false))
+
+    dispatch(saveEditorContent())
 }
 
 const editor = new Editor({

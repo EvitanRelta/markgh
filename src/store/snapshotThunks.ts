@@ -5,7 +5,12 @@ import {
     removeImageWrapper,
 } from '../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../converterFunctions/helpers/removeTipTapArtifacts'
-import { setEditorContent, _setFileTitle, _setLastEditedOn } from './dataSlice'
+import {
+    setEditorContent,
+    setIsLoadingSnapshot,
+    _setFileTitle,
+    _setLastEditedOn,
+} from './dataSlice'
 import { Snapshot } from './helpers/initDatabase'
 
 export const initSnapshots = createAsyncThunk<Snapshot[], undefined, AppThunkApiConfig>(
@@ -42,6 +47,10 @@ export const loadSnapshot = createAsyncThunk<void, Snapshot, AppThunkApiConfig>(
     async (snapshot, { dispatch }) => {
         dispatch(_setFileTitle(snapshot.fileTitle))
         dispatch(_setLastEditedOn(snapshot.lastEditedOn))
+
+        // To indicate to the editor's 'update' listener, that the change in the
+        // editor's content is due to loading of a snapshot.
+        dispatch(setIsLoadingSnapshot(true))
         dispatch(setEditorContent(snapshot.content))
     }
 )

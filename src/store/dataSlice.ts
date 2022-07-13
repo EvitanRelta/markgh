@@ -21,6 +21,10 @@ interface DataState {
     showMarkdown: boolean
     isEditorLoading: boolean
     snapshots: Snapshot[]
+
+    // To indicate to the editor's 'update' listener, that the change in the
+    // editor's content is due to loading of a snapshot.
+    isLoadingSnapshot: boolean
 }
 
 const dataSlice = createSlice({
@@ -34,6 +38,7 @@ const dataSlice = createSlice({
         showMarkdown: localStorage['showMarkdown'] === 'true', // localStorage cannot store boolean
         isEditorLoading: true,
         snapshots: [],
+        isLoadingSnapshot: false,
     } as DataState,
     reducers: {
         setMarkdownText(state, actions: PayloadAction<string>) {
@@ -55,6 +60,9 @@ const dataSlice = createSlice({
         },
         setIsEditorLoading(state, actions: PayloadAction<boolean>) {
             state.isEditorLoading = actions.payload
+        },
+        setIsLoadingSnapshot(state, actions: PayloadAction<boolean>) {
+            state.isLoadingSnapshot = actions.payload
         },
         setEditorContent(state, actions: PayloadAction<string>) {
             const { editor } = state
@@ -146,6 +154,7 @@ export const {
     _setFileTitle,
     setShowMarkdown,
     setIsEditorLoading,
+    setIsLoadingSnapshot,
     setEditorContent,
 } = dataSlice.actions
 export const dataReducer = dataSlice.reducer
