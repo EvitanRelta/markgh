@@ -10,7 +10,7 @@ import { placeholderEditorHtml } from '../placeholderEditorHtml'
 import { getFormatedNow } from './helpers/getFormatedNow'
 import { database, EditorDBInstance, Snapshot } from './helpers/initDatabase'
 import { editor } from './helpers/initEditor'
-import { addSnapshot, deleteSnapshot, initSnapshots } from './snapshotThunks'
+import { addSnapshot, deleteSnapshot, initSnapshots, loadSnapshot } from './snapshotThunks'
 
 interface DataState {
     editor: Editor
@@ -29,7 +29,7 @@ const dataSlice = createSlice({
         editor,
         database,
         markdownText: '',
-        lastEditedOn: localStorage['lastEditedOn'] ?? getFormatedNow(),
+        lastEditedOn: '',
         fileTitle: '',
         showMarkdown: localStorage['showMarkdown'] === 'true', // localStorage cannot store boolean
         isEditorLoading: true,
@@ -40,7 +40,6 @@ const dataSlice = createSlice({
             state.markdownText = actions.payload
         },
         setLastEditedOn(state, actions: PayloadAction<string>) {
-            localStorage['lastEditedOn'] = actions.payload
             state.lastEditedOn = actions.payload
         },
         setFileTitle(state, actions: PayloadAction<string>) {
@@ -104,10 +103,15 @@ export const loadInitialContent = createAsyncThunk<void, undefined, AppThunkApiC
     'data/loadInitialContent',
     async (_, { getState, dispatch }) => {
         const { database } = getState().data
-        const persistentContent = await database.currentContent.get(0)
-        const initialContent = persistentContent?.content ?? placeholderEditorHtml
+        const currentContent = await database.currentContent.get(0)
 
-        dispatch(setEditorContent(initialContent))
+        const initialData = currentContent ?? {
+            fileTitle: '',
+            lastEditedOn: getFormatedNow(),
+            content: placeholderEditorHtml,
+        }
+
+        await dispatch(loadSnapshot(initialData))
         await dispatch(initSnapshots())
         dispatch(setIsEditorLoading(false))
     }

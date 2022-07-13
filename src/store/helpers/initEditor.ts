@@ -19,9 +19,9 @@ export const _injectStore = (_store: AppStore) => {
 const onTextChange = (editorContainer: Element) => {
     const { dispatch } = store
     const markdown = toMarkdown(editorContainer)
-    dispatch(saveEditorContent())
     dispatch(setMarkdownText(markdown))
     dispatch(setLastEditedOn(getFormatedNow()))
+    dispatch(saveEditorContent())
 }
 
 const editor = new Editor({

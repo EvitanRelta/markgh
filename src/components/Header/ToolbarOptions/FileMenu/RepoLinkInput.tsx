@@ -3,8 +3,9 @@ import staticAxios from 'axios'
 import { useState } from 'react'
 import { markdownToHtml } from '../../../../converterFunctions'
 import { GithubRepoInfo } from '../../../../converterFunctions/markdownToHtml'
-import { setEditorContent } from '../../../../store/dataSlice'
+import { getFormatedNow } from '../../../../store/helpers/getFormatedNow'
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
+import { loadSnapshot } from '../../../../store/snapshotThunks'
 
 interface Props {
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
@@ -111,7 +112,14 @@ export const RepoLinkInput = ({ setAnchor }: Props) => {
             let response = await axios.get<ResponseDataType>(generateRawURL(githubRepoInfo))
             setAnchor(null)
             const htmlContent = markdownToHtml(response.data, githubRepoInfo)
-            dispatch(setEditorContent(htmlContent))
+            const { user, repo, branch, dirPath, fileName } = githubRepoInfo
+            dispatch(
+                loadSnapshot({
+                    fileTitle: `(${user}/${repo}:${branch}) ${dirPath}${fileName}`,
+                    lastEditedOn: getFormatedNow(),
+                    content: htmlContent,
+                })
+            )
         } catch (e) {
             setShowError(true)
             if (!staticAxios.isAxiosError(e)) return setErrorMessage((e as Error).message)

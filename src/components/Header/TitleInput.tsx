@@ -1,5 +1,5 @@
 import { Input, styled } from '@mui/material'
-import { setFileTitle } from '../../store/dataSlice'
+import { saveEditorContent, setFileTitle } from '../../store/dataSlice'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 
 const StyledInput = styled(Input)({
@@ -34,7 +34,10 @@ export const TitleInput = () => {
             type='text'
             placeholder='Untitled Document'
             value={fileTitle}
-            onChange={(e) => dispatch(setFileTitle(e.target.value))}
+            onChange={(e) => {
+                dispatch(setFileTitle(e.target.value))
+                dispatch(saveEditorContent())
+            }}
             sx={{ backgroundColor: themeColor, color: textColor }}
         />
     )
