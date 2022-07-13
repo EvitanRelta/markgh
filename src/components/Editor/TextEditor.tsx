@@ -20,8 +20,7 @@ export const TextEditor = () => {
         editorContainer.classList.add('markdown-body')
         setEditorContainer(editorContainer)
 
-        const parentContainer = editorContainer.parentElement as HTMLDivElement
-        parentContainer.classList.add('markdown-container')
+        editorContainer.classList.add('markdown-container')
     }, [editor])
 
     useEffect(() => {
