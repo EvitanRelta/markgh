@@ -83,9 +83,12 @@ export const saveEditorContent = createAsyncThunk<void, undefined, AppThunkApiCo
             removeImageWrapper(htmlCopy)
             removeTipTapArtifacts(htmlCopy)
 
-            await database.transaction('rw', database.text, () =>
-                database.text.put({ id: 0, value: htmlCopy.innerHTML })
-            )
+            type CurrentContentTable = typeof database.currentContent
+
+            await database.transaction('rw', database.currentContent, (trans) => {
+                const currentContentTable: CurrentContentTable = trans.table('currentContent')
+                currentContentTable.put({ id: 0, content: htmlCopy.innerHTML })
+            })
         } catch (e) {
             return rejectWithValue(e as Error)
         }
@@ -96,8 +99,8 @@ export const loadInitialContent = createAsyncThunk<void, undefined, AppThunkApiC
     'data/loadInitialContent',
     async (_, { getState, dispatch }) => {
         const { database } = getState().data
-        const persistentContent = await database.text.get(0)
-        const initialContent = persistentContent?.value ?? placeholderEditorHtml
+        const persistentContent = await database.currentContent.get(0)
+        const initialContent = persistentContent?.content ?? placeholderEditorHtml
 
         dispatch(setEditorContent(initialContent))
         await dispatch(initSnapshots())

@@ -1,16 +1,13 @@
 import Dexie, { Table } from 'dexie'
+import { initDatabaseSchema } from './initDatabaseSchema'
 
 class EditorDB extends Dexie {
     images!: Table<EditorImage, number>
-    text!: Table<EditorText, number>
+    currentContent!: Table<EditorText, number>
     snapshots!: Table<Snapshot, number>
     constructor() {
         super('EditorDB')
-        this.version(1).stores({
-            images: '++id,base64',
-            text: '++id,value',
-            snapshots: '++id,savedOn,title,value',
-        })
+        initDatabaseSchema(this)
     }
 }
 
@@ -20,14 +17,14 @@ export interface EditorImage {
 }
 export interface EditorText {
     id?: number
-    value: string
+    content: string
 }
 
 export interface Snapshot {
     id?: number
-    savedOn: string
-    title: string
-    value: string
+    lastEditedOn: string
+    fileTitle: string
+    content: string
 }
 
 export type EditorDBInstance = InstanceType<typeof EditorDB>
