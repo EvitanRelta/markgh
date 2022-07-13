@@ -1,4 +1,3 @@
-import './container.css'
 import './dark-colorblind.css'
 import './dark-dimmed.css'
 import './dark-high-contrast.css'
@@ -17,3 +16,5 @@ import './syntaxHighlighting/light-colorblind.highlight.css'
 import './syntaxHighlighting/light-high-contrast.highlight.css'
 import './syntaxHighlighting/light-tritanopia.highlight.css'
 import './syntaxHighlighting/light.highlight.css'
+
+import './container.css'
