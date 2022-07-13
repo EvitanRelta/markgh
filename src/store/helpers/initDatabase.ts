@@ -1,4 +1,5 @@
 import Dexie, { Table } from 'dexie'
+import { initDatabaseSchema } from './initDatabaseSchema'
 
 class EditorDB extends Dexie {
     images!: Table<EditorImage, number>
@@ -6,11 +7,7 @@ class EditorDB extends Dexie {
     snapshots!: Table<Snapshot, number>
     constructor() {
         super('EditorDB')
-        this.version(1).stores({
-            images: '++id,base64',
-            text: '++id,value',
-            snapshots: '++id,savedOn,title,value',
-        })
+        initDatabaseSchema(this)
     }
 }
 
