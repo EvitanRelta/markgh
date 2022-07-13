@@ -1,6 +1,6 @@
 import FS from '@isomorphic-git/lightning-fs'
-import { MenuItem } from '@mui/material'
-import { gitPR } from '../../../../scripts/helpers/gitActions'
+import { Dialog, MenuItem } from '@mui/material'
+import { useState } from 'react'
 
 const fs = new FS('fs')
 const dir = '/'
@@ -8,13 +8,14 @@ window.global = window
 window.Buffer = window.Buffer || require('buffer').Buffer
 
 export const PushGH = () => {
+    const [showDialog, setShowDialog] = useState(false)
+
+    const pushInputDialog = <Dialog open={showDialog} onClose={() => setShowDialog(false)}></Dialog>
+
     return (
-        <MenuItem
-            onClick={(e) =>
-                gitPR(fs, 'https://github.com/swxk19/markgh.git', localStorage['ghToken'])
-            }
-        >
-            Push README to Repo
-        </MenuItem>
+        <>
+            <MenuItem onClick={() => setShowDialog(true)}>Push README to Repo</MenuItem>
+            {pushInputDialog}
+        </>
     )
 }
