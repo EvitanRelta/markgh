@@ -39,10 +39,14 @@ const dataSlice = createSlice({
         setMarkdownText(state, actions: PayloadAction<string>) {
             state.markdownText = actions.payload
         },
-        setLastEditedOn(state, actions: PayloadAction<string>) {
+
+        // Set 'lastEditedOn' without side effects.
+        _setLastEditedOn(state, actions: PayloadAction<string>) {
             state.lastEditedOn = actions.payload
         },
-        setFileTitle(state, actions: PayloadAction<string>) {
+
+        // Set 'fileTitle' without side effects.
+        _setFileTitle(state, actions: PayloadAction<string>) {
             state.fileTitle = actions.payload
         },
         setShowMarkdown(state, actions: PayloadAction<boolean>) {
@@ -71,6 +75,25 @@ const dataSlice = createSlice({
         })
     },
 })
+
+// Set 'lastEditedOn' and save the change.
+export const setLastEditedOn = createAsyncThunk<void, string, AppThunkApiConfig>(
+    'data/setLastEditedOn',
+    async (newLastEditedOn, { dispatch }) => {
+        dispatch(_setLastEditedOn(newLastEditedOn))
+        dispatch(saveEditorContent())
+    }
+)
+
+// Set 'fileTitle' and save the change.
+export const setFileTitle = createAsyncThunk<void, string, AppThunkApiConfig>(
+    'data/setFileTitle',
+    async (newFileTitle, { dispatch }) => {
+        dispatch(_setFileTitle(newFileTitle))
+        dispatch(_setLastEditedOn(getFormatedNow()))
+        dispatch(saveEditorContent())
+    }
+)
 
 export const saveEditorContent = createAsyncThunk<void, undefined, AppThunkApiConfig>(
     'data/saveEditorContent',
@@ -119,8 +142,8 @@ export const loadInitialContent = createAsyncThunk<void, undefined, AppThunkApiC
 
 export const {
     setMarkdownText,
-    setLastEditedOn,
-    setFileTitle,
+    _setLastEditedOn,
+    _setFileTitle,
     setShowMarkdown,
     setIsEditorLoading,
     setEditorContent,

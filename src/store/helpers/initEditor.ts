@@ -3,12 +3,7 @@ import _ from 'lodash'
 import { AppStore } from '..'
 import { extensions } from '../../components/Editor/extensions/extensions'
 import { toMarkdown } from '../../converterFunctions'
-import {
-    loadInitialContent,
-    saveEditorContent,
-    setLastEditedOn,
-    setMarkdownText,
-} from '../dataSlice'
+import { loadInitialContent, setLastEditedOn, setMarkdownText } from '../dataSlice'
 import { getFormatedNow } from './getFormatedNow'
 
 let store!: AppStore
@@ -21,7 +16,6 @@ const onTextChange = (editorContainer: Element) => {
     const markdown = toMarkdown(editorContainer)
     dispatch(setMarkdownText(markdown))
     dispatch(setLastEditedOn(getFormatedNow()))
-    dispatch(saveEditorContent())
 }
 
 const editor = new Editor({
