@@ -23,39 +23,38 @@ export const PushGH = () => {
                     <h1>Push to GitHub</h1>
 
                     <h5>Insert Respository Link</h5>
-                    <p>
-                        <TextField
-                            error={showError}
-                            type='text'
-                            size='small'
-                            label={'Repository Link'}
-                            placeholder={'https://github.com/user/project'}
-                            InputLabelProps={{ shrink: true }}
-                            onChange={(e) => {
-                                setLink(e.target.value)
-                                setShowError(false)
-                                setShowLoading(false)
-                            }}
-                            onKeyPress={(ev) => {
-                                if (ev.key === 'Enter') {
-                                    ev.preventDefault()
-                                    getRepo()
-                                }
-                            }}
-                            helperText={
-                                showError
-                                    ? errorMessage
-                                    : 'Please login if you are accessing a private repo'
+
+                    <TextField
+                        error={showError}
+                        type='text'
+                        size='small'
+                        label={'Repository Link'}
+                        placeholder={'https://github.com/user/project'}
+                        InputLabelProps={{ shrink: true }}
+                        onChange={(e) => {
+                            setLink(e.target.value)
+                            setShowError(false)
+                            setShowLoading(false)
+                        }}
+                        onKeyPress={(ev) => {
+                            if (ev.key === 'Enter') {
+                                ev.preventDefault()
+                                getRepo()
                             }
-                        />
-                    </p>
-                    <p>
-                        <Button>Push</Button>
-                    </p>
+                        }}
+                        helperText={
+                            showError
+                                ? errorMessage
+                                : 'Please login if you are accessing a private repo'
+                        }
+                    />
+
+                    <Button sx={{ display: 'block' }}>Push</Button>
+
                     <p>Pull Request created. View it here</p>
-                    <p>
-                        <Button>Delete Branch</Button>
-                    </p>
+
+                    <Button>Delete Branch</Button>
+
                     <Box sx={{ marginRight: 10, fontSize: 12, marginTop: -1.5 }}>
                         <h3>How it's done</h3>
                         <p>1. A branch is created on your repository</p>
