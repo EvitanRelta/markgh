@@ -71,7 +71,7 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
                             helperText={
                                 showError
                                     ? errorMessage
-                                    : 'Please login if you are accessing a private repo'
+                                    : 'Please make sure you are logged in to push'
                             }
                         />
 
