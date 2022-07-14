@@ -18,67 +18,65 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
     return (
         <Dialog open={true} onClose={() => setShowDialog(false)} fullWidth>
             <DialogContent sx={{ alignItems: 'center' }}>
-                <Box sx={{ marginLeft: 10 }}>
-                    <h1>Push to GitHub</h1>
-                    <Box sx={{ minHeight: 130 }}>
-                        <h5 style={{ marginTop: 10, marginLeft: 10 }}>Insert Respository Link</h5>
-                        <Box sx={{ justifyContent: 'space-between', display: 'flex', width: 350 }}>
-                            <TextField
-                                error={showError}
-                                type='text'
-                                size='small'
-                                label={'Repository Link'}
-                                placeholder={'https://github.com/user/project'}
-                                InputLabelProps={{ shrink: true }}
-                                onChange={(e) => {
-                                    setLink(e.target.value)
-                                    setShowError(false)
-                                    setShowLoading(false)
-                                }}
-                                onKeyPress={(ev) => {
-                                    if (ev.key === 'Enter') {
-                                        ev.preventDefault()
-                                        getRepo()
-                                    }
-                                }}
-                                helperText={
-                                    showError
-                                        ? errorMessage
-                                        : 'Please login if you are accessing a private repo'
+                <h1 style={{ marginLeft: 10 }}>Push to GitHub</h1>
+                <Box sx={{ minHeight: 130, marginTop: -1 }}>
+                    <h5 style={{ marginLeft: 10 }}>Insert Respository Link</h5>
+                    <Box sx={{ justifyContent: 'space-between', display: 'flex', marginTop: -2 }}>
+                        <TextField
+                            sx={{ width: 450 }}
+                            error={showError}
+                            type='text'
+                            size='small'
+                            placeholder={'https://github.com/user/project'}
+                            InputLabelProps={{ shrink: true }}
+                            onChange={(e) => {
+                                setLink(e.target.value)
+                                setShowError(false)
+                                setShowLoading(false)
+                            }}
+                            onKeyPress={(ev) => {
+                                if (ev.key === 'Enter') {
+                                    ev.preventDefault()
+                                    getRepo()
                                 }
-                            />
+                            }}
+                            helperText={
+                                showError
+                                    ? errorMessage
+                                    : 'Please login if you are accessing a private repo'
+                            }
+                        />
 
-                            {showLoading ? (
-                                <Box sx={{ marginTop: 0.8, marginRight: -1 }}>
-                                    <CircularProgress size={25} />
-                                </Box>
-                            ) : (
-                                <Button
-                                    sx={{ marginRight: -3, maxHeight: 40 }}
-                                    onClick={() => {
-                                        setShowLoading(true)
-                                        updateGitHubReadme(
-                                            link,
-                                            localStorage['ghToken'],
-                                            setShowLoading
-                                        )
-                                    }}
-                                >
-                                    Push
-                                </Button>
-                            )}
-                        </Box>
-                        {showFinished && <p>Pull Request created. View it here</p>}
+                        {showLoading ? (
+                            <Box sx={{ marginTop: 0.8, marginRight: 6 }}>
+                                <CircularProgress size={25} />
+                            </Box>
+                        ) : (
+                            <Button
+                                sx={{ maxHeight: 40, marginRight: 2 }}
+                                onClick={() => {
+                                    setShowLoading(true)
+                                    updateGitHubReadme(
+                                        link,
+                                        localStorage['ghToken'],
+                                        setShowLoading
+                                    )
+                                }}
+                            >
+                                Push
+                            </Button>
+                        )}
                     </Box>
+                    {showFinished && <p>Pull Request created. View it here</p>}
+                </Box>
 
-                    {/* <Button>Delete Branch</Button> */}
+                {/* <Button>Delete Branch</Button> */}
 
-                    <Box sx={{ marginRight: 10, fontSize: 12, marginTop: -1.5 }}>
-                        <h3 style={{ marginLeft: 10 }}>How it's done</h3>
-                        <p>1. A branch is created on your repository</p>
-                        <p>2. A pull request of your exported README is created</p>
-                        <p>3. You can review the pull request and merge it if you're satisfied</p>
-                    </Box>
+                <Box sx={{ marginLeft: '20%', fontSize: 12, marginTop: -1.5 }}>
+                    <h3 style={{ marginLeft: '20%' }}>How it's done</h3>
+                    <p>1. A branch is created on your repository</p>
+                    <p>2. A pull request of your exported README is created</p>
+                    <p>3. You can review the pull request and merge it if you're satisfied</p>
                 </Box>
             </DialogContent>
         </Dialog>
