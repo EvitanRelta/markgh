@@ -1,5 +1,5 @@
 import { Octokit } from '@octokit/rest'
-import { getUserRepoPairFromUrl } from './getUserRepoPairFromUrl'
+import { getUserRepoPairFromUrl } from './InputLinkHelpers/getUserRepoPairFromUrl'
 
 interface PullRequest {
     title: string
