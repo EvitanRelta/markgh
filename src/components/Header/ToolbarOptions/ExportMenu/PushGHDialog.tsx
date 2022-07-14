@@ -78,7 +78,10 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
                         <Box>
                             Pull Request created!
                             <Box>
-                                View it <a href={PRLink}>here</a>
+                                View it{' '}
+                                <a href={PRLink} target='_blank'>
+                                    here
+                                </a>
                             </Box>
                         </Box>
                     )}
