@@ -1,16 +1,13 @@
 import { Octokit } from '@octokit/rest'
 import { getUserRepoPairFromUrl } from './getUserRepoPairFromUrl'
 
-const dir = '/'
-const corsProxy = 'https://cors-header-writer.herokuapp.com/'
-
 interface PullRequest {
     title: string
     body: string
     number: number
 }
 
-export const gitPR = async (url: string, token: string) => {
+export const updateGitHubReadme = async (url: string, token: string) => {
     const octokit = new Octokit({ auth: token })
     const PRID = Math.floor(Math.random() * (10000 + 1))
 
@@ -28,8 +25,8 @@ export const gitPR = async (url: string, token: string) => {
     const defaultBranch = await getDefaultBranch()
 
     //gets latest commit hash of default branch
-    const getDefaultCommitHash = async () => {
-        const branch = await defaultBranch
+    const getDefaultBranchCommitHash = async () => {
+        const branch = defaultBranch
         const res = await octokit.rest.repos.getBranch({
             owner,
             repo,
@@ -37,30 +34,34 @@ export const gitPR = async (url: string, token: string) => {
         })
         return res.data.commit.sha
     }
-    const defaultCommitHash = await getDefaultCommitHash()
+
+    const defaultBranchCommitHash = await getDefaultBranchCommitHash()
+
     //create branch named 'markgh-readme'
     const createBranch = async () => {
         console.log('create branch')
         const ref = `refs/heads/markgh-readme`
 
         //new branch will be created from this commit
-        const sha = await getDefaultCommitHash()
+        const sha = defaultBranchCommitHash
 
-        octokit.rest.git.createRef({
+        const res = await octokit.rest.git.createRef({
             owner,
             repo,
             ref,
             sha,
         })
+        return res
     }
 
+    //create pull request with branch 'markgh-readme' onto user's default branch
     const createPullRequest = async () => {
-        console.log('createpr')
+        console.log('create pull request')
         const head = 'markgh-readme'
         const base = defaultBranch
         const title = 'README created with MarkGH'
         const body = 'readme-id: ' + PRID
-        octokit.rest.pulls.create({
+        const res = await octokit.rest.pulls.create({
             owner,
             repo,
             head,
@@ -68,24 +69,7 @@ export const gitPR = async (url: string, token: string) => {
             title,
             body,
         })
-    }
-
-    const getPRLink = async (url: string) => {
-        const res = await octokit.rest.pulls.list({
-            owner,
-            repo,
-        })
-        const PRArray = res.data as PullRequest[]
-
-        for (let i = 0; i < PRArray.length; i++) {
-            const PR: PullRequest = PRArray[i]
-            // if (PR.title === 'README created with MarkGH' && PR.body === 'readme-id: ' + PRID) {
-            if (PR.title === 'code refactoring') {
-                const issueId = PR.number
-                return `https://github.com/${owner}/${repo}/pull/${issueId}`
-            }
-        }
-        return 'ERROR'
+        return res
     }
 
     const getTargetFileHash = async () => {
@@ -111,6 +95,7 @@ export const gitPR = async (url: string, token: string) => {
     const targetFileHash = await getTargetFileHash()
 
     const updateReadMeToBranch = async () => {
+        console.log('push readme')
         const path = 'README.md'
         const message = 'Update README by MarkGH'
         const content = ''
@@ -124,12 +109,27 @@ export const gitPR = async (url: string, token: string) => {
             branch: 'markgh-readme',
             sha: targetFileHash,
         })
-        console.log(res)
+
+        return res
     }
 
-    // gitClone()
-    // createBranch()
-    // gitPush()
-    // createPullRequest()
-    updateReadMeToBranch()
+    //gets url for the created PR, for user to click and view
+    const getPRLink = async (url: string) => {
+        console.log('get pr link')
+        const res = await octokit.rest.pulls.list({
+            owner,
+            repo,
+        })
+        const PRArray = res.data as PullRequest[]
+
+        for (let i = 0; i < PRArray.length; i++) {
+            const PR: PullRequest = PRArray[i]
+            // if (PR.title === 'README created with MarkGH' && PR.body === 'readme-id: ' + PRID) {
+            if (PR.title === 'code refactoring') {
+                const issueId = PR.number
+                return `https://github.com/${owner}/${repo}/pull/${issueId}`
+            }
+        }
+        return 'ERROR'
+    }
 }

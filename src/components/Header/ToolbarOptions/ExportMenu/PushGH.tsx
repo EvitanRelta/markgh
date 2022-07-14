@@ -1,6 +1,6 @@
 import { Box, Button, Dialog, DialogContent, MenuItem, TextField } from '@mui/material'
 import { useState } from 'react'
-import { gitPR } from '../../../../scripts/helpers/gitActions'
+import { updateGitHubReadme } from '../../../../scripts/helpers/updateGitHubReadme'
 
 export const PushGH = () => {
     const [showDialog, setShowDialog] = useState(false)
@@ -47,8 +47,8 @@ export const PushGH = () => {
                     <Button
                         sx={{ display: 'block' }}
                         onClick={() =>
-                            gitPR(
-                                'https://github.com/swxk19/readme-editor',
+                            updateGitHubReadme(
+                                'https://github.com/swxk19/private-repo',
                                 localStorage['ghToken']
                             )
                         }
