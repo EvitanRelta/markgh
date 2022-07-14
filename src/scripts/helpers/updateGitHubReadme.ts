@@ -144,6 +144,7 @@ export const updateGitHubReadme = async (
             (err) => {
                 console.log(1)
                 console.log(err)
+                setShowLoading(false)
             }
         )
         .then(
@@ -151,6 +152,7 @@ export const updateGitHubReadme = async (
             (err) => {
                 console.log(2)
                 console.log(err)
+                setShowLoading(false)
             }
         )
         .then(
