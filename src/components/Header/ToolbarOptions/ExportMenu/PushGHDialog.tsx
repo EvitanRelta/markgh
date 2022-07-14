@@ -12,6 +12,7 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
     const [showLoading, setShowLoading] = useState<boolean>(false)
     const [showError, setShowError] = useState<boolean>(false)
     const [showFinished, setShowFinished] = useState<boolean>(false)
+    const [PRLink, setPRLink] = useState<string>('')
 
     return (
         <Dialog open={true} onClose={() => setShowDialog(false)} fullWidth>
@@ -39,7 +40,8 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
                                     updateGitHubReadme(
                                         link,
                                         localStorage['ghToken'],
-                                        setShowLoading
+                                        setShowLoading,
+                                        setShowFinished
                                     )
                                 }
                             }}
@@ -57,20 +59,29 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
                         ) : (
                             <Button
                                 sx={{ maxHeight: 40, marginRight: 2 }}
-                                onClick={() => {
+                                onClick={async () => {
                                     setShowLoading(true)
-                                    updateGitHubReadme(
+                                    const PRLink = await updateGitHubReadme(
                                         link,
                                         localStorage['ghToken'],
-                                        setShowLoading
+                                        setShowLoading,
+                                        setShowFinished
                                     )
+                                    setPRLink(PRLink)
                                 }}
                             >
                                 Push
                             </Button>
                         )}
                     </Box>
-                    {showFinished && <p>Pull Request created. View it here</p>}
+                    {showFinished && (
+                        <Box>
+                            Pull Request created!
+                            <Box>
+                                View it <a href={PRLink}>here</a>
+                            </Box>
+                        </Box>
+                    )}
                 </Box>
 
                 {/* <Button>Delete Branch</Button> */}
