@@ -13,8 +13,6 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
     const [showError, setShowError] = useState<boolean>(false)
     const [showFinished, setShowFinished] = useState<boolean>(false)
 
-    const getRepo = async () => {}
-
     return (
         <Dialog open={true} onClose={() => setShowDialog(false)} fullWidth>
             <DialogContent sx={{ alignItems: 'center' }}>
@@ -37,7 +35,12 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
                             onKeyPress={(ev) => {
                                 if (ev.key === 'Enter') {
                                     ev.preventDefault()
-                                    getRepo()
+                                    setShowLoading(true)
+                                    updateGitHubReadme(
+                                        link,
+                                        localStorage['ghToken'],
+                                        setShowLoading
+                                    )
                                 }
                             }}
                             helperText={
