@@ -125,12 +125,10 @@ export const updateGitHubReadme = async (
             owner,
             repo,
         })
-        console.log(res)
         const PRArray = res.data as PullRequest[]
 
         for (let i = 0; i < PRArray.length; i++) {
             const PR: PullRequest = PRArray[i]
-            console.log(PR)
             if (PR.title === 'README created with MarkGH' && PR.body === 'readme-id: ' + PRID) {
                 const issueId = PR.number
                 return `https://github.com/${owner}/${repo}/pull/${issueId}`
