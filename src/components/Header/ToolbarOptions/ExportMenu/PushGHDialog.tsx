@@ -14,6 +14,18 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
     const [showFinished, setShowFinished] = useState<boolean>(false)
     const [PRLink, setPRLink] = useState<string>('')
 
+    const handlePushButtonClick = async () => {
+        setShowFinished(false)
+        setShowLoading(true)
+        const PRLink = await updateGitHubReadme(
+            link,
+            localStorage['ghToken'],
+            setShowLoading,
+            setShowFinished
+        )
+        setPRLink(PRLink)
+    }
+
     return (
         <Dialog open={true} onClose={() => setShowDialog(false)} fullWidth>
             <DialogContent sx={{ alignItems: 'center' }}>
@@ -36,13 +48,7 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
                             onKeyPress={(ev) => {
                                 if (ev.key === 'Enter') {
                                     ev.preventDefault()
-                                    setShowLoading(true)
-                                    updateGitHubReadme(
-                                        link,
-                                        localStorage['ghToken'],
-                                        setShowLoading,
-                                        setShowFinished
-                                    )
+                                    handlePushButtonClick()
                                 }
                             }}
                             helperText={
@@ -59,16 +65,7 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
                         ) : (
                             <Button
                                 sx={{ maxHeight: 40, marginRight: 2 }}
-                                onClick={async () => {
-                                    setShowLoading(true)
-                                    const PRLink = await updateGitHubReadme(
-                                        link,
-                                        localStorage['ghToken'],
-                                        setShowLoading,
-                                        setShowFinished
-                                    )
-                                    setPRLink(PRLink)
-                                }}
+                                onClick={() => handlePushButtonClick()}
                             >
                                 Push
                             </Button>
