@@ -10,7 +10,8 @@ interface PullRequest {
 export const updateGitHubReadme = async (
     url: string,
     token: string,
-    setShowLoading: React.Dispatch<React.SetStateAction<boolean>>
+    setShowLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    setShowFinished: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
     const octokit = new Octokit({ auth: token })
     const PRID = Math.floor(Math.random() * (10000 + 1))
@@ -124,17 +125,18 @@ export const updateGitHubReadme = async (
             owner,
             repo,
         })
+        console.log(res)
         const PRArray = res.data as PullRequest[]
 
         for (let i = 0; i < PRArray.length; i++) {
             const PR: PullRequest = PRArray[i]
-            // if (PR.title === 'README created with MarkGH' && PR.body === 'readme-id: ' + PRID) {
-            if (PR.title === 'code refactoring') {
+            console.log(PR)
+            if (PR.title === 'README created with MarkGH' && PR.body === 'readme-id: ' + PRID) {
                 const issueId = PR.number
                 return `https://github.com/${owner}/${repo}/pull/${issueId}`
             }
         }
-        return 'ERROR'
+        return 'ERROR1'
     }
 
     //returns link to PR for user to click and view
@@ -143,6 +145,7 @@ export const updateGitHubReadme = async (
         .then((res) => createPullRequest())
         .then((res) => {
             setShowLoading(false)
+            setShowFinished(true)
             return getPRLink(url)
         })
         .catch((e) => {
