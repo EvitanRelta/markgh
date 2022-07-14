@@ -138,32 +138,16 @@ export const updateGitHubReadme = async (
     }
 
     //returns link to PR for user to click and view
-    return createBranch()
-        .then(
-            (res) => updateReadMeToBranch(),
-            (err) => {
-                console.log(1)
-                console.log(err)
-                setShowLoading(false)
-            }
-        )
-        .then(
-            (res) => createPullRequest(),
-            (err) => {
-                console.log(2)
-                console.log(err)
-                setShowLoading(false)
-            }
-        )
-        .then(
-            (res) => {
-                setShowLoading(false)
-                return getPRLink(url)
-            },
-            (err) => {
-                console.log(3)
-                console.log(err)
-                setShowLoading(false)
-            }
-        )
+    return await createBranch()
+        .then((res) => updateReadMeToBranch())
+        .then((res) => createPullRequest())
+        .then((res) => {
+            setShowLoading(false)
+            return getPRLink(url)
+        })
+        .catch((e) => {
+            setShowLoading(false)
+            console.log(e)
+            return 'ERROR'
+        })
 }
