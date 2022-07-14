@@ -67,8 +67,8 @@ export const removeWrapperParagraphs = (htmlElement: Element) => {
         const parentElement = wrapper.parentElement
         if (!parentElement) throw new Error('Error parsing during paragraph wrapper removal.')
 
+        wrapper.before(...Array.from(wrapper.childNodes))
         parentElement.removeChild(wrapper)
-        parentElement.append(...Array.from(wrapper.childNodes))
     })
 }
 
