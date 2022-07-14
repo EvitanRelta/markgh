@@ -1,7 +1,4 @@
-import FS from '@isomorphic-git/lightning-fs'
 import { Octokit } from '@octokit/rest'
-import git from 'isomorphic-git'
-import http from 'isomorphic-git/http/web'
 import { getUserRepoPairFromUrl } from './getUserRepoPairFromUrl'
 
 const dir = '/'
@@ -13,31 +10,11 @@ interface PullRequest {
     number: number
 }
 
-export const gitPR = async (fs: FS, url: string, token: string) => {
+export const gitPR = async (url: string, token: string) => {
     const octokit = new Octokit({ auth: token })
     const PRID = Math.floor(Math.random() * (10000 + 1))
 
     const [owner, repo] = getUserRepoPairFromUrl(url)
-
-    const gitClone = async () => {
-        const res = await git
-            .clone({
-                fs,
-                http,
-                dir,
-                corsProxy,
-                url: url,
-                singleBranch: true,
-                depth: 1,
-                onAuth: () => ({
-                    username: token,
-                    password: 'x-oauth-basic',
-                }),
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
 
     //gets default branch of repo
     const getDefaultBranch = async () => {
@@ -48,7 +25,7 @@ export const gitPR = async (fs: FS, url: string, token: string) => {
         return res.data.default_branch
     }
 
-    const defaultBranch = getDefaultBranch()
+    const defaultBranch = await getDefaultBranch()
 
     //gets latest commit hash of default branch
     const getDefaultCommitHash = async () => {
@@ -58,10 +35,9 @@ export const gitPR = async (fs: FS, url: string, token: string) => {
             repo,
             branch,
         })
-
         return res.data.commit.sha
     }
-
+    const defaultCommitHash = await getDefaultCommitHash()
     //create branch named 'markgh-readme'
     const createBranch = async () => {
         console.log('create branch')
@@ -78,29 +54,10 @@ export const gitPR = async (fs: FS, url: string, token: string) => {
         })
     }
 
-    const gitPush = async () => {
-        const res = await git
-            .push({
-                fs,
-                http,
-                dir,
-                corsProxy,
-                remote: 'origin',
-                ref: 'markgh-readme',
-                onAuth: () => ({
-                    username: token,
-                    password: 'x-oauth-basic',
-                }),
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-
     const createPullRequest = async () => {
         console.log('createpr')
         const head = 'markgh-readme'
-        const base = await defaultBranch
+        const base = defaultBranch
         const title = 'README created with MarkGH'
         const body = 'readme-id: ' + PRID
         octokit.rest.pulls.create({
@@ -131,8 +88,48 @@ export const gitPR = async (fs: FS, url: string, token: string) => {
         return 'ERROR'
     }
 
+    const getTargetFileHash = async () => {
+        const targetFile = 'README.md'
+        const path = ''
+        const res = await octokit.rest.repos.getContent({
+            owner,
+            repo,
+            path,
+        })
+
+        const fileArray = res.data as Array<any>
+        for (let i = 0; i < fileArray.length; i++) {
+            let file = fileArray[i]
+            if (file.name === targetFile) {
+                return file.sha
+            }
+        }
+
+        return 'ERROR'
+    }
+
+    const targetFileHash = await getTargetFileHash()
+
+    const updateReadMeToBranch = async () => {
+        const path = 'README.md'
+        const message = 'Update README by MarkGH'
+        const content = ''
+
+        const res = await octokit.repos.createOrUpdateFileContents({
+            owner,
+            repo,
+            path,
+            message,
+            content,
+            branch: 'markgh-readme',
+            sha: targetFileHash,
+        })
+        console.log(res)
+    }
+
     // gitClone()
     // createBranch()
     // gitPush()
     // createPullRequest()
+    updateReadMeToBranch()
 }

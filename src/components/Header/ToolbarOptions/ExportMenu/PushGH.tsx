@@ -1,11 +1,6 @@
-import FS from '@isomorphic-git/lightning-fs'
 import { Box, Button, Dialog, DialogContent, MenuItem, TextField } from '@mui/material'
 import { useState } from 'react'
-
-const fs = new FS('fs')
-const dir = '/'
-window.global = window
-window.Buffer = window.Buffer || require('buffer').Buffer
+import { gitPR } from '../../../../scripts/helpers/gitActions'
 
 export const PushGH = () => {
     const [showDialog, setShowDialog] = useState(false)
@@ -49,7 +44,17 @@ export const PushGH = () => {
                         }
                     />
 
-                    <Button sx={{ display: 'block' }}>Push</Button>
+                    <Button
+                        sx={{ display: 'block' }}
+                        onClick={() =>
+                            gitPR(
+                                'https://github.com/swxk19/readme-editor',
+                                localStorage['ghToken']
+                            )
+                        }
+                    >
+                        Push
+                    </Button>
 
                     <p>Pull Request created. View it here</p>
 
