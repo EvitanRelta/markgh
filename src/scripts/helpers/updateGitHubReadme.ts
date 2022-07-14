@@ -10,6 +10,7 @@ interface PullRequest {
 export const updateGitHubReadme = async (
     url: string,
     token: string,
+    base64Content: string,
     setShowLoading: React.Dispatch<React.SetStateAction<boolean>>,
     setShowFinished: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
@@ -103,7 +104,7 @@ export const updateGitHubReadme = async (
         console.log('push readme')
         const path = 'README.md'
         const message = 'Update README by MarkGH'
-        const content = ''
+        const content = base64Content
 
         const res = await octokit.repos.createOrUpdateFileContents({
             owner,

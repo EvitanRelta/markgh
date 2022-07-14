@@ -1,12 +1,20 @@
 import { Box, Button, CircularProgress, Dialog, DialogContent, TextField } from '@mui/material'
+import { encode } from 'base-64'
 import { useState } from 'react'
+import {
+    removeCodeBlockWrapper,
+    removeImageWrapper,
+} from '../../../../converterFunctions/helpers/preProcessHtml'
+import { removeTipTapArtifacts } from '../../../../converterFunctions/helpers/removeTipTapArtifacts'
 import { updateGitHubReadme } from '../../../../scripts/helpers/updateGitHubReadme'
+import { useAppSelector } from '../../../../store/hooks'
 
 interface Props {
     setShowDialog: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const PushGHDialog = ({ setShowDialog }: Props) => {
+    const editor = useAppSelector((state) => state.data.editor)
     const [link, setLink] = useState<string>('')
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [showLoading, setShowLoading] = useState<boolean>(false)
@@ -14,12 +22,21 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
     const [showFinished, setShowFinished] = useState<boolean>(false)
     const [PRLink, setPRLink] = useState<string>('')
 
+    //github api stores file contents in base64
+    const prepareFileContent = (content: HTMLElement) => {
+        removeCodeBlockWrapper(content)
+        removeImageWrapper(content)
+        removeTipTapArtifacts(content)
+        return encode(content.innerHTML) //encodes in base64
+    }
+
     const handlePushButtonClick = async () => {
         setShowFinished(false)
         setShowLoading(true)
         const PRLink = await updateGitHubReadme(
             link,
             localStorage['ghToken'],
+            prepareFileContent(editor.view.dom.cloneNode(true) as HTMLElement),
             setShowLoading,
             setShowFinished
         )
