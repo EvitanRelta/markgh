@@ -46,7 +46,7 @@ export const getTagChanges = async (tag: string): Promise<TagChanges> => {
 
     const taggedCommit = getCommitHashFromTag(tag)
     const previousTaggedCommit = getCommitHashFromTag(previousTag)
-    const scrappedCommits = scrapeCommitData(previousTaggedCommit, taggedCommit)
+    const scrappedCommits = scrapeCommitData(previousTaggedCommit, taggedCommit, false, true)
 
     const prMerges = scrappedCommits.filter((commit) => isPullRequestMerge(commit.title))
     const issueClosingCommits = scrappedCommits.filter((commit) =>
