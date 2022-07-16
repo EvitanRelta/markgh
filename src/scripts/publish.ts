@@ -17,8 +17,8 @@
  *     (optional 3rd arg. is the branch to publish", default: "master")
  */
 
-// Attempt to init 'Octokit' Github API, as it might fail to get the
-// stored token, or fail to authenticate.
+// Import 'initOctokit' first, to attempt initialisation of 'Octokit' Github API,
+// as it might fail to get the stored token, or fail to authenticate.
 import './helpers/initOctokit'
 
 import { version } from '../../package.json'
