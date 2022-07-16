@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import '../../githubMarkdownCss/importAllGithubCss'
 import { useAppSelector } from '../../store/hooks'
 
+import '../../customCss/custom-tab-size.css'
 import '../../customCss/fix-codeblock-bottom-spacing.css'
 import '../../customCss/fix-codeblock-cannot-type.css'
 import '../../customCss/no-wrapper-paragraph-spacing.css'
