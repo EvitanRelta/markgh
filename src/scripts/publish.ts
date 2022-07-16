@@ -10,7 +10,15 @@ import { askBooleanQuestion } from './helpers/askBooleanQuestion'
 import { generateChangeLogText } from './helpers/changeLogHelpers/generateChangeLogText'
 import { getTagChanges } from './helpers/changeLogHelpers/getTagChanges'
 import { repoName, repoOwner } from './helpers/config.json'
-import { getLatestTag } from './helpers/gitHelpers'
+import {
+    branchExists,
+    getCurrentBranch,
+    getLatestTag,
+    getRemoteUrl,
+    getTrackedBranch,
+    hasUncommitedChanges,
+    isUpToDate,
+} from './helpers/gitHelpers'
 import { sh } from './helpers/initShellJs'
 import { publishGithubRelease } from './helpers/publishGithubRelease'
 import { exitWithErrorMsg, getCommandOutput, logMsg } from './helpers/shellHelpers'
@@ -100,17 +108,16 @@ function validate() {
             `Missing requirements. \nThis script requires ${requiredCommands.join(', ')}.`
         )
 
-    const hasUncommitedChanges = getCommandOutput('git status --porcelain') !== ''
-    if (hasUncommitedChanges) exitWithErrorMsg('Git directory has uncommited changes.')
+    if (hasUncommitedChanges()) exitWithErrorMsg('Git directory has uncommited changes.')
 
-    const currentBranch = getCommandOutput('git rev-parse --abbrev-ref HEAD')
+    const currentBranch = getCurrentBranch()
     const isOnCorrectBranch = currentBranch === selectedBranch
     if (!isOnCorrectBranch)
         exitWithErrorMsg(
             `Needs to be on "${selectedBranch}" branch. \nCurrently on "${currentBranch}".`
         )
 
-    const remoteUrl = getCommandOutput(`git remote get-url ${selectedRemote}`)
+    const remoteUrl = getRemoteUrl(selectedRemote)
     const isCorrectRemoteUrl = new RegExp(
         `^(https://github.com/|git@github.com:)${githubRepo}(.git)?$`
     ).test(remoteUrl)
@@ -123,12 +130,10 @@ function validate() {
 }
 
 function ensureBranchIsUpToDate() {
-    const headRef = getCommandOutput('git symbolic-ref -q HEAD')
-    const trackingBranch = getCommandOutput(
-        `git for-each-ref --format="%(upstream:short)" "${headRef}"`
-    )
-    const hasNoTrackingBranch = trackingBranch === ''
-    if (hasNoTrackingBranch) {
+    const currentBranch = getCurrentBranch()
+    const trackedBranch = getTrackedBranch(currentBranch)
+    const isNotTrackingBranch = trackedBranch === ''
+    if (isNotTrackingBranch) {
         const toContinue = askBooleanQuestion(
             `Warning: Branch "${selectedBranch}" is not tracking any remote branch. Continue? (y/n): `
         )
@@ -136,17 +141,10 @@ function ensureBranchIsUpToDate() {
         return
     }
 
-    logMsg(`Fetching "${trackingBranch}"...`)
-    sh.exec('git fetch')
+    if (isUpToDate(currentBranch))
+        return logMsg(`Branch "${selectedBranch}" is up-to-date with "${trackedBranch}".`)
 
-    const localCommitHash = getCommandOutput('git rev-parse @')
-    const remoteCommitHash = getCommandOutput(`git rev-parse @{u}`)
-
-    const isUpToDate = localCommitHash === remoteCommitHash
-    if (isUpToDate)
-        return logMsg(`Branch "${selectedBranch}" is up-to-date with "${trackingBranch}".`)
-
-    exitWithErrorMsg(`Branch "${selectedBranch}" is not up-to-date with "${trackingBranch}".`)
+    exitWithErrorMsg(`Branch "${selectedBranch}" is not up-to-date with "${trackedBranch}".`)
 }
 
 function bumpVersion() {
@@ -165,8 +163,7 @@ function pushSelectedBranch() {
 // the Github Action - 'Deploy to GitHub Pages'.
 function forcePushToPublishedBranch() {
     logMsg('Updating local "published" branch...')
-    const publishedBranchExists = getCommandOutput('git branch --list published') !== ''
-    if (!publishedBranchExists) sh.exec('git checkout -b published')
+    if (!branchExists('published')) sh.exec('git checkout -b published')
     else {
         sh.exec('git checkout published')
         sh.exec(`git reset --hard ${selectedBranch}`)
