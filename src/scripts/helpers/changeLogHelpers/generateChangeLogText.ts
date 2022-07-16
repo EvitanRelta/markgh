@@ -1,6 +1,6 @@
 import { repoName, repoOwner } from '../config.json'
-import type { PullRequestData } from './getGithubData'
 import type { ClosedIssueData, ScrappedCommitDataWUserName, TagChanges } from './getTagChanges'
+import type { PullRequestData } from './githubDataGetters'
 
 const hasLabel = (labelName: string) => (issueData: ClosedIssueData) =>
     issueData.issue.labels.some((label) => {

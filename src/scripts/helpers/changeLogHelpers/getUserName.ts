@@ -1,5 +1,5 @@
 import { memoize } from 'lodash'
-import { getCommitData } from './getGithubData'
+import { getCommitData } from './githubDataGetters'
 import { ScrappedCommitData } from './scrapeCommitData'
 
 const getUserNameFromCommit = async (commitHash: string) => {
