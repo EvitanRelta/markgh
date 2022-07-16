@@ -1,15 +1,7 @@
 import { getCommandOutput } from '../shellHelpers'
+import type { ScrappedCommitData } from './types'
 
-export interface ScrappedCommitData {
-    commitHash: string
-    abbrevCommitHash: string
-    authorName: string
-    authorEmail: string
-    authorDate: Date
-    title: string
-    body: string
-}
-
+// Scrapes local commit data from Git log.
 export const scrapeCommitData = (
     fromCommitHash: string, // older commit
     toCommitHash: string, // more recent commit

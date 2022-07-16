@@ -1,6 +1,6 @@
 import { memoize } from 'lodash'
 import { getCommitData } from './githubDataGetters'
-import { ScrappedCommitData } from './scrapeCommitData'
+import type { ScrappedCommitData } from './types'
 
 // Github's PR merge commits' authors might be the user's Github name (instead of username).
 // This attempts to get the actual Github username, to be referenced in Github's markdown when

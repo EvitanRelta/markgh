@@ -1,6 +1,5 @@
 import { repoName, repoOwner } from '../config.json'
-import type { ClosedIssueData, TagChanges } from './getTagChanges'
-import type { PullRequestData } from './githubDataGetters'
+import type { ClosedIssueData, PullRequestData, TagChanges } from './types'
 
 export const generateChangeLogText = (tagChanges: TagChanges): string => {
     const closedIssues = tagChanges.closedIssues.slice()

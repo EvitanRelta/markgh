@@ -2,29 +2,13 @@ import { SetOptional } from 'type-fest'
 import { getCommitHashFromTag, getPreviousTag } from '../gitHelpers'
 import { logMsg } from '../shellHelpers'
 import { memoGetUserName } from './getUserName'
-import { getIssueData, getPullRequestData, IssueData, PullRequestData } from './githubDataGetters'
+import { getIssueData, getPullRequestData } from './githubDataGetters'
 import { getClosedIssuesFromBodyText, hasIssueClosingKeywords } from './issueClosingKeywordParsers'
-import { scrapeCommitData, ScrappedCommitData } from './scrapeCommitData'
+import { scrapeCommitData } from './scrapeCommitData'
+import type { ClosedIssueData, PullRequestData, TagChanges } from './types'
 
 type IssueNumber = number
-export interface ScrappedCommitDataWUserName extends ScrappedCommitData {
-    authorUserName: string
-}
-export interface ClosedIssueData {
-    issue: IssueData
-    closedBy: {
-        commits: ScrappedCommitDataWUserName[]
-        pullRequests: PullRequestData[]
-    }
-}
 type IntermediateClosedIssues = Record<IssueNumber, SetOptional<ClosedIssueData, 'issue'>>
-export type ClosedIssues = ClosedIssueData[]
-export interface TagChanges {
-    tag: string
-    previousTag: string
-    closedIssues: ClosedIssues
-    mergedPullRequests: PullRequestData[]
-}
 
 const prMergeRegex = /^Merge pull request #([0-9]+) /
 const isPullRequestMerge = (commitTitle: string) => prMergeRegex.test(commitTitle)

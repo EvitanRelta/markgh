@@ -75,7 +75,3 @@ export const getCommitData = async (commitHash: string) => {
 export const memoGetIssueData = memoize(getIssueData)
 export const memoGetCommitData = memoize(getCommitData)
 export const memoGetPullRequestData = memoize(getPullRequestData)
-
-export type IssueData = Awaited<ReturnType<typeof getIssueData>>
-export type PullRequestData = Awaited<ReturnType<typeof getPullRequestData>>
-export type CommitData = Awaited<ReturnType<typeof getCommitData>>
