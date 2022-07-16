@@ -34,13 +34,13 @@ export const getTagChanges = async (tag: string): Promise<TagChanges> => {
             closedIssues[issueNumber] = { closedBy: { commits: [], pullRequests: [] } }
     }
 
-    logMsg('Fetching pull requests from Github...')
+    // Fetch all pull-requests from Github.
     const prNumbers = prMerges.map((commit) => getPRNumber(commit.title)!)
     const mergedPullRequests: PullRequestData[] = await Promise.all(
         prNumbers.map(getPullRequestData)
     )
 
-    logMsg('Fetching usernames from Github...')
+    // Fetch all usernames from Github.
     const addingUserNamePromise = issueClosingCommits.map(async (commit) => ({
         ...commit,
         authorUserName: await memoGetUserName(commit),
@@ -68,8 +68,7 @@ export const getTagChanges = async (tag: string): Promise<TagChanges> => {
     const entries = Object.entries(closedIssues)
     const issueNumbers = entries.map((x) => parseInt(x[0]))
 
-    logMsg('Fetching issues from Github...')
-    // Gets all issue data together asynchronously.
+    // Fetch all issues from Github.
     const issues = await Promise.all(issueNumbers.map(getIssueData))
 
     // Insert fetched issue-data into each entry.
