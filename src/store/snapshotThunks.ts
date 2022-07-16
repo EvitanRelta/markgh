@@ -51,7 +51,7 @@ export const loadSnapshot = createAsyncThunk<void, Snapshot, AppThunkApiConfig>(
         // To indicate to the editor's 'update' listener, that the change in the
         // editor's content is due to loading of a snapshot.
         dispatch(setIsLoadingSnapshot(true))
-        dispatch(setEditorContent(snapshot.content))
+        dispatch(setEditorContent({ content: snapshot.content }))
     }
 )
 

@@ -1,11 +1,9 @@
 import { Box, Button, CircularProgress, styled, TextField } from '@mui/material'
 import staticAxios from 'axios'
 import { useState } from 'react'
-import { markdownToHtml } from '../../../../converterFunctions'
 import { GithubRepoInfo } from '../../../../converterFunctions/markdownToHtml'
-import { getFormatedNow } from '../../../../store/helpers/getFormatedNow'
+import { importMarkdown } from '../../../../store/dataSlice'
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
-import { loadSnapshot } from '../../../../store/snapshotThunks'
 
 interface Props {
     setAnchor: React.Dispatch<React.SetStateAction<(EventTarget & Element) | null>>
@@ -111,13 +109,13 @@ export const RepoLinkInput = ({ setAnchor }: Props) => {
             const githubRepoInfo = await parseImportUrl(link)
             let response = await axios.get<ResponseDataType>(generateRawURL(githubRepoInfo))
             setAnchor(null)
-            const htmlContent = markdownToHtml(response.data, githubRepoInfo)
+
             const { user, repo, branch, dirPath, fileName } = githubRepoInfo
             dispatch(
-                loadSnapshot({
+                importMarkdown({
                     fileTitle: `(${user}/${repo}:${branch}) ${dirPath}${fileName}`,
-                    lastEditedOn: getFormatedNow(),
-                    content: htmlContent,
+                    markdown: response.data,
+                    githubRepoInfo,
                 })
             )
         } catch (e) {
