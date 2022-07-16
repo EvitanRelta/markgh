@@ -1,5 +1,5 @@
 import { SetOptional } from 'type-fest'
-import { getCommandOutput, logMsg } from '../shellHelperFunctions'
+import { getCommandOutput, logMsg } from '../shellHelpers'
 import { memoGetUserName } from './getUserName'
 import { getIssueData, getPullRequestData, IssueData, PullRequestData } from './githubDataGetters'
 import { getClosedIssuesFromBodyText, hasIssueClosingKeywords } from './issueClosingKeywordParsers'

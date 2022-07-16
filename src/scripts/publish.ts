@@ -12,7 +12,7 @@ import { getLatestTag, getTagChanges } from './helpers/changeLogHelpers/getTagCh
 import { repoName, repoOwner } from './helpers/config.json'
 import { sh } from './helpers/initShellJs'
 import { publishGithubRelease } from './helpers/publishGithubRelease'
-import { exitWithErrorMsg, getCommandOutput, logMsg } from './helpers/shellHelperFunctions'
+import { exitWithErrorMsg, getCommandOutput, logMsg } from './helpers/shellHelpers'
 import { writeToFile } from './helpers/writeToFile'
 
 const currentVersion = version

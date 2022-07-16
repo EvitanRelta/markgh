@@ -1,4 +1,4 @@
-import { getCommandOutput } from '../shellHelperFunctions'
+import { getCommandOutput } from '../shellHelpers'
 
 export interface ScrappedCommitData {
     commitHash: string
