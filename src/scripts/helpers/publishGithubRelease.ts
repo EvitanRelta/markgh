@@ -1,4 +1,4 @@
-import { repoName, repoOwner } from './config.json'
+import { repoName, repoOwner } from '../config.json'
 import { octokit } from './initOctokit'
 
 export const publishGithubRelease = (tag: string, title: string, body: string) => {

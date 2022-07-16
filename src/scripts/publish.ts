@@ -1,18 +1,46 @@
-// Run via 'ts-node' npm package:
-// npx ts-node PATH/publish.ts
+/**
+ * Requirement:
+ *     Install 'ts-node' npm package, or some way to run this Typescript script
+ *     './config.json' needs to have
+ *         - "repoOwner" (ie. the upstream-repo owner)
+ *         - "repoName" (ie. the upstream-repo name)
+ *     '~/.env' (in the project root) needs to have
+ *         - "GITHUB_TOKEN" (ie. Github personal-access token)
+ *
+ * Usage (using 'ts-node' npm package):
+ *         npx ts-node PATH/publish.ts [patch|minor|major]
+ *     or: npx ts-node PATH/publish.ts [patch|minor|major] [REMOTE]
+ *     or: npx ts-node PATH/publish.ts [patch|minor|major] [REMOTE] [BRANCH]
+ *
+ *     (required 1st arg. is the version-bump type)
+ *     (optional 2nd arg. is the remote name to the GitHub repo: "${githubRepo}", default: "origin")
+ *     (optional 3rd arg. is the branch to publish", default: "master")
+ */
 
-// Attempt to init 'Octokit' Github API, as it might fail to get the
-// stored token, or fail to authenticate.
+// Import 'initOctokit' first, to attempt initialisation of 'Octokit' Github API,
+// as it might fail to get the stored token, or fail to authenticate.
 import './helpers/initOctokit'
 
 import { version } from '../../package.json'
+import { repoName, repoOwner } from './config.json'
 import { askBooleanQuestion } from './helpers/askBooleanQuestion'
-import { repoName, repoOwner } from './helpers/config.json'
-import { generateChangeLogText } from './helpers/generateChangeLogText'
-import { getLatestTag, getTagChanges } from './helpers/getTagChanges'
+import { generateChangeLogText } from './helpers/changeLogHelpers/generateChangeLogText'
+import { getChangesFromScrappedCommits } from './helpers/changeLogHelpers/getChangesFromScrappedCommits'
+import { scrapeCommitData } from './helpers/changeLogHelpers/scrapeCommitData'
+import {
+    branchExists,
+    getCommitHashFromTag,
+    getCurrentBranch,
+    getLatestTag,
+    getPreviousTag,
+    getRemoteUrl,
+    getTrackedBranch,
+    hasUncommitedChanges,
+    isUpToDate,
+} from './helpers/gitHelpers'
 import { sh } from './helpers/initShellJs'
 import { publishGithubRelease } from './helpers/publishGithubRelease'
-import { exitWithErrorMsg, getCommandOutput, logMsg } from './helpers/shellHelperFunctions'
+import { exitWithErrorMsg, getCommandOutput, logMsg } from './helpers/shellHelpers'
 import { writeToFile } from './helpers/writeToFile'
 
 const currentVersion = version
@@ -99,17 +127,16 @@ function validate() {
             `Missing requirements. \nThis script requires ${requiredCommands.join(', ')}.`
         )
 
-    const hasUncommitedChanges = getCommandOutput('git status --porcelain') !== ''
-    if (hasUncommitedChanges) exitWithErrorMsg('Git directory has uncommited changes.')
+    if (hasUncommitedChanges()) exitWithErrorMsg('Git directory has uncommited changes.')
 
-    const currentBranch = getCommandOutput('git rev-parse --abbrev-ref HEAD')
+    const currentBranch = getCurrentBranch()
     const isOnCorrectBranch = currentBranch === selectedBranch
     if (!isOnCorrectBranch)
         exitWithErrorMsg(
             `Needs to be on "${selectedBranch}" branch. \nCurrently on "${currentBranch}".`
         )
 
-    const remoteUrl = getCommandOutput(`git remote get-url ${selectedRemote}`)
+    const remoteUrl = getRemoteUrl(selectedRemote)
     const isCorrectRemoteUrl = new RegExp(
         `^(https://github.com/|git@github.com:)${githubRepo}(.git)?$`
     ).test(remoteUrl)
@@ -122,12 +149,10 @@ function validate() {
 }
 
 function ensureBranchIsUpToDate() {
-    const headRef = getCommandOutput('git symbolic-ref -q HEAD')
-    const trackingBranch = getCommandOutput(
-        `git for-each-ref --format="%(upstream:short)" "${headRef}"`
-    )
-    const hasNoTrackingBranch = trackingBranch === ''
-    if (hasNoTrackingBranch) {
+    const currentBranch = getCurrentBranch()
+    const trackedBranch = getTrackedBranch(currentBranch)
+    const isNotTrackingBranch = trackedBranch === ''
+    if (isNotTrackingBranch) {
         const toContinue = askBooleanQuestion(
             `Warning: Branch "${selectedBranch}" is not tracking any remote branch. Continue? (y/n): `
         )
@@ -135,17 +160,10 @@ function ensureBranchIsUpToDate() {
         return
     }
 
-    logMsg(`Fetching "${trackingBranch}"...`)
-    sh.exec('git fetch')
+    if (isUpToDate(currentBranch))
+        return logMsg(`Branch "${selectedBranch}" is up-to-date with "${trackedBranch}".`)
 
-    const localCommitHash = getCommandOutput('git rev-parse @')
-    const remoteCommitHash = getCommandOutput(`git rev-parse @{u}`)
-
-    const isUpToDate = localCommitHash === remoteCommitHash
-    if (isUpToDate)
-        return logMsg(`Branch "${selectedBranch}" is up-to-date with "${trackingBranch}".`)
-
-    exitWithErrorMsg(`Branch "${selectedBranch}" is not up-to-date with "${trackingBranch}".`)
+    exitWithErrorMsg(`Branch "${selectedBranch}" is not up-to-date with "${trackedBranch}".`)
 }
 
 function bumpVersion() {
@@ -164,8 +182,7 @@ function pushSelectedBranch() {
 // the Github Action - 'Deploy to GitHub Pages'.
 function forcePushToPublishedBranch() {
     logMsg('Updating local "published" branch...')
-    const publishedBranchExists = getCommandOutput('git branch --list published') !== ''
-    if (!publishedBranchExists) sh.exec('git checkout -b published')
+    if (!branchExists('published')) sh.exec('git checkout -b published')
     else {
         sh.exec('git checkout published')
         sh.exec(`git reset --hard ${selectedBranch}`)
@@ -179,6 +196,16 @@ function forcePushToPublishedBranch() {
 
 async function getChangeLogText(tag: string) {
     logMsg('Generating changelog...')
-    const tagChanges = await getTagChanges(tag)
-    return generateChangeLogText(tagChanges)
+    const previousTag = getPreviousTag(tag)
+
+    logMsg('Scrapping local commits from Git log...')
+    const scrappedCommits = scrapeCommitData(
+        getCommitHashFromTag(previousTag),
+        getCommitHashFromTag(tag),
+        false,
+        true
+    )
+
+    const tagChanges = await getChangesFromScrappedCommits(scrappedCommits)
+    return generateChangeLogText(tagChanges, { tag, previousTag })
 }

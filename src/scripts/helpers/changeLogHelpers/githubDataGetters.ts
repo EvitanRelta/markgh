@@ -1,7 +1,7 @@
 import { RequestError } from '@octokit/request-error'
 import { memoize } from 'lodash'
-import { repoName, repoOwner } from './config.json'
-import { octokit } from './initOctokit'
+import { repoName, repoOwner } from '../../config.json'
+import { octokit } from '../initOctokit'
 
 // Thrown when a given issue number doesn't exists on the repo.
 export class NonExistentGHIssueError extends Error {
@@ -75,7 +75,3 @@ export const getCommitData = async (commitHash: string) => {
 export const memoGetIssueData = memoize(getIssueData)
 export const memoGetCommitData = memoize(getCommitData)
 export const memoGetPullRequestData = memoize(getPullRequestData)
-
-export type IssueData = Awaited<ReturnType<typeof getIssueData>>
-export type PullRequestData = Awaited<ReturnType<typeof getPullRequestData>>
-export type CommitData = Awaited<ReturnType<typeof getCommitData>>
