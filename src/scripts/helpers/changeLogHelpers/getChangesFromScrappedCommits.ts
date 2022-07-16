@@ -1,28 +1,21 @@
 import { SetOptional } from 'type-fest'
-import { getCommitHashFromTag, getPreviousTag } from '../gitHelpers'
-import { logMsg } from '../shellHelpers'
 import { memoGetUserName } from './getUserName'
 import { getIssueData, getPullRequestData } from './githubDataGetters'
 import { getClosedIssuesFromBodyText, hasIssueClosingKeywords } from './issueClosingKeywordParsers'
-import { scrapeCommitData } from './scrapeCommitData'
 import type {
+    ChangesData,
     ClosedIssueData,
     PullRequestData,
+    ScrappedCommitData,
     ScrappedCommitDataWUserName,
-    TagChanges,
 } from './types'
 
 type IssueNumber = number
 type IntermediateClosedIssues = Record<IssueNumber, SetOptional<ClosedIssueData, 'issue'>>
 
-export const getTagChanges = async (tag: string): Promise<TagChanges> => {
-    logMsg('Scrapping local commits from Git...')
-    const previousTag = getPreviousTag(tag)
-
-    const taggedCommit = getCommitHashFromTag(tag)
-    const previousTaggedCommit = getCommitHashFromTag(previousTag)
-    const scrappedCommits = scrapeCommitData(previousTaggedCommit, taggedCommit, false, true)
-
+export const getChangesFromScrappedCommits = async (
+    scrappedCommits: ScrappedCommitData[]
+): Promise<ChangesData> => {
     const prMerges = scrappedCommits.filter((commit) => isPullRequestMerge(commit.title))
     const issueClosingCommits = scrappedCommits.filter((commit) =>
         hasIssueClosingKeywords(commit.body)
@@ -75,8 +68,6 @@ export const getTagChanges = async (tag: string): Promise<TagChanges> => {
     entries.forEach(([_, data], i) => (data.issue = issues[i]))
 
     return {
-        tag,
-        previousTag,
         closedIssues: Object.values(closedIssues) as ClosedIssueData[],
         mergedPullRequests,
     }

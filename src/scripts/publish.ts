@@ -8,12 +8,15 @@ import './helpers/initOctokit'
 import { version } from '../../package.json'
 import { askBooleanQuestion } from './helpers/askBooleanQuestion'
 import { generateChangeLogText } from './helpers/changeLogHelpers/generateChangeLogText'
-import { getTagChanges } from './helpers/changeLogHelpers/getTagChanges'
+import { getChangesFromScrappedCommits } from './helpers/changeLogHelpers/getChangesFromScrappedCommits'
+import { scrapeCommitData } from './helpers/changeLogHelpers/scrapeCommitData'
 import { repoName, repoOwner } from './helpers/config.json'
 import {
     branchExists,
+    getCommitHashFromTag,
     getCurrentBranch,
     getLatestTag,
+    getPreviousTag,
     getRemoteUrl,
     getTrackedBranch,
     hasUncommitedChanges,
@@ -177,6 +180,16 @@ function forcePushToPublishedBranch() {
 
 async function getChangeLogText(tag: string) {
     logMsg('Generating changelog...')
-    const tagChanges = await getTagChanges(tag)
-    return generateChangeLogText(tagChanges)
+    const previousTag = getPreviousTag(tag)
+
+    logMsg('Scrapping local commits from Git log...')
+    const scrappedCommits = scrapeCommitData(
+        getCommitHashFromTag(previousTag),
+        getCommitHashFromTag(tag),
+        false,
+        true
+    )
+
+    const tagChanges = await getChangesFromScrappedCommits(scrappedCommits)
+    return generateChangeLogText(tagChanges, { tag, previousTag })
 }

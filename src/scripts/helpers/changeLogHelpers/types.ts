@@ -30,12 +30,9 @@ export interface ClosedIssueData {
     }
 }
 
-// Parsed data, of all the issues closed (and the commits/PRs that closes it),
-// and PRs merged between 2 tags.
+// Parsed data, of all the issues closed (and the commits/PRs that closes it), and PRs merged.
 // For generating changelogs.
-export interface TagChanges {
-    tag: string
-    previousTag: string
+export interface ChangesData {
     closedIssues: ClosedIssueData[]
     mergedPullRequests: PullRequestData[]
 }

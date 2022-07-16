@@ -1,9 +1,14 @@
 import { repoName, repoOwner } from '../config.json'
-import type { ClosedIssueData, PullRequestData, TagChanges } from './types'
+import type { ChangesData, ClosedIssueData, PullRequestData } from './types'
 
-export const generateChangeLogText = (tagChanges: TagChanges): string => {
-    const closedIssues = tagChanges.closedIssues.slice()
-    const mergedPullRequests = tagChanges.mergedPullRequests.slice()
+interface TagOptions {
+    previousTag: string
+    tag: string
+}
+
+export const generateChangeLogText = (changes: ChangesData, tagOptions?: TagOptions): string => {
+    const closedIssues = changes.closedIssues.slice()
+    const mergedPullRequests = changes.mergedPullRequests.slice()
 
     closedIssues.sort(sortIssuesByOldestClosedDates)
     mergedPullRequests.sort(sortPRsByOldestMergedDates)
@@ -27,11 +32,11 @@ export const generateChangeLogText = (tagChanges: TagChanges): string => {
         refactoringsSection +
         pullRequestSection
 
-    return (
-        "## What's Changed\n\n" +
-        body +
-        `<br>\n\n**Full Changelog**: https://github.com/${repoOwner}/${repoName}/compare/${tagChanges.previousTag}...${tagChanges.tag}`
-    )
+    const fullChangeLog = tagOptions
+        ? `<br>\n\n**Full Changelog**: https://github.com/${repoOwner}/${repoName}/compare/${tagOptions.previousTag}...${tagOptions.tag}`
+        : ''
+
+    return "## What's Changed\n\n" + body + fullChangeLog
 }
 
 const getDateDiff = (dateStr1: string, dateStr2: string) =>
