@@ -1,5 +1,21 @@
-// Run via 'ts-node' npm package:
-// npx ts-node PATH/publish.ts
+/**
+ * Requirement:
+ *     Install 'ts-node' npm package, or some way to run this Typescript script
+ *     './config.json' needs to have
+ *         - "repoOwner" (ie. the upstream-repo owner)
+ *         - "repoName" (ie. the upstream-repo name)
+ *     '~/.env' (in the project root) needs to have
+ *         - "GITHUB_TOKEN" (ie. Github personal-access token)
+ *
+ * Usage (using 'ts-node' npm package):
+ *         npx ts-node PATH/publish.ts [patch|minor|major]
+ *     or: npx ts-node PATH/publish.ts [patch|minor|major] [REMOTE]
+ *     or: npx ts-node PATH/publish.ts [patch|minor|major] [REMOTE] [BRANCH]
+ *
+ *     (required 1st arg. is the version-bump type)
+ *     (optional 2nd arg. is the remote name to the GitHub repo: "${githubRepo}", default: "origin")
+ *     (optional 3rd arg. is the branch to publish", default: "master")
+ */
 
 // Attempt to init 'Octokit' Github API, as it might fail to get the
 // stored token, or fail to authenticate.
