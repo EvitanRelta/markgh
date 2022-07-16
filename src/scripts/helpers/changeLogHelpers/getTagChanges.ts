@@ -1,5 +1,6 @@
 import { SetOptional } from 'type-fest'
-import { getCommandOutput, logMsg } from '../shellHelpers'
+import { getCommitHashFromTag, getPreviousTag } from '../gitHelpers'
+import { logMsg } from '../shellHelpers'
 import { memoGetUserName } from './getUserName'
 import { getIssueData, getPullRequestData, IssueData, PullRequestData } from './githubDataGetters'
 import { getClosedIssuesFromBodyText, hasIssueClosingKeywords } from './issueClosingKeywordParsers'
@@ -24,10 +25,6 @@ export interface TagChanges {
     closedIssues: ClosedIssues
     mergedPullRequests: PullRequestData[]
 }
-
-export const getLatestTag = () => getCommandOutput('git describe --abbrev=0')
-const getPreviousTag = (tag: string) => getCommandOutput(`git describe --abbrev=0 "${tag}^"`)
-const getCommitHashFromTag = (tag: string) => getCommandOutput(`git rev-list -n 1 "tags/${tag}"`)
 
 const prMergeRegex = /^Merge pull request #([0-9]+) /
 const isPullRequestMerge = (commitTitle: string) => prMergeRegex.test(commitTitle)
