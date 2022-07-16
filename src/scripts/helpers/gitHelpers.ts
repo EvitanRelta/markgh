@@ -8,7 +8,9 @@ export const getPreviousTag = (tag: string) => getCommandOutput(`git describe --
 // Commit Hashs
 export const getCommitHash = (ref: string) => getCommandOutput(`git rev-list -n 1 "${ref}"`)
 export const getCommitHashFromTag = (tag: string) => getCommitHash(`tags/${tag}`)
-export const getCommitHashOfBranchHead = (tag: string) => getCommitHash(`heads/${tag}`)
+export const getCommitHashOfBranch = (branchName: string) => getCommitHash(`heads/${branchName}`)
+export const getCommitHashOfRemoteBranch = (branchName: string) =>
+    getCommitHash(`remotes/${branchName}`)
 export const branchExists = (branchName: string) =>
     getCommandOutput(`git branch --list ${branchName}`) !== ''
 
@@ -28,7 +30,7 @@ export const isUpToDate = (branchName: string) => {
     if (isNotTrackingBranch)
         throw new Error(`Branch "${branchName}" is not tracking any upstream branch.`)
 
-    const localBranchHead = getCommitHashOfBranchHead(branchName)
-    const upstreamBranchHead = getCommitHashOfBranchHead(trackedBranch)
+    const localBranchHead = getCommitHashOfBranch(branchName)
+    const upstreamBranchHead = getCommitHashOfRemoteBranch(trackedBranch)
     return localBranchHead === upstreamBranchHead
 }
