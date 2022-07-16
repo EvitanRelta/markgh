@@ -1,9 +1,9 @@
 import { SetOptional } from 'type-fest'
+import { getCommandOutput, logMsg } from '../shellHelperFunctions'
 import { getClosedIssuesFromBodyText, hasIssueClosingKeywords } from './getClosedIssuesFromBodyText'
 import { getIssueData, getPullRequestData, IssueData, PullRequestData } from './getGithubData'
 import { memoGetUserName } from './getUserName'
 import { scrapeCommitData, ScrappedCommitData } from './scrapeCommitData'
-import { getCommandOutput, logMsg } from './shellHelperFunctions'
 
 type IssueNumber = number
 export interface ScrappedCommitDataWUserName extends ScrappedCommitData {

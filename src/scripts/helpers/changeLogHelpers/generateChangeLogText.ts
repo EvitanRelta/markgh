@@ -1,4 +1,4 @@
-import { repoName, repoOwner } from './config.json'
+import { repoName, repoOwner } from '../config.json'
 import type { PullRequestData } from './getGithubData'
 import type { ClosedIssueData, ScrappedCommitDataWUserName, TagChanges } from './getTagChanges'
 

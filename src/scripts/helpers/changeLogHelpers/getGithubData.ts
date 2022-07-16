@@ -1,7 +1,7 @@
 import { RequestError } from '@octokit/request-error'
 import { memoize } from 'lodash'
-import { repoName, repoOwner } from './config.json'
-import { octokit } from './initOctokit'
+import { repoName, repoOwner } from '../config.json'
+import { octokit } from '../initOctokit'
 
 // Thrown when a given issue number doesn't exists on the repo.
 export class NonExistentGHIssueError extends Error {
