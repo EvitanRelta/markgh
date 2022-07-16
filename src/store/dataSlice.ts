@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Editor } from '@tiptap/react'
 import type { AppThunkApiConfig } from '.'
+import { markdownToHtml } from '../converterFunctions'
 import {
     removeCodeBlockWrapper,
     removeImageWrapper,
 } from '../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../converterFunctions/helpers/removeTipTapArtifacts'
+import { GithubRepoInfo } from '../converterFunctions/markdownToHtml'
 import { placeholderEditorHtml } from '../placeholderEditorHtml'
 import { getFormatedNow } from './helpers/getFormatedNow'
 import { database, EditorDBInstance, Snapshot } from './helpers/initDatabase'
@@ -64,10 +66,18 @@ const dataSlice = createSlice({
         setIsLoadingSnapshot(state, actions: PayloadAction<boolean>) {
             state.isLoadingSnapshot = actions.payload
         },
-        setEditorContent(state, actions: PayloadAction<string>) {
+        setEditorContent(
+            state,
+            actions: PayloadAction<{ content: string; fullWhitespace?: boolean }>
+        ) {
             const { editor } = state
+            const { content, fullWhitespace } = actions.payload
             editor.commands.clearContent(false)
-            editor.commands.setContent(actions.payload, true, { preserveWhitespace: 'full' })
+            editor.commands.setContent(
+                content,
+                true,
+                fullWhitespace === false ? undefined : { preserveWhitespace: 'full' }
+            )
         },
     },
     extraReducers(builder) {
@@ -100,6 +110,29 @@ export const setFileTitle = createAsyncThunk<void, string, AppThunkApiConfig>(
         dispatch(_setFileTitle(newFileTitle))
         dispatch(_setLastEditedOn(getFormatedNow()))
         dispatch(saveEditorContent())
+    }
+)
+
+export interface ImportMarkdownOptions {
+    fileTitle: string
+    markdown: string
+    githubRepoInfo?: GithubRepoInfo
+}
+export const importMarkdown = createAsyncThunk<void, ImportMarkdownOptions, AppThunkApiConfig>(
+    'data/importMarkdown',
+    async ({ fileTitle, markdown, githubRepoInfo }, { dispatch }) => {
+        dispatch(_setFileTitle(fileTitle))
+        dispatch(_setLastEditedOn(getFormatedNow()))
+
+        // To indicate to the editor's 'update' listener, that the change in the
+        // editor's content is due to loading of a snapshot.
+        dispatch(setIsLoadingSnapshot(true))
+        dispatch(
+            setEditorContent({
+                content: markdownToHtml(markdown, githubRepoInfo),
+                fullWhitespace: false,
+            })
+        )
     }
 )
 
