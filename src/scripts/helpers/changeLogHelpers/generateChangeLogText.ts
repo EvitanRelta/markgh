@@ -1,4 +1,4 @@
-import { repoName, repoOwner } from '../config.json'
+import { repoName, repoOwner } from '../../config.json'
 import type { ChangesData, ClosedIssueData, PullRequestData } from './types'
 
 interface TagOptions {

@@ -6,11 +6,11 @@
 import './helpers/initOctokit'
 
 import { version } from '../../package.json'
+import { repoName, repoOwner } from './config.json'
 import { askBooleanQuestion } from './helpers/askBooleanQuestion'
 import { generateChangeLogText } from './helpers/changeLogHelpers/generateChangeLogText'
 import { getChangesFromScrappedCommits } from './helpers/changeLogHelpers/getChangesFromScrappedCommits'
 import { scrapeCommitData } from './helpers/changeLogHelpers/scrapeCommitData'
-import { repoName, repoOwner } from './helpers/config.json'
 import {
     branchExists,
     getCommitHashFromTag,
