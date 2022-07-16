@@ -175,7 +175,7 @@ function bumpVersion() {
 
 function pushSelectedBranch() {
     logMsg(`Pushing "${selectedBranch}" branch to "${selectedRemote}"...`)
-    sh.exec('git push')
+    sh.exec('git push --follow-tags')
 }
 
 // Push commits to 'published' branch, to be auto-deployed to Github Pages via
@@ -189,7 +189,7 @@ function forcePushToPublishedBranch() {
     }
 
     logMsg(`Force pushing "published" branch to "${selectedRemote}"...`)
-    sh.exec(`git push -uf ${selectedRemote} published`)
+    sh.exec(`git push -uf ${selectedRemote} published --follow-tags`)
 
     sh.exec('git checkout -') // return to previous checkout
 }
