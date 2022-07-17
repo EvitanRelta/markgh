@@ -1,32 +1,23 @@
 import { removeTipTapArtifacts } from './removeTipTapArtifacts'
 
-const isCodeOrCodeBlock = (element: Element) => ['CODE', 'PRE'].includes(element.tagName)
-const isEditorContainer = (element: Element) => element.classList.contains('markdown-body')
-const isInsideCodeOrCodeBlock = (element: Element): boolean => {
-    if (isEditorContainer(element)) return false
-    if (isCodeOrCodeBlock(element)) return true
-    if (element.parentElement === null) return false
-
-    return isInsideCodeOrCodeBlock(element.parentElement)
+// Helper function for escaping characters.
+export const escapeTextNode = (textNode: Node) => {
+    if (!textNode.nodeValue) return
+    textNode.nodeValue = textNode.nodeValue
+        .replace(/(?<!\\)&(?=\S+;)/gi, '&amp;')
+        .replaceAll('\xa0', ' ')
+        .replaceAll('  ', '&nbsp; ')
+        .replace(/^ | $|(?<=\s) (?=\S)/g, '&nbsp;')
+        .replace(/(?<!\\)<(?=\/?[a-z])/gi, '&lt;')
 }
-const isTextNode = (node: Node) => node.nodeType === node.TEXT_NODE
 
-const recursivelyEscape = (element: Element) => {
-    const escapeCharacters = (node: Node) => {
-        if (!node.nodeValue) return
-        node.nodeValue = node.nodeValue
-            .replace(/(?<!\\)&(?=\S+;)/gi, '&amp;')
-            .replaceAll('\xa0', ' ')
-            .replaceAll('  ', '&nbsp; ')
-            .replace(/^ | $|(?<=\s) (?=\S)/g, '&nbsp;')
-            .replace(/(?<!\\)<(?=\/?[a-z])/gi, '&lt;')
-    }
-
-    if (!isInsideCodeOrCodeBlock(element)) {
-        Array.from(element.childNodes).filter(isTextNode).forEach(escapeCharacters)
-    }
-
-    Array.from(element.children).forEach(recursivelyEscape)
+const escapeCharacters = (htmlElement: Element) => {
+    const isTextNode = (node: Node) => node.nodeType === node.TEXT_NODE
+    const elementsNotInCode = Array.from(htmlElement.querySelectorAll(':not(code,code *)'))
+    const textNodesNotInCode = elementsNotInCode
+        .map((element) => Array.from(element.childNodes).filter(isTextNode))
+        .flat()
+    textNodesNotInCode.forEach(escapeTextNode)
 }
 
 export const removeCodeBlockWrapper = (htmlElement: Element) => {
@@ -79,7 +70,7 @@ export const preserveEmptyListItem = (htmlElement: Element) => {
 }
 
 export const preProcessHtml = (htmlElement: Element) => {
-    recursivelyEscape(htmlElement)
+    escapeCharacters(htmlElement)
     removeCodeBlockWrapper(htmlElement)
     removeImageWrapper(htmlElement)
     removeWrapperParagraphs(htmlElement)

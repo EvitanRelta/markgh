@@ -1,4 +1,5 @@
 import { align } from './align'
+import { code } from './code'
 import { codeBlocks } from './codeBlocks'
 import { emptyParagraph } from './emptyParagraph'
 import { lineBreak } from './lineBreak'
@@ -10,6 +11,7 @@ import { underline } from './underline'
 
 export const plugins = [
     align,
+    code,
     codeBlocks,
     emptyParagraph,
     lineBreak,

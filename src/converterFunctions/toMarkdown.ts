@@ -12,6 +12,9 @@ export const toMarkdown = (html: Element) => {
         codeBlockStyle: 'fenced',
         bulletListMarker: '-',
         hr: '---',
+        // @ts-expect-error (turndown types are outdated)
+        // Prevents collapsing of whitespace in <code> tags.
+        preformattedCode: true,
     }).use(plugins)
 
     const markdown = turndownService.turndown(htmlCopy)
