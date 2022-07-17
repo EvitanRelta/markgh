@@ -4,7 +4,7 @@ export const lineBreak: Plugin = (service) => {
     service.addRule('align', {
         filter: 'br',
         replacement: (content, node, options) => {
-            return '\n<br>'
+            return node.nextSibling ? '\n<br>' : '\n<br><br>'
         },
     })
 }
