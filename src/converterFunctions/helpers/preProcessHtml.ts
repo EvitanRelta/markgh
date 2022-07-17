@@ -1,7 +1,7 @@
 import { removeTipTapArtifacts } from './removeTipTapArtifacts'
 
 // Helper function for escaping characters.
-const escapeTextNode = (textNode: Node) => {
+export const escapeTextNode = (textNode: Node) => {
     if (!textNode.nodeValue) return
     textNode.nodeValue = textNode.nodeValue
         .replace(/(?<!\\)&(?=\S+;)/gi, '&amp;')
