@@ -72,10 +72,17 @@ export const removeWrapperParagraphs = (htmlElement: Element) => {
     })
 }
 
+export const preserveEmptyListItem = (htmlElement: Element) => {
+    const emptyListItems = htmlElement.querySelectorAll('li:empty')
+    const insertLineBreak = (listItem: Element) => listItem.append(document.createElement('br'))
+    emptyListItems.forEach(insertLineBreak)
+}
+
 export const preProcessHtml = (htmlElement: Element) => {
     recursivelyEscape(htmlElement)
     removeCodeBlockWrapper(htmlElement)
     removeImageWrapper(htmlElement)
     removeWrapperParagraphs(htmlElement)
     removeTipTapArtifacts(htmlElement)
+    preserveEmptyListItem(htmlElement)
 }
