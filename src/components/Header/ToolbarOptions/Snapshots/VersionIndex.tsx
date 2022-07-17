@@ -126,7 +126,7 @@ export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                        sx={titleStyle}
+                        primaryTypographyProps={{ sx: titleStyle }}
                         primary={snapshot.fileTitle || 'Untitled Document'}
                         secondary={'Snapshot on ' + snapshot.lastEditedOn}
                     />
