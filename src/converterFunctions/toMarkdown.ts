@@ -12,6 +12,7 @@ export const toMarkdown = (html: Element) => {
         codeBlockStyle: 'fenced',
         bulletListMarker: '-',
         hr: '---',
+        emDelimiter: '*',
         // @ts-expect-error (turndown types are outdated)
         // Prevents collapsing of whitespace in <code> tags.
         preformattedCode: true,
