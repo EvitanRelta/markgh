@@ -5,8 +5,9 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks'
 const StyledInput = styled(Input)({
     border: '0px',
     fontSize: '25px',
-    width: '30%',
+    minWidth: '20em',
     marginLeft: 12,
+    marginRight: 20,
     '&:before': {
         borderBottom: '0px',
         transform: 'scaleX(0)',
