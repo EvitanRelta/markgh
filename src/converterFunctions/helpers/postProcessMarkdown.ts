@@ -19,13 +19,16 @@ const replaceOnlyNonCodeOrCodeBlock = (
 export const postProcessMarkdown = (markdown: string) => {
     type StrReplacement = (str: string) => string
 
-    // Assumes that there's no more than 2 '&nbsp;' in a row.
-    // eg. '[TEXT]&nbsp;&nbsp;[TEXT]' -> '[TEXT]&nbsp; [TEXT]'
-    const unescapeDoubleNbsp: StrReplacement = (x) => x.replace(/(?<=&nbsp;)&nbsp;(?!$)/gm, ' ')
+    // eg. '[TEXT] &nbsp; [TEXT]' -> '[TEXT]   [TEXT]'
+    const allToSpaces: StrReplacement = (x) => x.replaceAll('&nbsp;', ' ')
 
-    // eg. '[TEXT]&nbsp;[TEXT]' -> '[TEXT] [TEXT]'
-    const unescapeUnnecessaryNbsp: StrReplacement = (x) =>
-        x.replace(/(?<!\s|^)&nbsp;(?!\s|$)/gm, ' ')
+    // eg. '[TEXT]   [TEXT]' -> '[TEXT]&nbsp;  [TEXT]'
+    // (3rd space isn't replaced as it's not a double)
+    const escapeDoubleSpace: StrReplacement = (x) => x.replaceAll('  ', '&nbsp; ')
+
+    // eg. '[TEXT]&nbsp;  [TEXT]' -> '[TEXT]&nbsp; &nbsp;[TEXT]'
+    const escapeLeadingTrailingSpaces: StrReplacement = (x) =>
+        x.replaceAll(/^ | $|(?<=\s) (?=\S)/g, '&nbsp;')
 
     // eg. '[TEXT]&nbsp; &nbsp; &nbsp;[TEXT]' -> '[TEXT] &nbsp; &nbsp; [TEXT]'
     const reduceOddNumOfNbsp: StrReplacement = (x) =>
@@ -42,8 +45,9 @@ export const postProcessMarkdown = (markdown: string) => {
 
     const postProcess: StrReplacement = (markdown) =>
         [
-            unescapeDoubleNbsp,
-            unescapeUnnecessaryNbsp,
+            allToSpaces,
+            escapeDoubleSpace,
+            escapeLeadingTrailingSpaces,
             reduceOddNumOfNbsp,
             avoidNbspBesideWords,
             htmlEscapeToBackslashEscape,
