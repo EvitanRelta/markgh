@@ -44,7 +44,7 @@ export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
     }
 
     return (
-        <Box sx={{ minHeight: 130, marginTop: -1 }}>
+        <>
             <h5 style={{ marginLeft: 10 }}>Insert Respository Link</h5>
             <Box sx={{ justifyContent: 'space-between', display: 'flex', marginTop: -2 }}>
                 <TextField
@@ -83,6 +83,6 @@ export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
                     </Button>
                 )}
             </Box>
-        </Box>
+        </>
     )
 }
