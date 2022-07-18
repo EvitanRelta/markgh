@@ -3,7 +3,7 @@ import { encode } from 'base-64'
 import { useState } from 'react'
 import {
     removeCodeBlockWrapper,
-    removeImageWrapper
+    removeImageWrapper,
 } from '../../../../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../../../../converterFunctions/helpers/removeTipTapArtifacts'
 import { isGithubRepoUrl } from '../../../../scripts/helpers/InputLinkHelpers/linkValidity'
@@ -45,11 +45,24 @@ export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
             link,
             localStorage['ghToken'],
             prepareFileContent(editor.view.dom.cloneNode(true) as HTMLElement)
-        ).then((PRLink) => {
-            setShowLoading(false)
-            setShowFinished(true)
-            setPRLink(PRLink)
-        })
+        )
+            .then((PRLink) => {
+                setShowLoading(false)
+                setShowFinished(true)
+                setPRLink(PRLink)
+            })
+            .catch((e) => {
+                setShowError(true)
+                setShowLoading(false)
+                console.log(e.status)
+                switch (e.status) {
+                    case 404:
+                        setErrorMessage('Error 404: Repository does not exist')
+                        break
+                    default:
+                        setErrorMessage('ERROR')
+                }
+            })
     }
 
     return (

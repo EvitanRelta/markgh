@@ -14,28 +14,33 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
     const [owner, repo] = getUserRepoPairFromUrl(url)
 
     //gets default branch of repo
+    //checks if repo exists
     const getDefaultBranch = async () => {
-        const res = await octokit.rest.repos.get({
-            owner,
-            repo,
-        })
-        return res.data.default_branch
+        try {
+            const res = await octokit.rest.repos.get({
+                owner,
+                repo,
+            })
+            return res.data.default_branch
+        } catch (e) {
+            throw e
+        }
     }
-
-    const defaultBranch = await getDefaultBranch()
 
     //gets latest commit hash of default branch
     const getDefaultBranchCommitHash = async () => {
-        const branch = defaultBranch
-        const res = await octokit.rest.repos.getBranch({
-            owner,
-            repo,
-            branch,
-        })
-        return res.data.commit.sha
+        try {
+            const branch = await getDefaultBranch()
+            const res = await octokit.rest.repos.getBranch({
+                owner,
+                repo,
+                branch,
+            })
+            return res.data.commit.sha
+        } catch (e) {
+            throw e
+        }
     }
-
-    const defaultBranchCommitHash = await getDefaultBranchCommitHash()
 
     //create branch named 'markgh-readme'
     const createBranch = async () => {
@@ -43,7 +48,7 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
         const ref = `refs/heads/markgh-readme`
 
         //new branch will be created from this commit
-        const sha = defaultBranchCommitHash
+        const sha = await getDefaultBranchCommitHash()
 
         const res = await octokit.rest.git.createRef({
             owner,
@@ -58,7 +63,7 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
     const createPullRequest = async () => {
         console.log('create pull request')
         const head = 'markgh-readme'
-        const base = defaultBranch
+        const base = await getDefaultBranch()
         const title = 'README created with MarkGH'
         const body = 'readme-id: ' + PRID
         const res = await octokit.rest.pulls.create({
@@ -73,26 +78,28 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
     }
 
     const getTargetFileHash = async () => {
-        const targetFile = 'README.md'
-        const path = ''
-        const res = await octokit.rest.repos.getContent({
-            owner,
-            repo,
-            path,
-        })
+        try {
+            const targetFile = 'README.md'
+            const path = ''
+            const res = await octokit.rest.repos.getContent({
+                owner,
+                repo,
+                path,
+            })
 
-        const fileArray = res.data as Array<any>
-        for (let i = 0; i < fileArray.length; i++) {
-            let file = fileArray[i]
-            if (file.name === targetFile) {
-                return file.sha
+            const fileArray = res.data as Array<any>
+            for (let i = 0; i < fileArray.length; i++) {
+                let file = fileArray[i]
+                if (file.name === targetFile) {
+                    return file.sha
+                }
             }
+
+            return 'ERROR'
+        } catch (e) {
+            throw e
         }
-
-        return 'ERROR'
     }
-
-    const targetFileHash = await getTargetFileHash()
 
     const updateReadMeToBranch = async () => {
         console.log('push readme')
@@ -107,7 +114,7 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
             message,
             content,
             branch: 'markgh-readme',
-            sha: targetFileHash,
+            sha: await getTargetFileHash(),
         })
 
         return res
@@ -140,7 +147,6 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
             return getPRLink(url)
         })
         .catch((e) => {
-            console.log(e)
-            return 'ERROR'
+            throw e
         })
 }
