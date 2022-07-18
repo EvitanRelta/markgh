@@ -7,13 +7,7 @@ interface PullRequest {
     number: number
 }
 
-export const updateGitHubReadme = async (
-    url: string,
-    token: string,
-    base64Content: string,
-    setShowLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    setShowFinished: React.Dispatch<React.SetStateAction<boolean>>
-) => {
+export const updateGitHubReadme = async (url: string, token: string, base64Content: string) => {
     const octokit = new Octokit({ auth: token })
     const PRID = Math.floor(Math.random() * (10000 + 1))
 
@@ -143,12 +137,9 @@ export const updateGitHubReadme = async (
         .then((res) => updateReadMeToBranch())
         .then((res) => createPullRequest())
         .then((res) => {
-            setShowLoading(false)
-            setShowFinished(true)
             return getPRLink(url)
         })
         .catch((e) => {
-            setShowLoading(false)
             console.log(e)
             return 'ERROR'
         })

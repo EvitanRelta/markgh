@@ -3,9 +3,10 @@ import { encode } from 'base-64'
 import { useState } from 'react'
 import {
     removeCodeBlockWrapper,
-    removeImageWrapper,
+    removeImageWrapper
 } from '../../../../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../../../../converterFunctions/helpers/removeTipTapArtifacts'
+import { isGithubRepoUrl } from '../../../../scripts/helpers/InputLinkHelpers/linkValidity'
 import { updateGitHubReadme } from '../../../../scripts/helpers/updateGitHubReadme'
 import { useAppSelector } from '../../../../store/hooks'
 
@@ -33,14 +34,22 @@ export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
     const handlePushButtonClick = async () => {
         setShowFinished(false)
         setShowLoading(true)
-        const PRLink = await updateGitHubReadme(
+
+        if (!isGithubRepoUrl(link)) {
+            setShowError(true)
+            setErrorMessage('Invalid Repository URL')
+            setShowLoading(false)
+            return
+        }
+        await updateGitHubReadme(
             link,
             localStorage['ghToken'],
-            prepareFileContent(editor.view.dom.cloneNode(true) as HTMLElement),
-            setShowLoading,
-            setShowFinished
-        )
-        setPRLink(PRLink)
+            prepareFileContent(editor.view.dom.cloneNode(true) as HTMLElement)
+        ).then((PRLink) => {
+            setShowLoading(false)
+            setShowFinished(true)
+            setPRLink(PRLink)
+        })
     }
 
     return (
