@@ -17,12 +17,12 @@ const StyledDialogTitle = styled('h1')({
 
 const StyledTopPortionContainer = styled(Box)({
     marginTop: -1,
-    minHeight: 130,
+    minHeight: 170,
 })
 
 const StyledCompletedResultContainer = styled(Box)({
-    marginLeft: 1.5,
-    marginTop: 2,
+    marginLeft: 10,
+    marginTop: 15,
 })
 
 const StyledInstructionsContainer = styled(Box)({

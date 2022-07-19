@@ -23,6 +23,7 @@ const StyledMidSectionContainer = styled(Box)({
     justifyContent: 'space-between',
     display: 'flex',
     marginTop: -2,
+    maxWidth: '95%',
 })
 
 const StyledInputField = styled(TextField)({
@@ -30,8 +31,8 @@ const StyledInputField = styled(TextField)({
 })
 
 const StyledLoadingCircleContainer = styled(Box)({
-    marginTop: 0.8,
-    marginRight: 6,
+    marginTop: 5,
+    marginRight: 25,
 })
 
 const StyledPushButton = styled(Button)({
