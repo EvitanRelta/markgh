@@ -7,7 +7,7 @@ import {
 } from '../../../../converterFunctions/helpers/preProcessHtml'
 import { removeTipTapArtifacts } from '../../../../converterFunctions/helpers/removeTipTapArtifacts'
 import { isGithubRepoUrl } from '../../../../scripts/helpers/InputLinkHelpers/linkValidity'
-import { RetrievePRError, updateGitHubReadme } from '../../../../scripts/helpers/updateGitHubReadme'
+import { updateGitHubReadme } from '../../../../scripts/helpers/updateGitHubReadme'
 import { useAppSelector } from '../../../../store/hooks'
 
 interface Props {
@@ -56,19 +56,7 @@ export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
             .catch((e) => {
                 setShowError(true)
                 setShowLoading(false)
-
-                //http request errors
-                switch (e.status) {
-                    case 404:
-                        setErrorMessage('Error 404: Repository does not exist')
-                        break
-                    default:
-                        setErrorMessage('ERROR')
-                }
-
-                if (e instanceof RetrievePRError) {
-                    setErrorMessage(e.message)
-                }
+                setErrorMessage(e.message)
             })
     }
 
