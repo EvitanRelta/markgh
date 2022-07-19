@@ -9,6 +9,12 @@ interface PullRequest {
     state: string
 }
 
+export class RetrievePRError extends Error {
+    constructor() {
+        super('Unable to retrieve PR (GitHub may be down)')
+    }
+}
+
 export const updateGitHubReadme = async (url: string, token: string, base64Content: string) => {
     const octokit = new Octokit({ auth: token })
 
@@ -170,7 +176,7 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
                 return `https://github.com/${owner}/${repo}/pull/${issueId}`
             }
         }
-        return 'ERROR1'
+        throw new RetrievePRError()
     }
 
     //returns link to PR for user to click and view
