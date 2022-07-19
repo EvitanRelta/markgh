@@ -1,4 +1,4 @@
-import { Box, Dialog, DialogContent } from '@mui/material'
+import { Box, Dialog, DialogContent, styled } from '@mui/material'
 import { useState } from 'react'
 import { useAppSelector } from '../../../../store/hooks'
 import { PushGHDialogLogin } from './PushGHDialogLogin'
@@ -8,6 +8,33 @@ interface Props {
     setShowDialog: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+const StyledDialogContent = styled(DialogContent)({
+    alignItems: 'center',
+})
+const StyledDialogTitle = styled('h1')({
+    marginLeft: 10,
+})
+
+const StyledTopPortionContainer = styled(Box)({
+    marginTop: -1,
+    minHeight: 130,
+})
+
+const StyledCompletedResultContainer = styled(Box)({
+    marginLeft: 1.5,
+    marginTop: 2,
+})
+
+const StyledInstructionsContainer = styled(Box)({
+    marginLeft: '25%',
+    fontSize: 12,
+    marginTop: -1.5,
+})
+
+const StyledInstructionsTitle = styled('h3')({
+    marginLeft: '20%',
+})
+
 export const PushGHDialog = ({ setShowDialog }: Props) => {
     const loggedIn = useAppSelector((state) => state.auth).loggedIn
     const [showFinished, setShowFinished] = useState<boolean>(false)
@@ -15,9 +42,9 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
 
     return (
         <Dialog open={true} onClose={() => setShowDialog(false)} fullWidth>
-            <DialogContent sx={{ alignItems: 'center' }}>
-                <h1 style={{ marginLeft: 10 }}>Push to GitHub</h1>
-                <Box sx={{ marginTop: -1, minHeight: 130 }}>
+            <StyledDialogContent>
+                <StyledDialogTitle>Push to GitHub</StyledDialogTitle>
+                <StyledTopPortionContainer>
                     {loggedIn ? (
                         <PushRepoLinkInput
                             setShowFinished={setShowFinished}
@@ -28,7 +55,7 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
                     )}
 
                     {showFinished && (
-                        <Box sx={{ marginLeft: 1.5, marginTop: 2 }}>
+                        <StyledCompletedResultContainer>
                             Pull Request created!
                             <Box>
                                 View it{' '}
@@ -36,19 +63,19 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
                                     here
                                 </a>
                             </Box>
-                        </Box>
+                        </StyledCompletedResultContainer>
                     )}
-                </Box>
+                </StyledTopPortionContainer>
 
                 {/* <Button>Delete Branch</Button> */}
 
-                <Box sx={{ marginLeft: '25%', fontSize: 12, marginTop: -1.5 }}>
-                    <h3 style={{ marginLeft: '20%' }}>How it's done</h3>
+                <StyledInstructionsContainer>
+                    <StyledInstructionsTitle>How it's done</StyledInstructionsTitle>
                     <p>1. A branch is created on your repository</p>
                     <p>2. A pull request of your exported README is created</p>
                     <p>3. You can review the pull request and merge it if you're satisfied</p>
-                </Box>
-            </DialogContent>
+                </StyledInstructionsContainer>
+            </StyledDialogContent>
         </Dialog>
     )
 }
