@@ -11,7 +11,6 @@ interface PullRequest {
 
 export const updateGitHubReadme = async (url: string, token: string, base64Content: string) => {
     const octokit = new Octokit({ auth: token })
-    const PRID = Math.floor(Math.random() * (10000 + 1))
 
     //branch to get readme from, will be set by running of 'getBranchCommitHash'
     var branch = ''
@@ -93,7 +92,7 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
             const head = 'markgh-readme'
             const base = await getDefaultBranch()
             const title = 'README created with MarkGH'
-            const body = 'readme-id: ' + PRID
+            const body = "Review the changes and merge it when you're ready 😊"
             const res = await octokit.rest.pulls.create({
                 owner,
                 repo,
