@@ -2,14 +2,19 @@ import { Octokit } from '@octokit/rest'
 import { getUserRepoPairFromUrl } from './InputLinkHelpers/getUserRepoPairFromUrl'
 
 interface PullRequest {
-    title: string
-    body: string
+    head: {
+        ref: string
+    }
     number: number
+    state: string
 }
 
 export const updateGitHubReadme = async (url: string, token: string, base64Content: string) => {
     const octokit = new Octokit({ auth: token })
     const PRID = Math.floor(Math.random() * (10000 + 1))
+
+    //branch to get readme from, will be set by running of 'getBranchCommitHash'
+    var branch = ''
 
     const [owner, repo] = getUserRepoPairFromUrl(url)
 
@@ -27,82 +32,111 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
         }
     }
 
-    //gets latest commit hash of default branch
-    const getDefaultBranchCommitHash = async () => {
+    //gets latest commit hash of markgh-branch (if already created) or default branch
+    const getBranchCommitHash = async () => {
         try {
-            const branch = await getDefaultBranch()
+            branch = 'markgh-readme'
             const res = await octokit.rest.repos.getBranch({
                 owner,
                 repo,
                 branch,
             })
             return res.data.commit.sha
-        } catch (e) {
-            throw e
+        } catch (e: any) {
+            switch (e.status) {
+                //markgh-readme branch has not been created
+                case 404:
+                    branch = await getDefaultBranch()
+                    const res = await octokit.rest.repos.getBranch({
+                        owner,
+                        repo,
+                        branch,
+                    })
+                    return res.data.commit.sha
+                default:
+                    throw e
+            }
         }
     }
 
     //create branch named 'markgh-readme'
     const createBranch = async () => {
-        console.log('create branch')
         const ref = `refs/heads/markgh-readme`
 
-        //new branch will be created from this commit
-        const sha = await getDefaultBranchCommitHash()
+        //new branch will be created from this commit (if markgh-readme branch not yet created)
+        try {
+            const sha = await getBranchCommitHash()
 
-        const res = await octokit.rest.git.createRef({
-            owner,
-            repo,
-            ref,
-            sha,
-        })
-        return res
+            await octokit.rest.git.createRef({
+                owner,
+                repo,
+                ref,
+                sha,
+            })
+        } catch (e: any) {
+            switch (e.status) {
+                //branch already exists,
+                // change head branch(where the target readme file to update is located) to markgh-readme
+                case 422:
+                    branch = 'markgh-readme'
+                    break
+                default:
+                    throw e
+            }
+        }
     }
 
     //create pull request with branch 'markgh-readme' onto user's default branch
     const createPullRequest = async () => {
-        console.log('create pull request')
-        const head = 'markgh-readme'
-        const base = await getDefaultBranch()
-        const title = 'README created with MarkGH'
-        const body = 'readme-id: ' + PRID
-        const res = await octokit.rest.pulls.create({
-            owner,
-            repo,
-            head,
-            base,
-            title,
-            body,
-        })
-        return res
+        //Currently no open PRs with 'markgh-readme' branch, create one
+        try {
+            const head = 'markgh-readme'
+            const base = await getDefaultBranch()
+            const title = 'README created with MarkGH'
+            const body = 'readme-id: ' + PRID
+            const res = await octokit.rest.pulls.create({
+                owner,
+                repo,
+                head,
+                base,
+                title,
+                body,
+            })
+        } catch (e: any) {
+            switch (e.status) {
+                //An open PR from 'markgh-readme' still currently exists, do nothing
+                //GitHub automatically updates new commits of the same branch to the PR
+                case 422:
+                    break
+                default:
+                    throw e
+            }
+        }
     }
 
+    //gets the hash of the file to update
+    //gets from 'master' branch if it is the first push
+    //gets from 'markgh-readme' branch if it already exists
     const getTargetFileHash = async () => {
         try {
             const targetFile = 'README.md'
             const path = ''
-            const res = await octokit.rest.repos.getContent({
+            const ref = branch //determind by whether a 'markgh-readme' branch was already created prior to this push
+            const res = await octokit.rest.repos.getReadme({
                 owner,
                 repo,
                 path,
+                ref,
             })
 
-            const fileArray = res.data as Array<any>
-            for (let i = 0; i < fileArray.length; i++) {
-                let file = fileArray[i]
-                if (file.name === targetFile) {
-                    return file.sha
-                }
-            }
-
-            return 'ERROR'
+            return res.data.sha
         } catch (e) {
             throw e
         }
     }
 
+    //push new readme to (newly) created 'markgh-readme' branch
     const updateReadMeToBranch = async () => {
-        console.log('push readme')
         const path = 'README.md'
         const message = 'Update README by MarkGH'
         const content = base64Content
@@ -122,16 +156,17 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
 
     //gets url for the created PR, for user to click and view
     const getPRLink = async (url: string) => {
-        console.log('get pr link')
         const res = await octokit.rest.pulls.list({
             owner,
             repo,
         })
+
         const PRArray = res.data as PullRequest[]
 
         for (let i = 0; i < PRArray.length; i++) {
             const PR: PullRequest = PRArray[i]
-            if (PR.title === 'README created with MarkGH' && PR.body === 'readme-id: ' + PRID) {
+            //Find an open PR from 'markgh-readme' branch
+            if (PR.head.ref === 'markgh-readme' && PR.state === 'open') {
                 const issueId = PR.number
                 return `https://github.com/${owner}/${repo}/pull/${issueId}`
             }

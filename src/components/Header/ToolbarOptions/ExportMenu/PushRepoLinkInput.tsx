@@ -47,6 +47,8 @@ export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
             prepareFileContent(editor.view.dom.cloneNode(true) as HTMLElement)
         )
             .then((PRLink) => {
+                setShowError(false)
+                setErrorMessage('')
                 setShowLoading(false)
                 setShowFinished(true)
                 setPRLink(PRLink)
@@ -54,7 +56,7 @@ export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
             .catch((e) => {
                 setShowError(true)
                 setShowLoading(false)
-                console.log(e.status)
+                console.log(e)
                 switch (e.status) {
                     case 404:
                         setErrorMessage('Error 404: Repository does not exist')
