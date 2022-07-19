@@ -26,19 +26,19 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
                     ) : (
                         <PushGHDialogLogin />
                     )}
-                </Box>
 
-                {showFinished && (
-                    <>
-                        Pull Request created!
-                        <Box>
-                            View it{' '}
-                            <a href={PRLink} target='_blank'>
-                                here
-                            </a>
+                    {showFinished && (
+                        <Box sx={{ marginLeft: 1.5, marginTop: 2 }}>
+                            Pull Request created!
+                            <Box>
+                                View it{' '}
+                                <a href={PRLink} target='_blank'>
+                                    here
+                                </a>
+                            </Box>
                         </Box>
-                    </>
-                )}
+                    )}
+                </Box>
 
                 {/* <Button>Delete Branch</Button> */}
 
