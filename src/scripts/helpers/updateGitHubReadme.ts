@@ -187,9 +187,9 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
 
     //returns link to PR for user to click and view
     return await createBranch()
-        .then((res) => updateReadMeToBranch())
-        .then((res) => createPullRequest())
-        .then((res) => {
+        .then(() => updateReadMeToBranch())
+        .then(() => createPullRequest())
+        .then(() => {
             return getPRLink(url)
         })
         .catch((e) => {
