@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, TextField } from '@mui/material'
+import { Box, Button, CircularProgress, styled, TextField } from '@mui/material'
 import { encode } from 'base-64'
 import { useState } from 'react'
 import {
@@ -14,6 +14,30 @@ interface Props {
     setShowFinished: React.Dispatch<React.SetStateAction<boolean>>
     setPRLink: React.Dispatch<React.SetStateAction<string>>
 }
+
+const StyledTitle = styled('h5')({
+    marginLeft: 10,
+})
+
+const StyledMidSectionContainer = styled(Box)({
+    justifyContent: 'space-between',
+    display: 'flex',
+    marginTop: -2,
+})
+
+const StyledInputField = styled(TextField)({
+    width: 450,
+})
+
+const StyledLoadingCircleContainer = styled(Box)({
+    marginTop: 0.8,
+    marginRight: 6,
+})
+
+const StyledPushButton = styled(Button)({
+    maxHeight: 40,
+    marginRight: 2,
+})
 
 export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
     const editor = useAppSelector((state) => state.data.editor)
@@ -62,10 +86,9 @@ export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
 
     return (
         <>
-            <h5 style={{ marginLeft: 10 }}>Insert Respository Link</h5>
-            <Box sx={{ justifyContent: 'space-between', display: 'flex', marginTop: -2 }}>
-                <TextField
-                    sx={{ width: 450 }}
+            <StyledTitle>Insert Respository Link</StyledTitle>
+            <StyledMidSectionContainer>
+                <StyledInputField
                     error={showError}
                     type='text'
                     size='small'
@@ -88,18 +111,15 @@ export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
                 />
 
                 {showLoading ? (
-                    <Box sx={{ marginTop: 0.8, marginRight: 6 }}>
+                    <StyledLoadingCircleContainer>
                         <CircularProgress size={25} />
-                    </Box>
+                    </StyledLoadingCircleContainer>
                 ) : (
-                    <Button
-                        sx={{ maxHeight: 40, marginRight: 2 }}
-                        onClick={() => handlePushButtonClick()}
-                    >
+                    <StyledPushButton onClick={() => handlePushButtonClick()}>
                         Push
-                    </Button>
+                    </StyledPushButton>
                 )}
-            </Box>
+            </StyledMidSectionContainer>
         </>
     )
 }
