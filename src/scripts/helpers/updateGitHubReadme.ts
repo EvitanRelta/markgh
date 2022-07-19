@@ -15,6 +15,12 @@ export class RetrievePRError extends Error {
     }
 }
 
+export class NonExistentRepoError extends Error {
+    constructor() {
+        super('Repository does not exist, please check the link')
+    }
+}
+
 export const updateGitHubReadme = async (url: string, token: string, base64Content: string) => {
     const octokit = new Octokit({ auth: token })
 
@@ -33,7 +39,7 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
             })
             return res.data.default_branch
         } catch (e) {
-            throw e
+            throw new NonExistentRepoError()
         }
     }
 
