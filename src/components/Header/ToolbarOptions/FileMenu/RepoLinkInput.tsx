@@ -2,7 +2,7 @@ import { Box, Button, CircularProgress, styled, TextField } from '@mui/material'
 import staticAxios from 'axios'
 import { useState } from 'react'
 import { GithubRepoInfo } from '../../../../converterFunctions/markdownToHtml'
-import { getUserRepoPairFromUrl } from '../../../../scripts/helpers/getUserRepoPairFromUrl'
+import { getUserRepoPairFromUrl } from '../../../../scripts/helpers/InputLinkHelpers/getUserRepoPairFromUrl'
 import { importMarkdown } from '../../../../store/dataSlice'
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
 
