@@ -55,7 +55,7 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
             return res.data.commit.sha
         } catch (e: any) {
             switch (e.status) {
-                //markgh-readme branch has not been created
+                //markgh-readme branch has not been created, get default branch's (master) hash
                 case 404:
                     branch = await getDefaultBranch()
                     const res = await octokit.rest.repos.getBranch({
