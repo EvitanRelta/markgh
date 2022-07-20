@@ -18,7 +18,12 @@ import {
 import { useEffect, useState } from 'react'
 import { Snapshot } from '../../../../store/helpers/initDatabase'
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
-import { deleteSnapshot, loadSnapshot, saveSnapshot } from '../../../../store/snapshotThunks'
+import {
+    clearAllSnapshots,
+    deleteSnapshot,
+    loadSnapshot,
+    saveSnapshot,
+} from '../../../../store/snapshotThunks'
 
 interface Props {
     anchorEl: (EventTarget & Element) | null
@@ -163,6 +168,7 @@ export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
                         paddingTop: 0.3,
                         paddingBottom: 0.3,
                     }}
+                    onClick={() => dispatch(clearAllSnapshots())}
                 >
                     Clear all
                 </Button>
