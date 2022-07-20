@@ -29,7 +29,7 @@ interface Props {
 const SnapshotMenuContainer = styled(Menu)({
     position: 'absolute',
     top: -8,
-    left: -170,
+    left: -235,
 })
 
 const StyledTitleText = styled(Typography)({

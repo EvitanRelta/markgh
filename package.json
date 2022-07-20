@@ -87,6 +87,7 @@
     ]
   },
   "devDependencies": {
+    "@types/base-64": "^1.0.0",
     "@types/quill": "^2.0.9",
     "@types/react-helmet": "^6.1.5",
     "@types/readline-sync": "^1.4.4",
