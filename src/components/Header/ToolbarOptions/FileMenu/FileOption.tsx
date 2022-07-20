@@ -1,18 +1,13 @@
 import { Box, Button, Menu, styled, Tooltip } from '@mui/material'
 import { useState } from 'react'
-import { ExportFile } from './ExportFile'
 import { ImportGHRepo } from './ImportGHRepo'
 import { OpenFile } from './OpenFile'
-
-interface Props {
-    onDownload: () => void
-}
 
 const StyledFileOptionContainer = styled(Box)({
     display: 'inline-block',
 })
 
-export const FileOption = ({ onDownload }: Props) => {
+export const FileOption = () => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
 
     const openMenu = (e: React.MouseEvent) => setAnchor(e.currentTarget)
@@ -28,7 +23,6 @@ export const FileOption = ({ onDownload }: Props) => {
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 <OpenFile />
                 <ImportGHRepo menuOpen={Boolean(anchor)} setAnchor={setAnchor} />
-                <ExportFile onDownload={onDownload} />
             </Menu>
         </StyledFileOptionContainer>
     )
