@@ -62,7 +62,7 @@ export const OpenFile = () => {
                 <Box style={{ display: 'inline' }}>
                     <StyledFolderOpenIcon />
                 </Box>
-                <StyledText>Open...</StyledText>
+                <StyledText>Open from device...</StyledText>
             </StyledLabel>
         </StyledMenuItem>
     )
