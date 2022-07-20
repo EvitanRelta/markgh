@@ -1,14 +1,10 @@
 import { Box, Button, CircularProgress, styled, TextField } from '@mui/material'
-import { encode } from 'base-64'
 import { useState } from 'react'
-import {
-    removeCodeBlockWrapper,
-    removeImageWrapper,
-} from '../../../../converterFunctions/helpers/preProcessHtml'
-import { removeTipTapArtifacts } from '../../../../converterFunctions/helpers/removeTipTapArtifacts'
 import { isGithubRepoUrl } from '../../../../scripts/helpers/InputLinkHelpers/linkValidity'
 import { updateGitHubReadme } from '../../../../scripts/helpers/updateGitHubReadme'
 import { useAppSelector } from '../../../../store/hooks'
+
+window.Buffer = Buffer
 
 interface Props {
     setShowFinished: React.Dispatch<React.SetStateAction<boolean>>
@@ -42,19 +38,12 @@ const StyledPushButton = styled(Button)({
 
 export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
     const editor = useAppSelector((state) => state.data.editor)
+    const content = editor.view.dom.cloneNode(true) as HTMLElement
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
 
     const [showLoading, setShowLoading] = useState<boolean>(false)
-
-    //github api stores file contents in base64
-    const prepareFileContent = (content: HTMLElement) => {
-        removeCodeBlockWrapper(content)
-        removeImageWrapper(content)
-        removeTipTapArtifacts(content)
-        return encode(content.innerHTML) //encodes in base64
-    }
 
     const handlePushButtonClick = async () => {
         setShowFinished(false)
@@ -66,11 +55,7 @@ export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
             setShowLoading(false)
             return
         }
-        await updateGitHubReadme(
-            link,
-            localStorage['ghToken'],
-            prepareFileContent(editor.view.dom.cloneNode(true) as HTMLElement)
-        )
+        await updateGitHubReadme(link, localStorage['ghToken'], content)
             .then((PRLink) => {
                 setShowError(false)
                 setErrorMessage('')

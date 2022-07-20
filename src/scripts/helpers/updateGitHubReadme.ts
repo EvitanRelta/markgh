@@ -1,5 +1,13 @@
 import { Octokit } from '@octokit/rest'
+import { Buffer } from 'buffer'
+import {
+    removeCodeBlockWrapper,
+    removeImageWrapper,
+} from '../../converterFunctions/helpers/preProcessHtml'
+import { removeTipTapArtifacts } from '../../converterFunctions/helpers/removeTipTapArtifacts'
 import { getUserRepoPairFromUrl } from './InputLinkHelpers/getUserRepoPairFromUrl'
+
+window.Buffer = Buffer
 
 interface PullRequest {
     head: {
@@ -21,11 +29,27 @@ export class NonExistentRepoError extends Error {
     }
 }
 
-export const updateGitHubReadme = async (url: string, token: string, base64Content: string) => {
+//github api stores file contents in base64
+const prepareFileContent = (content: HTMLElement) => {
+    removeCodeBlockWrapper(content)
+    removeImageWrapper(content)
+    removeTipTapArtifacts(content)
+    var buffer = Buffer.from(content.innerHTML)
+    return buffer.toString('base64') //encodes in base64
+}
+
+export const updateGitHubReadme = async (url: string, token: string, content: HTMLElement) => {
     const octokit = new Octokit({ auth: token })
 
     //branch to get readme from, will be set by running of 'getBranchCommitHash'
     var branch = ''
+
+    const base64Content = prepareFileContent(content)
+
+    //body message of PR
+    const body =
+        "<p>Review the changes below and merge it when you're ready 😊</p><h3>Preview:</h3><hr contenteditable='false'><p></p>" +
+        content.innerHTML
 
     const [owner, repo] = getUserRepoPairFromUrl(url)
 
@@ -97,14 +121,31 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
         }
     }
 
+    const getPRIssueNumber = async () => {
+        const res = await octokit.rest.pulls.list({
+            owner,
+            repo,
+        })
+
+        const PRArray = res.data as PullRequest[]
+
+        for (let i = 0; i < PRArray.length; i++) {
+            const PR: PullRequest = PRArray[i]
+            //Find an open PR from 'markgh-readme' branch
+            if (PR.head.ref === 'markgh-readme' && PR.state === 'open') {
+                return PR.number
+            }
+        }
+        throw new RetrievePRError()
+    }
+
     //create pull request with branch 'markgh-readme' onto user's default branch
-    const createPullRequest = async () => {
+    const createOrUpdatePullRequest = async () => {
         //Currently no open PRs with 'markgh-readme' branch, create one
         try {
             const head = 'markgh-readme'
             const base = await getDefaultBranch()
             const title = 'README created with MarkGH'
-            const body = "Review the changes and merge it when you're ready 😊"
             const res = await octokit.rest.pulls.create({
                 owner,
                 repo,
@@ -118,6 +159,13 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
                 //An open PR from 'markgh-readme' still currently exists, do nothing
                 //GitHub automatically updates new commits of the same branch to the PR
                 case 422:
+                    const pull_number = await getPRIssueNumber()
+                    await octokit.rest.pulls.update({
+                        owner,
+                        repo,
+                        pull_number,
+                        body,
+                    })
                     break
                 default:
                     throw e
@@ -165,32 +213,16 @@ export const updateGitHubReadme = async (url: string, token: string, base64Conte
         return res
     }
 
-    //gets url for the created PR, for user to click and view
-    const getPRLink = async (url: string) => {
-        const res = await octokit.rest.pulls.list({
-            owner,
-            repo,
-        })
-
-        const PRArray = res.data as PullRequest[]
-
-        for (let i = 0; i < PRArray.length; i++) {
-            const PR: PullRequest = PRArray[i]
-            //Find an open PR from 'markgh-readme' branch
-            if (PR.head.ref === 'markgh-readme' && PR.state === 'open') {
-                const issueId = PR.number
-                return `https://github.com/${owner}/${repo}/pull/${issueId}`
-            }
-        }
-        throw new RetrievePRError()
+    const generatePRLink = (issueNumber: number) => {
+        return `https://github.com/${owner}/${repo}/pull/${issueNumber}`
     }
 
     //returns link to PR for user to click and view
     return await createBranch()
         .then(() => updateReadMeToBranch())
-        .then(() => createPullRequest())
-        .then(() => {
-            return getPRLink(url)
+        .then(() => createOrUpdatePullRequest())
+        .then(async () => {
+            return generatePRLink(await getPRIssueNumber())
         })
         .catch((e) => {
             throw e
