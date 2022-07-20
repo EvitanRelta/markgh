@@ -58,7 +58,7 @@ export const ImportGHRepo = ({ setAnchor, menuOpen }: Props) => {
             onKeyDown={(e: React.KeyboardEvent) => e.stopPropagation()}
         >
             <StyledGitHubIcon sx={{ marginLeft: 0.5 }} />
-            <StyledText>Import from GitHub...</StyledText>
+            <StyledText>Import from GitHub</StyledText>
             <StyledArrowForwardIosIcon
                 sx={{ fontSize: 'small', marginLeft: 3 }}
                 onMouseEnter={openPopover}
