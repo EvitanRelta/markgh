@@ -44,6 +44,21 @@ const StyledTitleText = styled(Typography)({
     marginTop: 17,
 })
 
+const StyledTitleContainer = styled(Box)({
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    display: 'flex',
+    borderBottom: '2px solid gray',
+})
+
+const StyledClearAllButton = styled(Button)({
+    fontSize: 11.5,
+    paddingTop: 0.3,
+    paddingBottom: 0.3,
+    marginTop: 20,
+    marginRight: 6,
+})
+
 const StyledSnapshotList = styled(List)({
     minWidth: 400,
 })
@@ -154,29 +169,15 @@ export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
                 onClose={onClose}
                 anchorEl={document.getElementById('last-edited')}
             >
-                <Box
-                    sx={{
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        display: 'flex',
-                        borderBottom: '2px solid gray',
-                    }}
-                >
+                <StyledTitleContainer>
                     <StyledTitleText variant='h4'>Snapshots</StyledTitleText>
-                    <Button
+                    <StyledClearAllButton
                         variant='outlined'
-                        sx={{
-                            fontSize: 11.5,
-                            paddingTop: 0.3,
-                            paddingBottom: 0.3,
-                            marginTop: 2,
-                            marginRight: 1,
-                        }}
                         onClick={() => dispatch(clearAllSnapshots())}
                     >
                         Clear all
-                    </Button>
-                </Box>
+                    </StyledClearAllButton>
+                </StyledTitleContainer>
                 <StyledSnapshotList sx={{ minHeight: windowDimensions.height }} dense>
                     {snapshots.map(snapshotArrayMapper)}
                 </StyledSnapshotList>
