@@ -1,6 +1,6 @@
 import { Box, Button, Menu, styled, Tooltip } from '@mui/material'
 import { useState } from 'react'
-import { ExportFile } from '../FileMenu/ExportFile'
+import { DownloadMarkdown } from './DownloadMarkdown'
 import { PushGH } from './PushGH'
 
 const StyledExportOptionContainer = styled(Box)({
@@ -24,7 +24,7 @@ export const ExportOption = () => {
             </Tooltip>
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 <PushGH />
-                <ExportFile />
+                <DownloadMarkdown />
             </Menu>
         </StyledExportOptionContainer>
     )

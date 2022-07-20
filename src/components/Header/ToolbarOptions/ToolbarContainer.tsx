@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { ExportOption } from './ExportMenu/ExportOption'
-import { FileOption } from './FileMenu/FileOption'
+import { ImportOption } from './ImportMenu/ImportOption'
 import { SnapshotOption } from './Snapshots/SnapshotOption'
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 export const ToolbarContainer = ({ openVersions }: Props) => {
     return (
         <Box>
-            <FileOption />
+            <ImportOption />
             <ExportOption />
             <SnapshotOption openVersions={openVersions} />
         </Box>

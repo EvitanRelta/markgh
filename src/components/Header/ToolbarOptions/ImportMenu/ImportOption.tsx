@@ -7,7 +7,7 @@ const StyledFileOptionContainer = styled(Box)({
     display: 'inline-block',
 })
 
-export const FileOption = () => {
+export const ImportOption = () => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
 
     const openMenu = (e: React.MouseEvent) => setAnchor(e.currentTarget)

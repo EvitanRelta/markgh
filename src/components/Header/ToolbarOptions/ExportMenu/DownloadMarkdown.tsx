@@ -16,7 +16,7 @@ const StyledText = styled(Box)({
     display: 'inline',
 })
 
-export const ExportFile = () => {
+export const DownloadMarkdown = () => {
     const fileTitle = useAppSelector((state) => state.data.fileTitle)
     const markdownText = useAppSelector((state) => state.data.markdownText)
 
@@ -39,7 +39,7 @@ export const ExportFile = () => {
     return (
         <StyledMenuItem onClick={onDownload}>
             <StyledDownloadIcon />
-            <StyledText>Export Markdown</StyledText>
+            <StyledText>Download Markdown</StyledText>
         </StyledMenuItem>
     )
 }
