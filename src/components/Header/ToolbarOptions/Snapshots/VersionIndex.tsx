@@ -42,7 +42,6 @@ const StyledTitleText = styled(Typography)({
     marginLeft: 5,
     marginRight: 10,
     marginTop: 17,
-    borderBottom: '2px solid gray',
 })
 
 const StyledSnapshotList = styled(List)({
@@ -148,34 +147,40 @@ export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
     }
 
     return (
-        <Box>
+        <>
             {showDialog && discardChangesPrompt}
             <SnapshotMenuContainer
                 open={Boolean(anchorEl)}
                 onClose={onClose}
                 anchorEl={document.getElementById('last-edited')}
             >
-                <Box>
-                    <StyledTitleText variant='h4'>Snapshots</StyledTitleText>
-                </Box>
-                <Button
-                    variant='outlined'
+                <Box
                     sx={{
-                        position: 'relative',
-                        top: -35,
-                        left: 290,
-                        fontSize: 12,
-                        paddingTop: 0.3,
-                        paddingBottom: 0.3,
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        display: 'flex',
+                        borderBottom: '2px solid gray',
                     }}
-                    onClick={() => dispatch(clearAllSnapshots())}
                 >
-                    Clear all
-                </Button>
+                    <StyledTitleText variant='h4'>Snapshots</StyledTitleText>
+                    <Button
+                        variant='outlined'
+                        sx={{
+                            fontSize: 11.5,
+                            paddingTop: 0.3,
+                            paddingBottom: 0.3,
+                            marginTop: 2,
+                            marginRight: 1,
+                        }}
+                        onClick={() => dispatch(clearAllSnapshots())}
+                    >
+                        Clear all
+                    </Button>
+                </Box>
                 <StyledSnapshotList sx={{ minHeight: windowDimensions.height }} dense>
                     {snapshots.map(snapshotArrayMapper)}
                 </StyledSnapshotList>
             </SnapshotMenuContainer>
-        </Box>
+        </>
     )
 }
