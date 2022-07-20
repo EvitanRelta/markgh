@@ -150,7 +150,22 @@ export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
                 onClose={onClose}
                 anchorEl={document.getElementById('last-edited')}
             >
-                <StyledTitleText variant='h4'>Snapshots</StyledTitleText>
+                <Box>
+                    <StyledTitleText variant='h4'>Snapshots</StyledTitleText>
+                </Box>
+                <Button
+                    variant='outlined'
+                    sx={{
+                        position: 'relative',
+                        top: -35,
+                        left: 290,
+                        fontSize: 12,
+                        paddingTop: 0.3,
+                        paddingBottom: 0.3,
+                    }}
+                >
+                    Clear all
+                </Button>
                 <StyledSnapshotList sx={{ minHeight: windowDimensions.height }} dense>
                     {snapshots.map(snapshotArrayMapper)}
                 </StyledSnapshotList>
