@@ -113,8 +113,18 @@ export const updateGitHubReadme = async (url: string, token: string, content: HT
     const createBranch = async () => {
         const ref = `refs/heads/markgh-readme`
 
+        //list of branches
+        const listBranches = await octokit.rest.repos.listBranches({
+            owner,
+            repo,
+        })
+
+        //check if branch already exists
+        const branchExists =
+            listBranches.data.filter((branch) => branch.name === 'markgh-readme').length > 0
+
         //new branch will be created from this commit (if markgh-readme branch not yet created)
-        try {
+        if (!branchExists) {
             const sha = await getBranchCommitHash()
 
             await octokit.rest.git.createRef({
@@ -123,17 +133,11 @@ export const updateGitHubReadme = async (url: string, token: string, content: HT
                 ref,
                 sha,
             })
-        } catch (e: any) {
-            switch (e.status) {
-                //branch already exists,
-                // change head branch(where the target readme file to update is located) to markgh-readme
-                case 422:
-                    branch = 'markgh-readme'
-                    break
-                default:
-                    throw e
-            }
+            return
         }
+        //branch already exists,
+        // change head branch(where the target readme file to update is located) to markgh-readme
+        branch = 'markgh-readme'
     }
 
     const getPRIssueNumber = async () => {
@@ -151,13 +155,15 @@ export const updateGitHubReadme = async (url: string, token: string, content: HT
                 return PR.number
             }
         }
-        throw new RetrievePRError()
+        return -1
     }
 
     //create pull request with branch 'markgh-readme' onto user's default branch
     const createOrUpdatePullRequest = async () => {
+        const pull_number = await getPRIssueNumber()
+
         //Currently no open PRs with 'markgh-readme' branch, create one
-        try {
+        if (pull_number < 0) {
             const head = 'markgh-readme'
             const base = await getDefaultBranch()
             const title = 'README created with MarkGH'
@@ -169,25 +175,15 @@ export const updateGitHubReadme = async (url: string, token: string, content: HT
                 title,
                 body,
             })
-        } catch (e: any) {
-            switch (e.status) {
-                //An open PR from 'markgh-readme' still currently exists, do nothing
-                //GitHub automatically updates new commits of the same branch to the PR
-                case 422:
-                    const pull_number = await getPRIssueNumber()
-                    await octokit.rest.pulls.update({
-                        owner,
-                        repo,
-                        pull_number,
-                        body,
-                    })
-                    break
-                default:
-                    throw e
-            }
+            //else, a PR already exists, continue on that one
+            await octokit.rest.pulls.update({
+                owner,
+                repo,
+                pull_number,
+                body,
+            })
         }
     }
-
     //gets the hash of the file to update
     //gets from 'master' branch if it is the first push
     //gets from 'markgh-readme' branch if it already exists
