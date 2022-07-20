@@ -29,6 +29,12 @@ export class NonExistentRepoError extends Error {
     }
 }
 
+export class InvalidUserError extends Error {
+    constructor() {
+        super('The repository does not belong to you')
+    }
+}
+
 //github api stores file contents in base64
 const prepareFileContent = (content: HTMLElement) => {
     removeCodeBlockWrapper(content)
@@ -52,6 +58,15 @@ export const updateGitHubReadme = async (url: string, token: string, content: HT
         content.innerHTML
 
     const [owner, repo] = getUserRepoPairFromUrl(url)
+
+    const checkUserId = async () => {
+        const res = await octokit.rest.users.getAuthenticated()
+        const userId = res.data.login
+
+        if (userId !== owner) {
+            throw new InvalidUserError()
+        }
+    }
 
     //gets default branch of repo
     //checks if repo exists
@@ -217,8 +232,11 @@ export const updateGitHubReadme = async (url: string, token: string, content: HT
         return `https://github.com/${owner}/${repo}/pull/${issueNumber}`
     }
 
+    const res = await octokit.rest.users.getAuthenticated()
+
     //returns link to PR for user to click and view
-    return await createBranch()
+    return await checkUserId()
+        .then(() => createBranch())
         .then(() => updateReadMeToBranch())
         .then(() => createOrUpdatePullRequest())
         .then(async () => {
