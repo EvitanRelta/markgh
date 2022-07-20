@@ -15,7 +15,7 @@ export const ImportOption = () => {
 
     return (
         <StyledFileOptionContainer>
-            <Tooltip title='File Options' disableInteractive arrow>
+            <Tooltip title='Import Options' disableInteractive arrow>
                 <Button style={{ padding: 0 }} onClick={openMenu}>
                     Import
                 </Button>
