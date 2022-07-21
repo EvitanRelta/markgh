@@ -46,24 +46,60 @@ interface BasicFormatOption {
     name: string
     toolbarFunction: ToolbarFunction
     icon: FormatOptionIcon
+    hotkey?: string
 }
 type FormatOption = BasicFormatOption | FormatOptionComponent
 
 const editorOptions: FormatOption[] = [
-    { name: 'Bold', toolbarFunction: bold, icon: FormatBoldIcon },
-    { name: 'Italic', toolbarFunction: italic, icon: FormatItalicIcon },
-    { name: 'Underline', toolbarFunction: underline, icon: FormatUnderlinedIcon },
-    { name: 'Strikethrough', toolbarFunction: strikethrough, icon: FormatStrikethroughTwoToneIcon },
-    { name: 'Superscript', toolbarFunction: superscript, icon: SuperscriptIcon },
-    { name: 'Subscript', toolbarFunction: subscript, icon: SubscriptIcon },
-    { name: 'Code', toolbarFunction: code, icon: CodeIcon },
-    { name: 'Block Quote', toolbarFunction: blockQuote, icon: FormatQuoteIcon },
-    { name: 'Code Block', toolbarFunction: codeBlock, icon: DataObjectIcon },
-    { name: 'Link', toolbarFunction: link, icon: LinkIcon },
+    { name: 'Bold', toolbarFunction: bold, icon: FormatBoldIcon, hotkey: 'Ctrl + B' },
+    { name: 'Italic', toolbarFunction: italic, icon: FormatItalicIcon, hotkey: 'Ctrl + I' },
+    {
+        name: 'Underline',
+        toolbarFunction: underline,
+        icon: FormatUnderlinedIcon,
+        hotkey: 'Ctrl + U',
+    },
+    {
+        name: 'Strikethrough',
+        toolbarFunction: strikethrough,
+        icon: FormatStrikethroughTwoToneIcon,
+        hotkey: 'Ctrl + Shift + X',
+    },
+    {
+        name: 'Superscript',
+        toolbarFunction: superscript,
+        icon: SuperscriptIcon,
+        hotkey: 'Ctrl + .',
+    },
+    { name: 'Subscript', toolbarFunction: subscript, icon: SubscriptIcon, hotkey: 'Ctrl + ,' },
+    { name: 'Code', toolbarFunction: code, icon: CodeIcon, hotkey: 'Ctrl + E' },
+    {
+        name: 'Block Quote',
+        toolbarFunction: blockQuote,
+        icon: FormatQuoteIcon,
+        hotkey: 'Ctrl + Shift + B',
+    },
+    {
+        name: 'Code Block',
+        toolbarFunction: codeBlock,
+        icon: DataObjectIcon,
+        hotkey: 'Ctrl + Alt + C',
+    },
+    { name: 'Link', toolbarFunction: link, icon: LinkIcon, hotkey: '' },
     HeadingDropDown,
     { name: 'Add Url Image', toolbarFunction: addUrlImage, icon: ImageIcon },
-    { name: 'Ordered List', toolbarFunction: orderedList, icon: FormatListNumberedIcon },
-    { name: 'Unordered List', toolbarFunction: unorderedList, icon: FormatListBulletedIcon },
+    {
+        name: 'Ordered List',
+        toolbarFunction: orderedList,
+        icon: FormatListNumberedIcon,
+        hotkey: 'Ctrl + Shift + 7',
+    },
+    {
+        name: 'Unordered List',
+        toolbarFunction: unorderedList,
+        icon: FormatListBulletedIcon,
+        hotkey: 'Ctrl + Shift + 8',
+    },
     AlignDropDown,
     { name: 'Horizontal Line', toolbarFunction: horizontalRule, icon: HorizontalRuleIcon },
 ]
@@ -83,6 +119,10 @@ const StyledToolbarContainer = styled(Box)({
     borderBottom: '1px solid gray',
 })
 
+const StyledTooltipText = styled(Box)({
+    textAlign: 'center',
+})
+
 const EditorToolbar = ({ editor }: Props) => {
     const optionMapping = (option: FormatOption, index: number) => {
         if (typeof option !== 'object') {
@@ -90,9 +130,16 @@ const EditorToolbar = ({ editor }: Props) => {
             return <FormatOptionComponent key={index} editor={editor} />
         }
 
-        const { name, toolbarFunction, icon: FormatOptionIcon } = option
+        const { name, toolbarFunction, icon: FormatOptionIcon, hotkey } = option
+
+        const tooltipTitle = (
+            <StyledTooltipText>
+                {name} <br /> {hotkey !== undefined && hotkey}
+            </StyledTooltipText>
+        )
+
         return (
-            <Tooltip title={name} key={index} disableInteractive arrow>
+            <Tooltip title={tooltipTitle} key={index} disableInteractive arrow>
                 <StyledIconButton onClick={toolbarFunction(editor)}>
                     <FormatOptionIcon />
                 </StyledIconButton>
