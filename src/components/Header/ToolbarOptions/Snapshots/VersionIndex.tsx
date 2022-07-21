@@ -63,6 +63,24 @@ const StyledSnapshotList = styled(List)({
     minWidth: 400,
 })
 
+const StyledSnapshotIndexContainer = styled(Box)({
+    justifyContent: 'space-between',
+    display: 'flex',
+    alignItems: 'center',
+})
+
+const StyledSnapshotTextContainer = styled(Box)({
+    display: 'flex',
+    justifyContent: 'space-between',
+    minWidth: 320,
+    maxWidth: 320,
+    overflow: 'hidden',
+})
+
+const StyledTrashIconButton = styled(IconButton)({
+    display: 'inline',
+})
+
 export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
     const dispatch = useAppDispatch()
     const snapshots = useAppSelector((state) => state.data.snapshots)
@@ -149,32 +167,33 @@ export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
     }, [])
 
     const snapshotArrayMapper = (snapshot: Snapshot) => {
-        const titleStyle = snapshot.fileTitle ? undefined : { opacity: 0.5, fontStyle: 'italic' }
+        const defaultTitleStyle = { overflow: 'hidden', textOverflow: 'ellipsis' }
+        const titleStyle = snapshot.fileTitle
+            ? defaultTitleStyle
+            : { ...defaultTitleStyle, opacity: 0.5, fontStyle: 'italic' }
 
         return (
             <MenuItem key={snapshot.id!}>
-                <Box
-                    sx={{ display: 'flex', justifyContent: 'space-between', paddingRight: 12 }}
-                    onClick={() => handleLoadSnapshot(snapshot)}
-                >
-                    <ListItemAvatar>
-                        <Avatar>
-                            <ArticleIcon />
-                        </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                        primaryTypographyProps={{ sx: titleStyle }}
-                        primary={snapshot.fileTitle || 'Untitled Document'}
-                        secondary={'Snapshot on ' + snapshot.lastEditedOn}
-                    />
-                </Box>
-                <IconButton
-                    sx={{ display: 'inline' }}
-                    onClick={() => dispatch(deleteSnapshot(snapshot.id!))}
-                    key={snapshot.id!}
-                >
-                    <DeleteIcon />
-                </IconButton>
+                <StyledSnapshotIndexContainer>
+                    <StyledSnapshotTextContainer onClick={() => handleLoadSnapshot(snapshot)}>
+                        <ListItemAvatar>
+                            <Avatar>
+                                <ArticleIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                            primaryTypographyProps={{ sx: titleStyle }}
+                            primary={snapshot.fileTitle || 'Untitled Document'}
+                            secondary={'Snapshot on ' + snapshot.lastEditedOn}
+                        />
+                    </StyledSnapshotTextContainer>
+                    <StyledTrashIconButton
+                        onClick={() => dispatch(deleteSnapshot(snapshot.id!))}
+                        key={snapshot.id!}
+                    >
+                        <DeleteIcon />
+                    </StyledTrashIconButton>
+                </StyledSnapshotIndexContainer>
             </MenuItem>
         )
     }
