@@ -183,14 +183,14 @@ export const updateGitHubReadme = async (url: string, token: string, content: HT
                 title,
                 body,
             })
-            //else, a PR already exists, continue on that one
-            await octokit.rest.pulls.update({
-                owner,
-                repo,
-                pull_number,
-                body,
-            })
+            return
         }
+        await octokit.rest.pulls.update({
+            owner,
+            repo,
+            pull_number,
+            body,
+        })
     }
     //gets the hash of the file to update
     //gets from 'master' branch if it is the first push
