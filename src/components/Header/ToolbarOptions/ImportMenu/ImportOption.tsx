@@ -5,6 +5,8 @@ import { OpenFile } from './OpenFile'
 
 const StyledFileOptionContainer = styled(Box)({
     display: 'inline-block',
+    marginLeft: 5,
+    marginRight: 5,
 })
 
 export const ImportOption = () => {
@@ -16,9 +18,7 @@ export const ImportOption = () => {
     return (
         <StyledFileOptionContainer>
             <Tooltip title='Import Options' disableInteractive arrow>
-                <Button style={{ padding: 0 }} onClick={openMenu}>
-                    Import
-                </Button>
+                <Button onClick={openMenu}>Import</Button>
             </Tooltip>
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 <OpenFile />
