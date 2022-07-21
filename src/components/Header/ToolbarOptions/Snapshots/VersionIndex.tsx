@@ -18,7 +18,12 @@ import {
 import { useEffect, useState } from 'react'
 import { Snapshot } from '../../../../store/helpers/initDatabase'
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
-import { deleteSnapshot, loadSnapshot, saveSnapshot } from '../../../../store/snapshotThunks'
+import {
+    clearAllSnapshots,
+    deleteSnapshot,
+    loadSnapshot,
+    saveSnapshot,
+} from '../../../../store/snapshotThunks'
 
 interface Props {
     anchorEl: (EventTarget & Element) | null
@@ -37,7 +42,21 @@ const StyledTitleText = styled(Typography)({
     marginLeft: 5,
     marginRight: 10,
     marginTop: 17,
+})
+
+const StyledTitleContainer = styled(Box)({
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    display: 'flex',
     borderBottom: '2px solid gray',
+})
+
+const StyledClearAllButton = styled(Button)({
+    paddingTop: 0.3,
+    paddingBottom: 0.3,
+    marginTop: 20,
+    marginRight: 6,
+    minWidth: 94.33,
 })
 
 const StyledSnapshotList = styled(List)({
@@ -50,6 +69,9 @@ export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
     const [showDialog, setShowDialog] = useState(false)
     const [workingSnapshot, setWorkingSnapshot] = useState<Snapshot>()
+    const [showConfirmClear, setShowConfirmClear] = useState(false)
+
+    const fontSize = showConfirmClear ? 10 : 11.5
 
     function getWindowDimensions() {
         const { innerWidth: width, innerHeight: height } = window
@@ -61,6 +83,21 @@ export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
 
     const handleLoadSnapshot = (snapshot: Snapshot) => {
         dispatch(loadSnapshot(snapshot))
+        closeVersions()
+    }
+
+    const handleClearAll = () => {
+        if (!showConfirmClear) {
+            setShowConfirmClear(true)
+            setTimeout(() => setShowConfirmClear(false), 3500)
+            return
+        }
+        dispatch(clearAllSnapshots())
+        setShowConfirmClear(false)
+    }
+
+    const handleCloseVersions = () => {
+        setShowConfirmClear(false)
         closeVersions()
     }
 
@@ -141,20 +178,29 @@ export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
             </MenuItem>
         )
     }
-
     return (
-        <Box>
+        <>
             {showDialog && discardChangesPrompt}
             <SnapshotMenuContainer
                 open={Boolean(anchorEl)}
-                onClose={onClose}
+                onClose={handleCloseVersions}
                 anchorEl={document.getElementById('last-edited')}
             >
-                <StyledTitleText variant='h4'>Snapshots</StyledTitleText>
+                <StyledTitleContainer>
+                    <StyledTitleText variant='h4'>Snapshots</StyledTitleText>
+                    <StyledClearAllButton
+                        sx={{ fontSize: fontSize }}
+                        variant='outlined'
+                        color={showConfirmClear ? 'error' : undefined}
+                        onClick={handleClearAll}
+                    >
+                        {showConfirmClear ? 'Click to confirm' : 'Clear all'}
+                    </StyledClearAllButton>
+                </StyledTitleContainer>
                 <StyledSnapshotList sx={{ minHeight: windowDimensions.height }} dense>
                     {snapshots.map(snapshotArrayMapper)}
                 </StyledSnapshotList>
             </SnapshotMenuContainer>
-        </Box>
+        </>
     )
 }

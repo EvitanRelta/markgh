@@ -41,6 +41,15 @@ export const deleteSnapshot = createAsyncThunk<void, Required<Snapshot>['id'], A
         await database.snapshots.delete(snapshot)
     }
 )
+export const clearAllSnapshots = createAsyncThunk<void, undefined, AppThunkApiConfig>(
+    'data/clearAllSnapshots',
+    async (_, { getState, dispatch }) => {
+        const { database } = getState().data
+        const snapshotIds = (await database.snapshots.toArray()).map((snapshot) => snapshot.id!)
+        await database.snapshots.bulkDelete(snapshotIds)
+        await dispatch(initSnapshots()) //needs this because bulkDelete doesn't cause an update in state, the snapshot list doesnt get updated
+    }
+)
 
 export const loadSnapshot = createAsyncThunk<void, Snapshot, AppThunkApiConfig>(
     'data/loadSnapShot',
