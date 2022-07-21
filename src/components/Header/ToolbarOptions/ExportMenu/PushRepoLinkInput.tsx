@@ -12,13 +12,13 @@ interface Props {
 }
 
 const StyledTitle = styled('h5')({
-    marginLeft: 10,
+    marginLeft: 26,
 })
 
 const StyledMidSectionContainer = styled(Box)({
     justifyContent: 'space-between',
     display: 'flex',
-    marginTop: -2,
+    marginTop: -13,
     maxWidth: '95%',
 })
 
