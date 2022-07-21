@@ -20,6 +20,7 @@ const StyledMidSectionContainer = styled(Box)({
     display: 'flex',
     marginTop: -13,
     maxWidth: '95%',
+    marginLeft: 10,
 })
 
 const StyledInputField = styled(TextField)({
@@ -33,7 +34,8 @@ const StyledLoadingCircleContainer = styled(Box)({
 
 const StyledPushButton = styled(Button)({
     maxHeight: 40,
-    marginRight: 2,
+    marginLeft: 20,
+    marginRight: 0,
 })
 
 export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
@@ -101,7 +103,7 @@ export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
                         <CircularProgress size={25} />
                     </StyledLoadingCircleContainer>
                 ) : (
-                    <StyledPushButton onClick={() => handlePushButtonClick()}>
+                    <StyledPushButton variant='contained' onClick={() => handlePushButtonClick()}>
                         Push
                     </StyledPushButton>
                 )}
