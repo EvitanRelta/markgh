@@ -6,6 +6,8 @@ import { useAppDispatch } from '../../../../store/hooks'
 
 const StyledMenuItem = styled(MenuItem)({
     padding: 10,
+    marginTop: 2,
+    marginBottom: 2,
 })
 
 const StyledLabel = styled('label')({

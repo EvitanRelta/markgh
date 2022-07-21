@@ -12,6 +12,8 @@ const StyledMenuItem = styled(MenuItem)({
     paddingBottom: 13,
     paddingRight: 5,
     marginLeft: 3,
+    marginTop: 2,
+    marginBottom: 2,
 })
 
 const StyledGitHubIcon = styled(GitHubIcon)({
@@ -20,6 +22,7 @@ const StyledGitHubIcon = styled(GitHubIcon)({
 
 const StyledText = styled(ListItemText)({
     marginLeft: 10,
+    marginRight: 6,
 })
 
 const StyledPopover = styled(Popover)({

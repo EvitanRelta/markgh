@@ -8,6 +8,9 @@ const StyledFileOptionContainer = styled(Box)({
     marginLeft: 5,
     marginRight: 5,
 })
+const StyledImportButton = styled(Button)({
+    padding: 3,
+})
 
 export const ImportOption = () => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
@@ -18,7 +21,7 @@ export const ImportOption = () => {
     return (
         <StyledFileOptionContainer>
             <Tooltip title='Import Options' disableInteractive arrow>
-                <Button onClick={openMenu}>Import</Button>
+                <StyledImportButton onClick={openMenu}>Import</StyledImportButton>
             </Tooltip>
             <Menu open={Boolean(anchor)} keepMounted anchorEl={anchor} onClose={closeMenu}>
                 <OpenFile />
