@@ -33,11 +33,22 @@ const convertRelativeImageSrc = (
         .forEach(({ img, src }) => img.setAttribute('src', getAbsolutePath(src as string)))
 }
 
+const convertUnderlineTags = (html: Element) => {
+    const replaceTagTo = (newTag: string) => (element: Element) => {
+        const newElement = document.createElement(newTag)
+        newElement.innerHTML = element.innerHTML
+        element.parentNode!.replaceChild(newElement, element)
+    }
+    html.querySelectorAll('ins').forEach(replaceTagTo('u'))
+}
+
 export const markdownToHtml = (markdown: string, githubRepoInfo?: GithubRepoInfo) => {
     const markdownit = new MarkdownIt({ html: true, linkify: true })
     const htmlString = markdownit.render(markdown).replaceAll(/\n(?=<\/code><\/pre>)/g, '')
 
     const element = htmlToElement(htmlString)
+    convertUnderlineTags(element)
+
     if (githubRepoInfo) convertRelativeImageSrc(element, githubRepoInfo)
 
     return element.innerHTML
