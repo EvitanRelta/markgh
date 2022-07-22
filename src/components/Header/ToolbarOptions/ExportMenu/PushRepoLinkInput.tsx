@@ -38,7 +38,7 @@ const StyledPushButton = styled(Button)({
 
 export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
     const editor = useAppSelector((state) => state.data.editor)
-    const content = editor.view.dom.cloneNode(true) as HTMLElement
+    const markdown = useAppSelector((state) => state.data.markdownText)
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
     const [link, setLink] = useState<string>('')
@@ -55,7 +55,7 @@ export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
             setShowLoading(false)
             return
         }
-        await updateGitHubReadme(link, localStorage['ghToken'], content)
+        await updateGitHubReadme(link, localStorage['ghToken'], markdown)
             .then((PRLink) => {
                 setShowError(false)
                 setErrorMessage('')
