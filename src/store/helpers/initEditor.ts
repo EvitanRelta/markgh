@@ -6,6 +6,7 @@ import { toMarkdown } from '../../converterFunctions'
 import {
     loadInitialContent,
     saveEditorContent,
+    setHasEdits,
     setIsLoadingSnapshot,
     setMarkdownText,
     _setLastEditedOn,
@@ -25,8 +26,10 @@ const onTextChange = (editorContainer: Element) => {
 
     // If the change is due to loading of a snapshot, then
     // don't update 'lastEditedOn'.
-    if (!isLoadingSnapshot) dispatch(_setLastEditedOn(getFormatedNow()))
-    else dispatch(setIsLoadingSnapshot(false))
+    if (!isLoadingSnapshot) {
+        dispatch(_setLastEditedOn(getFormatedNow()))
+        dispatch(setHasEdits(true))
+    } else dispatch(setIsLoadingSnapshot(false))
 
     dispatch(saveEditorContent())
 }
