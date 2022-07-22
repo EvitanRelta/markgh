@@ -35,6 +35,14 @@ export class InvalidUserError extends Error {
     }
 }
 
+export class GHAPIConflictError extends Error {
+    constructor() {
+        super(
+            "GitHub's servers are still updating \n Please wait a few moments before pushing again (longer if it's a large file)"
+        )
+    }
+}
+
 //github api stores file contents in base64
 const prepareFileContent = (content: HTMLElement) => {
     removeCodeBlockWrapper(content)
@@ -211,17 +219,25 @@ export const updateGitHubReadme = async (url: string, token: string, content: HT
         const message = 'Update README by MarkGH'
         const content = base64Content
 
-        const res = await octokit.repos.createOrUpdateFileContents({
-            owner,
-            repo,
-            path,
-            message,
-            content,
-            branch: 'markgh-readme',
-            sha: await getTargetFileHash(),
-        })
+        try {
+            const res = await octokit.repos.createOrUpdateFileContents({
+                owner,
+                repo,
+                path,
+                message,
+                content,
+                branch: 'markgh-readme',
+                sha: await getTargetFileHash(),
+            })
 
-        return res
+            return res
+        } catch (e: any) {
+            if (e.status === 409) {
+                console.log(e.status)
+                throw new GHAPIConflictError()
+            }
+            throw e
+        }
     }
 
     const generatePRLink = (issueNumber: number) => {

@@ -66,7 +66,7 @@ export const PushRepoLinkInput = ({ setShowFinished, setPRLink }: Props) => {
             .catch((e) => {
                 setShowError(true)
                 setShowLoading(false)
-                setErrorMessage(e.message)
+                setErrorMessage(e.message + ' (' + e.status + ')')
             })
     }
 
