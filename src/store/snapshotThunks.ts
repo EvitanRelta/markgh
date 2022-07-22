@@ -7,6 +7,7 @@ import {
 import { removeTipTapArtifacts } from '../converterFunctions/helpers/removeTipTapArtifacts'
 import {
     setEditorContent,
+    setHasEdits,
     setIsLoadingSnapshot,
     _setFileTitle,
     _setLastEditedOn,
@@ -56,6 +57,7 @@ export const loadSnapshot = createAsyncThunk<void, Snapshot, AppThunkApiConfig>(
     async (snapshot, { dispatch }) => {
         dispatch(_setFileTitle(snapshot.fileTitle))
         dispatch(_setLastEditedOn(snapshot.lastEditedOn))
+        dispatch(setHasEdits(false))
 
         // To indicate to the editor's 'update' listener, that the change in the
         // editor's content is due to loading of a snapshot.

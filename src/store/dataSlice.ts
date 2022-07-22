@@ -27,6 +27,9 @@ interface DataState {
     // To indicate to the editor's 'update' listener, that the change in the
     // editor's content is due to loading of a snapshot.
     isLoadingSnapshot: boolean
+
+    // To indicate if there's been any edits since loading in a snapshot.
+    hasEdits: boolean
 }
 
 const dataSlice = createSlice({
@@ -41,6 +44,7 @@ const dataSlice = createSlice({
         isEditorLoading: true,
         snapshots: [],
         isLoadingSnapshot: false,
+        hasEdits: false,
     } as DataState,
     reducers: {
         setMarkdownText(state, actions: PayloadAction<string>) {
@@ -65,6 +69,9 @@ const dataSlice = createSlice({
         },
         setIsLoadingSnapshot(state, actions: PayloadAction<boolean>) {
             state.isLoadingSnapshot = actions.payload
+        },
+        setHasEdits(state, actions: PayloadAction<boolean>) {
+            state.hasEdits = actions.payload
         },
         setEditorContent(
             state,
@@ -99,6 +106,7 @@ export const setLastEditedOn = createAsyncThunk<void, string, AppThunkApiConfig>
     'data/setLastEditedOn',
     async (newLastEditedOn, { dispatch }) => {
         dispatch(_setLastEditedOn(newLastEditedOn))
+        dispatch(setHasEdits(true))
         dispatch(saveEditorContent())
     }
 )
@@ -109,6 +117,7 @@ export const setFileTitle = createAsyncThunk<void, string, AppThunkApiConfig>(
     async (newFileTitle, { dispatch }) => {
         dispatch(_setFileTitle(newFileTitle))
         dispatch(_setLastEditedOn(getFormatedNow()))
+        dispatch(setHasEdits(true))
         dispatch(saveEditorContent())
     }
 )
@@ -122,17 +131,13 @@ export const importMarkdown = createAsyncThunk<void, ImportMarkdownOptions, AppT
     'data/importMarkdown',
     async ({ fileTitle, markdown, githubRepoInfo }, { dispatch }) => {
         dispatch(_setFileTitle(fileTitle))
-        dispatch(_setLastEditedOn(getFormatedNow()))
-
-        // To indicate to the editor's 'update' listener, that the change in the
-        // editor's content is due to loading of a snapshot.
-        dispatch(setIsLoadingSnapshot(true))
         dispatch(
             setEditorContent({
                 content: markdownToHtml(markdown, githubRepoInfo),
                 fullWhitespace: false,
             })
         )
+        // Saving is done by the editor's "update" event listener.
     }
 )
 
@@ -176,6 +181,7 @@ export const loadInitialContent = createAsyncThunk<void, undefined, AppThunkApiC
         }
 
         await dispatch(loadSnapshot(initialData))
+        dispatch(setHasEdits(true))
         await dispatch(initSnapshots())
         dispatch(setIsEditorLoading(false))
     }
@@ -188,6 +194,7 @@ export const {
     setShowMarkdown,
     setIsEditorLoading,
     setIsLoadingSnapshot,
+    setHasEdits,
     setEditorContent,
 } = dataSlice.actions
 export const dataReducer = dataSlice.reducer

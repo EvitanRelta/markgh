@@ -84,6 +84,7 @@ const StyledTrashIconButton = styled(IconButton)({
 export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
     const dispatch = useAppDispatch()
     const snapshots = useAppSelector((state) => state.data.snapshots)
+    const hasEdits = useAppSelector((state) => state.data.hasEdits)
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
     const [showDialog, setShowDialog] = useState(false)
     const [workingSnapshot, setWorkingSnapshot] = useState<Snapshot>()
@@ -100,6 +101,12 @@ export const VersionIndex = ({ anchorEl, onClose, closeVersions }: Props) => {
     }
 
     const handleLoadSnapshot = (snapshot: Snapshot) => {
+        if (hasEdits) {
+            setWorkingSnapshot(snapshot)
+            setShowDialog(true)
+            return
+        }
+
         dispatch(loadSnapshot(snapshot))
         closeVersions()
     }
