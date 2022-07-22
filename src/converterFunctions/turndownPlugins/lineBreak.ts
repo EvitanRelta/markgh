@@ -11,6 +11,9 @@ export const lineBreak: Plugin = (service) => {
                 parent !== null && parent.tagName === 'LI' && parent.childNodes.length === 1
             if (isEmptyListItem) return '\n<br>'
 
+            const isHeader = parent !== null && /H[0-6]/.test(parent.tagName)
+            if (isHeader) return element.nextSibling ? '<br>' : '<br><br>'
+
             return element.nextSibling ? '\n<br>' : '\n<br><br>'
         },
     })
