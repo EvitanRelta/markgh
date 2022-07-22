@@ -62,8 +62,14 @@ export const updateGitHubReadme = async (url: string, token: string, content: HT
 
     //body message of PR
     const body =
-        "<p>Review the changes below and merge it when you're ready 😊</p><h3>Preview:</h3><hr contenteditable='false'><p></p>" +
-        content.innerHTML
+        `Review the changes and merge it when you're ready 😊
+
+<details>
+<summary><h2>Preview <sub><sup><em><code>(<ins>Disclaimer:</ins> Preview may not render exactly like in GitHub's markdown files)</code></em></sup></sub></h2></summary>
+
+` +
+        content.innerHTML +
+        '\n\n</details>'
 
     const [owner, repo] = getUserRepoPairFromUrl(url)
 
@@ -183,14 +189,14 @@ export const updateGitHubReadme = async (url: string, token: string, content: HT
                 title,
                 body,
             })
-            //else, a PR already exists, continue on that one
-            await octokit.rest.pulls.update({
-                owner,
-                repo,
-                pull_number,
-                body,
-            })
+            return
         }
+        await octokit.rest.pulls.update({
+            owner,
+            repo,
+            pull_number,
+            body,
+        })
     }
     //gets the hash of the file to update
     //gets from 'master' branch if it is the first push
