@@ -122,17 +122,13 @@ export const importMarkdown = createAsyncThunk<void, ImportMarkdownOptions, AppT
     'data/importMarkdown',
     async ({ fileTitle, markdown, githubRepoInfo }, { dispatch }) => {
         dispatch(_setFileTitle(fileTitle))
-        dispatch(_setLastEditedOn(getFormatedNow()))
-
-        // To indicate to the editor's 'update' listener, that the change in the
-        // editor's content is due to loading of a snapshot.
-        dispatch(setIsLoadingSnapshot(true))
         dispatch(
             setEditorContent({
                 content: markdownToHtml(markdown, githubRepoInfo),
                 fullWhitespace: false,
             })
         )
+        // Saving is done by the editor's "update" event listener.
     }
 )
 
