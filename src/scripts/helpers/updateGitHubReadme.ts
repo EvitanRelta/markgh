@@ -1,10 +1,5 @@
 import { Octokit } from '@octokit/rest'
 import { Buffer } from 'buffer'
-import {
-    removeCodeBlockWrapper,
-    removeImageWrapper,
-} from '../../converterFunctions/helpers/preProcessHtml'
-import { removeTipTapArtifacts } from '../../converterFunctions/helpers/removeTipTapArtifacts'
 import { getUserRepoPairFromUrl } from './InputLinkHelpers/getUserRepoPairFromUrl'
 
 window.Buffer = Buffer
@@ -44,21 +39,18 @@ export class GHAPIConflictError extends Error {
 }
 
 //github api stores file contents in base64
-const prepareFileContent = (content: HTMLElement) => {
-    removeCodeBlockWrapper(content)
-    removeImageWrapper(content)
-    removeTipTapArtifacts(content)
-    var buffer = Buffer.from(content.innerHTML)
+const prepareFileContent = (markdown: string) => {
+    var buffer = Buffer.from(markdown)
     return buffer.toString('base64') //encodes in base64
 }
 
-export const updateGitHubReadme = async (url: string, token: string, content: HTMLElement) => {
+export const updateGitHubReadme = async (url: string, token: string, markdown: string) => {
     const octokit = new Octokit({ auth: token })
 
     //branch to get readme from, will be set by running of 'getBranchCommitHash'
     var branch = ''
 
-    const base64Content = prepareFileContent(content)
+    const base64Content = prepareFileContent(markdown)
 
     //body message of PR
     const body =
@@ -68,7 +60,7 @@ export const updateGitHubReadme = async (url: string, token: string, content: HT
 <summary><h2>Preview <sub><sup><em><code>(<ins>Disclaimer:</ins> Preview may not render exactly like in GitHub's markdown files)</code></em></sup></sub></h2></summary>
 
 ` +
-        content.innerHTML +
+        markdown +
         '\n\n</details>'
 
     const [owner, repo] = getUserRepoPairFromUrl(url)
