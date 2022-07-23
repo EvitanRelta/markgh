@@ -1,5 +1,6 @@
 import { Box, styled } from '@mui/material'
 import { useState } from 'react'
+import { useAppSelector } from '../../store/hooks'
 import { TitleInput } from './TitleInput'
 import { LastEdited } from './ToolbarOptions/Snapshots/LastEdited'
 import { VersionIndex } from './ToolbarOptions/Snapshots/VersionIndex'
@@ -26,6 +27,7 @@ const StyledBottomRow = styled(Box)({
 })
 
 export const Header = () => {
+    const theme = useAppSelector((state) => state.theme)
     const [showVersions, setShowVersions] = useState<(EventTarget & Element) | null>(null)
 
     const openVersions = (e: React.MouseEvent) => {
@@ -36,10 +38,20 @@ export const Header = () => {
         setShowVersions(null)
     }
 
+    //dynamic 'require' is not supported on react
+    const logoSrc =
+        theme === 'light'
+            ? require('../../assets/logo.png')
+            : require('../../assets/negative_logo.png')
+
     return (
         <StyledHeaderBox>
             <StyledTopRow>
-                <TitleInput />
+                <Box sx={{ marginLeft: 1.5, fontSize: 20, fontWeight: 'Bold' }}>
+                    <img style={{ width: 32.5, top: 8.5, position: 'relative' }} src={logoSrc} />
+
+                    <TitleInput />
+                </Box>
                 <UserMenuContainer />
             </StyledTopRow>
             <StyledBottomRow>
