@@ -28,6 +28,7 @@ const StyledInstructionsContainer = styled(Box)({
     fontSize: 12,
     marginTop: -16,
     marginLeft: '5%',
+    lineHeight: 0.8,
 })
 
 const StyledInstructionsTitle = styled('h3')({})
@@ -42,10 +43,13 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
             <StyledDialogContent>
                 <StyledDialogTitle>Push to GitHub</StyledDialogTitle>
                 <StyledInstructionsContainer>
-                    <StyledInstructionsTitle>How it's done</StyledInstructionsTitle>
-                    <p>1. A branch is created on your repository</p>
-                    <p>2. A pull request of your exported README is created</p>
-                    <p>3. You can review the pull request and merge it if you're satisfied</p>
+                    <StyledInstructionsTitle>What it will do:</StyledInstructionsTitle>
+                    <p>1. Push changes to 'margh-readme' branch </p>
+                    <p>2. Creates a pull-request </p>
+
+                    <StyledInstructionsTitle>Then you can:</StyledInstructionsTitle>
+                    <p>1. Review the pull-request on GitHub </p>
+                    <p>2. Merge if you're satisified</p>
                 </StyledInstructionsContainer>
                 <StyledTopPortionContainer>
                     {loggedIn ? (
