@@ -115,8 +115,8 @@ const EditorToolbar = () => {
     return (
         <StyledToolbarContainer>
             {' '}
-            {editorOptions.map((option) => (
-                <EditorFormatOption option={option} />
+            {editorOptions.map((option, index) => (
+                <EditorFormatOption key={index} option={option} />
             ))}
         </StyledToolbarContainer>
     )
