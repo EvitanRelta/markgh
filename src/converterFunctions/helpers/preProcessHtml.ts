@@ -63,10 +63,11 @@ export const removeWrapperParagraphs = (htmlElement: Element) => {
     })
 }
 
-export const preserveEmptyListItem = (htmlElement: Element) => {
-    const emptyListItems = htmlElement.querySelectorAll('li:empty')
+export const preserveBlankElements = (htmlElement: Element) => {
+    const isBlank = (element: Element) => /^\s*$/.test(element.textContent ?? '')
     const insertLineBreak = (listItem: Element) => listItem.append(document.createElement('br'))
-    emptyListItems.forEach(insertLineBreak)
+    const elements = Array.from(htmlElement.querySelectorAll('li,p,h1,h2,h3,h4,h5,h6'))
+    elements.filter(isBlank).forEach(insertLineBreak)
 }
 
 export const preProcessHtml = (htmlElement: Element) => {
@@ -75,5 +76,5 @@ export const preProcessHtml = (htmlElement: Element) => {
     removeImageWrapper(htmlElement)
     removeWrapperParagraphs(htmlElement)
     removeTipTapArtifacts(htmlElement)
-    preserveEmptyListItem(htmlElement)
+    preserveBlankElements(htmlElement)
 }
