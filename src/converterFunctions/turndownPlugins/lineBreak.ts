@@ -7,14 +7,18 @@ export const lineBreak: Plugin = (service) => {
             const element = node as Element
             const parent = element.parentElement
 
-            const isEmptyListItem =
-                parent !== null && parent.tagName === 'LI' && parent.childNodes.length === 1
-            if (isEmptyListItem) return '\n<br>'
+            if (parent === null) return element.nextSibling ? '\n<br>' : '\n<br><br>'
 
-            const isHeader = parent !== null && /H[0-6]/.test(parent.tagName)
-            if (isHeader) return element.nextSibling ? '<br>' : '<br><br>'
+            const isHeader = /H[0-6]/.test(parent.tagName)
+            const prefix = isHeader ? '' : '\n'
 
-            return element.nextSibling ? '\n<br>' : '\n<br><br>'
+            const isLineBreak = (element: Node) => element.nodeName === 'BR'
+            const hasOnlyLineBreaks = (element: Element) =>
+                Array.from(element.childNodes).every(isLineBreak)
+
+            return element.nextSibling || hasOnlyLineBreaks(parent)
+                ? prefix + '<br>'
+                : prefix + '<br><br>'
         },
     })
 }
