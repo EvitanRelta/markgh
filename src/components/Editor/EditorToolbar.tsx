@@ -14,12 +14,12 @@ import {
     Subscript as SubscriptIcon,
     Superscript as SuperscriptIcon,
 } from '@mui/icons-material'
-import { Box, IconButton, styled, SvgIconTypeMap, Tooltip } from '@mui/material'
+import { Box, styled, SvgIconTypeMap } from '@mui/material'
 import { OverridableComponent } from '@mui/material/OverridableComponent'
 import { Editor } from '@tiptap/react'
 import React from 'react'
-import { useAppSelector } from '../../store/hooks'
 import { AlignDropDown } from './AlignDropDown'
+import { EditorFormatOption } from './EditorFormatOption'
 import { HeadingDropDown } from './HeadingDropDown'
 import {
     addUrlImage,
@@ -49,7 +49,7 @@ interface BasicFormatOption {
     icon: FormatOptionIcon
     hotkey?: string
 }
-type FormatOption = BasicFormatOption | FormatOptionComponent
+export type FormatOption = BasicFormatOption | FormatOptionComponent
 
 const editorOptions: FormatOption[] = [
     { name: 'Bold', toolbarFunction: bold, icon: FormatBoldIcon, hotkey: 'Ctrl + B' },
@@ -109,59 +109,19 @@ interface Props {
     editor: Editor | null
 }
 
-const StyledIconButton = styled(IconButton)({
-    transition: 'none',
-    '&:hover': {
-        borderRadius: 1,
-    },
-    marginTop: -1,
-})
 const StyledToolbarContainer = styled(Box)({
     borderBottom: '1px solid gray',
     borderTop: '1px solid gray',
     minWidth: '100%',
 })
 
-const StyledTooltipText = styled(Box)({
-    textAlign: 'center',
-})
-
-const StyledTooltipHotkeyText = styled(Box)({
-    fontStyle: 'italic',
-    fontSize: 9,
-})
-
 const EditorToolbar = ({ editor }: Props) => {
-    const theme = useAppSelector((state) => state.theme)
-    const optionMapping = (option: FormatOption, index: number) => {
-        if (typeof option !== 'object') {
-            const FormatOptionComponent = option
-            return <FormatOptionComponent key={index} editor={editor} />
-        }
-
-        const { name, toolbarFunction, icon: FormatOptionIcon, hotkey } = option
-
-        const tooltipTitle = (
-            <StyledTooltipText>
-                {name}
-                <StyledTooltipHotkeyText sx={{ fontStyle: 'italic', fontSize: 9 }}>
-                    {hotkey !== undefined && hotkey}
-                </StyledTooltipHotkeyText>
-            </StyledTooltipText>
-        )
-
-        return (
-            <Tooltip title={tooltipTitle} key={index} disableInteractive arrow>
-                <StyledIconButton onClick={toolbarFunction(editor)}>
-                    <FormatOptionIcon />
-                </StyledIconButton>
-            </Tooltip>
-        )
-    }
-
     return (
         <StyledToolbarContainer>
-            <Box>{editorOptions.map(optionMapping)}</Box>
+            {' '}
+            {editorOptions.map((option) => (
+                <EditorFormatOption option={option} />
+            ))}
         </StyledToolbarContainer>
     )
 }
