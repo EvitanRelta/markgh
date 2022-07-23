@@ -18,6 +18,7 @@ import { Box, IconButton, styled, SvgIconTypeMap, Tooltip } from '@mui/material'
 import { OverridableComponent } from '@mui/material/OverridableComponent'
 import { Editor } from '@tiptap/react'
 import React from 'react'
+import { useAppSelector } from '../../store/hooks'
 import { AlignDropDown } from './AlignDropDown'
 import { HeadingDropDown } from './HeadingDropDown'
 import {
@@ -117,6 +118,8 @@ const StyledIconButton = styled(IconButton)({
 })
 const StyledToolbarContainer = styled(Box)({
     borderBottom: '1px solid gray',
+    borderTop: '1px solid gray',
+    minWidth: '100%',
 })
 
 const StyledTooltipText = styled(Box)({
@@ -129,6 +132,7 @@ const StyledTooltipHotkeyText = styled(Box)({
 })
 
 const EditorToolbar = ({ editor }: Props) => {
+    const theme = useAppSelector((state) => state.theme)
     const optionMapping = (option: FormatOption, index: number) => {
         if (typeof option !== 'object') {
             const FormatOptionComponent = option
