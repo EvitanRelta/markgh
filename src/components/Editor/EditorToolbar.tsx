@@ -14,11 +14,12 @@ import {
     Subscript as SubscriptIcon,
     Superscript as SuperscriptIcon,
 } from '@mui/icons-material'
-import { Box, IconButton, styled, SvgIconTypeMap, Tooltip } from '@mui/material'
+import { Box, styled, SvgIconTypeMap } from '@mui/material'
 import { OverridableComponent } from '@mui/material/OverridableComponent'
 import { Editor } from '@tiptap/react'
 import React from 'react'
 import { AlignDropDown } from './AlignDropDown'
+import { EditorFormatOption } from './EditorFormatOption'
 import { HeadingDropDown } from './HeadingDropDown'
 import {
     addUrlImage,
@@ -47,7 +48,7 @@ interface BasicFormatOption {
     toolbarFunction: ToolbarFunction
     icon: FormatOptionIcon
 }
-type FormatOption = BasicFormatOption | FormatOptionComponent
+export type FormatOption = BasicFormatOption | FormatOptionComponent
 
 const editorOptions: FormatOption[] = [
     { name: 'Bold', toolbarFunction: bold, icon: FormatBoldIcon },
@@ -72,37 +73,19 @@ interface Props {
     editor: Editor | null
 }
 
-const StyledIconButton = styled(IconButton)({
-    transition: 'none',
-    '&:hover': {
-        borderRadius: 1,
-    },
-    marginTop: -1,
-})
 const StyledToolbarContainer = styled(Box)({
     borderBottom: '1px solid gray',
+    borderTop: '1px solid gray',
+    minWidth: '100%',
 })
 
 const EditorToolbar = ({ editor }: Props) => {
-    const optionMapping = (option: FormatOption, index: number) => {
-        if (typeof option !== 'object') {
-            const FormatOptionComponent = option
-            return <FormatOptionComponent key={index} editor={editor} />
-        }
-
-        const { name, toolbarFunction, icon: FormatOptionIcon } = option
-        return (
-            <Tooltip title={name} key={index} disableInteractive arrow>
-                <StyledIconButton onClick={toolbarFunction(editor)}>
-                    <FormatOptionIcon />
-                </StyledIconButton>
-            </Tooltip>
-        )
-    }
-
     return (
         <StyledToolbarContainer>
-            <Box>{editorOptions.map(optionMapping)}</Box>
+            {' '}
+            {editorOptions.map((option) => (
+                <EditorFormatOption option={option} />
+            ))}
         </StyledToolbarContainer>
     )
 }
