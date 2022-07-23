@@ -1,7 +1,6 @@
 import { Button, styled } from '@mui/material'
 import { setShowMarkdown } from '../../store/dataSlice'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { ImageContainer } from './ImageContainer'
 
 const StyledShowMdButton = styled(Button)({
     minWidth: 169.42,
@@ -20,7 +19,7 @@ export const Footer = () => {
 
     return (
         <>
-            <ImageContainer />
+            {/* <ImageContainer /> */}
             <StyledShowMdButton
                 sx={{
                     backgroundColor: buttonColor,
