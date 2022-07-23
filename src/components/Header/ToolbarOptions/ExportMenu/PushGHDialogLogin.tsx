@@ -8,7 +8,7 @@ const StyledLoginContainer = styled(Box)({
     borderRadius: 10,
     maxWidth: 300,
     minHeight: 130,
-    marginTop: 20,
+    marginTop: 40,
     marginLeft: '23.5%',
 })
 
