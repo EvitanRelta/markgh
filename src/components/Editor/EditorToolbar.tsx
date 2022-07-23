@@ -123,6 +123,11 @@ const StyledTooltipText = styled(Box)({
     textAlign: 'center',
 })
 
+const StyledTooltipHotkeyText = styled(Box)({
+    fontStyle: 'italic',
+    fontSize: 9,
+})
+
 const EditorToolbar = ({ editor }: Props) => {
     const optionMapping = (option: FormatOption, index: number) => {
         if (typeof option !== 'object') {
@@ -134,7 +139,10 @@ const EditorToolbar = ({ editor }: Props) => {
 
         const tooltipTitle = (
             <StyledTooltipText>
-                {name} <br /> {hotkey !== undefined && hotkey}
+                {name}
+                <StyledTooltipHotkeyText sx={{ fontStyle: 'italic', fontSize: 9 }}>
+                    {hotkey !== undefined && hotkey}
+                </StyledTooltipHotkeyText>
             </StyledTooltipText>
         )
 
