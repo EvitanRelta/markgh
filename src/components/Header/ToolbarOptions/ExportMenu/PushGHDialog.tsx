@@ -45,7 +45,7 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
                 <StyledDialogTitle>Push to GitHub</StyledDialogTitle>
                 <StyledInstructionsContainer>
                     <StyledInstructionsTitle>What it will do:</StyledInstructionsTitle>
-                    <p>1. Push changes to 'margh-readme' branch </p>
+                    <p>1. Push changes to 'markgh-readme' branch </p>
                     <p>2. Creates a pull-request </p>
 
                     <StyledInstructionsTitle>Then you can:</StyledInstructionsTitle>
