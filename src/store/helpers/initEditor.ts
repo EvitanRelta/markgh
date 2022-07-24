@@ -1,7 +1,6 @@
 import { Editor } from '@tiptap/react'
 import _ from 'lodash'
 import { AppStore } from '..'
-import { extensions } from '../../components/Editor/extensions/extensions'
 import { toMarkdown } from '../../converterFunctions'
 import {
     loadInitialContent,
@@ -11,6 +10,7 @@ import {
     setMarkdownText,
     _setLastEditedOn,
 } from '../dataSlice'
+import { editorOptions } from './editorOptions'
 import { getFormatedNow } from './getFormatedNow'
 
 let store!: AppStore
@@ -34,10 +34,7 @@ const onTextChange = (editorContainer: Element) => {
     dispatch(saveEditorContent())
 }
 
-const editor = new Editor({
-    extensions,
-    parseOptions: { preserveWhitespace: 'full' },
-})
+const editor = new Editor(editorOptions)
 
 editor.on('create', ({ editor }) => {
     const { dispatch } = store

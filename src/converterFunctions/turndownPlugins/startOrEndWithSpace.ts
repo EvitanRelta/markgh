@@ -9,7 +9,7 @@ export const startOrEndWithSpace: Plugin = (service) => {
             if (!affectedTags.includes(node.nodeName)) return false
 
             // '&nbsp;' characters have already been escaped during preprocess.
-            const startOrEndWithSpace = /(^(&nbsp;| )|(&nbsp;| )$)/.test(node.innerText)
+            const startOrEndWithSpace = /(^(&nbsp;| )|(&nbsp;| )$)/.test(node.textContent ?? '')
             return startOrEndWithSpace
         },
         replacement: (content, node, options) => {
