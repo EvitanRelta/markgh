@@ -1,18 +1,33 @@
 import { removeTipTapArtifacts } from './removeTipTapArtifacts'
+import { replaceTabsWApproxSpaces } from './tabEmulation/replaceTabsWApproxSpaces'
 
 // Helper function for escaping characters.
 export const escapeTextNode = (textNode: Node) => {
     if (!textNode.nodeValue) return
     textNode.nodeValue = textNode.nodeValue
         .replace(/(?<!\\)&(?=\S+;)/gi, '&amp;')
+        .replaceAll('\u2003', '&emsp;')
+        .replaceAll('\u2002', '&ensp;')
         .replaceAll('\xa0', ' ')
+        .replaceAll('\u2009', '&thinsp;')
+        .replaceAll('\u200A', '&hairsp;')
         .replaceAll('  ', '&nbsp; ')
         .replace(/^ | $|(?<=\s) (?=\S)/g, '&nbsp;')
         .replace(/(?<!\\)<(?=\/?[a-z])/gi, '&lt;')
 }
 
+const isTextNode = (node: Node) => node.nodeType === node.TEXT_NODE
+
+export const replaceTabs = (element: Element) => {
+    Array.from(element.childNodes)
+        .filter(isTextNode)
+        .forEach((node) => {
+            node.nodeValue = replaceTabsWApproxSpaces(node.nodeValue!)
+        })
+    Array.from(element.children).forEach(replaceTabs)
+}
+
 const escapeCharacters = (htmlElement: Element) => {
-    const isTextNode = (node: Node) => node.nodeType === node.TEXT_NODE
     const elementsNotInCode = Array.from(htmlElement.querySelectorAll(':not(code,code *)'))
     const textNodesNotInCode = elementsNotInCode
         .map((element) => Array.from(element.childNodes).filter(isTextNode))
@@ -71,6 +86,7 @@ export const preserveBlankElements = (htmlElement: Element) => {
 }
 
 export const preProcessHtml = (htmlElement: Element) => {
+    replaceTabs(htmlElement)
     escapeCharacters(htmlElement)
     removeCodeBlockWrapper(htmlElement)
     removeImageWrapper(htmlElement)
