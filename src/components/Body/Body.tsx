@@ -23,7 +23,7 @@ export const Body = () => {
 
     return (
         <>
-            <EditorToolbar editor={editor} />
+            <EditorToolbar />
             <StyledContentContainer>
                 <StyledEditorContianer sx={{ width: editorWidth }}>
                     <TextEditor />

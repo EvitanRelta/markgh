@@ -29,14 +29,14 @@ export const EditorFormatOption = ({ option }: Props) => {
         const FormatOptionComponent = option
         return <FormatOptionComponent editor={editor} />
     }
-    const { name, toolbarFunction, icon: FormatOptionIcon, hotkey } = option
+    const { name, toolbarFunction, icon: FormatOptionIcon } = option
 
     const tooltipTitle = (
         <StyledTooltipText>
             {name}
-            <StyledTooltipHotkeyText sx={{ fontStyle: 'italic', fontSize: 9 }}>
-                {hotkey !== undefined && hotkey}
-            </StyledTooltipHotkeyText>
+            <StyledTooltipHotkeyText
+                sx={{ fontStyle: 'italic', fontSize: 9 }}
+            ></StyledTooltipHotkeyText>
         </StyledTooltipText>
     )
 

@@ -69,17 +69,13 @@ const editorOptions: FormatOption[] = [
     { name: 'Horizontal Line', toolbarFunction: horizontalRule, icon: HorizontalRuleIcon },
 ]
 
-interface Props {
-    editor: Editor | null
-}
-
 const StyledToolbarContainer = styled(Box)({
     borderBottom: '1px solid gray',
     borderTop: '1px solid gray',
     minWidth: '100%',
 })
 
-const EditorToolbar = ({ editor }: Props) => {
+const EditorToolbar = () => {
     return (
         <StyledToolbarContainer>
             {' '}
