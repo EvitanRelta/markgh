@@ -7,6 +7,8 @@ interface Props {
 const StyledSnapshotButton = styled(Button)({
     display: 'inline-block',
     padding: 3,
+    marginLeft: 5,
+    marginRight: 5,
 })
 
 export const SnapshotOption = ({ openVersions }: Props) => {

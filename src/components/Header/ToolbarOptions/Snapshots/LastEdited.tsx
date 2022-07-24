@@ -12,9 +12,10 @@ const StyledText = styled(Box)({
     textDecoration: 'underline',
     fontSize: 14.5,
     display: 'inline-flex',
-    marginTop: 8,
-    paddingTop: 0.15,
+    marginTop: 8.5,
     cursor: 'pointer',
+    marginLeft: 5,
+    marginRight: 5,
 })
 
 export const LastEdited = ({ openVersions }: Props) => {

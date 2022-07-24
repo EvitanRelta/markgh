@@ -21,19 +21,17 @@ const StyledTopPortionContainer = styled(Box)({
 })
 
 const StyledCompletedResultContainer = styled(Box)({
-    marginLeft: 10,
     marginTop: 15,
 })
 
 const StyledInstructionsContainer = styled(Box)({
-    marginLeft: '25%',
     fontSize: 12,
-    marginTop: -1.5,
+    marginTop: -16,
+    marginLeft: '5%',
+    lineHeight: 0.8,
 })
 
-const StyledInstructionsTitle = styled('h3')({
-    marginLeft: '20%',
-})
+const StyledInstructionsTitle = styled('h3')({})
 
 export const PushGHDialog = ({ setShowDialog }: Props) => {
     const loggedIn = useAppSelector((state) => state.auth).loggedIn
@@ -44,6 +42,15 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
         <Dialog open={true} onClose={() => setShowDialog(false)} fullWidth>
             <StyledDialogContent>
                 <StyledDialogTitle>Push to GitHub</StyledDialogTitle>
+                <StyledInstructionsContainer>
+                    <StyledInstructionsTitle>What it will do:</StyledInstructionsTitle>
+                    <p>1. Push changes to 'margh-readme' branch </p>
+                    <p>2. Creates a pull-request </p>
+
+                    <StyledInstructionsTitle>Then you can:</StyledInstructionsTitle>
+                    <p>1. Review the pull-request on GitHub </p>
+                    <p>2. Merge if you're satisified</p>
+                </StyledInstructionsContainer>
                 <StyledTopPortionContainer>
                     {loggedIn ? (
                         <PushRepoLinkInput
@@ -68,13 +75,6 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
                 </StyledTopPortionContainer>
 
                 {/* <Button>Delete Branch</Button> */}
-
-                <StyledInstructionsContainer>
-                    <StyledInstructionsTitle>How it's done</StyledInstructionsTitle>
-                    <p>1. A branch is created on your repository</p>
-                    <p>2. A pull request of your exported README is created</p>
-                    <p>3. You can review the pull request and merge it if you're satisfied</p>
-                </StyledInstructionsContainer>
             </StyledDialogContent>
         </Dialog>
     )
