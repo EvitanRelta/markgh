@@ -64,7 +64,7 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
 
                     {showFinished && (
                         <StyledCompletedResultContainer>
-                            Pull Request created!
+                            Pull-request created!
                             <Box>
                                 View it{' '}
                                 <a href={PRLink} target='_blank'>
