@@ -4,6 +4,12 @@ import { useAppDispatch } from '../../../../store/hooks'
 
 const StyledLoginContainer = styled(Box)({
     textAlign: 'center',
+    border: '1px solid gray',
+    borderRadius: 10,
+    maxWidth: 300,
+    minHeight: 130,
+    marginTop: 40,
+    marginLeft: '23.5%',
 })
 
 export const PushGHDialogLogin = () => {
@@ -12,7 +18,9 @@ export const PushGHDialogLogin = () => {
     return (
         <StyledLoginContainer>
             <h4>Please login to continue</h4>
-            <Button onClick={() => dispatch(loginUser())}>Login to GitHub</Button>
+            <Button variant='outlined' onClick={() => dispatch(loginUser())}>
+                Login to GitHub
+            </Button>
         </StyledLoginContainer>
     )
 }

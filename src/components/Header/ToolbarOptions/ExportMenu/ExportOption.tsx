@@ -5,6 +5,8 @@ import { PushGH } from './PushGH'
 
 const StyledExportOptionContainer = styled(Box)({
     display: 'inline-block',
+    marginLeft: 5,
+    marginRight: 5,
 })
 
 const StyledExportOptionButton = styled(Button)({

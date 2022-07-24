@@ -18,11 +18,11 @@ const StyledMdTextContainer = styled(Box)({
 const StyledCopyClipboardContainer = styled(Box)({
     margin: 0,
     right: 23,
-    top: 151,
+    top: 20,
     position: 'absolute',
     borderRadius: 7,
     paddingBottom: 1,
-    zIndex: 1000,
+    zIndex: 3,
 })
 
 const StyledCopiedButton = styled(Button)({
