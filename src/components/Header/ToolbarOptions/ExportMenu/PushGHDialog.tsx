@@ -21,7 +21,8 @@ const StyledTopPortionContainer = styled(Box)({
 })
 
 const StyledCompletedResultContainer = styled(Box)({
-    marginTop: 15,
+    marginTop: 12,
+    marginLeft: 30,
 })
 
 const StyledInstructionsContainer = styled(Box)({
