@@ -1,21 +1,13 @@
-<h1 align="center">
-  MarkGH <img src="./assets/logo.png" height="30" />
-</h1>
+<p align="center">
+  Center aligned
+</p>
 
-Online markdown editor for&nbsp; <img src="./assets/github_logo.png" height="25" />
+A long repeated &nbsp; &nbsp; &nbsp; space
 
-*   Avoid writing **_raw markdown_**
-*   Edit it like a **_Word document_**
+**Auto-escaping:** \<div> \&gt; \</div>
 
-## Hide this HTML-Markdown mess:
-
-```markdown
-<h1 align="center">
-  MarkGH <img src="./assets/github_logo.png" height="30" />
-</h1>
-
-Online markdown editor for&nbsp; <img src="./assets/github_logo.png" height="25" />
-
-*   Avoid writing **_raw markdown_**
-*   Edit it like a **_Word document_**
+```javascript
+// Syntax highlighting
+// Similar to GitHub
+const regex = new RegExp("Hello")
 ```
