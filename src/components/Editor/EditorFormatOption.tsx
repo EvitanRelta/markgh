@@ -1,5 +1,4 @@
 import { Box, IconButton, styled, Tooltip } from '@mui/material'
-import { Editor as CoreEditor } from '@tiptap/core'
 import { useEffect, useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
 import { FormatOption } from './EditorToolbar'
@@ -40,13 +39,16 @@ export const EditorFormatOption = ({ option }: Props) => {
     useEffect(() => {
         if (!editor) return
 
-        const getAttributeActive = (editor: CoreEditor) => {
-            return editor.isActive(attributeName)
+        type OnTransactionCallback = Parameters<typeof editor.on<'transaction'>>[1]
+        const updateAttributeActive: OnTransactionCallback = ({ editor }) => {
+            setIsActive(editor.isActive(attributeName))
         }
 
-        editor.on('transaction', ({ editor }) => {
-            setIsActive(getAttributeActive(editor))
-        })
+        editor.on('transaction', updateAttributeActive)
+
+        return () => {
+            editor.off('transaction', updateAttributeActive)
+        }
     }, [editor, setIsActive, attributeName])
 
     if (typeof option !== 'object') {
