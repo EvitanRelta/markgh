@@ -47,7 +47,7 @@ export const EditorFormatOption = ({ option }: Props) => {
         editor.on('transaction', ({ editor }) => {
             setIsActive(getAttributeActive(editor))
         })
-    }, [editor])
+    }, [editor, setIsActive, attributeName])
 
     if (typeof option !== 'object') {
         const FormatOptionComponent = option
