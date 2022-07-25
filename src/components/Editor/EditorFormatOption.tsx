@@ -29,44 +29,46 @@ export const EditorFormatOption = ({ option }: Props) => {
     const editor = useAppSelector((state) => state.data.editor)
     const [isActive, setIsActive] = useState(false)
     const [bgColor, setBgColor] = useState<string | undefined>(undefined)
-
-    const excludeHighlightActive = [
-        'Add Url Image',
-        'Horizontal Line',
-        'Ordered List',
-        'Unordered List',
-    ]
+    const attributeName = typeof option === 'object' ? option.attributeName : ''
 
     //Changes icon color if it's active, unless its excluded from activation (non-toggle-able actions)
     useEffect(() => {
-        isActive && !excludeHighlightActive.includes(option.name)
-            ? setBgColor('#3178d2')
-            : setBgColor(undefined)
+        isActive ? setBgColor('#3178d2') : setBgColor(undefined)
     }, [isActive])
+
+    useEffect(() => {
+        if (!editor) return
+
+        type OnTransactionCallback = Parameters<typeof editor.on<'transaction'>>[1]
+        const updateAttributeActive: OnTransactionCallback = ({ editor }) => {
+            setIsActive(editor.isActive(attributeName))
+        }
+
+        editor.on('transaction', updateAttributeActive)
+
+        return () => {
+            editor.off('transaction', updateAttributeActive)
+        }
+    }, [editor, setIsActive, attributeName])
 
     if (typeof option !== 'object') {
         const FormatOptionComponent = option
         return <FormatOptionComponent editor={editor} />
     }
-    const { name, toolbarFunction, icon: FormatOptionIcon } = option
+    const { name, toolbarFunction, icon: FormatOptionIcon, hotkey } = option
 
     const tooltipTitle = (
         <StyledTooltipText>
             {name}
-            <StyledTooltipHotkeyText
-                sx={{ fontStyle: 'italic', fontSize: 9 }}
-            ></StyledTooltipHotkeyText>
+            <StyledTooltipHotkeyText sx={{ fontStyle: 'italic', fontSize: 9 }}>
+                {hotkey}
+            </StyledTooltipHotkeyText>
         </StyledTooltipText>
     )
-    const handleToggleOption = () => {
-        console.log(11)
-        setIsActive(!isActive)
-        toolbarFunction(editor)()
-    }
 
     return (
         <Tooltip title={tooltipTitle} disableInteractive arrow>
-            <StyledIconButton sx={{ color: bgColor }} onClick={handleToggleOption}>
+            <StyledIconButton sx={{ color: bgColor }} onClick={toolbarFunction(editor)}>
                 <FormatOptionIcon />
             </StyledIconButton>
         </Tooltip>

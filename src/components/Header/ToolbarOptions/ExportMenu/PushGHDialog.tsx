@@ -21,7 +21,8 @@ const StyledTopPortionContainer = styled(Box)({
 })
 
 const StyledCompletedResultContainer = styled(Box)({
-    marginTop: 15,
+    marginTop: 12,
+    marginLeft: 30,
 })
 
 const StyledInstructionsContainer = styled(Box)({
@@ -44,7 +45,7 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
                 <StyledDialogTitle>Push to GitHub</StyledDialogTitle>
                 <StyledInstructionsContainer>
                     <StyledInstructionsTitle>What it will do:</StyledInstructionsTitle>
-                    <p>1. Push changes to 'margh-readme' branch </p>
+                    <p>1. Push changes to 'markgh-readme' branch </p>
                     <p>2. Creates a pull-request </p>
 
                     <StyledInstructionsTitle>Then you can:</StyledInstructionsTitle>
@@ -63,7 +64,7 @@ export const PushGHDialog = ({ setShowDialog }: Props) => {
 
                     {showFinished && (
                         <StyledCompletedResultContainer>
-                            Pull Request created!
+                            Pull-request created!
                             <Box>
                                 View it{' '}
                                 <a href={PRLink} target='_blank'>

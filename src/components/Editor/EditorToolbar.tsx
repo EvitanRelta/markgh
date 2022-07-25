@@ -45,6 +45,7 @@ type FormatOptionComponent = (props: { editor: Editor | null }) => JSX.Element
 type ToolbarFunction = (editor: Editor | null) => () => void
 interface BasicFormatOption {
     name: string
+    attributeName: string
     toolbarFunction: ToolbarFunction
     icon: FormatOptionIcon
     hotkey?: string
@@ -52,57 +53,98 @@ interface BasicFormatOption {
 export type FormatOption = BasicFormatOption | FormatOptionComponent
 
 const editorOptions: FormatOption[] = [
-    { name: 'Bold', toolbarFunction: bold, icon: FormatBoldIcon, hotkey: 'Ctrl + B' },
-    { name: 'Italic', toolbarFunction: italic, icon: FormatItalicIcon, hotkey: 'Ctrl + I' },
+    {
+        name: 'Bold',
+        attributeName: 'bold',
+        toolbarFunction: bold,
+        icon: FormatBoldIcon,
+        hotkey: 'Ctrl + B',
+    },
+    {
+        name: 'Italic',
+        attributeName: 'italic',
+        toolbarFunction: italic,
+        icon: FormatItalicIcon,
+        hotkey: 'Ctrl + I',
+    },
     {
         name: 'Underline',
+        attributeName: 'underline',
         toolbarFunction: underline,
         icon: FormatUnderlinedIcon,
         hotkey: 'Ctrl + U',
     },
     {
         name: 'Strikethrough',
+        attributeName: 'strike',
         toolbarFunction: strikethrough,
         icon: FormatStrikethroughTwoToneIcon,
         hotkey: 'Ctrl + Shift + X',
     },
     {
         name: 'Superscript',
+        attributeName: 'superscript',
         toolbarFunction: superscript,
         icon: SuperscriptIcon,
         hotkey: 'Ctrl + .',
     },
-    { name: 'Subscript', toolbarFunction: subscript, icon: SubscriptIcon, hotkey: 'Ctrl + ,' },
-    { name: 'Code', toolbarFunction: code, icon: CodeIcon, hotkey: 'Ctrl + E' },
+    {
+        name: 'Subscript',
+        attributeName: 'subscript',
+        toolbarFunction: subscript,
+        icon: SubscriptIcon,
+        hotkey: 'Ctrl + ,',
+    },
+    {
+        name: 'Code',
+        attributeName: 'code',
+        toolbarFunction: code,
+        icon: CodeIcon,
+        hotkey: 'Ctrl + E',
+    },
     {
         name: 'Block Quote',
+        attributeName: 'blockquote',
         toolbarFunction: blockQuote,
         icon: FormatQuoteIcon,
         hotkey: 'Ctrl + Shift + B',
     },
     {
         name: 'Code Block',
+        attributeName: 'codeBlock',
         toolbarFunction: codeBlock,
         icon: DataObjectIcon,
         hotkey: 'Ctrl + Alt + C',
     },
-    { name: 'Link', toolbarFunction: link, icon: LinkIcon, hotkey: '' },
+    { name: 'Link', attributeName: 'link', toolbarFunction: link, icon: LinkIcon, hotkey: '' },
     HeadingDropDown,
-    { name: 'Add Url Image', toolbarFunction: addUrlImage, icon: ImageIcon },
+    {
+        name: 'Add Url Image',
+        attributeName: 'addUrlImage',
+        toolbarFunction: addUrlImage,
+        icon: ImageIcon,
+    },
     {
         name: 'Ordered List',
+        attributeName: 'orderedList',
         toolbarFunction: orderedList,
         icon: FormatListNumberedIcon,
         hotkey: 'Ctrl + Shift + 7',
     },
     {
         name: 'Unordered List',
+        attributeName: 'bulletList',
         toolbarFunction: unorderedList,
         icon: FormatListBulletedIcon,
         hotkey: 'Ctrl + Shift + 8',
     },
     AlignDropDown,
-    { name: 'Horizontal Line', toolbarFunction: horizontalRule, icon: HorizontalRuleIcon },
+    {
+        name: 'Horizontal Line',
+        attributeName: 'horizontalRule',
+        toolbarFunction: horizontalRule,
+        icon: HorizontalRuleIcon,
+    },
 ]
 
 const StyledToolbarContainer = styled(Box)({
