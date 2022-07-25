@@ -133,7 +133,7 @@ const editorOptions: FormatOption[] = [
     },
     {
         name: 'Unordered List',
-        attributeName: 'unorderedList',
+        attributeName: 'bulletList',
         toolbarFunction: unorderedList,
         icon: FormatListBulletedIcon,
         hotkey: 'Ctrl + Shift + 8',
