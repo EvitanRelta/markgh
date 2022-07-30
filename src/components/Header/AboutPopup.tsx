@@ -1,9 +1,21 @@
-import { Popover } from '@mui/material'
+import { Box, Popover, styled } from '@mui/material'
 import { useState } from 'react'
 
 interface Props {
     theme: string
 }
+
+const StyledAboutContentContainer = styled(Box)({
+    padding: 6,
+})
+
+const StyledCreditsText = styled(Box)({
+    textAlign: 'center',
+})
+
+const StyledLink = styled('a')({
+    ':visited': { color: '#0067ee' },
+})
 
 export const AboutPopup = ({ theme }: Props) => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
@@ -13,6 +25,33 @@ export const AboutPopup = ({ theme }: Props) => {
         theme === 'light'
             ? require('../../assets/logo.png')
             : require('../../assets/negative_logo.png')
+
+    const aboutImgSrc =
+        theme === 'light'
+            ? require('../../assets/about.png')
+            : require('../../assets/negative_about.png')
+
+    const aboutContent = (
+        <StyledAboutContentContainer>
+            <img
+                src={aboutImgSrc}
+                style={{
+                    width: 800,
+                }}
+            />
+            <br />
+            <StyledCreditsText>
+                Made by{' '}
+                <StyledLink href='https://github.com/EvitanRelta/' target='_blank'>
+                    Shaun Tan
+                </StyledLink>{' '}
+                &amp;{' '}
+                <StyledLink href='https://github.com/swxk19/' target='_blank'>
+                    Kelvin Seow
+                </StyledLink>
+            </StyledCreditsText>
+        </StyledAboutContentContainer>
+    )
 
     return (
         <>
@@ -25,7 +64,13 @@ export const AboutPopup = ({ theme }: Props) => {
                 open={Boolean(anchor)}
                 anchorEl={anchor}
                 onClose={() => setAnchor(null)}
-            ></Popover>
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+            >
+                {aboutContent}
+            </Popover>
         </>
     )
 }
