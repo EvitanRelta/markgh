@@ -17,6 +17,13 @@ const StyledLink = styled('a')({
     ':visited': { color: '#0067ee' },
 })
 
+const StyledLogo = styled('img')({
+    width: 32.5,
+    top: 8.5,
+    position: 'relative',
+    cursor: 'pointer',
+})
+
 export const AboutPopup = ({ theme }: Props) => {
     const [anchor, setAnchor] = useState<(EventTarget & Element) | null>(null)
 
@@ -55,11 +62,7 @@ export const AboutPopup = ({ theme }: Props) => {
 
     return (
         <>
-            <img
-                style={{ width: 32.5, top: 8.5, position: 'relative' }}
-                src={logoSrc}
-                onClick={(e) => setAnchor(e.currentTarget)}
-            />
+            <StyledLogo src={logoSrc} onClick={(e) => setAnchor(e.currentTarget)} />
             <Popover
                 open={Boolean(anchor)}
                 anchorEl={anchor}
