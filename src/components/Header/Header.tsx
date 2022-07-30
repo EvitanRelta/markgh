@@ -2,6 +2,7 @@ import { Box, styled } from '@mui/material'
 import { useState } from 'react'
 import { useAppSelector } from '../../store/hooks'
 import { EditorToolbar } from '../Editor/EditorToolbar'
+import { AboutPopup } from './AboutPopup'
 import { TitleInput } from './TitleInput'
 import { LastEdited } from './ToolbarOptions/Snapshots/LastEdited'
 import { VersionIndex } from './ToolbarOptions/Snapshots/VersionIndex'
@@ -30,7 +31,6 @@ const StyledBottomRow = styled(Box)({
 })
 
 export const Header = () => {
-    const editor = useAppSelector((state) => state.data.editor)
     const theme = useAppSelector((state) => state.theme)
     const headerBackgroundColor = theme === 'light' ? '#ffffff' : '#121212'
     const [showVersions, setShowVersions] = useState<(EventTarget & Element) | null>(null)
@@ -43,17 +43,11 @@ export const Header = () => {
         setShowVersions(null)
     }
 
-    //dynamic 'require' is not supported on react
-    const logoSrc =
-        theme === 'light'
-            ? require('../../assets/logo.png')
-            : require('../../assets/negative_logo.png')
-
     return (
         <StyledHeaderBox sx={{ backgroundColor: headerBackgroundColor }}>
             <StyledTopRow>
                 <Box sx={{ marginLeft: 1.5, fontSize: 20, fontWeight: 'Bold' }}>
-                    <img style={{ width: 32.5, top: 8.5, position: 'relative' }} src={logoSrc} />
+                    <AboutPopup theme={theme} />
 
                     <TitleInput />
                 </Box>
