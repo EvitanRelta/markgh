@@ -1,4 +1,5 @@
 import { Box, Button, CircularProgress, styled, TextField } from '@mui/material'
+import { Octokit } from '@octokit/rest'
 import staticAxios from 'axios'
 import { useState } from 'react'
 import { GithubRepoInfo } from '../../../../converterFunctions/markdownToHtml'
@@ -41,8 +42,6 @@ export const RepoLinkInput = ({ setAnchor }: Props) => {
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
     const [showLoading, setShowLoading] = useState<boolean>(false)
-
-    const corsProxyPrefix = 'https://cors-header-writer.herokuapp.com/'
 
     const isGithubRepoUrl = (url: string) =>
         /(https?:\/\/)?(www\.)?github.com(\/[\w-]+){2}/i.test(url)
@@ -88,11 +87,6 @@ export const RepoLinkInput = ({ setAnchor }: Props) => {
         return { user, repo, branch, dirPath, fileName }
     }
 
-    const generateRawURL = (githubRepoInfo: GithubRepoInfo) => {
-        const { user, repo, branch, dirPath, fileName } = githubRepoInfo
-        return `${corsProxyPrefix}https://raw.githubusercontent.com/${user}/${repo}/${branch}${dirPath}${fileName}`
-    }
-
     const getRepo = async () => {
         setShowLoading(true)
 
@@ -104,16 +98,15 @@ export const RepoLinkInput = ({ setAnchor }: Props) => {
         }
 
         try {
-            type ResponseDataType = string
             const githubRepoInfo = await parseImportUrl(link)
-            let response = await axios.get<ResponseDataType>(generateRawURL(githubRepoInfo))
+            const content = await getGHFileContent(githubRepoInfo)
             setAnchor(null)
 
             const { user, repo, branch, dirPath, fileName } = githubRepoInfo
             dispatch(
                 importMarkdown({
                     fileTitle: `(${user}/${repo}:${branch}) ${dirPath}${fileName}`,
-                    markdown: response.data,
+                    markdown: content,
                     githubRepoInfo,
                 })
             )
@@ -166,4 +159,20 @@ export const RepoLinkInput = ({ setAnchor }: Props) => {
             </Box>
         </StyledLinkInputContainer>
     )
+}
+
+async function getGHFileContent({ user, repo, branch, dirPath, fileName }: GithubRepoInfo) {
+    const decodeBase64 = (str: string) => Buffer.from(str, 'base64').toString('ascii')
+    const removeLeadingSlash = (path: string) => path.replace(/^\//, '')
+
+    const octokit = new Octokit()
+    let response = (
+        await octokit.rest.repos.getContent({
+            owner: user,
+            repo,
+            ref: branch,
+            path: `${removeLeadingSlash(dirPath)}${fileName}`,
+        })
+    ).data as { content: string }
+    return decodeBase64(response.content)
 }
